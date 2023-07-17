@@ -1,5 +1,9 @@
 # B07Group7Project
 
-Group Memebers:
+
+Group Members:
 Sebastian Jingoi
+Aaron D'Mello
 Zain Rizvi
+
+
