@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">B07Group7Project</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="placeholder_footer">Placeholder Footer</string>
+    <string name="placeholder_header">Placeholder Header</string>
+    <string name="placeholder_fragment">Placeholder Fragment</string>
 </resources>
