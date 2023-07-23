@@ -12,6 +12,11 @@ public class NavigationActivity extends AppCompatActivity implements FragmentSwi
 
     ActivityFragmentNavigationBinding binding;
 
+
+    Fragment homeFragment; // Replace with hashmap maybe?? TBD.
+    Fragment cartFragment;
+    Fragment accountFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,20 +24,24 @@ public class NavigationActivity extends AppCompatActivity implements FragmentSwi
         setContentView(binding.getRoot());
         replaceFragment(new ExampleFragment());
 
+        homeFragment = new ExampleFragment();    // CHANGE THIS
+        cartFragment = new ExampleFragment();    // CHANGE THIS
+        accountFragment = new ExampleFragment(); // CHANGE THIS
+
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 
             int itemId = item.getItemId();
+
             if (itemId == R.id.homeNav) {
-                replaceFragment(new ExampleFragment()); // CHANGE THIS LATER
+                replaceFragment(homeFragment);
             } else if (itemId == R.id.cartNav) {
-                replaceFragment(new ExampleFragment()); // CHANGE THIS LATER
+                replaceFragment(cartFragment);
             } else if (itemId == R.id.accountNav) {
-                replaceFragment(new ExampleFragment()); // CHANGE THIS LATER
+                replaceFragment(accountFragment);
             }
 
             return true;
         });
-
     }
 
     @Override
