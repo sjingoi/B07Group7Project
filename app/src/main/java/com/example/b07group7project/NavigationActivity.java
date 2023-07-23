@@ -22,7 +22,7 @@ public class NavigationActivity extends AppCompatActivity implements FragmentSwi
         super.onCreate(savedInstanceState);
         binding = ActivityFragmentNavigationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new ExampleFragment());
+//        replaceFragment(new ExampleFragment());
 
         homeFragment = new ExampleFragment();    // CHANGE THIS
         cartFragment = new ExampleFragment();    // CHANGE THIS
