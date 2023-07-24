@@ -8,35 +8,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.R;
+import com.example.b07group7project.RecyclerViewAdapter;
 
 import java.util.List;
 
-public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
-
-    Context context;
-    List<CartItem> items;
+public class CartAdapter extends RecyclerViewAdapter<CartItem, CartViewHolder> {
 
     public CartAdapter(Context context, List<CartItem> items) {
-        this.context = context;
-        this.items = items;
+        super(context, items);
     }
 
     @NonNull
     @Override
     public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new CartViewHolder(LayoutInflater.from(context).inflate(R.layout.cart_item_view, parent, false));
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
-        CartItem item = items.get(position);
-        holder.nameView.setText(item.getProductName());
-        holder.quantityView.setText(String.format(Integer.toString(item.getQuantity())));
-        holder.imageView.setBackgroundResource(item.getImage());
-    }
-
-    @Override
-    public int getItemCount() {
-        return items.size();
     }
 }
