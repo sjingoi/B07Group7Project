@@ -4,4 +4,5 @@
     <string name="placeholder_footer">Placeholder Footer</string>
     <string name="placeholder_header">Placeholder Header</string>
     <string name="placeholder_fragment">Placeholder Fragment</string>
+    <string name="check_out_button">Check Out</string>
 </resources>
