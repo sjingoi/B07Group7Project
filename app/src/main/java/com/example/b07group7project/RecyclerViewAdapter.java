@@ -14,8 +14,8 @@ import com.example.b07group7project.shopping_cart.CartViewHolder;
 import java.util.List;
 
 public abstract class RecyclerViewAdapter<ItemType, ViewHolderType extends RecyclerViewHolder> extends RecyclerView.Adapter<ViewHolderType> {
-    Context context;
-    List<ItemType> items;
+    protected Context context;
+    protected List<ItemType> items;
 
     @NonNull
     @Override
