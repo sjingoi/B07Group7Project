@@ -1,14 +1,18 @@
 package com.example.b07group7project.shopping_cart;
 
+import android.graphics.Bitmap;
+
+import java.net.URL;
+
 public class CartItem {
     String productName;
     int quantity;
-    int image;
+    String imageURL;
 
-    public CartItem(String productName, int quantity, int image) {
+    public CartItem(String productName, int quantity, String imageURL) {
         this.productName = productName;
         this.quantity = quantity;
-        this.image = image;
+        this.imageURL = imageURL;
     }
 
     public String getProductName() {
@@ -19,8 +23,8 @@ public class CartItem {
         return quantity;
     }
 
-    public int getImage() {
-        return image;
+    public String getImage() {
+        return imageURL;
     }
 
     public void setProductName(String productName) {
@@ -31,8 +35,8 @@ public class CartItem {
         this.quantity = quantity;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public void setImage(String imageURL) {
+        this.imageURL = imageURL;
     }
 
 }

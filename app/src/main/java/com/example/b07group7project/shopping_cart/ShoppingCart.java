@@ -1,5 +1,7 @@
 package com.example.b07group7project.shopping_cart;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +14,10 @@ import android.view.ViewGroup;
 
 import com.example.b07group7project.R;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,14 +51,7 @@ public class ShoppingCart extends Fragment {
 
         List<CartItem> cart = new ArrayList<>();
 
-        cart.add(new CartItem("Test Product", 2, R.drawable.ic_launcher_background)); // PLACEHOLDER DATA
-        cart.add(new CartItem("Test Product", 2, R.drawable.ic_launcher_background));
-        cart.add(new CartItem("Test Product", 2, R.drawable.ic_launcher_background));
-        cart.add(new CartItem("Test Product", 2, R.drawable.ic_launcher_background));
-        cart.add(new CartItem("Test Product", 2, R.drawable.ic_launcher_background));
-        cart.add(new CartItem("Test Product", 2, R.drawable.ic_launcher_background));
-        cart.add(new CartItem("Test Product", 2, R.drawable.ic_launcher_background));
-        cart.add(new CartItem("Test Product", 2, R.drawable.ic_launcher_background));
+        cart.add(new CartItem("Test Product", 2, "https://fastly.picsum.photos/id/554/200/300.jpg?hmac=fYkNLoTqHRKUkIc3bZt_xMEb17s_BIRuuKTz8jb9ijs")); // PLACEHOLDER DATA
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(new CartAdapter(requireContext().getApplicationContext(), cart));
