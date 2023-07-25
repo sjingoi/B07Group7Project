@@ -27,16 +27,7 @@ public class EmailPasswordActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            reload();
-        }
-    }
-
-    public void updateUI(FirebaseUser user) {
-        if(user == null){
-            Toast.makeText(this, "Authentication Failed", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            Toast.makeText(this, "Authentication Succeeded", Toast.LENGTH_SHORT).show();
+            onLoginComplete(currentUser);
         }
     }
 
@@ -45,6 +36,22 @@ public class EmailPasswordActivity extends AppCompatActivity {
         Intent myIntent = new Intent(this, ResetPasswordActivity.class);
         startActivity(myIntent);
     }
-    private void reload() {
+
+    public void onLoginComplete(FirebaseUser user) {
+        if(user == null){
+            Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(this, "Login Succeeded", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void onRegistrationComplete(FirebaseUser user){
+        if(user == null){
+            Toast.makeText(this, "Registration Failed", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(this, "Registration Succeeded", Toast.LENGTH_SHORT).show();
+        }
     }
 }
