@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">B07Group7Project</string>
-    <string name="sign_in">Sign In</string>
-    <string name="shopper_sign_in">Shopper Sign In</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="placeholder_footer">Placeholder Footer</string>
+    <string name="placeholder_header">Placeholder Header</string>
+    <string name="placeholder_fragment">Placeholder Fragment</string>
+    <string name="homeNavMenu">Home</string>
+    <string name="cartNavMenu">Cart</string>
+    <string name="accountNavMenu">Account</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
