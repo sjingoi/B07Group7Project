@@ -1,9 +1,13 @@
 package com.example.b07group7project.ui.login;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +29,6 @@ public class LoginFragment extends Fragment {
 
         binding = FragmentLoginBinding.inflate(inflater, container, false);
 
-
         return binding.getRoot();
 
     }
@@ -35,6 +38,44 @@ public class LoginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         presenter = new LoginPresenter(mAuth, this);
+        EditText usernameEditText = binding.username;
+        EditText passwordEditText = binding.password;
+        Button loginButton = binding.login;
+        Button registerButton = binding.register;
+        Button forgotPasswordButton = binding.forgotPassword;
+
+        TextWatcher loginWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                boolean areFieldsValid = presenter.isValid(usernameEditText.getText().toString(),
+                        passwordEditText.getText().toString());
+                loginButton.setEnabled(areFieldsValid);
+                registerButton.setEnabled(areFieldsValid);
+            }
+        };
+        passwordEditText.addTextChangedListener(loginWatcher);
+        usernameEditText.addTextChangedListener(loginWatcher);
+        loginButton.setOnClickListener(v -> {
+            String usernameText = usernameEditText.getText().toString();
+            String passwordText = passwordEditText.getText().toString();
+            presenter.loginButtonOnClick(usernameText, passwordText);
+        });
+        registerButton.setOnClickListener(v -> {
+            String usernameText = usernameEditText.getText().toString();
+            String passwordText = passwordEditText.getText().toString();
+            presenter.registerButtonOnClick(usernameText, passwordText);
+        });
+
+        forgotPasswordButton.setOnClickListener(v -> {
+
+
+        });
 
     }
 
