@@ -8,25 +8,33 @@ import android.os.Bundle;
 
 import com.example.b07group7project.databinding.ActivityFragmentNavigationBinding;
 
+import java.util.ArrayList;
+
 public class NavigationActivity extends AppCompatActivity implements FragmentSwitch {
 
     ActivityFragmentNavigationBinding binding;
 
 
-    Fragment homeFragment; // Replace with hashmap maybe?? TBD.
+    Fragment homeFragment;
     Fragment cartFragment;
     Fragment accountFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+
+        homeFragment = intent.getStringExtra("home-fragment");
+        cartFragment = intent.getStringExtra("cart-fragment");
+        accountFragment = intent.getStringExtra("account-fragment");
+
         binding = ActivityFragmentNavigationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 //        replaceFragment(new ExampleFragment());
 
-        homeFragment = new ExampleFragment();    // CHANGE THIS
-        cartFragment = new ExampleFragment();    // CHANGE THIS
-        accountFragment = new ExampleFragment(); // CHANGE THIS
+//        homeFragment = new ExampleFragment();    // CHANGE THIS
+//        cartFragment = new ExampleFragment();    // CHANGE THIS
+//        accountFragment = new ExampleFragment(); // CHANGE THIS
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 
