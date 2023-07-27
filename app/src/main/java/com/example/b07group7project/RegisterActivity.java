@@ -40,6 +40,9 @@ public class RegisterActivity extends AppCompatActivity {
                 if (emailtext.equals("") || passwordtext.equals("")){
                     Toast.makeText(RegisterActivity.this, "Email and/or password cannot be empty.", Toast.LENGTH_SHORT).show();
                 }
+                else if (password.length() < 6) {
+                    Toast.makeText(RegisterActivity.this, "Password is too short", Toast.LENGTH_SHORT).show();
+                }
                 else{
                     registerUser(emailtext, passwordtext);
                 }
