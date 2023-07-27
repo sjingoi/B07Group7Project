@@ -1,11 +1,9 @@
 package com.example.b07group7project;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.b07group7project.ui.login.EmailPasswordActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.FirebaseApp;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,8 +19,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        //TODO: remove before merging to main
-        Intent myIntent = new Intent(this, EmailPasswordActivity.class);
-        startActivity(myIntent);
+        //TODO
     }
 }
