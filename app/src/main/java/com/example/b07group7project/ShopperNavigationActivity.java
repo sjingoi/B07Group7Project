@@ -7,12 +7,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 
-import com.example.b07group7project.databinding.ActivityFragmentNavigationBinding;
+import com.example.b07group7project.databinding.ShopperNavigationActivityBinding;
 
-public class NavigationActivity extends AppCompatActivity implements FragmentSwitch {
+public class ShopperNavigationActivity extends AppCompatActivity implements FragmentSwitch {
 
-    ActivityFragmentNavigationBinding binding;
-
+    ShopperNavigationActivityBinding binding;
 
     Fragment homeFragment;
     Fragment cartFragment;
@@ -22,7 +21,7 @@ public class NavigationActivity extends AppCompatActivity implements FragmentSwi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityFragmentNavigationBinding.inflate(getLayoutInflater());
+        binding = ShopperNavigationActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         homeFragment = new ExampleFragment();    // CHANGE THIS
