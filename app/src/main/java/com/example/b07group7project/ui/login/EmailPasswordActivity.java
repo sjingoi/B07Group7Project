@@ -55,10 +55,12 @@ public class EmailPasswordActivity extends AppCompatActivity {
         }
         else{
             Toast.makeText(this, "Registration Succeeded", Toast.LENGTH_SHORT).show();
+            //TODO
         }
     }
 
     public void moveToShopperLandingPage(FirebaseUser user){
+
         //TODO
     }
 
