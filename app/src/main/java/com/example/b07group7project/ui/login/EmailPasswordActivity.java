@@ -41,8 +41,11 @@ public class EmailPasswordActivity extends AppCompatActivity {
         if(user == null){
             Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();
         }
+        else if(isShopper(user)){
+            moveToShopperLandingPage(user);
+        }
         else{
-            Toast.makeText(this, "Login Succeeded", Toast.LENGTH_SHORT).show();
+            moveToStoreOwnerLandingPage(user);
         }
     }
 
@@ -53,5 +56,19 @@ public class EmailPasswordActivity extends AppCompatActivity {
         else{
             Toast.makeText(this, "Registration Succeeded", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void moveToShopperLandingPage(FirebaseUser user){
+        //TODO
+    }
+
+    public void moveToStoreOwnerLandingPage(FirebaseUser user){
+        //TODO:
+        Toast.makeText(this, "Login Succeeded", Toast.LENGTH_SHORT).show();
+    }
+
+    public boolean isShopper(FirebaseUser user){
+        //TODO
+        return true;
     }
 }
