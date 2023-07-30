@@ -1,6 +1,9 @@
 package com.example.b07group7project.ui.login;
 
+import android.widget.Toast;
+
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginPresenter {
     FirebaseAuth mAuth;
@@ -30,15 +33,31 @@ public class LoginPresenter {
         loginFragment.setLoadingAnimation(true);
         mAuth.createUserWithEmailAndPassword(username, password)
                 .addOnCompleteListener(task -> {
-                    ((EmailPasswordActivity) loginFragment.requireActivity())
-                            .onRegistrationComplete(mAuth.getCurrentUser());
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    if(user == null){
+                        onRegistrationFailed();
+                        return;
+                    }
+
+                    EmailPasswordActivity parent = (EmailPasswordActivity) loginFragment.requireActivity();
+                    parent.replaceFragment(new RegisterFragment(user));
                     loginFragment.setLoadingAnimation(false);
                 });
     }
+
+    private void onRegistrationFailed() {
+        Toast.makeText(loginFragment.getContext(), "Registration Failed", Toast.LENGTH_SHORT).show();
+    }
+
     public boolean isValid(String user, String password) {
         if (user == null) {
             return false;
         }
         return password != null && password.trim().length() > 5;
+    }
+
+    public void forgotPasswordOnClick() {
+        EmailPasswordActivity parent = (EmailPasswordActivity) loginFragment.requireActivity();
+        parent.replaceFragment(new ResetPasswordFragment());
     }
 }

@@ -1,17 +1,15 @@
 package com.example.b07group7project.ui.login;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.example.b07group7project.Navigation;
 import com.example.b07group7project.R;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class EmailPasswordActivity extends AppCompatActivity {
+public class EmailPasswordActivity extends Navigation {
     private FirebaseAuth mAuth;
 
     @Override
@@ -31,17 +29,9 @@ public class EmailPasswordActivity extends AppCompatActivity {
         }
     }
 
-    public void resetPassword(){
-        //TODO:
-        Intent myIntent = new Intent(this, ResetPasswordActivity.class);
-        startActivity(myIntent);
-    }
 
     public void onLoginComplete(FirebaseUser user) {
-        if(user == null){
-            Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();
-        }
-        else if(isShopper(user)){
+        if(isShopper(user)){
             moveToShopperLandingPage(user);
         }
         else{
@@ -49,28 +39,25 @@ public class EmailPasswordActivity extends AppCompatActivity {
         }
     }
 
-    public void onRegistrationComplete(FirebaseUser user){
-        if(user == null){
-            Toast.makeText(this, "Registration Failed", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            Toast.makeText(this, "Registration Succeeded", Toast.LENGTH_SHORT).show();
-            //TODO
-        }
-    }
+
 
     public void moveToShopperLandingPage(FirebaseUser user){
-
-        //TODO
+        //TODO: replace this with appropriate page
+        Toast.makeText(this, "Login Succeeded - shopper", Toast.LENGTH_SHORT).show();
     }
 
     public void moveToStoreOwnerLandingPage(FirebaseUser user){
-        //TODO:
-        Toast.makeText(this, "Login Succeeded", Toast.LENGTH_SHORT).show();
+        //TODO: replace this with appropriate page
+        Toast.makeText(this, "Login Succeeded - store owner", Toast.LENGTH_SHORT).show();
     }
 
     public boolean isShopper(FirebaseUser user){
         //TODO
         return true;
+    }
+
+    @Override
+    public int getFragmentContainer() {
+        return R.id.fragmentContainerView;
     }
 }

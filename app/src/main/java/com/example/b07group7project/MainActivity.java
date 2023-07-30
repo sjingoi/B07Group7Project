@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        //TODO
+//        Intent myIntent = new Intent(this, EmailPasswordActivity.class);
+//        startActivity(myIntent);
     }
 }

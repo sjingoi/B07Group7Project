@@ -46,17 +46,18 @@ public class LoginFragment extends Fragment {
 
         TextWatcher loginWatcher = new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                boolean areFieldsValid = presenter.isValid(usernameEditText.getText().toString(),
+                        passwordEditText.getText().toString());
+                loginButton.setEnabled(areFieldsValid);
+                registerButton.setEnabled(areFieldsValid);
+            }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void afterTextChanged(Editable editable) {
-                boolean areFieldsValid = presenter.isValid(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
-                loginButton.setEnabled(areFieldsValid);
-                registerButton.setEnabled(areFieldsValid);
             }
         };
         passwordEditText.addTextChangedListener(loginWatcher);
@@ -72,10 +73,7 @@ public class LoginFragment extends Fragment {
             presenter.registerButtonOnClick(usernameText, passwordText);
         });
 
-        forgotPasswordButton.setOnClickListener(v -> {
-
-
-        });
+        forgotPasswordButton.setOnClickListener(v -> presenter.forgotPasswordOnClick());
 
     }
 
