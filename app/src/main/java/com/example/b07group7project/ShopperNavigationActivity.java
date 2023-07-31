@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 
 import com.example.b07group7project.databinding.ShopperNavigationActivityBinding;
+import com.example.b07group7project.shopping_cart.ShoppingCart;
 
 public class ShopperNavigationActivity extends Navigation {
 
@@ -22,7 +23,7 @@ public class ShopperNavigationActivity extends Navigation {
         setContentView(binding.getRoot());
 
         homeFragment = new ExampleFragment();    // CHANGE THIS
-        cartFragment = new ExampleFragment();    // CHANGE THIS
+        cartFragment = new ShoppingCart();
         accountFragment = new ExampleFragment(); // CHANGE THIS
 
         replaceFragment(homeFragment);
