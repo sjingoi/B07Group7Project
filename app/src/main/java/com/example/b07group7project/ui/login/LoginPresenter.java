@@ -2,6 +2,7 @@ package com.example.b07group7project.ui.login;
 
 import android.widget.Toast;
 
+import com.example.b07group7project.Navigation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -39,7 +40,7 @@ public class LoginPresenter {
                         return;
                     }
 
-                    EmailPasswordActivity parent = (EmailPasswordActivity) loginFragment.requireActivity();
+                    Navigation parent = (Navigation) loginFragment.requireActivity();
                     parent.replaceFragment(new RegisterFragment(user));
                     loginFragment.setLoadingAnimation(false);
                 });
@@ -57,7 +58,7 @@ public class LoginPresenter {
     }
 
     public void forgotPasswordOnClick() {
-        EmailPasswordActivity parent = (EmailPasswordActivity) loginFragment.requireActivity();
+        Navigation parent = (Navigation) loginFragment.requireActivity();
         parent.replaceFragment(new ResetPasswordFragment());
     }
 }
