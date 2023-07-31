@@ -20,7 +20,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_thing"
-        android:name="com.example.b07group7project.ExampleFragment"
+        android:name="com.example.b07group7project.item_preview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
