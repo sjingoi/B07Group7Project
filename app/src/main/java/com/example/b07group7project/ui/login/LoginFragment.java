@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.b07group7project.databinding.FragmentLoginBinding;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginFragment extends Fragment {
 
@@ -36,8 +35,9 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        presenter = new LoginPresenter(mAuth, this);
+        presenter = new LoginPresenter(
+                ((EmailPasswordActivity)requireActivity()).getLoginModel(),
+                this);
         EditText usernameEditText = binding.username;
         EditText passwordEditText = binding.password;
         Button loginButton = binding.login;
@@ -54,10 +54,19 @@ public class LoginFragment extends Fragment {
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                boolean areFieldsValid = presenter.isValid(usernameEditText.getText().toString(),
+                        passwordEditText.getText().toString());
+                loginButton.setEnabled(areFieldsValid);
+                registerButton.setEnabled(areFieldsValid);
+            }
 
             @Override
             public void afterTextChanged(Editable editable) {
+                boolean areFieldsValid = presenter.isValid(usernameEditText.getText().toString(),
+                        passwordEditText.getText().toString());
+                loginButton.setEnabled(areFieldsValid);
+                registerButton.setEnabled(areFieldsValid);
             }
         };
         passwordEditText.addTextChangedListener(loginWatcher);
