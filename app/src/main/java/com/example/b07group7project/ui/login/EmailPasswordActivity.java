@@ -25,7 +25,8 @@ public class EmailPasswordActivity extends Navigation {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            onLoginComplete(currentUser);
+            mAuth.signOut();
+//            onLoginComplete(currentUser);
         }
     }
 
