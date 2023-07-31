@@ -1,6 +1,6 @@
 package com.example.b07group7project;
 
-public class productClass {
+public class StoreItem {
     private String itemDesc;
     private String storeID;
     private String itemName;
@@ -38,7 +38,7 @@ public class productClass {
         return itemID;
     }
 
-    public productClass(String itemDesc, String storeID, String itemName, String itemID) {
+    public StoreItem(String itemDesc, String storeID, String itemName, String itemID) {
         this.itemDesc = itemDesc;
         this.storeID = storeID;
         this.itemName = itemName;
