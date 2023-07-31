@@ -3,15 +3,14 @@ package com.example.b07group7project.ui.login;
 import android.widget.Toast;
 
 import com.example.b07group7project.Navigation;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginPresenter {
-    FirebaseAuth mAuth;
+    LoginModel loginModel;
     LoginFragment loginFragment;
 
-    public LoginPresenter(FirebaseAuth mAuth, LoginFragment loginFragment) {
-        this.mAuth = mAuth;
+    public LoginPresenter(LoginModel loginModel, LoginFragment loginFragment) {
+        this.loginModel = loginModel;
         this.loginFragment = loginFragment;
     }
     public void loginButtonOnClick(String username, String password){
@@ -19,10 +18,14 @@ public class LoginPresenter {
             return;
         }
         loginFragment.setLoadingAnimation(true);
-        mAuth.signInWithEmailAndPassword(username, password)
-                .addOnCompleteListener(task -> {
-                    ((EmailPasswordActivity) loginFragment.requireActivity())
-                            .onLoginComplete(mAuth.getCurrentUser());
+        loginModel.signIn(username, password, task -> {
+                    if(loginModel.getCurrentUser() != null){
+                        EmailPasswordActivity activity = (EmailPasswordActivity)loginFragment.requireActivity();
+                        activity.onLoginCompete();
+                    }
+
+                    else
+                        Toast.makeText(loginFragment.getContext(), "Login Failed", Toast.LENGTH_LONG).show();
                     loginFragment.setLoadingAnimation(false);
                 });
     }
@@ -32,16 +35,16 @@ public class LoginPresenter {
             return;
         }
         loginFragment.setLoadingAnimation(true);
-        mAuth.createUserWithEmailAndPassword(username, password)
-                .addOnCompleteListener(task -> {
-                    FirebaseUser user = mAuth.getCurrentUser();
+        loginModel.register(username, password, task -> {
+                    FirebaseUser user = loginModel.getCurrentUser();
                     if(user == null){
                         onRegistrationFailed();
+                        loginFragment.setLoadingAnimation(false);
                         return;
                     }
 
                     Navigation parent = (Navigation) loginFragment.requireActivity();
-                    parent.replaceFragment(new RegisterFragment(user));
+                    parent.replaceFragment(new RegisterFragment());
                     loginFragment.setLoadingAnimation(false);
                 });
     }
@@ -58,7 +61,7 @@ public class LoginPresenter {
     }
 
     public void forgotPasswordOnClick() {
-        Navigation parent = (Navigation) loginFragment.requireActivity();
+        EmailPasswordActivity parent = (EmailPasswordActivity) loginFragment.requireActivity();
         parent.replaceFragment(new ResetPasswordFragment());
     }
 }

@@ -10,14 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.b07group7project.Navigation;
 import com.example.b07group7project.databinding.FragmentResetPasswordBinding;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class ResetPasswordFragment extends Fragment {
 
     FragmentResetPasswordBinding binding;
-    FirebaseAuth mAuth;
+    LoginModel loginModel;
 
 
     @Nullable
@@ -27,7 +25,7 @@ public class ResetPasswordFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         binding = FragmentResetPasswordBinding.inflate(getLayoutInflater());
-        mAuth = FirebaseAuth.getInstance();
+        loginModel = ((EmailPasswordActivity)requireActivity()).getLoginModel();
         return binding.getRoot();
     }
 
@@ -37,12 +35,12 @@ public class ResetPasswordFragment extends Fragment {
 
         binding.sendResetLinkButton.setOnClickListener(
                 v->{
-                    mAuth.sendPasswordResetEmail(binding.editTextTextEmailAddress.getText().toString());
+                    loginModel.sendResetLink(binding.editTextTextEmailAddress.getText().toString());
                     Toast.makeText(getContext(), "Email Sent", Toast.LENGTH_LONG).show();
                 });
 
         binding.button.setOnClickListener(
-                v-> ((Navigation) requireActivity()).replaceFragment(new LoginFragment())
+                v-> ((EmailPasswordActivity) requireActivity()).replaceFragment(new LoginFragment())
         );
 
     }
