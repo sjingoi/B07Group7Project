@@ -7,11 +7,13 @@ import androidx.fragment.app.FragmentTransaction;
 
 public abstract class Navigation extends AppCompatActivity implements FragmentSwitch {
 
+
+    public abstract int getFragmentContainer();
     @Override
     public void replaceFragment(Fragment newFragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frameLayout, newFragment);
+        fragmentTransaction.replace(getFragmentContainer(), newFragment);
         fragmentTransaction.commit();
     }
 }

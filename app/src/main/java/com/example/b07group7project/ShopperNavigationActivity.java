@@ -42,4 +42,9 @@ public class ShopperNavigationActivity extends Navigation {
             return true;
         });
     }
+
+    @Override
+    public int getFragmentContainer() {
+        return R.id.frameLayout;
+    }
 }
