@@ -2,15 +2,12 @@
     <string name="app_name">B07Group7Project</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="placeholder_footer">Placeholder Footer</string>
-    <string name="placeholder_header">Past Orders</string>
-    <string name="order1">Order 1</string>
-    <string name="order2">Order 2</string>
-    <string name="order3">Order 3</string>
-    <string name="order4">Order 4</string>
-    <string name="order5">Order 5</string>
-
+    <string name="placeholder_header">Test Preview</string>
     <string name="placeholder_fragment">Placeholder Fragment</string>
     <string name="homeNavMenu">Home</string>
     <string name="cartNavMenu">Cart</string>
     <string name="accountNavMenu">Account</string>
+    <string name="itemName">Item Name</string>
+    <string name="itemDesc">Item Desc</string>
+    <string name="itemDescTitle">Description:</string>
 </resources>

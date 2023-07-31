@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Change android:name parameter to get the fragment you want to display for your own testing -->
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_thing"
         android:name="com.example.b07group7project.ExampleFragment"
@@ -29,7 +30,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView2"
@@ -41,10 +42,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="404dp"
-        android:layout_height="588dp"
-        app:layout_constraintBottom_toBottomOf="@+id/fragment_thing"
-        app:layout_constraintTop_toTopOf="@+id/fragment_thing"
-        tools:layout_editor_absoluteX="3dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
