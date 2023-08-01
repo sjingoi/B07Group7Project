@@ -8,6 +8,7 @@ public class Product {
     String description;
     String price;
 
+
     public Product(String productname, String description, String price){
         this.productname = productname;
         this.description = description;

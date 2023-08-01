@@ -10,6 +10,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 public class StoreDatabase {
@@ -78,6 +79,7 @@ public class StoreDatabase {
                     product.put("Product Name", child.child("Product Name").getValue());
                     product.put("Product Description", child.child("Product Name").getValue());
                     product.put("Product Price", child.child("Product Price").getValue());
+                    //product.put("Product Image", child.child())
                     products.put((String)product.get("Product Name"), product);
                 }
             }
@@ -112,6 +114,8 @@ public class StoreDatabase {
         return storenames;
     }
 
-
+    public List<PreviousOrder> getPreviousOrders(String email) {
+        return PreviousOrder.getPreviousOrders(reference.child("Stores").child("Email").child("Previous Orders"), email);
+    }
 
 }
