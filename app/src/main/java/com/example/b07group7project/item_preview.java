@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,7 +26,6 @@ public class item_preview extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
 
     public item_preview() {
         // Required empty public constructor
@@ -59,7 +61,37 @@ public class item_preview extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_item_preview, container, false);
+        View view = inflater.inflate(R.layout.fragment_item_preview, container, false);
+
+        // Get references to TextView and Buttons
+        TextView cartItemQtyTextView = view.findViewById(R.id.cartItemQty);
+        ImageButton incrementButton = view.findViewById(R.id.button3);
+        ImageButton decrementButton = view.findViewById(R.id.button4);
+
+        // Initial value for cartItemQty
+        final int[] cartItemQty = {0};
+        cartItemQtyTextView.setText(String.valueOf(cartItemQty[0]));
+
+        // Set OnClickListener for the increment button
+        incrementButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Increment the cartItemQty and update the TextView
+                cartItemQty[0]++;
+                cartItemQtyTextView.setText(String.valueOf(cartItemQty[0]));
+            }
+        });
+
+        // Set OnClickListener for the decrement button
+        decrementButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Decrement the cartItemQty (with a minimum value of 0) and update the TextView
+                cartItemQty[0] = Math.max(0, cartItemQty[0] - 1);
+                cartItemQtyTextView.setText(String.valueOf(cartItemQty[0]));
+            }
+        });
+
+        return view;
     }
 }

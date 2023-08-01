@@ -13,4 +13,6 @@
     <string name="itemPrice">$0.00</string>
     <string name="itemPriceTitle">Price:</string>
     <string name="addToCart">Add To Cart</string>
+    <string name="btn_description1">Increment Button</string>
+    <string name="btn_description2">Decrement Button</string>
 </resources>
