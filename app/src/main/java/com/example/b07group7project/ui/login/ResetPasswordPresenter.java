@@ -1,7 +1,6 @@
 package com.example.b07group7project.ui.login;
 
 import android.view.View;
-import android.widget.Toast;
 
 public class ResetPasswordPresenter {
     ResetPasswordFragment resetPasswordFragment;
@@ -19,6 +18,6 @@ public class ResetPasswordPresenter {
 
     public void onSendResetLink(View ignoredV) {
         loginModel.sendResetLink(resetPasswordFragment.getEmail());
-        Toast.makeText(resetPasswordFragment.getContext(), "Email Sent", Toast.LENGTH_LONG).show();
+        resetPasswordFragment.showEmailSentNotification();
     }
 }
