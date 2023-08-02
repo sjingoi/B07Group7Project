@@ -13,11 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StoreRecyclerViewAdapter extends RecyclerViewAdapter<Store, StoreRecyclerViewAdapter.MyViewHolder>{
+public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecyclerViewAdapter.MyViewHolder>{
+    Context context;
+    ArrayList<Store> items;
 
-
-    public StoreRecyclerViewAdapter(Context context, List<Store> items) {
-        super(context, items);
+    public StoreRecyclerViewAdapter(Context context, ArrayList<Store> items) {
+        this.context = context;
+        this.items = items;
     }
 
     @NonNull
@@ -36,7 +38,12 @@ public class StoreRecyclerViewAdapter extends RecyclerViewAdapter<Store, StoreRe
         holder.imageView.setImageResource(items.get(position).getImage());
     }
 
-    public static class MyViewHolder extends RecyclerViewHolder<Store> {
+    @Override
+    public int getItemCount() {
+        return items.size();
+    }
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
         TextView tvName;
@@ -46,11 +53,6 @@ public class StoreRecyclerViewAdapter extends RecyclerViewAdapter<Store, StoreRe
 
             imageView = itemView.findViewById(R.id.imageView2);
             tvName = itemView.findViewById(R.id.Store_Name);
-        }
-
-        @Override
-        public void updateView(Store item) {
-
         }
 
     }
