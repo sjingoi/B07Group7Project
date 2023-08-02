@@ -12,7 +12,7 @@ public class GetStoreImplementation implements GetStoreInterface{
                 R.drawable.baseline_logo1_24, R.drawable.baseline_logo1_24,
                 R.drawable.baseline_logo1_24, R.drawable.baseline_logo1_24,};
         String[] StoreNames = {"Walmart", "Winners", "Target", "Taco Bell", "McDonalds", "Burger King",
-                "VERY VERY VERY LONG NAME HERE", "Foot Locker", "Costco"};
+                "Normal Name", "Foot Locker", "Costco"};
 
         for (int i = 0; i < StoreNames.length; i++){
             StoreList.add(new Store(StoreNames[i], StoreLogos[i]));
