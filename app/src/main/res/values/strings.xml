@@ -7,6 +7,8 @@
     <string name="homeNavMenu">Home</string>
     <string name="cartNavMenu">Cart</string>
     <string name="accountNavMenu">Account</string>
+
+    <!-- Strings related to item info -->
     <string name="itemName">Item Name</string>
     <string name="itemDesc">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?</string>
     <string name="itemDescTitle">Description:</string>
@@ -15,4 +17,19 @@
     <string name="addToCart">Add To Cart</string>
     <string name="btn_description1">Increment Button</string>
     <string name="btn_description2">Decrement Button</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_register">Register</string>
+    <string name="action_reset_password">Forgot Password?</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_page_string">Sign In</string>
+    <string name="send_reset_link">Send Reset Link</string>
+    <string name="create_account">Create account</string>
+    <string name="shopper_account">Shopper Account</string>
+    <string name="store_owner_account">Store Owner Account</string>
+
 </resources>
