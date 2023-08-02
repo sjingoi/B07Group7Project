@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -96,5 +97,14 @@ public class LoginFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    public void showLoginFailedNotification() {
+        Toast.makeText(getContext(), "Login Failed", Toast.LENGTH_LONG).show();
+    }
+
+    public void onRegistrationFailed() {
+        Toast.makeText(getContext(), "Registration Failed", Toast.LENGTH_SHORT).show();
+        setLoadingAnimation(false);
     }
 }

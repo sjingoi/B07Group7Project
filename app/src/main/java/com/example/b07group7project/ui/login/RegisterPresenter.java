@@ -12,22 +12,13 @@ public class RegisterPresenter {
         this.registerFragment = registerView;
     }
 
-    public void handleCreateStoreOwnerAccount() {
+    public void handleCreateAccount(UserType userType) {
         if(loginModel.getCurrentUser() == null){
             registerFragment.showRegistrationFailedNotification();
             return;
         }
 
-        loginModel.setUserType(UserType.STORE_OWNER, loginModel.getCurrentUser());
-        ((EmailPasswordActivity) registerFragment.requireActivity()).moveToStoreOwnerLandingPage();
-    }
-
-    public void handleCreateShopperAccount() {
-        if(loginModel.getCurrentUser() == null){
-            registerFragment.showRegistrationFailedNotification();
-            return;
-        }
-        loginModel.setUserType(UserType.SHOPPER, loginModel.getCurrentUser());
-        ((EmailPasswordActivity) registerFragment.requireActivity()).moveToShopperLandingPage();
+        loginModel.setUserType(userType, loginModel.getCurrentUser());
+        ((EmailPasswordActivity) registerFragment.requireActivity()).onLoginCompete();
     }
 }

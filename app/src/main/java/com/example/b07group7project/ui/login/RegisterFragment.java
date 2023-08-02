@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.b07group7project.UserType;
 import com.example.b07group7project.databinding.FragmentRegisterAccountBinding;
 
 public class RegisterFragment extends Fragment {
@@ -32,8 +33,8 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.createShopperAccount.setOnClickListener(v-> registerPresenter.handleCreateShopperAccount());
-        binding.createStoreOwnerAccount.setOnClickListener(v-> registerPresenter.handleCreateStoreOwnerAccount());
+        binding.createShopperAccount.setOnClickListener(v-> registerPresenter.handleCreateAccount(UserType.SHOPPER));
+        binding.createStoreOwnerAccount.setOnClickListener(v-> registerPresenter.handleCreateAccount(UserType.STORE_OWNER));
 
     }
 
