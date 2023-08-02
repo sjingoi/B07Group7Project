@@ -65,6 +65,9 @@ public class item_preview extends Fragment {
 
         // Get references to TextView and Buttons
         TextView cartItemQtyTextView = view.findViewById(R.id.cartItemQty);
+        TextView textViewItemName = view.findViewById(R.id.itemName);
+        TextView textViewItemPrice = view.findViewById(R.id.itemPrice);
+        TextView textViewItemDesc = view.findViewById(R.id.itemDesc);
         ImageButton incrementButton = view.findViewById(R.id.button3);
         ImageButton decrementButton = view.findViewById(R.id.button4);
 

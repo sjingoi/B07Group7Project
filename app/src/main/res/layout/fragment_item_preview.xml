@@ -20,7 +20,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/itemName"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="#673AB7"
@@ -31,17 +31,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="155dp"
-                android:layout_height="155dp"
+                android:id="@+id/itemImage"
+                android:layout_width="175dp"
+                android:layout_height="175dp"
                 android:layout_marginTop="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/itemName"
                 app:srcCompat="@drawable/ic_launcher_background" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/itemDesc"
                 android:layout_width="match_parent"
                 android:layout_height="279dp"
                 android:layout_marginTop="4dp"
@@ -60,7 +60,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.121"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                app:layout_constraintTop_toBottomOf="@+id/itemDesc"
                 app:layout_constraintVertical_bias="1.0" />
 
             <TextView
@@ -73,7 +73,7 @@
                 android:textColor="#673AB7"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintTop_toBottomOf="@+id/itemImage" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -83,11 +83,11 @@
                 android:text="@string/itemPriceTitle"
                 android:textColor="#673AB7"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/itemImage"
                 tools:layout_editor_absoluteX="1dp" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/itemPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"

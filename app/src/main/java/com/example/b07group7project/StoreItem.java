@@ -5,7 +5,7 @@ public class StoreItem {
     private String storeID;
     private String itemName;
     private String itemID;
-    private String itemPrice;
+    private double itemPrice;
 
     public String getItemDesc() {
         return itemDesc;
@@ -17,6 +17,9 @@ public class StoreItem {
 
     public String getItemName() {
         return itemName;
+    }
+    public double getItemPrice() {
+        return itemPrice;
     }
 
     public void setItemDesc(String itemDesc) {
@@ -35,11 +38,13 @@ public class StoreItem {
         this.itemID = itemID;
     }
 
+    public void setItemPrice(double itemPrice) { this.itemPrice = itemPrice; }
+
     public String getItemID() {
         return itemID;
     }
 
-    public StoreItem(String itemDesc, String storeID, String itemName, String itemID, String itemPrice) {
+    public StoreItem(String itemDesc, String storeID, String itemName, String itemID, double itemPrice) {
         this.itemDesc = itemDesc;
         this.storeID = storeID;
         this.itemName = itemName;
