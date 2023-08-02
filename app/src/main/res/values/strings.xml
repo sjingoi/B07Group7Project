@@ -8,30 +8,6 @@
     <string name="cartNavMenu">Cart</string>
     <string name="accountNavMenu">Account</string>
 
-    <string-array name="StoreNames">
-        <item>Walmart</item>
-        <item>Costco</item>
-        <item>Winnners</item>
-        <item>Target</item>
-        <item>Taco Bell</item>
-        <item>McDonalds</item>
-        <item>Burger King</item>
-        <item>Tim Hortons</item>
-        <item>Foot Locker</item>
-    </string-array>
-
-    <string-array name="StoreBios">
-        <item>Biography 1</item>
-        <item>Biography 2</item>
-        <item>Biography 3</item>
-        <item>Biography 4</item>
-        <item>Biography 5</item>
-        <item>Biography 6</item>
-        <item>Biography 7</item>
-        <item>Biography 8</item>
-        <item>Biography 9</item>
-    </string-array>
-
 
 
 

@@ -32,24 +32,20 @@ public class StoreRecyclerViewAdapter extends RecyclerViewAdapter<Store, StoreRe
     @Override
     public void onBindViewHolder(@NonNull StoreRecyclerViewAdapter.MyViewHolder holder, int position) {
         // Assign Value to Each Row as They Come On Screen
-
         holder.tvName.setText(items.get(position).getStoreName());
-        holder.tvBio.setText(items.get(position).getStoreName());
         holder.imageView.setImageResource(items.get(position).getImage());
-
     }
 
     public static class MyViewHolder extends RecyclerViewHolder<Store> {
 
         ImageView imageView;
-        TextView tvName, tvBio;
+        TextView tvName;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imageView = itemView.findViewById(R.id.imageView2);
             tvName = itemView.findViewById(R.id.Store_Name);
-            tvBio = itemView.findViewById(R.id.Store_Bio);
         }
 
         @Override
@@ -57,8 +53,5 @@ public class StoreRecyclerViewAdapter extends RecyclerViewAdapter<Store, StoreRe
 
         }
 
-
     }
-
-
 }
