@@ -32,7 +32,7 @@ public class ShopperViewStoreFragment extends Fragment implements StoreClickList
         // Line where getStores is used
         GetStoreInterface storeInterface = new GetStoreImplementation();
         //
-        ArrayList<Store> StoreList = storeInterface.getStores();
+        ArrayList<Store> StoreList = (ArrayList<Store>) storeInterface.getStores();
         StoreRecyclerViewAdapter adapter = new StoreRecyclerViewAdapter(requireContext(), StoreList, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 2));
