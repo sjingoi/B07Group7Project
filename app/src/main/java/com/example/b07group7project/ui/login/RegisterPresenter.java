@@ -1,7 +1,5 @@
 package com.example.b07group7project.ui.login;
 
-import android.widget.Toast;
-
 import com.example.b07group7project.UserType;
 
 public class RegisterPresenter {
@@ -16,7 +14,7 @@ public class RegisterPresenter {
 
     public void handleCreateStoreOwnerAccount() {
         if(loginModel.getCurrentUser() == null){
-            Toast.makeText(registerFragment.requireContext(), "Account creation failed", Toast.LENGTH_LONG).show();
+            registerFragment.showRegistrationFailedNotification();
             return;
         }
 
@@ -26,7 +24,7 @@ public class RegisterPresenter {
 
     public void handleCreateShopperAccount() {
         if(loginModel.getCurrentUser() == null){
-            Toast.makeText(registerFragment.requireContext(), "Account creation failed", Toast.LENGTH_LONG).show();
+            registerFragment.showRegistrationFailedNotification();
             return;
         }
         loginModel.setUserType(UserType.SHOPPER, loginModel.getCurrentUser());

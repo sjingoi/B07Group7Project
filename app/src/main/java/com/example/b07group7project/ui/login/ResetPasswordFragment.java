@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,5 +39,9 @@ public class ResetPasswordFragment extends Fragment {
 
     public String getEmail() {
         return binding.editTextTextEmailAddress.getText().toString();
+    }
+
+    public void showEmailSentNotification() {
+        Toast.makeText(getContext(), "Email Sent", Toast.LENGTH_LONG).show();
     }
 }
