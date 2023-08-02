@@ -19,14 +19,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Code For Running ShopperViewStoreFragment
-        if (savedInstanceState == null) {
-            // Create a new instance of the ShopperViewStoreFragment
-            ShopperViewStoreFragment shopperViewStoreFragment = new ShopperViewStoreFragment();
-
-            // Replace the existing content with the ShopperViewStoreFragment
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_container, shopperViewStoreFragment);
-            transaction.commit();
-      }
+//        if (savedInstanceState == null) {
+//            // Create a new instance of the ShopperViewStoreFragment
+//            ShopperViewStoreFragment shopperViewStoreFragment = new ShopperViewStoreFragment();
+//
+//            // Replace the existing content with the ShopperViewStoreFragment
+//            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//            transaction.replace(R.id.fragment_container, shopperViewStoreFragment);
+//            transaction.commit();
+//      }
     }
 }
