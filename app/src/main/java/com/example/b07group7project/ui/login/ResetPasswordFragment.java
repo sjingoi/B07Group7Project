@@ -33,8 +33,8 @@ public class ResetPasswordFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.sendResetLinkButton.setOnClickListener(v -> resetPasswordPresenter.onSendResetLink(v));
-        binding.button.setOnClickListener(v -> resetPasswordPresenter.onGoBack(v));
+        binding.sendResetLinkButton.setOnClickListener(v -> resetPasswordPresenter.onSendResetLink());
+        binding.button.setOnClickListener(v -> resetPasswordPresenter.onGoBack());
     }
 
     public String getEmail() {

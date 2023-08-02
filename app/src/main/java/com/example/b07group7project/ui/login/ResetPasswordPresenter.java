@@ -1,7 +1,5 @@
 package com.example.b07group7project.ui.login;
 
-import android.view.View;
-
 public class ResetPasswordPresenter {
     ResetPasswordFragment resetPasswordFragment;
     LoginModel loginModel;
@@ -11,12 +9,12 @@ public class ResetPasswordPresenter {
         this.loginModel = loginModel;
     }
 
-    public void onGoBack(View ignoredV) {
+    public void onGoBack() {
         ((EmailPasswordActivity) resetPasswordFragment.requireActivity())
                 .replaceFragment(new LoginFragment());
     }
 
-    public void onSendResetLink(View ignoredV) {
+    public void onSendResetLink() {
         loginModel.sendResetLink(resetPasswordFragment.getEmail());
         resetPasswordFragment.showEmailSentNotification();
     }
