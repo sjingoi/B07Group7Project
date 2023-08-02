@@ -7,7 +7,6 @@
     <string name="homeNavMenu">Home</string>
     <string name="cartNavMenu">Cart</string>
     <string name="accountNavMenu">Account</string>
-
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -21,5 +20,4 @@
     <string name="create_account">Create account</string>
     <string name="shopper_account">Shopper Account</string>
     <string name="store_owner_account">Store Owner Account</string>
-
 </resources>
