@@ -4,13 +4,13 @@ public class Store{
     // This Is Store Class for Testing, Will be changed later when Creating real store class
     String storeName;
     // image can be changed to appropiate type
-    int image;
+    String image;
 
     public Store() {
         // Required empty public constructor
     }
 
-    public Store(String storeName, int image) {
+    public Store(String storeName, String image) {
         this.storeName = storeName;
         this.image = image;
     }
@@ -19,7 +19,7 @@ public class Store{
         return storeName;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 }

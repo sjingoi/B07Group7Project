@@ -7,11 +7,13 @@ import java.util.List;
 public class GetStoreImplementation implements GetStoreInterface{
     public List<Store> getStores() {
         List<Store> StoreList = new ArrayList<>();
-        int[] StoreLogos = {R.drawable.baseline_logo1_24, R.drawable.baseline_logo1_24,
-                R.drawable.baseline_logo1_24, R.drawable.baseline_logo1_24,
-                R.drawable.baseline_logo1_24, R.drawable.baseline_logo1_24,
-                R.drawable.baseline_logo1_24, R.drawable.baseline_logo1_24,
-                R.drawable.baseline_logo1_24, R.drawable.baseline_logo1_24,};
+        
+        String[] StoreLogos = {"https://picsum.photos/200/300", "https://picsum.photos/200/300",
+                "https://picsum.photos/200/300", "https://picsum.photos/200/300",
+                "https://picsum.photos/200/300", "https://picsum.photos/200/300",
+                "https://picsum.photos/200/300", "https://picsum.photos/200/300",
+                "https://picsum.photos/200/300"};
+
         String[] StoreNames = {"Walmart", "Winners", "Target", "Taco Bell", "McDonalds", "Burger King",
                 "Normal Name", "Foo Locker", "Costco"};
 
