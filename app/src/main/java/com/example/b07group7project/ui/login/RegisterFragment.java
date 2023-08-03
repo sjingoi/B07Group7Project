@@ -25,8 +25,8 @@ public class RegisterFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         binding = FragmentRegisterAccountBinding.inflate(getLayoutInflater());
-        registerPresenter = new RegisterPresenter(this,
-                ((EmailPasswordActivity)requireActivity()).getLoginModel());
+        EmailPasswordActivity emailPasswordActivity = (EmailPasswordActivity) requireActivity();
+        registerPresenter = new RegisterPresenter(emailPasswordActivity, emailPasswordActivity.getLoginModel());
         return binding.getRoot();
     }
 

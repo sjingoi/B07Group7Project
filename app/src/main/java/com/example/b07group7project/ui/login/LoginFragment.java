@@ -36,9 +36,10 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        EmailPasswordActivity activity = (EmailPasswordActivity)requireActivity();
         presenter = new LoginPresenter(
-                ((EmailPasswordActivity)requireActivity()).getLoginModel(),
-                this);
+                activity.getLoginModel(),
+                new LoginViewAdapter(this, activity));
         EditText usernameEditText = binding.username;
         EditText passwordEditText = binding.password;
         Button loginButton = binding.login;
@@ -99,7 +100,7 @@ public class LoginFragment extends Fragment {
         binding = null;
     }
 
-    public void showLoginFailedNotification() {
+    public void onLoginFailed() {
         Toast.makeText(getContext(), "Login Failed", Toast.LENGTH_LONG).show();
     }
 
