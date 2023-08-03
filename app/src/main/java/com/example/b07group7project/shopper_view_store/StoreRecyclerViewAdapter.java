@@ -1,4 +1,4 @@
-package com.example.b07group7project;
+package com.example.b07group7project.shopper_view_store;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.b07group7project.R;
+import com.example.b07group7project.Store;
 import com.example.b07group7project.database.ImageDownloader;
 
 import java.util.ArrayList;
