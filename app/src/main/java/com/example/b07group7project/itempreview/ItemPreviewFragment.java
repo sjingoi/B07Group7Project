@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -82,6 +83,7 @@ public class ItemPreviewFragment extends Fragment {
 
         ImageButton incrementButton = view.findViewById(R.id.button3);
         ImageButton decrementButton = view.findViewById(R.id.button4);
+        Button addToCart = view.findViewById(R.id.button2);
 
         // Initial value for cartItemQty
         final int[] cartItemQty = {0};
@@ -104,6 +106,14 @@ public class ItemPreviewFragment extends Fragment {
                 // Decrement the cartItemQty (with a minimum value of 0) and update the TextView
                 cartItemQty[0] = Math.max(0, cartItemQty[0] - 1);
                 cartItemQtyTextView.setText(String.valueOf(cartItemQty[0]));
+            }
+        });
+
+        // Set OnClickListener for the cart add button
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Add to cart (shopping cart)
             }
         });
 
