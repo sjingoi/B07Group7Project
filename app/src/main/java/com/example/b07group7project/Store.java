@@ -3,16 +3,15 @@ package com.example.b07group7project;
 public class Store{
     // This Is Store Class for Testing, Will be changed later when Creating real store class
     String storeName;
-    // image can be changed to appropiate type
-    String image;
+    String imageURL;
 
     public Store() {
         // Required empty public constructor
     }
 
-    public Store(String storeName, String image) {
+    public Store(String storeName, String imageURL) {
         this.storeName = storeName;
-        this.image = image;
+        this.imageURL = imageURL;
     }
 
     public String getStoreName() {
@@ -20,6 +19,6 @@ public class Store{
     }
 
     public String getImage() {
-        return image;
+        return imageURL;
     }
 }
