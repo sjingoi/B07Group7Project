@@ -19,6 +19,8 @@ public class StoreDatabase {
     FirebaseDatabase database;
     DatabaseReference reference;
 
+    HashMap<Object, >
+
     public StoreDatabase(){
         database = FirebaseDatabase.getInstance("https://b07group7project-default-rtdb.firebaseio.com/");
         reference = database.getReference();

@@ -20,13 +20,33 @@ public class CustomerDatabase {
         reference = database.getReference();
     }
 
-    public void addPreviousOrder(String email){
+    public void addCustomer(Customer customer) {
+        UUID uuid = UUID.randomUUID();
+        DatabaseReference newreference = reference.child("Customers").child(uuid.toString());
+        newreference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.exists()) {
+                    HashMap<String, Object> hashmap = customer.putIntoHashMap();
+                    newreference.setValue(hashmap);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    public void addPreviousOrder(String email, PreviousOrder previousOrder){
         reference.child("Customers");
         UUID uuid = UUID.randomUUID();
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                HashMap h = previousOrder.putIntoHashMap();
+                if (!snapshot.exists()) {
+                    reference.child(uuid.toString()).setValue(h);
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
