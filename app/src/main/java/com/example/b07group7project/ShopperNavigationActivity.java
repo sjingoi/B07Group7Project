@@ -21,7 +21,7 @@ public class ShopperNavigationActivity extends Navigation {
         binding = ShopperNavigationActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        homeFragment = new item_preview();    // CHANGE THIS
+        homeFragment = new ExampleFragment();    // CHANGE THIS
         cartFragment = new ExampleFragment();    // CHANGE THIS
         accountFragment = new ExampleFragment(); // CHANGE THIS
 

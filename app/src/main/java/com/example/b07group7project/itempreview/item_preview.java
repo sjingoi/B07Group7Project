@@ -1,4 +1,4 @@
-package com.example.b07group7project;
+package com.example.b07group7project.itempreview;
 
 import android.os.Bundle;
 
@@ -7,9 +7,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.example.b07group7project.R;
 
 /**
  * A simple {@link Fragment} subclass.

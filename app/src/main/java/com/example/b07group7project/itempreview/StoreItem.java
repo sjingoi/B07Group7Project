@@ -1,4 +1,4 @@
-package com.example.b07group7project;
+package com.example.b07group7project.itempreview;
 
 public class StoreItem {
     private String itemDesc;
