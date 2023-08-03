@@ -14,12 +14,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
-public class StoreDatabase {
+public class StoreDatabase implements GetStoreInterface{
     FirebaseDatabase database;
     DatabaseReference reference;
 
-    HashMap<Object, >
+    List<Store> stores;
 
     public StoreDatabase(){
         database = FirebaseDatabase.getInstance("https://b07group7project-default-rtdb.firebaseio.com/");
@@ -104,23 +105,41 @@ public class StoreDatabase {
 
     }
 
-    public void getStores(ArrayList<String> storenames) {
-        DatabaseReference newreference = reference.child("Stores");
-        newreference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot child : snapshot.getChildren()) {
-                    storenames.add((String) child.child("Store Name").getValue());
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-    }
+
 
     public List<PreviousOrder> getPreviousOrders(String email) {
         return PreviousOrder.getPreviousOrders(reference.child("Stores").child("Email").child("Previous Orders"), email);
     }
 
+    @Override
+    public List<Store> getStores() {
+        if(stores != null)
+            return stores;
+
+        DatabaseReference newreference = reference.child("Stores");
+        newreference.addValueEventListener((new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Iterable<DataSnapshot> snap = snapshot.getChildren();
+                List<Store> store = new ArrayList<>();
+                for (DataSnapshot d : snap) {
+                    String s1 = d.child("Store Name").getValue().toString();
+                    String s2 = d.child("Store Image").getValue().toString();
+                    store.add(new Store(s1, s2));
+                }
+                stores = store;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        }));
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return stores;
+    }
 }

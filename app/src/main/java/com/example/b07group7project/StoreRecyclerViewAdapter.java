@@ -41,7 +41,7 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
     public void onBindViewHolder(@NonNull StoreRecyclerViewAdapter.MyViewHolder holder, int position) {
         // Assign Value to Each Row as They Come On Screen
         holder.tvName.setText(items.get(position).getStoreName());
-        ImageDownloader.setImageResource(holder.imageView, items.get(position).getImage());
+        //ImageDownloader.setImageResource(holder.imageView, items.get(position).getImage());
 
 
         View.OnClickListener clickListener = new View.OnClickListener() {
