@@ -1,10 +1,12 @@
-package com.example.b07group7project;
+package com.example.b07group7project.shopper_view_store;
+
+import com.example.b07group7project.Store;
 
 import java.util.ArrayList;
 import java.util.List;
 
 // This Is Class For Testing, Will Be Removed later on and will call getStores from database
-public class GetStoreImplementation implements GetStoreInterface{
+public class GetStoreImplementation implements GetStoreInterface {
     public List<Store> getStores() {
         List<Store> StoreList = new ArrayList<>();
         
