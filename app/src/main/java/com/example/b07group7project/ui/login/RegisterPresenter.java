@@ -5,20 +5,15 @@ import com.example.b07group7project.UserType;
 public class RegisterPresenter {
 
     LoginModel loginModel;
-    RegisterFragment registerFragment;
+    EmailPasswordActivity emailPasswordActivity;
 
-    public RegisterPresenter(RegisterFragment registerView, LoginModel loginModel) {
+    public RegisterPresenter(EmailPasswordActivity emailPasswordActivity, LoginModel loginModel) {
         this.loginModel = loginModel;
-        this.registerFragment = registerView;
+        this.emailPasswordActivity = emailPasswordActivity;
     }
 
     public void handleCreateAccount(UserType userType) {
-        if(loginModel.getCurrentUser() == null){
-            registerFragment.showRegistrationFailedNotification();
-            return;
-        }
-
         loginModel.setUserType(userType, loginModel.getCurrentUser());
-        ((EmailPasswordActivity) registerFragment.requireActivity()).onLoginCompete();
+        emailPasswordActivity.onLoginCompete();
     }
 }

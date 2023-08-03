@@ -7,26 +7,26 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginPresenter {
     LoginModel loginModel;
-    LoginFragment loginFragment;
+    LoginView loginView;
 
-    public LoginPresenter(LoginModel loginModel, LoginFragment loginFragment) {
+    public LoginPresenter(LoginModel loginModel, LoginView loginView) {
         this.loginModel = loginModel;
-        this.loginFragment = loginFragment;
+        this.loginView = loginView;
     }
     public void loginButtonOnClick(String username, String password){
         if(!isValid(username, password)){
             return;
         }
-        loginFragment.setLoadingAnimation(true);
-        loginModel.signIn(username, password, this::onLoginComplete);
+        loginView.setLoadingAnimation(true);
+        loginModel.signIn(username, password, this::afterLoginAttempt);
     }
 
     public void registerButtonOnClick(String username, String password){
         if(!isValid(username, password)){
             return;
         }
-        loginFragment.setLoadingAnimation(true);
-        loginModel.register(username, password, this::onRegistrationComplete);
+        loginView.setLoadingAnimation(true);
+        loginModel.register(username, password, this::afterRegistrationAttempt);
     }
 
     public boolean isValid(String user, String password) {
@@ -37,28 +37,23 @@ public class LoginPresenter {
     }
 
     public void forgotPasswordOnClick() {
-        EmailPasswordActivity parent = (EmailPasswordActivity) loginFragment.requireActivity();
-        parent.replaceFragment(new ResetPasswordFragment());
+        loginView.replaceFragment(new ResetPasswordFragment());
     }
 
-    private void onRegistrationComplete(Task<AuthResult> task) {
-        FirebaseUser user = loginModel.getCurrentUser();
-        if (user == null) {
-            loginFragment.onRegistrationFailed();
-            return;
-        }
-
-        Navigation parent = (Navigation) loginFragment.requireActivity();
-        parent.replaceFragment(new RegisterFragment());
-        loginFragment.setLoadingAnimation(false);
-    }
-
-    private void onLoginComplete(Task<AuthResult> task) {
+    private void afterRegistrationAttempt(Task<AuthResult> task) {
         if (loginModel.getCurrentUser() != null) {
-            EmailPasswordActivity activity = (EmailPasswordActivity) loginFragment.requireActivity();
-            activity.onLoginCompete();
+            loginView.replaceFragment(new RegisterFragment());
+        } else {
+            loginView.onRegistrationFailed();
+        }
+        loginView.setLoadingAnimation(false);
+    }
+
+    private void afterLoginAttempt(Task<AuthResult> task) {
+        if (loginModel.getCurrentUser() != null) {
+            loginView.onLoginComplete();
         } else
-            loginFragment.showLoginFailedNotification();
-        loginFragment.setLoadingAnimation(false);
+            loginView.onLoginFailed();
+        loginView.setLoadingAnimation(false);
     }
 }
