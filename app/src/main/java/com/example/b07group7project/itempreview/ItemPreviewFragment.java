@@ -14,10 +14,10 @@ import com.example.b07group7project.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link item_preview#newInstance} factory method to
+ * Use the {@link ItemPreviewFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class item_preview extends Fragment {
+public class ItemPreviewFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,7 +28,7 @@ public class item_preview extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public item_preview() {
+    public ItemPreviewFragment() {
         // Required empty public constructor
     }
 
@@ -38,11 +38,11 @@ public class item_preview extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment item_preview.
+     * @return A new instance of fragment ItemPreviewFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static item_preview newInstance(String param1, String param2) {
-        item_preview fragment = new item_preview();
+    public static ItemPreviewFragment newInstance(String param1, String param2) {
+        ItemPreviewFragment fragment = new ItemPreviewFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -69,6 +69,17 @@ public class item_preview extends Fragment {
         TextView textViewItemName = view.findViewById(R.id.itemName);
         TextView textViewItemPrice = view.findViewById(R.id.itemPrice);
         TextView textViewItemDesc = view.findViewById(R.id.itemDesc);
+
+        GetItemInfo itemInterface = new GetItemInfoImplementation();
+        StoreItem item = itemInterface.getItemInformation();
+
+        String itemName = item.getItemName();
+        double itemPrice = item.getItemPrice();
+
+        textViewItemName.setText(itemName);
+        textViewItemPrice.setText("$" + itemPrice);
+        textViewItemDesc.setText(item.getItemDesc());
+
         ImageButton incrementButton = view.findViewById(R.id.button3);
         ImageButton decrementButton = view.findViewById(R.id.button4);
 
