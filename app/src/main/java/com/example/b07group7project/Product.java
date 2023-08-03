@@ -1,24 +1,29 @@
 package com.example.b07group7project;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 public class Product {
 
     String productname;
     String description;
     String price;
+    String imageURL;
+    String uuid;
 
-
-    public Product(String productname, String description, String price){
+    public Product(String productname, String description, String price, String imageURL){
         this.productname = productname;
         this.description = description;
         this.price = price;
+        this.imageURL = imageURL;
+        this.uuid = UUID.randomUUID().toString();
     }
-    public Product(String productname, String description, double price){
+    public Product(String productname, String description, double price, String imageURL){
         this.productname = productname;
         this.description = description;
-        Double d = price;
-        this.price = d.toString();
+        this.price = Double.toString(price);
+        this.imageURL = imageURL;
+        this.uuid = UUID.randomUUID().toString();
     }
     public String getProductname() {
         return productname;
@@ -49,6 +54,7 @@ public class Product {
         product.put("Product name", productname);
         product.put("Product Description", description);
         product.put("Product Price", price);
+        product.put("Product imageURL", imageURL);
         return product;
     }
 }

@@ -25,17 +25,23 @@ public class PreviousOrder {
         reference = database.getReference();
     }
 
-    public PreviousOrder(String email, UUID uuid){
+    public PreviousOrder(String email, String accounttype){
         database = FirebaseDatabase.getInstance("https://b07group7project-default-rtdb.firebaseio.com/");
         reference = database.getReference();
         products = new HashMap<>();
-        DatabaseReference newreference = reference.child("Customer").child("Previous Orders").child("Products"); // change****************
+        /*
+        DatabaseReference newreference = reference;
+        if (accounttype.equals("Store Owner")) {
+            newreference = reference.child("Store").child("Previous Orders").child("Products"); // change****************
+        } else {
+            newreference = reference.child(accounttype).child("Previous Orders").child("Products"); // change****************
+        }
         newreference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int i = 1;
                 for (DataSnapshot snap: snapshot.getChildren()) {
-                    Product p = new Product((String) snap.child("Name").getValue(), (String) snap.child("Description").getValue(), (String) snap.child("Price").getValue());
+                    Product p = new Product((String) snap.child("Product Name").getValue(), (String) snap.child("Product Description").getValue(), (String) snap.child("Product Price").getValue(), (String) snap.child("Product imageURL").getValue());
                     products.put(Integer.toString(i), p);
                     i++;
                 }
@@ -46,6 +52,7 @@ public class PreviousOrder {
 
             }
         });
+         */
     }
 
     public static List<PreviousOrder> getPreviousOrders(DatabaseReference ref, String email) {
@@ -56,7 +63,7 @@ public class PreviousOrder {
                 PreviousOrder previousOrder;
                 for (DataSnapshot snap : snapshot.getChildren()) {
                     UUID uuid = fromString(snap.getKey());
-                    previousOrder = new PreviousOrder(email, uuid);
+                    previousOrder = new PreviousOrder(email, uuid.toString());
                     previousOrders.add(previousOrder);
                     previousOrder = null;
                     uuid = null;
@@ -68,6 +75,16 @@ public class PreviousOrder {
 
             }
         });
-        return previousOrders;
+        return previousOrders; /////////Change this
+
+    }
+
+    public HashMap<String, Object> putIntoHashMap() {
+        HashMap<String, Object> hashmap = new HashMap<>();
+        for (String s : hashmap.keySet()) {
+            UUID uuid = UUID.randomUUID();
+            hashmap.put(uuid.toString(), hashmap.get(s));
+        }
+        return hashmap;
     }
 }
