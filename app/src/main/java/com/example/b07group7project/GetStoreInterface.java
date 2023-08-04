@@ -1,9 +1,10 @@
 package com.example.b07group7project;
 
+import com.example.b07group7project.database.OnComplete;
+
 import java.util.ArrayList;
-import java.util.List;
 
 
 public interface GetStoreInterface {
-    public List<Store> getStores();
+    void getStores(OnComplete<ArrayList<Store>> onComplete);
 }
