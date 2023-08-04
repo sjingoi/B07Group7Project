@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
 //            transaction.commit();
 //      }
 
+
+
         // Code For Running CheckoutFragment
         if (savedInstanceState == null) {
             // Create a new instance of the ShopperViewStoreFragment
