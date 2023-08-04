@@ -31,7 +31,6 @@ public class GetCartImplementation implements GetCartInterface{
             };
 
 
-        ArrayList<Product> ArrayList;
-        onComplete.onComplete(new ArrayList<Product>(Arrays.asList(prods)));
+        onComplete.onComplete(new ArrayList<>(Arrays.asList(prods)));
     }
 }

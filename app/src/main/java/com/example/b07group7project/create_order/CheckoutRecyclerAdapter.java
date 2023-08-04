@@ -45,8 +45,10 @@ public class CheckoutRecyclerAdapter extends RecyclerView.Adapter<CheckoutRecycl
          Will probably need to fix XML File as well for this
          */
 
-        String name = String.valueOf(products.get(position).getItemName());
-        String quantity= String.valueOf(products.get(position).getQuantity());
+        Product prod = products.get(position);
+
+        String name = String.valueOf(prod.getItemName());
+        String quantity= String.valueOf(prod.getQuantity());
 
         DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
         String formattedPrice = decimalFormat.format(products.get(position).getPrice());
