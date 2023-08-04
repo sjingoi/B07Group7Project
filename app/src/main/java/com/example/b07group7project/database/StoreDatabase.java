@@ -15,7 +15,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class StoreDatabase implements GetStoreInterface {
     ArrayList<Store> stores;
@@ -55,23 +54,29 @@ public class StoreDatabase implements GetStoreInterface {
     }
 
     public void updateStoreList(DataSnapshot dataSnapshot){
-        HashMap<String, Object> o = (HashMap<String, Object>) dataSnapshot.getValue();
         Log.d("db", "updateStoreListDataSnap: " + dataSnapshot);
         ArrayList<Store> store = new ArrayList<>();
-        for (Map.Entry<String, Object> e : o.entrySet()) {
+        for (DataSnapshot e : dataSnapshot.getChildren()) {
             Log.d("myLog", e.getKey());
-            String name = null;
-            Object nameObject = ((HashMap<String, Object>)e.getValue()).getOrDefault("Store Name", null);
-            if(nameObject != null)
-                name = nameObject.toString();
-            String url = null;
-            Object urlObject = ((HashMap<String, Object>)e.getValue()).getOrDefault("Store Image", null);
-            if(urlObject != null)
-                url = urlObject.toString();
+            HashMap<String, Object> value = (HashMap<String, Object>) e.getValue();
+            if(value == null)
+                continue;
+            String name = getObjectAsString(
+                    value.getOrDefault("Store Name", null)
+            );
+            String url = getObjectAsString(
+                    value.getOrDefault("Store Image", null)
+            );
 
             store.add(new Store(name, url));
         }
         Log.d("myLog", "storeList: " + store.size());
         stores = store;
+    }
+
+    private String getObjectAsString(Object o){
+        if(o == null)
+            return null;
+        return o.toString();
     }
 }

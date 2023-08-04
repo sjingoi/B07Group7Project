@@ -16,9 +16,6 @@ import java.util.ArrayList;
 
 public class ShopperViewStoreFragment extends Fragment implements StoreClickListener{
 
-    public ShopperViewStoreFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,7 +27,6 @@ public class ShopperViewStoreFragment extends Fragment implements StoreClickList
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.shopper_view_store_fragment, container, false);
 
-        // Line where getStores is used
         GetStoreInterface storeInterface = new StoreDatabase();
         storeInterface.getStores(
                 stores -> onReceivedStores(stores, view)

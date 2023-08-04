@@ -5,10 +5,6 @@ public class Store{
     String storeName;
     String imageURL;
 
-    public Store() {
-        // Required empty public constructor
-    }
-
     public Store(String storeName, String imageURL) {
         this.storeName = storeName;
         this.imageURL = imageURL;
