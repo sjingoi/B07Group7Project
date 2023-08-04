@@ -1,21 +1,20 @@
 package com.example.b07group7project.ui.login;
 
 public class ResetPasswordPresenter {
-    ResetPasswordFragment resetPasswordFragment;
+    ResetPasswordView resetPasswordView;
     LoginModel loginModel;
-    public ResetPasswordPresenter(ResetPasswordFragment resetPasswordFragment,
+    public ResetPasswordPresenter(ResetPasswordView resetPasswordFragment,
                                   LoginModel loginModel) {
-        this.resetPasswordFragment = resetPasswordFragment;
+        this.resetPasswordView = resetPasswordFragment;
         this.loginModel = loginModel;
     }
 
     public void onGoBack() {
-        ((EmailPasswordActivity) resetPasswordFragment.requireActivity())
-                .replaceFragment(new LoginFragment());
+        resetPasswordView.replaceFragment(new LoginFragment());
     }
 
     public void onSendResetLink() {
-        loginModel.sendResetLink(resetPasswordFragment.getEmail());
-        resetPasswordFragment.showEmailSentNotification();
+        loginModel.sendResetLink(resetPasswordView.getEmail());
+        resetPasswordView.showEmailSentNotification();
     }
 }

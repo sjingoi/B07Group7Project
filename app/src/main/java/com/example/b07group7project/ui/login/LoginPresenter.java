@@ -1,9 +1,7 @@
 package com.example.b07group7project.ui.login;
 
-import com.example.b07group7project.Navigation;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseUser;
 
 public class LoginPresenter {
     LoginModel loginModel;
@@ -40,7 +38,7 @@ public class LoginPresenter {
         loginView.replaceFragment(new ResetPasswordFragment());
     }
 
-    private void afterRegistrationAttempt(Task<AuthResult> task) {
+    public void afterRegistrationAttempt(Task<AuthResult> task) {
         if (loginModel.getCurrentUser() != null) {
             loginView.replaceFragment(new RegisterFragment());
         } else {
@@ -49,7 +47,7 @@ public class LoginPresenter {
         loginView.setLoadingAnimation(false);
     }
 
-    private void afterLoginAttempt(Task<AuthResult> task) {
+    public void afterLoginAttempt(Task<AuthResult> task) {
         if (loginModel.getCurrentUser() != null) {
             loginView.onLoginComplete();
         } else
