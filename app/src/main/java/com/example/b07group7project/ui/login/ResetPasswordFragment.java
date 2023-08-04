@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.b07group7project.databinding.FragmentResetPasswordBinding;
 
-public class ResetPasswordFragment extends Fragment {
+public class ResetPasswordFragment extends Fragment implements ResetPasswordView {
 
     FragmentResetPasswordBinding binding;
     ResetPasswordPresenter resetPasswordPresenter;
@@ -37,6 +37,11 @@ public class ResetPasswordFragment extends Fragment {
         binding.button.setOnClickListener(v -> resetPasswordPresenter.onGoBack());
     }
 
+    @Override
+    public void replaceFragment(Fragment fragment) {
+        ((EmailPasswordActivity) requireActivity()).replaceFragment(fragment);
+    }
+
     public String getEmail() {
         return binding.editTextTextEmailAddress.getText().toString();
     }
@@ -44,4 +49,5 @@ public class ResetPasswordFragment extends Fragment {
     public void showEmailSentNotification() {
         Toast.makeText(getContext(), "Email Sent", Toast.LENGTH_LONG).show();
     }
+
 }
