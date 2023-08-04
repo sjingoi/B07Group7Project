@@ -45,7 +45,7 @@ public class CheckoutRecyclerAdapter extends RecyclerView.Adapter<CheckoutRecycl
 
         holder.tvName.setText(name);
         holder.tvQTY.setText(QTY);
-        holder.tvPrice.setText(price);
+        holder.tvPrice.setText("$" + price);
     }
 
     @Override

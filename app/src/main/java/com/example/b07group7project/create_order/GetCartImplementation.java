@@ -10,9 +10,8 @@ public class GetCartImplementation implements GetCartInterface{
     public List<Product> getCart(String user) {
         ArrayList<Product> products = new ArrayList<Product>();
 
-        for (int i = 0; i < 10; i++){
-            Product prod = new Product("FlashLight", "SAMPLE DESCRIPTION",
-                    9.99, 5, "Walmart", "");
+        for (int i = 0; i < 15; i++){
+            Product prod = new Product("FlashLight", 9.99, 5);
             products.add(prod);
         }
 
