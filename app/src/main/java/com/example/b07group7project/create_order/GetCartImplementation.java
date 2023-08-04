@@ -1,14 +1,16 @@
 package com.example.b07group7project.create_order;
 
+import com.example.b07group7project.database.OnComplete;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+
 
 // Example Class Only For Testing, Will be replaced with Database Call (or from cart)
 public class GetCartImplementation implements GetCartInterface{
 
     @Override
-    public ArrayList<Product> getCart(String user) {
+    public void getCart(OnComplete<ArrayList<Product>> onComplete){
 
         Product[] prods ={
             new Product("FlashLight", 9.99, 5),
@@ -29,6 +31,7 @@ public class GetCartImplementation implements GetCartInterface{
             };
 
 
-        return new ArrayList<>(Arrays.asList(prods));
+        ArrayList<Product> ArrayList;
+        onComplete.onComplete(new ArrayList<Product>(Arrays.asList(prods)));
     }
 }

@@ -16,7 +16,7 @@ import com.example.b07group7project.R;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class CheckoutRecyclerAdapter extends RecyclerView.Adapter<CheckoutRecyclerAdapter.MyViewHolder>{
     Context context;
@@ -40,6 +40,11 @@ public class CheckoutRecyclerAdapter extends RecyclerView.Adapter<CheckoutRecycl
 
     @Override
     public void onBindViewHolder(@NonNull CheckoutRecyclerAdapter.MyViewHolder holder, int position) {
+
+        /* TODO: If Name is Too Long Then It Just Runs Off Screen (Not Huge Issue But Nice To Fix)
+         Will probably need to fix XML File as well for this
+         */
+
         String name = String.valueOf(products.get(position).getItemName());
         String quantity= String.valueOf(products.get(position).getQuantity());
 
