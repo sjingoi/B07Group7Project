@@ -1,14 +1,11 @@
 package com.example.b07group7project.create_order;
 
-import static java.lang.Math.round;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,8 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.b07group7project.R;
 
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -39,12 +34,22 @@ public class CheckoutFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.checkout_fragment, container, false);
 
-        // Recyler View Stuff
+
         RecyclerView recyclerView = view.findViewById(R.id.Checkout_RecyclerView);
         // TODO: Update Accordinlgy based on Implemenetation of GetCartInterface
         GetCartInterface cartInterface = new GetCartImplementation();
-        ArrayList<Product> cart = cartInterface.getCart("ExampleUser");
-        // --------------------------------------------
+        cartInterface.getCart(
+                products -> onReceivedCart(products, view)
+        );
+
+
+
+
+        return view;
+    }
+
+    public void onReceivedCart(ArrayList<Product> cart, View view){
+        RecyclerView recyclerView = view.findViewById(R.id.Checkout_RecyclerView);
         CheckoutRecyclerAdapter adapter = new CheckoutRecyclerAdapter(requireContext(), cart);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -53,7 +58,6 @@ public class CheckoutFragment extends Fragment {
 
         // Price
         TextView totals = view.findViewById(R.id.OrderTotals);
-        //totals.setText("TOTAL: $" + calculateTotal(cart));
         totals.setText("TOTAL: $" + calculateTotal(cart));
 
 
@@ -62,7 +66,7 @@ public class CheckoutFragment extends Fragment {
         orderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                // TODO: Modify When PlaceOrder is Implemented Through Database
+//              // TODO: Update As Needed When PlaceOrder Is Implemented Through Databse
                 PlaceOrderInterface orderInterface = new PlaceOrderImplementation();
                 orderInterface.placeOrder(cart, "EXAMPLE USER HERE");
 
@@ -72,11 +76,8 @@ public class CheckoutFragment extends Fragment {
 
             }
         });
-
-
-
-        return view;
     }
+
 
     public String calculateTotal(ArrayList<Product> cart){
         double total = 0;
