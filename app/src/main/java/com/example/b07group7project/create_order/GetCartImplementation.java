@@ -24,7 +24,7 @@ public class GetCartImplementation implements GetCartInterface{
                     new Product("TV", 1299.99, 1),
                     new Product("T-Shirt", 20.00, 3),
                     new Product("Jeans", 50.00, 1),
-                    new Product("VERY VERY LONG NAME", 1000000, 1),
+                    new Product("VERY VERY VERY VERY VERY VERY LONG NAME", 1000000, 1),
                     new Product("Shorts", 10.99, 10),
             };
 
