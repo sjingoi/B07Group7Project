@@ -20,9 +20,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class CheckoutFragment extends Fragment {
-    public CheckoutFragment() {
-        // Empty Constructor
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
