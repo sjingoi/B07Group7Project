@@ -3,17 +3,22 @@ package com.example.b07group7project.create_order;
 // Product Class, Can Add/Remove Fields in the future as needed
 public class Product {
     String description;
-    int price;
+    String storeName;
+    String itemName;
     String imageURL;
     int quantity;
-    String storeName;
+    double price;
 
-    public Product(String description, int price, String imageURL, int quantity, String storeName) {
+
+
+    public Product(String itemName, String description, double price, int quantity, String storeName, String imageURL) {
+        this.itemName = itemName;
         this.description = description;
         this.price = price;
-        this.imageURL = imageURL;
         this.quantity = quantity;
         this.storeName = storeName;
+        this.imageURL = imageURL;
+
     }
 
     public String getDescription() {
@@ -24,11 +29,11 @@ public class Product {
         this.description = description;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -62,5 +67,13 @@ public class Product {
 
     public void setStoreName(String storeName) {
         this.storeName = storeName;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 }
