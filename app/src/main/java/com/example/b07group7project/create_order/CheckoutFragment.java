@@ -1,5 +1,7 @@
 package com.example.b07group7project.create_order;
 
+import static java.lang.Math.round;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.b07group7project.R;
 
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class CheckoutFragment extends Fragment {
@@ -38,7 +43,7 @@ public class CheckoutFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.Checkout_RecyclerView);
         // TODO: Update Accordinlgy based on Implemenetation of GetCartInterface
         GetCartInterface cartInterface = new GetCartImplementation();
-        ArrayList<Product> cart = (ArrayList<Product>) cartInterface.getCart("ExampleUser");
+        ArrayList<Product> cart = cartInterface.getCart("ExampleUser");
         // --------------------------------------------
         CheckoutRecyclerAdapter adapter = new CheckoutRecyclerAdapter(requireContext(), cart);
         recyclerView.setAdapter(adapter);
@@ -48,8 +53,8 @@ public class CheckoutFragment extends Fragment {
 
         // Price
         TextView totals = view.findViewById(R.id.OrderTotals);
-        totals.setText("TOTAL: $" + CalculateTotal(cart));
-
+        //totals.setText("TOTAL: $" + calculateTotal(cart));
+        totals.setText("TOTAL: $" + calculateTotal(cart));
 
 
         // Button Stuff
@@ -73,14 +78,18 @@ public class CheckoutFragment extends Fragment {
         return view;
     }
 
-    public String CalculateTotal(ArrayList<Product> Cart){
+    public String calculateTotal(ArrayList<Product> cart){
         double total = 0;
-        for (int i = 0; i < Cart.size(); i++){
-            total += (Cart.get(i).price * Cart.get(i).getQuantity());
+        for (int i = 0; i < cart.size(); i++){
+            total += (cart.get(i).price * cart.get(i).getQuantity());
         }
 
-        // Round to 2 decimal places
-        return String.format("%.2f", total);
+
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+        String formattedPrice = decimalFormat.format(total);
+
+        // Convert total to 2 decimal places
+        return formattedPrice;
     }
 
 }
