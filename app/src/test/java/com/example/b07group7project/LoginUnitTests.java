@@ -33,7 +33,7 @@ import org.mockito.ArgumentCaptor;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class LoginUnitTests {
 
 
     LoginView loginView = mock(LoginView.class);
