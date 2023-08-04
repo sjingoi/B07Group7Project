@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.b07group7project.R;
 
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,12 +41,14 @@ public class CheckoutRecyclerAdapter extends RecyclerView.Adapter<CheckoutRecycl
     @Override
     public void onBindViewHolder(@NonNull CheckoutRecyclerAdapter.MyViewHolder holder, int position) {
         String name = String.valueOf(products.get(position).getItemName());
-        String QTY = String.valueOf(products.get(position).getQuantity());
-        String price = String.valueOf((products.get(position).getPrice() * products.get(position).getQuantity()));
+        String quantity= String.valueOf(products.get(position).getQuantity());
+
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+        String formattedPrice = decimalFormat.format(products.get(position).getPrice());
 
         holder.tvName.setText(name);
-        holder.tvQTY.setText(QTY);
-        holder.tvPrice.setText("$" + price);
+        holder.tvQTY.setText(quantity);
+        holder.tvPrice.setText("$" + formattedPrice);
     }
 
     @Override
