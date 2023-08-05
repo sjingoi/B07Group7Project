@@ -33,14 +33,6 @@ public class ItemPreviewFragment extends Fragment {
         String itemID = "200";
         String storeID = "544b51d6-0328-4491-9a3d-f1532b6cbae0";
 
-        // Get item information asynchronously using the StoreItemService
-        StoreItemService storeItemService = new StoreItemService();
-        storeItemService.getItemInformation(itemID, storeID).thenAccept(storeItem -> {
-            currentItem = storeItem;
-            // Update UI components with the retrieved item information
-            updateUIWithItemInfo();
-        });
-
     }
 
     @Override
