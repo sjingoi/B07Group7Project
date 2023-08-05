@@ -1,14 +1,18 @@
-package com.example.b07group7project;
+package com.example.b07group7project.nav;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 
-import com.example.b07group7project.databinding.ShopperNavigationActivityBinding;
+import com.example.b07group7project.ExampleFragment;
+import com.example.b07group7project.MainActivity;
+import com.example.b07group7project.R;
+import com.example.b07group7project.databinding.ActivityStoreOwnerNavigationBinding;
 
-public class ShopperNavigationActivity extends Navigation {
+public class StoreOwnerNavigationActivity extends Navigation {
 
-    ShopperNavigationActivityBinding binding;
+    ActivityStoreOwnerNavigationBinding binding;
 
     Fragment homeFragment;
     Fragment cartFragment;
@@ -18,7 +22,7 @@ public class ShopperNavigationActivity extends Navigation {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ShopperNavigationActivityBinding.inflate(getLayoutInflater());
+        binding = ActivityStoreOwnerNavigationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         homeFragment = new ExampleFragment();    // CHANGE THIS
@@ -45,6 +49,6 @@ public class ShopperNavigationActivity extends Navigation {
 
     @Override
     public int getFragmentContainer() {
-        return R.id.frameLayout;
+        return;
     }
 }

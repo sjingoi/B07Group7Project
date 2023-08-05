@@ -3,7 +3,7 @@ package com.example.b07group7project.ui.login;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.example.b07group7project.Navigation;
+import com.example.b07group7project.nav.Navigation;
 import com.example.b07group7project.R;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
