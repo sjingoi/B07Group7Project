@@ -53,8 +53,7 @@ public class EmailPasswordActivity extends Navigation {
         return loginModel;
     }
 
-    public void onLoginCompete() {
-        UserType type = loginModel.getUserType(loginModel.getCurrentUser());
+    public void onLoginCompete(UserType type) {
         if(type == UserType.SHOPPER)
             moveToShopperLandingPage();
         else

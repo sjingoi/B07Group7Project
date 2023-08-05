@@ -2,6 +2,7 @@ package com.example.b07group7project.ui.login;
 
 import com.example.b07group7project.UserPermission;
 import com.example.b07group7project.UserType;
+import com.example.b07group7project.database.OnComplete;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,8 +44,8 @@ public class LoginModelAdapter implements LoginModel{
     }
 
     @Override
-    public UserType getUserType(FirebaseUser user) {
-        return userPermission.getUserType(user);
+    public void getUserType(FirebaseUser user, OnComplete<UserType> withUserType) {
+        userPermission.getUserType(user, withUserType);
     }
 
     @Override

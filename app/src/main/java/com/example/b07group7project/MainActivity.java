@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.b07group7project.ui.login.EmailPasswordActivity;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -14,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this.getApplicationContext(), ShopperNavigationActivity.class);
+        Intent intent = new Intent(this.getApplicationContext(), EmailPasswordActivity.class);
         startActivity(intent);
     }
 }
