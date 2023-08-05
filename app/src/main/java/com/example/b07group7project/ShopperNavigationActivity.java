@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 
 import com.example.b07group7project.databinding.ShopperNavigationActivityBinding;
+import com.example.b07group7project.shopper_view_store.ShopperViewStoreFragment;
 
 public class ShopperNavigationActivity extends Navigation {
 

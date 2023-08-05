@@ -1,4 +1,4 @@
-package com.example.b07group7project;
+package com.example.b07group7project.shopper_view_store;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,11 +10,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.b07group7project.R;
+import com.example.b07group7project.Store;
 import com.example.b07group7project.database.StoreDatabase;
 
 import java.util.ArrayList;
 
-public class ShopperViewStoreFragment extends Fragment implements StoreClickListener{
+public class ShopperViewStoreFragment extends Fragment implements StoreClickListener {
 
 
     @Override
@@ -46,4 +48,5 @@ public class ShopperViewStoreFragment extends Fragment implements StoreClickList
     public void onStoreClicked(Store store) {
         Toast.makeText(requireContext(), store.getStoreName(), Toast.LENGTH_SHORT).show();
     }
+
 }

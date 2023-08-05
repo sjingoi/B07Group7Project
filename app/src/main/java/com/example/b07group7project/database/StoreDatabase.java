@@ -4,8 +4,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.b07group7project.GetStoreInterface;
 import com.example.b07group7project.Store;
+import com.example.b07group7project.shopper_view_store.GetStoreInterface;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
