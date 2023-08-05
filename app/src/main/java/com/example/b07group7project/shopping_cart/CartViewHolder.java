@@ -10,7 +10,7 @@ import com.example.b07group7project.R;
 import com.example.b07group7project.RecyclerViewHolder;
 import com.example.b07group7project.database.ImageDownloader;
 
-public class CartViewHolder extends RecyclerViewHolder<CartItem> {
+public class CartViewHolder extends RecyclerViewHolder<CartEntry> {
 
     ImageView imageView;
     TextView nameView, quantityView;
@@ -30,19 +30,19 @@ public class CartViewHolder extends RecyclerViewHolder<CartItem> {
     }
 
     @Override
-    public void updateView(CartItem cartItem) {
-        nameView.setText(cartItem.getProductName());
-        quantityView.setText(String.format(Integer.toString(cartItem.getQuantity())));
+    public void updateView(CartEntry cartEntry) {
+        nameView.setText(cartEntry.getProduct().getItemName());
+        quantityView.setText(String.format(Integer.toString(cartEntry.getQuantity())));
 
         increaseQty.setOnClickListener(view -> {
-            cartItem.setQuantity(cartItem.getQuantity() + 1);
-            quantityView.setText(String.format(Integer.toString(cartItem.getQuantity())));
+            cartEntry.setQuantity(cartEntry.getQuantity() + 1);
+            quantityView.setText(String.format(Integer.toString(cartEntry.getQuantity())));
         });
 
         decreaseQty.setOnClickListener(view -> {
-            if (cartItem.getQuantity() != 1) {
-                cartItem.setQuantity(cartItem.getQuantity() - 1);
-                quantityView.setText(String.format(Integer.toString(cartItem.getQuantity())));
+            if (cartEntry.getQuantity() != 1) {
+                cartEntry.setQuantity(cartEntry.getQuantity() - 1);
+                quantityView.setText(String.format(Integer.toString(cartEntry.getQuantity())));
             }
         });
 
@@ -50,9 +50,9 @@ public class CartViewHolder extends RecyclerViewHolder<CartItem> {
             //Stuff here
         });
 
-        layout.setOnClickListener(cartItem.onClickListener);
+        layout.setOnClickListener(cartEntry.onClickListener);
 
 
-        ImageDownloader.setImageResource(imageView, cartItem.imageURL);
+        ImageDownloader.setImageResource(imageView, cartEntry.getProduct().getImageURL());
     }
 }

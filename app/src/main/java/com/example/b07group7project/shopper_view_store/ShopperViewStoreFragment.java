@@ -11,10 +11,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.R;
-import com.example.b07group7project.Store;
+import com.example.b07group7project.database_abstractions.Store;
 
 import com.example.b07group7project.database.StoreDatabase;
-import com.example.b07group7project.shopping_cart.ShoppingCart;
 
 
 import java.util.ArrayList;

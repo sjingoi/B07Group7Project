@@ -5,16 +5,15 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.R;
 import com.example.b07group7project.RecyclerViewAdapter;
 
 import java.util.List;
 
-public class CartAdapter extends RecyclerViewAdapter<CartItem, CartViewHolder> {
+public class CartAdapter extends RecyclerViewAdapter<CartEntry, CartViewHolder> {
 
-    public CartAdapter(Context context, List<CartItem> items) {
+    public CartAdapter(Context context, List<CartEntry> items) {
         super(context, items);
     }
 
