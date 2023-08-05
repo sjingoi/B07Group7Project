@@ -21,7 +21,7 @@
         android:layout_marginStart="8dp"
         android:text="Item Name Here"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/removeItem"
         app:layout_constraintStart_toEndOf="@+id/cartItemImage"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,6 +33,14 @@
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/cartItemName"
         app:layout_constraintTop_toBottomOf="@+id/cartItemName" />
+
+    <ImageButton
+        android:id="@+id/removeItem"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/baseline_delete_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/quantity"
@@ -71,5 +79,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
