@@ -3,6 +3,7 @@ package com.example.b07group7project.create_order;
 // Product Class, Can Add/Remove Fields in the future as needed
 public class Product {
 
+    String itemName;
     int quantity;
     double price;
 
