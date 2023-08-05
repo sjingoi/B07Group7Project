@@ -1,16 +1,16 @@
 package com.example.b07group7project.itempreview;
 
 public class StoreItem {
-    private String itemDesc;
+    private String ProductDesc;
     private String storeID;
-    private String itemName;
+    private String ProductName;
     private String itemID;
-    private double itemPrice;
+    private double ProductPrice;
     private int itemQuant;
 
-    public StoreItem(String itemID, String itemName, int itemQuant) {
+    public StoreItem(String itemID, String ProductName, int itemQuant) {
         this.itemID = itemID;
-        this.itemName = itemName;
+        this.ProductName = ProductName;
         this.itemQuant = itemQuant;
     }
 
@@ -26,7 +26,7 @@ public class StoreItem {
     }
 
     public String getItemDesc() {
-        return itemDesc;
+        return ProductDesc;
     }
 
     public String getStoreID() {
@@ -34,14 +34,14 @@ public class StoreItem {
     }
 
     public String getItemName() {
-        return itemName;
+        return ProductName;
     }
     public double getItemPrice() {
-        return itemPrice;
+        return ProductPrice;
     }
 
     public void setItemDesc(String itemDesc) {
-        this.itemDesc = itemDesc;
+        this.ProductDesc = itemDesc;
     }
 
     public void setStoreID(String storeID) {

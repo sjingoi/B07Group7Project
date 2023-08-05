@@ -10,8 +10,8 @@ import java.util.concurrent.CompletableFuture;
 
 public class StoreItemService implements GetItemInfo{
     // Method to get item information asynchronously
-    public CompletableFuture<StoreItem> getItemInformation(String itemID) {
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference("store_items/" + itemID);
+    public CompletableFuture<StoreItem> getItemInformation(String itemID, String storeID) {
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("Stores/" + storeID + "/Products/" + itemID);
         CompletableFuture<StoreItem> result = new CompletableFuture<>();
 
         db.addListenerForSingleValueEvent(new ValueEventListener() {

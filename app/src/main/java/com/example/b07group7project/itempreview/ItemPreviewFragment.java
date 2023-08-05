@@ -29,11 +29,13 @@ public class ItemPreviewFragment extends Fragment {
 
         // Get the item ID from arguments (sent from the previous fragment)
         //String itemID = getArguments().getString("itemID");
-        String itemID = "100";
+        //String storeID = getArguments().getString("storeID");
+        String itemID = "200";
+        String storeID = "544b51d6-0328-4491-9a3d-f1532b6cbae0";
 
         // Get item information asynchronously using the StoreItemService
         StoreItemService storeItemService = new StoreItemService();
-        storeItemService.getItemInformation(itemID).thenAccept(storeItem -> {
+        storeItemService.getItemInformation(itemID, storeID).thenAccept(storeItem -> {
             currentItem = storeItem;
             // Update UI components with the retrieved item information
             updateUIWithItemInfo();
