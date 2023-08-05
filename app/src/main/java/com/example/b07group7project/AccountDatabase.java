@@ -14,12 +14,12 @@ public class AccountDatabase {
     DatabaseReference reference;
 
     public AccountDatabase(){
-        database = FirebaseDatabase.getInstance("https://b07group7project-default-rtdb.firebaseio.com/");
+        database = FirebaseDatabase.getInstance(Constants.database_url);
         reference = database.getReference();
     }
 
     public void addAccount(Account account) {
-        DatabaseReference newreference = reference.child("Accounts").child(account.email);
+        DatabaseReference newreference = reference.child(Constants.accounts).child(account.email);
         newreference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

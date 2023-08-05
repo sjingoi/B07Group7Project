@@ -19,34 +19,40 @@ public class Customer {
     String name;
     List<PreviousOrder> previousOrders;
     List<Product> shoppingCart;
-
+    String uuid;
 
     public Customer(String email, String name) {
-        email = checkFor(email);
+        //email = checkFor(email);
+        this.email = email;
         this.name = name;
+        this.uuid = UUID.randomUUID().toString();
     }
 
     public Customer(String email, String name, List<PreviousOrder> previousOrders) {
-        email = checkFor(email);
-
+        //email = checkFor(email);
+        this.email = email;
         this.previousOrders = previousOrders;
+        this.uuid = UUID.randomUUID().toString();
     }
 
     public Customer(String email, String name, List<PreviousOrder> previousOrders, List<Product> shoppingCart) {
-        email = checkFor(email);
+        //email = checkFor(email);
+        this.email = email;
         this.name = name;
         this.previousOrders = previousOrders;
         this.shoppingCart = shoppingCart;
+        this.uuid = UUID.randomUUID().toString();
     }
 
     public HashMap<String, Object> putIntoHashMap() {
         HashMap<String, Object> hashmap = new HashMap<>();
-        hashmap.put("Customer Email", this.email);
+        hashmap.put(Constants.customer_email, this.email);
+        hashmap.put(Constants.customer_name, this.name);
         if (previousOrders != null) {
-            hashmap.put("Previous Orders", this.previousOrders);
+            hashmap.put(Constants.previous_orders, this.previousOrders);
         }
         if (shoppingCart != null) {
-            hashmap.put("Shopping Cart", this.shoppingCart);
+            hashmap.put(Constants.shopping_cart, this.shoppingCart);
         }
         return hashmap;
     }

@@ -10,20 +10,23 @@ public class Product {
     String price;
     String imageURL;
     String uuid;
+    String storeuuid;
 
-    public Product(String productname, String description, String price, String imageURL){
+    public Product(String productname, String description, String price, String imageURL, Store store){
         this.productname = productname;
         this.description = description;
         this.price = price;
         this.imageURL = imageURL;
         this.uuid = UUID.randomUUID().toString();
+        this.storeuuid = store.uuid;
     }
-    public Product(String productname, String description, double price, String imageURL){
+    public Product(String productname, String description, double price, String imageURL, Store store){
         this.productname = productname;
         this.description = description;
         this.price = Double.toString(price);
         this.imageURL = imageURL;
         this.uuid = UUID.randomUUID().toString();
+        this.storeuuid = store.uuid;
     }
     public String getProductname() {
         return productname;
@@ -51,10 +54,10 @@ public class Product {
 
     public HashMap<String, Object> putIntoHashMap(){
         HashMap<String, Object> product = new HashMap<>();
-        product.put("Product name", productname);
-        product.put("Product Description", description);
-        product.put("Product Price", price);
-        product.put("Product imageURL", imageURL);
+        product.put(Constants.product_name, productname);
+        product.put(Constants.product_description, description);
+        product.put(Constants.product_price, price);
+        product.put(Constants.product_image, imageURL);
         return product;
     }
 }

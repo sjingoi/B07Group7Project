@@ -55,12 +55,12 @@ public class Store{
 
     public HashMap<String, Object> storeIntoHashmap () {
         HashMap<String, Object> store = new HashMap<>();
-        store.put("Store name", storeName);
-        store.put("Store Description", storedescription);
-        store.put("Email", email);
-        store.put("Products", productlist);
-        store.put("Previous Orders", previousOrders);
-        store.put("Store Icon", imageURL);
+        store.put(Constants.store_name, storeName);
+        store.put(Constants.store_description, storedescription);
+        store.put(Constants.store_email, email);
+        store.put(Constants.store_products, productlist);
+        store.put(Constants.store_orders, previousOrders);
+        store.put(Constants.store_image, imageURL);
         return store;
     }
 }

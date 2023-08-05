@@ -16,13 +16,12 @@ public class CustomerDatabase {
     DatabaseReference reference;
 
     public CustomerDatabase() {
-        database = FirebaseDatabase.getInstance("https://b07group7project-default-rtdb.firebaseio.com/");
+        database = FirebaseDatabase.getInstance(Constants.database_url);
         reference = database.getReference();
     }
 
     public void addCustomer(Customer customer) {
-        UUID uuid = UUID.randomUUID();
-        DatabaseReference newreference = reference.child("Customers").child(uuid.toString());
+        DatabaseReference newreference = reference.child(Constants.customers).child(customer.uuid);
         newreference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -37,17 +36,40 @@ public class CustomerDatabase {
         });
     }
 
-    public void addPreviousOrder(String email, PreviousOrder previousOrder){
-        reference.child("Customers");
-        UUID uuid = UUID.randomUUID();
-        reference.addValueEventListener(new ValueEventListener() {
+    public void addToShoppingCart(Customer customer, Product product, int quantity) {
+        DatabaseReference newreference = reference.child(Constants.customers).child(customer.uuid).child(Constants.shopping_cart).child(product.uuid);
+        newreference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                HashMap h = previousOrder.putIntoHashMap();
                 if (!snapshot.exists()) {
-                    reference.child(uuid.toString()).setValue(h);
+                    HashMap<String, String> hashmap = new HashMap<>();
+                    hashmap.put(Constants.quantity, Integer.toString(quantity));
+                    hashmap.put(Constants.store_uuid, product.storeuuid);
+                    newreference.setValue(hashmap);
+                }
+                else {
+                    String currentQuantity = (String) snapshot.child(Constants.quantity).getValue();
+                    int i = Integer.parseInt(currentQuantity);
+                    i += quantity;
+                    newreference.child(Constants.quantity).setValue(Integer.toString(i));
                 }
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void addPreviousOrder(Customer customer, PreviousOrder previousOrder){
+        DatabaseReference newreference = reference.child(Constants.customers).child(customer.uuid).child(Constants.shopping_cart);
+        newreference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+            }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
