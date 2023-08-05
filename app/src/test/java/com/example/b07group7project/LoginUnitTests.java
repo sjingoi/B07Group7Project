@@ -10,6 +10,7 @@ import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
+import com.example.b07group7project.database.OnComplete;
 import com.example.b07group7project.ui.login.EmailPasswordActivity;
 import com.example.b07group7project.ui.login.LoginFragment;
 import com.example.b07group7project.ui.login.LoginModel;
@@ -47,6 +48,9 @@ public class LoginUnitTests {
 
     ArgumentCaptor<OnCompleteListener<AuthResult>> captor =
             ArgumentCaptor.forClass(OnCompleteListener.class);
+
+    ArgumentCaptor<OnComplete<UserType>> userTypeOnCompleteCaptor =
+            ArgumentCaptor.forClass(OnComplete.class);
 
     Task<AuthResult> task = mock(Task.class);
     FirebaseUser user = mock(FirebaseUser.class);
@@ -121,7 +125,12 @@ public class LoginUnitTests {
         result.onComplete(task);
         
         verify(loginModel).getCurrentUser();
-        verify(loginView).onLoginComplete();
+        verify(loginModel).getUserType(eq(user), userTypeOnCompleteCaptor.capture());
+
+        OnComplete<UserType> r = userTypeOnCompleteCaptor.getValue();
+        r.onComplete(UserType.SHOPPER);
+
+        verify(loginView).onLoginComplete(UserType.SHOPPER);
         verify(loginView).setLoadingAnimation(false);
         verifyNoMoreInteractions(loginModel, loginView);
     }
@@ -174,7 +183,7 @@ public class LoginUnitTests {
         registerPresenter.handleCreateAccount(UserType.STORE_OWNER);
 
         verify(loginModel).setUserType(UserType.STORE_OWNER, null);
-        verify(emailPasswordActivity).onLoginCompete();
+        verify(emailPasswordActivity).onLoginCompete(UserType.STORE_OWNER);
     }
 
     @Test
@@ -185,7 +194,7 @@ public class LoginUnitTests {
         registerPresenter.handleCreateAccount(UserType.SHOPPER);
 
         verify(loginModel).setUserType(UserType.SHOPPER, user);
-        verify(emailPasswordActivity).onLoginCompete();
+        verify(emailPasswordActivity).onLoginCompete(UserType.SHOPPER);
     }
 
     @Test
