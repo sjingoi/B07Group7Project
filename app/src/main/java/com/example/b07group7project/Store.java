@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class Store{
-    // This Is Store Class for Testing, Will be changed later when Creating real store class
+
     String storeName;
     String imageURL;
 

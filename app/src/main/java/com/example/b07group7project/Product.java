@@ -12,6 +12,8 @@ public class Product {
     String uuid;
     String storeuuid;
 
+    int quantity;
+
     public Product(String productname, String description, String price, String imageURL, Store store){
         this.productname = productname;
         this.description = description;
@@ -27,6 +29,16 @@ public class Product {
         this.imageURL = imageURL;
         this.uuid = UUID.randomUUID().toString();
         this.storeuuid = store.uuid;
+    }
+
+    public Product(String productname, String description, String price, String imageURL, Store store, int quantity){
+        this.productname = productname;
+        this.description = description;
+        this.price = price;
+        this.imageURL = imageURL;
+        this.uuid = UUID.randomUUID().toString();
+        this.storeuuid = store.uuid;
+        this.quantity = quantity;
     }
     public String getProductname() {
         return productname;

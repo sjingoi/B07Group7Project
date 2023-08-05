@@ -26,13 +26,13 @@ public class StoreDatabase implements GetStoreInterface{
     List<Store> stores;
 
     public StoreDatabase(){
-        database = FirebaseDatabase.getInstance("https://b07group7project-default-rtdb.firebaseio.com/");
+        database = FirebaseDatabase.getInstance(Constants.database_url);
         reference = database.getReference();
     }
 
 
     public void addStore(Store store){
-        DatabaseReference newreference = reference.child("Stores").child(store.uuid);
+        DatabaseReference newreference = reference.child(Constants.stores).child(store.uuid);
 
         newreference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -50,7 +50,7 @@ public class StoreDatabase implements GetStoreInterface{
     }
 
     public void addProductToStore(Product product, Store store){
-        DatabaseReference newreference = reference.child("Stores").child(store.uuid).child("Products").child(product.uuid);
+        DatabaseReference newreference = reference.child(Constants.stores).child(store.uuid).child(Constants.products).child(product.uuid);
 
         newreference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -69,20 +69,14 @@ public class StoreDatabase implements GetStoreInterface{
     }
 
     public void addOrderToStore(Order order) {
-        Store s = order.store;
-        Customer c = order.customer;
-        HashMap<String, String> hash = new HashMap<>();
-        hash.put("Customer ID", c.uuid);
-        hash.put("Order Complete", "false");
-        DatabaseReference newreference = reference.child("Stores").child(s.uuid).child("Orders").child(order.uuid);
+        DatabaseReference newreference = reference.child(Constants.stores).child(order.store.uuid).child(Constants.orders).child(order.uuid);
+
         newreference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.exists()) {
-                    newreference.setValue(hash);
-
-                    newreference.child("Ordered Products").setValue(order.productsuuidToQuantity);
-
+                    HashMap<String, Object> hashmap = order.putIntoHashMap();
+                    newreference.setValue(hashmap);
                 }
             }
             @Override

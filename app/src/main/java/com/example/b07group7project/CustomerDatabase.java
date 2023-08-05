@@ -38,26 +38,16 @@ public class CustomerDatabase {
 
     public void addToShoppingCart(Customer customer, Product product, int quantity) {
         DatabaseReference newreference = reference.child(Constants.customers).child(customer.uuid).child(Constants.shopping_cart).child(product.uuid);
-        newreference.addListenerForSingleValueEvent(new ValueEventListener() {
+        newreference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.exists()) {
-                    HashMap<String, String> hashmap = new HashMap<>();
-                    hashmap.put(Constants.quantity, Integer.toString(quantity));
-                    hashmap.put(Constants.store_uuid, product.storeuuid);
-                    newreference.setValue(hashmap);
-                }
-                else {
-                    String currentQuantity = (String) snapshot.child(Constants.quantity).getValue();
-                    int i = Integer.parseInt(currentQuantity);
-                    i += quantity;
-                    newreference.child(Constants.quantity).setValue(Integer.toString(i));
+                    //HashMap<String, String> hashmap = customer.putIntoShoppingMap(product, quantity);
+                    newreference.setValue(Integer.toString(quantity));
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }

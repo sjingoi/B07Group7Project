@@ -54,6 +54,17 @@ public class Customer {
         if (shoppingCart != null) {
             hashmap.put(Constants.shopping_cart, this.shoppingCart);
         }
+        else {
+            hashmap.put(Constants.shopping_cart, "");
+        }
+        return hashmap;
+    }
+
+    public HashMap<String, String> putIntoShoppingMap(Product product, int quantity) {
+        HashMap<String, String> hashmap = new HashMap<>();
+        hashmap.put(Constants.store_uuid, product.storeuuid);
+        hashmap.put(Constants.quantity, Integer.toString(quantity));
+
         return hashmap;
     }
 
