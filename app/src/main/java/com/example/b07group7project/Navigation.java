@@ -10,9 +10,12 @@ public abstract class Navigation extends AppCompatActivity implements FragmentSw
 
     public abstract int getFragmentContainer();
     @Override
-    public void replaceFragment(Fragment newFragment) {
+    public void replaceFragment(Fragment newFragment, Boolean addToBackStack) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if (addToBackStack) {
+            fragmentTransaction.addToBackStack(null);
+        }
         fragmentTransaction.replace(getFragmentContainer(), newFragment);
         fragmentTransaction.commit();
     }

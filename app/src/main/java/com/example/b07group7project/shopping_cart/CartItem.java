@@ -1,18 +1,21 @@
 package com.example.b07group7project.shopping_cart;
-
-import android.graphics.Bitmap;
-
-import java.net.URL;
+import android.view.View;
 
 public class CartItem {
+
     String productName;
     int quantity;
     String imageURL;
 
-    public CartItem(String productName, int quantity, String imageURL) {
+    View.OnClickListener onClickListener;
+
+    public CartItem(String productName, int quantity, String imageURL, View.OnClickListener onClickListener) {
         this.productName = productName;
         this.quantity = quantity;
         this.imageURL = imageURL;
+
+        this.onClickListener = onClickListener;
+
     }
 
     public String getProductName() {

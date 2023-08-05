@@ -40,7 +40,7 @@ public class LoginPresenter {
                     }
 
                     EmailPasswordActivity parent = (EmailPasswordActivity) loginFragment.requireActivity();
-                    parent.replaceFragment(new RegisterFragment(user));
+                    parent.replaceFragment(new RegisterFragment(user), false);
                     loginFragment.setLoadingAnimation(false);
                 });
     }
@@ -58,6 +58,6 @@ public class LoginPresenter {
 
     public void forgotPasswordOnClick() {
         EmailPasswordActivity parent = (EmailPasswordActivity) loginFragment.requireActivity();
-        parent.replaceFragment(new ResetPasswordFragment());
+        parent.replaceFragment(new ResetPasswordFragment(), false);
     }
 }

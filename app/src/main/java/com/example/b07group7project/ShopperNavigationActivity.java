@@ -22,22 +22,22 @@ public class ShopperNavigationActivity extends Navigation {
         binding = ShopperNavigationActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        homeFragment = new ExampleFragment();    // CHANGE THIS
-        cartFragment = new ShoppingCart();
-        accountFragment = new ExampleFragment(); // CHANGE THIS
+        homeFragment = ExampleFragment.newInstance();    // CHANGE THIS
+        cartFragment = ShoppingCart.newInstance();
+        accountFragment = ExampleFragment.newInstance(); // CHANGE THIS
 
-        replaceFragment(homeFragment);
+        replaceFragment(homeFragment, false);
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 
             int itemId = item.getItemId();
 
             if (itemId == R.id.homeNav) {
-                replaceFragment(homeFragment);
+                replaceFragment(homeFragment, false);
             } else if (itemId == R.id.cartNav) {
-                replaceFragment(cartFragment);
+                replaceFragment(cartFragment, false);
             } else if (itemId == R.id.accountNav) {
-                replaceFragment(accountFragment);
+                replaceFragment(accountFragment, false);
             }
 
             return true;
