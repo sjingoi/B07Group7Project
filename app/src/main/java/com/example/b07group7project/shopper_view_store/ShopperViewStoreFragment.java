@@ -13,13 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.b07group7project.R;
 import com.example.b07group7project.Store;
 
+import com.example.b07group7project.database.StoreDatabase;
+
+
 import java.util.ArrayList;
 
 public class ShopperViewStoreFragment extends Fragment implements StoreClickListener {
-
-    public ShopperViewStoreFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,20 +30,25 @@ public class ShopperViewStoreFragment extends Fragment implements StoreClickList
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.shopper_view_store_fragment, container, false);
 
+        GetStoreInterface storeInterface = new StoreDatabase();
+        storeInterface.getStores(
+                stores -> onReceivedStores(stores, view)
+        );
+
+        return view;
+    }
+
+    public void onReceivedStores(ArrayList<Store> stores, View view){
         RecyclerView recyclerView = view.findViewById(R.id.StoreListRecyclerView);
-        // Line where getStores is used
-        GetStoreInterface storeInterface = new GetStoreImplementation();
-        //
-        ArrayList<Store> StoreList = (ArrayList<Store>) storeInterface.getStores();
-        StoreRecyclerViewAdapter adapter = new StoreRecyclerViewAdapter(requireContext(), StoreList, this);
+        StoreRecyclerViewAdapter adapter = new StoreRecyclerViewAdapter(requireContext(), stores, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 2));
 
-        return view;
     }
 
     @Override
     public void onStoreClicked(Store store) {
         Toast.makeText(requireContext(), store.getStoreName(), Toast.LENGTH_SHORT).show();
     }
+
 }
