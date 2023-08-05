@@ -1,4 +1,4 @@
-package com.example.b07group7project.create_order;
+package com.example.b07group7project;
 
 // Product Class, Can Add/Remove Fields in the future as needed
 public class Product {
