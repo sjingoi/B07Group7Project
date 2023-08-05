@@ -12,12 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.R;
 import com.example.b07group7project.Store;
+
 import com.example.b07group7project.database.StoreDatabase;
+
 
 import java.util.ArrayList;
 
 public class ShopperViewStoreFragment extends Fragment implements StoreClickListener {
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class ShopperViewStoreFragment extends Fragment implements StoreClickList
         StoreRecyclerViewAdapter adapter = new StoreRecyclerViewAdapter(requireContext(), stores, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 2));
+
     }
 
     @Override
