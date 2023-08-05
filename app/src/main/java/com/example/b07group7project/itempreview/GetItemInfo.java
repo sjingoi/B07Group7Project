@@ -1,5 +1,6 @@
 package com.example.b07group7project.itempreview;
+import java.util.concurrent.CompletableFuture;
 
 public interface GetItemInfo {
-    StoreItem getItemInformation();
+    CompletableFuture<StoreItem> getItemInformation(String itemID);
 }

@@ -6,6 +6,24 @@ public class StoreItem {
     private String itemName;
     private String itemID;
     private double itemPrice;
+    private int itemQuant;
+
+    public StoreItem(String itemID, String itemName, int itemQuant) {
+        this.itemID = itemID;
+        this.itemName = itemName;
+        this.itemQuant = itemQuant;
+    }
+
+    public StoreItem() {
+    }
+
+    public int getItemQuant() {
+        return itemQuant;
+    }
+
+    public void setItemQuant(int itemQuant) {
+        this.itemQuant = itemQuant;
+    }
 
     public String getItemDesc() {
         return itemDesc;
@@ -44,11 +62,12 @@ public class StoreItem {
         return itemID;
     }
 
-    public StoreItem(String itemDesc, String storeID, String itemName, String itemID, double itemPrice) {
+    public StoreItem(String itemDesc, String storeID, String itemName, String itemID, double itemPrice, int itemQuant) {
         this.itemDesc = itemDesc;
         this.storeID = storeID;
         this.itemName = itemName;
         this.itemID = itemID;
         this.itemPrice = itemPrice;
+        this.itemQuant = itemQuant;
     }
 }
