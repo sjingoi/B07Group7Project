@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 
 import com.example.b07group7project.databinding.ShopperNavigationActivityBinding;
-import com.example.b07group7project.itempreview.ItemPreviewFragment;
+import com.example.b07group7project.shopper_view_store.ShopperViewStoreFragment;
 
 public class ShopperNavigationActivity extends Navigation {
 
@@ -22,7 +22,7 @@ public class ShopperNavigationActivity extends Navigation {
         binding = ShopperNavigationActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        homeFragment = new ItemPreviewFragment();    // CHANGE THIS
+        homeFragment = new ShopperViewStoreFragment();    // CHANGE THIS
         cartFragment = new ExampleFragment();    // CHANGE THIS
         accountFragment = new ExampleFragment(); // CHANGE THIS
 

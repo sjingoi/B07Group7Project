@@ -1,4 +1,4 @@
-package com.example.b07group7project;
+package com.example.b07group7project.shopper_view_store;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.b07group7project.R;
+import com.example.b07group7project.Store;
 import com.example.b07group7project.database.ImageDownloader;
 
 import java.util.ArrayList;
@@ -40,18 +42,11 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
     @Override
     public void onBindViewHolder(@NonNull StoreRecyclerViewAdapter.MyViewHolder holder, int position) {
         // Assign Value to Each Row as They Come On Screen
-        holder.tvName.setText(items.get(position).getStoreName());
-        ImageDownloader.setImageResource(holder.imageView, items.get(position).getImage());
+        Store store = items.get(position);
+        holder.tvName.setText(store.getStoreName());
+        ImageDownloader.setImageResource(holder.imageView, store.getImage());
 
-
-        View.OnClickListener clickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.onStoreClicked(items.get(position));
-            }
-        };
-        holder.cardView.setOnClickListener(clickListener);
-
+        holder.cardView.setOnClickListener(view -> listener.onStoreClicked(store));
     }
 
     @Override
