@@ -14,11 +14,24 @@ import com.example.b07group7project.R;
 import com.example.b07group7project.Store;
 
 import com.example.b07group7project.database.StoreDatabase;
+import com.example.b07group7project.shopping_cart.ShoppingCart;
 
 
 import java.util.ArrayList;
 
 public class ShopperViewStoreFragment extends Fragment implements StoreClickListener {
+
+
+    public ShopperViewStoreFragment() {
+        // Required Empty Constructor
+    }
+
+    public static ShopperViewStoreFragment newInstance() {
+        ShopperViewStoreFragment fragment = new ShopperViewStoreFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
