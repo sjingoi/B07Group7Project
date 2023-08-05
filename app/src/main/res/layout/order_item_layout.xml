@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical"
+android:padding="16dp">
+
+<TextView
+    android:id="@+id/orderIdTextView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Order ID: " />
+
+<TextView
+    android:id="@+id/customerIdTextView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Customer ID: " />
+
+<TextView
+    android:id="@+id/productNameTextView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Product Name: " />
+
+<TextView
+    android:id="@+id/quantityTextView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Quantity: " />
+
+<TextView
+    android:id="@+id/statusTextView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Status: " />
+
+<Button
+    android:id="@+id/confirmButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Confirm" />
+</LinearLayout>
