@@ -5,16 +5,23 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.b07group7project.ui.login.EmailPasswordActivity;
+import com.google.firebase.FirebaseApp;
 
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        FirebaseApp.initializeApp(this.getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
 
-        Intent intent = new Intent(this.getApplicationContext(), ShopperNavigationActivity.class);
-        startActivity(intent);
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Intent myIntent = new Intent(this, EmailPasswordActivity.class);
+        startActivity(myIntent);
     }
 }
