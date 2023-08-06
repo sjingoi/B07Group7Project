@@ -53,6 +53,6 @@ public class CartViewHolder extends RecyclerViewHolder<CartEntry> {
         layout.setOnClickListener(cartEntry.onClickListener);
 
 
-        ImageDownloader.setImageResource(imageView, cartEntry.getProduct().getImageURL());
+        ImageDownloader.setImageResource(imageView, cartEntry.getProduct().getImageURL(), 256, 256);
     }
 }
