@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import com.example.b07group7project.database_abstractions.Store;
 
 public class Order {
     HashMap<Product, Integer> productsuuidToQuantity;
