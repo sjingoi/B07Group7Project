@@ -21,7 +21,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     @NonNull
     @Override
     public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Inflate your item layout and return a new instance of the ViewHolder.
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_item_layout, parent, false);
         return new OrderViewHolder(itemView);
     }
@@ -29,19 +28,20 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         Order order = orders.get(position);
-        // Bind the data to the views in the ViewHolder.
-        holder.orderIdTextView.setText(order.getOrderId());
-        holder.customerIdTextView.setText(order.getCustomerId());
-        holder.productNameTextView.setText(order.getProductName());
-        holder.quantityTextView.setText(String.valueOf(order.getQuantity()));
-        holder.statusTextView.setText(order.getStatus());
 
+        // Bind the data to the views in the ViewHolder.
+        holder.orderIdTextView.setText("Order ID: " + order.uuid);
+        holder.customerNameTextView.setText("Customer Name: " + order.customer.name);
+        holder.storeNameTextView.setText("Store Name: " + order.store.getStoreName());
+        holder.orderStatusTextView.setText("Status: " + order.order_complete);
+
+        // Handle the "Confirm" button click event here.
         holder.confirmButton.setOnClickListener(v -> {
-            // Handle the "Confirm" button click event here.
-            // You can update the status of the order to "Confirmed" in the database.
-            // Since we are not dealing with the database here, we'll just update the local data.
-            order.setStatus("Confirmed");
-            notifyItemChanged(position);
+            // Implement the order confirmation logic here.
+            // Call the confirmOrder() method of your OrderRepository to confirm the order.
+            // For now, we'll assume the confirmation is successful and update the order status locally.
+            order.order_complete = "true";
+            notifyDataSetChanged();
         });
     }
 
@@ -51,22 +51,20 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     }
 
     static class OrderViewHolder extends RecyclerView.ViewHolder {
-        // Declare your views here for each item in the RecyclerView item layout.
         TextView orderIdTextView;
-        TextView customerIdTextView;
-        TextView productNameTextView;
-        TextView quantityTextView;
-        TextView statusTextView;
+        TextView customerNameTextView;
+        TextView storeNameTextView;
+        TextView orderStatusTextView;
         Button confirmButton;
 
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
+
             // Initialize your views here based on the item layout.
             orderIdTextView = itemView.findViewById(R.id.orderIdTextView);
-            customerIdTextView = itemView.findViewById(R.id.customerIdTextView);
-            productNameTextView = itemView.findViewById(R.id.productNameTextView);
-            quantityTextView = itemView.findViewById(R.id.quantityTextView);
-            statusTextView = itemView.findViewById(R.id.statusTextView);
+            customerNameTextView = itemView.findViewById(R.id.customerNameTextView);
+            storeNameTextView = itemView.findViewById(R.id.storeNameTextView);
+            orderStatusTextView = itemView.findViewById(R.id.orderStatusTextView);
             confirmButton = itemView.findViewById(R.id.confirmButton);
         }
     }
