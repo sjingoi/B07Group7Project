@@ -1,40 +1,76 @@
 package com.example.b07group7project;
 
-// Product Class, Can Add/Remove Fields in the future as needed
+import java.util.HashMap;
+import java.util.UUID;
+import com.example.b07group7project.database_abstractions.Store;
+
 public class Product {
 
-    String itemName;
-    int quantity;
-    double price;
+    String productname;
+    String description;
+    String price;
+    String imageURL;
+    String uuid;
+    String storeuuid;
 
-    public Product(String itemName, double price, int quantity) {
-        this.itemName = itemName;
+    int quantity;
+
+    public Product(String productname, String description, String price, String imageURL, Store store){
+        this.productname = productname;
+        this.description = description;
         this.price = price;
-        this.quantity = quantity;
+        this.imageURL = imageURL;
+        this.uuid = UUID.randomUUID().toString();
+        this.storeuuid = store.getUuid();
+    }
+    public Product(String productname, String description, double price, String imageURL, Store store){
+        this.productname = productname;
+        this.description = description;
+        this.price = Double.toString(price);
+        this.imageURL = imageURL;
+        this.uuid = UUID.randomUUID().toString();
+        this.storeuuid = store.getUuid();
     }
 
-    public double getPrice() {
+    public Product(String productname, String description, String price, String imageURL, Store store, int quantity){
+        this.productname = productname;
+        this.description = description;
+        this.price = price;
+        this.imageURL = imageURL;
+        this.uuid = UUID.randomUUID().toString();
+        this.storeuuid = store.getUuid();
+        this.quantity = quantity;
+    }
+    public String getProductname() {
+        return productname;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setProductname(String productname) {
+        this.productname = productname;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-
-    public String getItemName() {
-        return itemName;
-    }
-
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
+    public HashMap<String, Object> putIntoHashMap(){
+        HashMap<String, Object> product = new HashMap<>();
+        product.put(Constants.product_name, productname);
+        product.put(Constants.product_description, description);
+        product.put(Constants.product_price, price);
+        product.put(Constants.product_image, imageURL);
+        return product;
     }
 }
