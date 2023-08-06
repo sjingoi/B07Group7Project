@@ -17,7 +17,6 @@ import java.util.UUID;
 public class Customer {
     String email;
     String name;
-    List<PreviousOrder> previousOrders;
     List<Product> shoppingCart;
     String uuid;
 
@@ -28,18 +27,12 @@ public class Customer {
         this.uuid = UUID.randomUUID().toString();
     }
 
-    public Customer(String email, String name, List<PreviousOrder> previousOrders) {
-        //email = checkFor(email);
-        this.email = email;
-        this.previousOrders = previousOrders;
-        this.uuid = UUID.randomUUID().toString();
-    }
 
-    public Customer(String email, String name, List<PreviousOrder> previousOrders, List<Product> shoppingCart) {
+
+    public Customer(String email, String name, List<Product> shoppingCart) {
         //email = checkFor(email);
         this.email = email;
         this.name = name;
-        this.previousOrders = previousOrders;
         this.shoppingCart = shoppingCart;
         this.uuid = UUID.randomUUID().toString();
     }
@@ -48,9 +41,6 @@ public class Customer {
         HashMap<String, Object> hashmap = new HashMap<>();
         hashmap.put(Constants.customer_email, this.email);
         hashmap.put(Constants.customer_name, this.name);
-        if (previousOrders != null) {
-            hashmap.put(Constants.previous_orders, this.previousOrders);
-        }
         if (shoppingCart != null) {
             hashmap.put(Constants.shopping_cart, this.shoppingCart);
         }

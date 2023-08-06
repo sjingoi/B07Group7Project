@@ -16,9 +16,6 @@ public class Store{
     HashMap<String, Object> previousOrders;
     String email;
 
-    public Store() {
-        // Required empty public constructor
-    }
 
     public Store(String storeName, String imageURL) {
         this.storeName = storeName;

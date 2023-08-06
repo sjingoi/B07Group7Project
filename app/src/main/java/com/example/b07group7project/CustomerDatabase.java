@@ -42,7 +42,6 @@ public class CustomerDatabase {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.exists()) {
-                    //HashMap<String, String> hashmap = customer.putIntoShoppingMap(product, quantity);
                     newreference.setValue(Integer.toString(quantity));
                 }
             }
