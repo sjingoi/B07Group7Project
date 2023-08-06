@@ -8,7 +8,7 @@ public class ImageDownloader {
 //    private static HashMap<String, Bitmap> imageCache;
 
     public static void setImageResource(ImageView imageView, String imageURL) {
-        Picasso.get().load(imageURL).resize(50, 50).centerCrop().into(imageView);
+        setImageResource(imageView, imageURL, 256, 256);
 
 //        if (imageCache != null && imageCache.containsKey(imageURL)) {
 //            imageView.setImageBitmap(imageCache.get(imageURL));
@@ -34,6 +34,10 @@ public class ImageDownloader {
 //        }
 //
 //        executorService.shutdown();
+    }
+
+    public static void setImageResource(ImageView imageView, String imageURL, int resWidth, int resHeight) {
+        Picasso.get().load(imageURL).resize(resWidth, resHeight).centerCrop().into(imageView);
     }
 
 //    private static class URLDownload implements Callable<Bitmap> {
