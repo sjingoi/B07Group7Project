@@ -14,12 +14,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.R;
+import com.example.b07group7project.shopping_cart.CartEntry;
 
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class CheckoutFragment extends Fragment {
+
+    public static CheckoutFragment newInstance() {
+        CheckoutFragment fragment = new CheckoutFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,7 +53,7 @@ public class CheckoutFragment extends Fragment {
         return view;
     }
 
-    public void onReceivedCart(ArrayList<Product> cart, View view){
+    public void onReceivedCart(ArrayList<CartEntry> cart, View view){
         RecyclerView recyclerView = view.findViewById(R.id.Checkout_RecyclerView);
         CheckoutRecyclerAdapter adapter = new CheckoutRecyclerAdapter(requireContext(), cart);
         recyclerView.setAdapter(adapter);
@@ -76,10 +84,10 @@ public class CheckoutFragment extends Fragment {
     }
 
 
-    public String calculateTotal(ArrayList<Product> cart){
+    public String calculateTotal(ArrayList<CartEntry> cart){
         double total = 0;
         for (int i = 0; i < cart.size(); i++){
-            total += (cart.get(i).price * cart.get(i).getQuantity());
+            total += (cart.get(i).getProduct().getPrice() * cart.get(i).getQuantity());
         }
 
 
