@@ -2,6 +2,7 @@ package com.example.b07group7project;
 
 import java.util.HashMap;
 import java.util.UUID;
+import com.example.b07group7project.database_abstractions.Store;
 
 public class Product {
 
@@ -20,7 +21,7 @@ public class Product {
         this.price = price;
         this.imageURL = imageURL;
         this.uuid = UUID.randomUUID().toString();
-        this.storeuuid = store.uuid;
+        this.storeuuid = store.getUuid();
     }
     public Product(String productname, String description, double price, String imageURL, Store store){
         this.productname = productname;
@@ -28,7 +29,7 @@ public class Product {
         this.price = Double.toString(price);
         this.imageURL = imageURL;
         this.uuid = UUID.randomUUID().toString();
-        this.storeuuid = store.uuid;
+        this.storeuuid = store.getUuid();
     }
 
     public Product(String productname, String description, String price, String imageURL, Store store, int quantity){
@@ -37,7 +38,7 @@ public class Product {
         this.price = price;
         this.imageURL = imageURL;
         this.uuid = UUID.randomUUID().toString();
-        this.storeuuid = store.uuid;
+        this.storeuuid = store.getUuid();
         this.quantity = quantity;
     }
     public String getProductname() {
