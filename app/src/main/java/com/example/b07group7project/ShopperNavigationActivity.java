@@ -26,7 +26,7 @@ public class ShopperNavigationActivity extends Navigation {
         setContentView(binding.getRoot());
 
         homeFragment = ShopperViewStoreFragment.newInstance();
-        cartFragment = ViewProductFragment.newInstance();
+        cartFragment = ShoppingCart.newInstance();
         accountFragment = ExampleFragment.newInstance(); // CHANGE THIS
 
         replaceFragment(homeFragment, false);
