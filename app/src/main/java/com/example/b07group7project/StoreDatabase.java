@@ -4,6 +4,9 @@ import android.app.DownloadManager;
 
 import androidx.annotation.NonNull;
 
+import com.example.b07group7project.database.OnComplete;
+import com.example.b07group7project.database_abstractions.Store;
+import com.example.b07group7project.shopper_view_store.GetStoreInterface;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,11 +22,12 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-public class StoreDatabase implements GetStoreInterface{
+
+public class StoreDatabase implements GetStoreInterface {
     FirebaseDatabase database;
     DatabaseReference reference;
 
-    List<Store> stores;
+    List<com.example.b07group7project.database_abstractions.Store> stores;
 
     public StoreDatabase(){
         database = FirebaseDatabase.getInstance(Constants.database_url);
@@ -31,8 +35,8 @@ public class StoreDatabase implements GetStoreInterface{
     }
 
 
-    public void addStore(Store store){
-        DatabaseReference newreference = reference.child(Constants.stores).child(store.uuid);
+    public void addStore(com.example.b07group7project.database_abstractions.Store store){
+        DatabaseReference newreference = reference.child(Constants.stores).child(store.getUuid());
 
         newreference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -49,8 +53,8 @@ public class StoreDatabase implements GetStoreInterface{
 
     }
 
-    public void addProductToStore(Product product, Store store){
-        DatabaseReference newreference = reference.child(Constants.stores).child(store.uuid).child(Constants.products).child(product.uuid);
+    public void addProductToStore(Product product, com.example.b07group7project.database_abstractions.Store store){
+        DatabaseReference newreference = reference.child(Constants.stores).child(store.getUuid()).child(Constants.products).child(product.uuid);
 
         newreference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -69,7 +73,7 @@ public class StoreDatabase implements GetStoreInterface{
     }
 
     public void addOrderToStore(Order order) {
-        DatabaseReference newreference = reference.child(Constants.stores).child(order.store.uuid).child(Constants.orders).child(order.uuid);
+        DatabaseReference newreference = reference.child(Constants.stores).child(order.store.getUuid()).child(Constants.orders).child(order.uuid);
 
         newreference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -86,9 +90,14 @@ public class StoreDatabase implements GetStoreInterface{
     }
 
 
-
+    /*
     @Override
-    public List<Store> getStores() {
+    public List<com.example.b07group7project.Store> getStores() {
         return null;
+    }
+    */
+    @Override
+    public void getStores(OnComplete<ArrayList<Store>> withStoreList) {
+
     }
 }
