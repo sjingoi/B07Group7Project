@@ -8,6 +8,7 @@ import com.example.b07group7project.create_order.CheckoutFragment;
 import com.example.b07group7project.databinding.ShopperNavigationActivityBinding;
 import com.example.b07group7project.shopping_cart.ShoppingCart;
 import com.example.b07group7project.shopper_view_store.ShopperViewStoreFragment;
+import com.example.b07group7project.view_products.ViewProductFragment;
 
 public class ShopperNavigationActivity extends Navigation {
 
@@ -25,7 +26,7 @@ public class ShopperNavigationActivity extends Navigation {
         setContentView(binding.getRoot());
 
         homeFragment = ShopperViewStoreFragment.newInstance();
-        cartFragment = ShoppingCart.newInstance();
+        cartFragment = ViewProductFragment.newInstance();
         accountFragment = ExampleFragment.newInstance(); // CHANGE THIS
 
         replaceFragment(homeFragment, false);

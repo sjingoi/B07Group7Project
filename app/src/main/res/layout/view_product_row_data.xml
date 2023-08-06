@@ -29,7 +29,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="8dp"
-                android:contentDescription="store icon"
+                android:contentDescription="Product Icon"
                 android:src="@drawable/baseline_logo1_24"
                 app:layout_constraintBottom_toTopOf="@+id/Product_Name"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +50,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:text="STORE NAME HERE" />
+                tools:text="PRODUCT NAME HERE" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

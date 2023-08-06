@@ -64,9 +64,9 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.imageView2);
-            tvName = itemView.findViewById(R.id.Store_Name);
-            cardView = itemView.findViewById(R.id.StoreCardView);
+            imageView = itemView.findViewById(R.id.Product_Image);
+            tvName = itemView.findViewById(R.id.Product_Name);
+            cardView = itemView.findViewById(R.id.ProductCardView);
         }
 
     }
