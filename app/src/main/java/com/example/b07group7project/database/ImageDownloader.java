@@ -1,73 +1,63 @@
 package com.example.b07group7project.database;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.widget.ImageView;
-import android.widget.Toast;
-
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import com.squareup.picasso.Picasso;
 
 public class ImageDownloader {
 
-    private static HashMap<String, Bitmap> imageCache;
+//    private static HashMap<String, Bitmap> imageCache;
 
     public static void setImageResource(ImageView imageView, String imageURL) {
+        Picasso.get().load(imageURL).resize(50, 50).centerCrop().into(imageView);
 
-        if (imageCache != null && imageCache.containsKey(imageURL)) {
-            imageView.setImageBitmap(imageCache.get(imageURL));
-        }
-
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Future<Bitmap> future = executorService.submit(new URLDownload(imageURL));
-        try {
-            Bitmap bitmap = future.get();
-
-            if (bitmap != null) {
-                imageView.setImageBitmap(bitmap);
-                if (imageCache == null) {
-                    imageCache = new HashMap<>();
-                }
-                imageCache.put(imageURL, bitmap);
-            } else {
-                Toast.makeText(imageView.getContext(), "Image null.", Toast.LENGTH_SHORT).show();
-            }
-        } catch (Exception e) {
-            Toast.makeText(imageView.getContext(), "Error in setting image.", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-
-        executorService.shutdown();
+//        if (imageCache != null && imageCache.containsKey(imageURL)) {
+//            imageView.setImageBitmap(imageCache.get(imageURL));
+//        }
+//
+//        ExecutorService executorService = Executors.newSingleThreadExecutor();
+//        Future<Bitmap> future = executorService.submit(new URLDownload(imageURL));
+//        try {
+//            Bitmap bitmap = future.get();
+//
+//            if (bitmap != null) {
+//                imageView.setImageBitmap(bitmap);
+//                if (imageCache == null) {
+//                    imageCache = new HashMap<>();
+//                }
+//                imageCache.put(imageURL, bitmap);
+//            } else {
+//                Toast.makeText(imageView.getContext(), "Image null.", Toast.LENGTH_SHORT).show();
+//            }
+//        } catch (Exception e) {
+//            Toast.makeText(imageView.getContext(), "Error in setting image.", Toast.LENGTH_SHORT).show();
+//            e.printStackTrace();
+//        }
+//
+//        executorService.shutdown();
     }
 
-    private static class URLDownload implements Callable<Bitmap> {
-
-        private final String imageUrl;
-
-        public URLDownload(String imageUrl) {
-            this.imageUrl = imageUrl;
-        }
-
-        @Override
-        public Bitmap call() {
-            try {
-                URL url = new URL(imageUrl);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setDoInput(true);
-                connection.connect();
-                InputStream input = connection.getInputStream();
-                return BitmapFactory.decodeStream(input);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-    }
+//    private static class URLDownload implements Callable<Bitmap> {
+//
+//        private final String imageUrl;
+//
+//        public URLDownload(String imageUrl) {
+//            this.imageUrl = imageUrl;
+//        }
+//
+//        @Override
+//        public Bitmap call() {
+//            try {
+//                URL url = new URL(imageUrl);
+//                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//                connection.setDoInput(true);
+//                connection.connect();
+//                InputStream input = connection.getInputStream();
+//                return BitmapFactory.decodeStream(input);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//                return null;
+//            }
+//        }
+//    }
 
 }
