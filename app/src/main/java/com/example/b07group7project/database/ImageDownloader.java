@@ -8,6 +8,7 @@ import android.widget.Toast;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -15,7 +16,13 @@ import java.util.concurrent.Future;
 
 public class ImageDownloader {
 
+    private static HashMap<String, Bitmap> imageCache;
+
     public static void setImageResource(ImageView imageView, String imageURL) {
+
+        if (imageCache != null && imageCache.containsKey(imageURL)) {
+            imageView.setImageBitmap(imageCache.get(imageURL));
+        }
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Future<Bitmap> future = executorService.submit(new URLDownload(imageURL));
@@ -23,8 +30,11 @@ public class ImageDownloader {
             Bitmap bitmap = future.get();
 
             if (bitmap != null) {
-
                 imageView.setImageBitmap(bitmap);
+                if (imageCache == null) {
+                    imageCache = new HashMap<>();
+                }
+                imageCache.put(imageURL, bitmap);
             } else {
                 Toast.makeText(imageView.getContext(), "Image null.", Toast.LENGTH_SHORT).show();
             }
