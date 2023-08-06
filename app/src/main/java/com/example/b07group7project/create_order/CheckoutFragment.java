@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.R;
-import com.example.b07group7project.shopper_view_store.ShopperViewStoreFragment;
 import com.example.b07group7project.shopping_cart.CartEntry;
 
 

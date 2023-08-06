@@ -9,13 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.example.b07group7project.ExampleFragment;
-import com.example.b07group7project.FragmentSwitch;
-import com.example.b07group7project.R;
-import com.example.b07group7project.database_abstractions.Store;
-import com.example.b07group7project.database_abstractions.StoreProduct;
 
-import java.util.ArrayList;
+import com.example.b07group7project.R;
+
 import java.util.List;
 public class ShoppingCart extends Fragment {
 
@@ -45,24 +41,14 @@ public class ShoppingCart extends Fragment {
 
         RecyclerView recyclerView = shoppingCartLayout.findViewById(R.id.cartItemList);
 
-        List<CartEntry> cart = new ArrayList<>();
-
-        View.OnClickListener cartOnClick = view -> {
-
-            if (requireContext() instanceof FragmentSwitch) {
-                FragmentSwitch fragmentSwitch = (FragmentSwitch) requireContext();
-                fragmentSwitch.replaceFragment(ExampleFragment.newInstance(), true);
-            }
-
-
-        };
-        StoreProduct sp = new StoreProduct("Test Product", "hi", "https://fastly.picsum.photos/id/554/200/300.jpg?hmac=fYkNLoTqHRKUkIc3bZt_xMEb17s_BIRuuKTz8jb9ijs", 69.99);
-        Store store = null;
-        cart.add(new CartEntry(sp, store, 2, cartOnClick)); // PLACEHOLDER DATA
+        (new GetCartEntriesImplementation()).getCartEntries(cartEntries -> onData(recyclerView, cartEntries));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        recyclerView.setAdapter(new CartAdapter(requireContext().getApplicationContext(), cart));
 
         return shoppingCartLayout;
+    }
+
+    private void onData(RecyclerView recyclerView, List<CartEntry> cart) {
+        recyclerView.setAdapter(new CartAdapter(requireContext().getApplicationContext(), cart));
     }
 }
