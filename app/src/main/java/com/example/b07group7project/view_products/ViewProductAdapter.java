@@ -18,6 +18,7 @@ import com.example.b07group7project.database_abstractions.StoreProduct;
 
 import java.util.ArrayList;
 
+// RecylerViewAdapter for ViewProductFragment
 public class ViewProductAdapter extends RecyclerView.Adapter<ViewProductAdapter.MyViewHolder>{
 
     Context context;

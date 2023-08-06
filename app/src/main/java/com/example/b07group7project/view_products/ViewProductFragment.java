@@ -39,7 +39,7 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.view_product_fragment, container, false);
 
-        // TODO: Replace GetProductImplementation with DATABASE STUFF
+        // TODO: Replace GetProductImplementation with Database Stuff
         GetProductsInterface productInterface = new GetProductsImplementation();
         productInterface.getProducts(
                 products -> onReceivedStores(products, view)
@@ -56,6 +56,8 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
 
     }
 
+    /*This is where button is clicked, when implementing navigation between fragments
+    then update code in here */
     @Override
     public void onProductClicked(StoreProduct product) {
         Toast.makeText(requireContext(), product.getItemName(), Toast.LENGTH_SHORT).show();

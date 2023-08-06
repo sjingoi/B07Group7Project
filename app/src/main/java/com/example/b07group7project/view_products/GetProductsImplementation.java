@@ -9,6 +9,7 @@ import com.example.b07group7project.database_abstractions.StoreProduct;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+// Sample Implementation to be swapped when actually implementing
 public class GetProductsImplementation implements GetProductsInterface {
 
     @Override
