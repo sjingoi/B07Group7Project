@@ -1,59 +1,40 @@
 package com.example.b07group7project;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
 public class Order {
-    private String orderId;
-    private String customerId;
-    private String productName;
-    private int quantity;
-    private String status;
+    HashMap<Product, Integer> productsuuidToQuantity;
+    Store store;
+    Customer customer;
 
-    // Constructor
-    public Order(String orderId, String customerId, String productName, int quantity, String status) {
-        this.orderId = orderId;
-        this.customerId = customerId;
-        this.productName = productName;
-        this.quantity = quantity;
-        this.status = status;
+    String uuid;
+
+
+
+    public Order(HashMap<Product, Integer> productsuuidToQuantity, Store store, Customer customer) {
+        this.productsuuidToQuantity= productsuuidToQuantity;
+        this.store = store;
+        this.customer = customer;
+        uuid = UUID.randomUUID().toString();
     }
 
-    // Getters and Setters
-    public String getOrderId() {
-        return orderId;
+    public HashMap<String, Object> putIntoHashMap() {
+        HashMap<String, Object> newhashmap = new HashMap<>();
+        newhashmap.put(Constants.customer_uuid, customer.uuid);
+        newhashmap.put(Constants.order_complete, "false");
+        HashMap<String, Integer> products = convertHashMap();
+        newhashmap.put(Constants.store_products, products);
+        return newhashmap;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    private HashMap<String, Integer> convertHashMap() {
+        HashMap<String, Integer> newhashmap = new HashMap<>();
+        for (Map.Entry<Product, Integer> m : productsuuidToQuantity.entrySet()) {
+            newhashmap.put(m.getKey().uuid, m.getValue());
+        }
+        return newhashmap;
     }
 }
