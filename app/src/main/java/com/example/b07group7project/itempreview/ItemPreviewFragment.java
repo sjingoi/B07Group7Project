@@ -13,23 +13,34 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.b07group7project.R;
+import com.example.b07group7project.database_abstractions.StoreProduct;
+import com.example.b07group7project.shopping_cart.ShoppingCart;
 
 public class ItemPreviewFragment extends Fragment {
     private TextView cartItemQtyTextView;
-    private StoreItem currentItem;
+    private StoreProduct currentItem;
     private int cartItemQty = 0;
 
     public ItemPreviewFragment() {
         // Required empty public constructor
     }
 
+    public static ItemPreviewFragment newInstance() {
+        ItemPreviewFragment fragment = new ItemPreviewFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Get the item ID from arguments (sent from the previous fragment)
-        //String itemID = getArguments().getString("itemID");
-        //String storeID = getArguments().getString("storeID");
+        //Get the item ID from arguments (sent from the previous fragment)
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+                //String itemID = arguments.getString("itemID");
+                //String storeID = arguments.getString("storeID");
+                    }
         String itemID = "200";
         String storeID = "544b51d6-0328-4491-9a3d-f1532b6cbae0";
 
@@ -69,7 +80,7 @@ public class ItemPreviewFragment extends Fragment {
         addToCartButton.setOnClickListener(v -> {
             // Call the addToCart method to add the item to the cart
             if (currentItem != null) {
-                addToCart(currentItem.getItemID(), currentItem.getItemName(), cartItemQty);
+                //addToCart(currentItem.getItemID(), currentItem.getItemName(), cartItemQty);
             }
         });
 
@@ -90,8 +101,8 @@ public class ItemPreviewFragment extends Fragment {
 
         if (currentItem != null) {
             textViewItemName.setText(currentItem.getItemName());
-            textViewItemPrice.setText("$" + currentItem.getItemPrice());
-            textViewItemDesc.setText(currentItem.getItemDesc());
+            textViewItemPrice.setText("$" + currentItem.getPrice());
+            textViewItemDesc.setText(currentItem.getDescription());
             cartItemQtyTextView.setText(String.valueOf(cartItemQty));
         }
     }

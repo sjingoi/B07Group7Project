@@ -5,6 +5,9 @@
     <string name="placeholder_header">Test Preview</string>
     <string name="placeholder_fragment">Placeholder Fragment</string>
 
+    <!--Strings related to product creation-->
+    <string name="product_creation_title">Product Creation</string>
+
     <!--Strings related to Shopping Cart-->
     <string name="check_out_button">Check Out</string>
 
