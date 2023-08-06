@@ -1,6 +1,9 @@
 package com.example.b07group7project.create_order;
 
 import com.example.b07group7project.database.OnComplete;
+import com.example.b07group7project.database_abstractions.Store;
+import com.example.b07group7project.database_abstractions.StoreProduct;
+import com.example.b07group7project.shopping_cart.CartEntry;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,26 +13,32 @@ import java.util.Arrays;
 public class GetCartImplementation implements GetCartInterface{
 
     @Override
-    public void getCart(OnComplete<ArrayList<Product>> onComplete){
+    public void getCart(OnComplete<ArrayList<CartEntry>> onComplete){
 
-        Product[] prods ={
-            new Product("FlashLight", 9.99, 5),
-                    new Product("Battery", 12.36, 2),
-                    new Product("Poster", 9.99, 1),
-                    new Product("TV", 1299.99, 1),
-                    new Product("T-Shirt", 20.00, 3),
-                    new Product("Jeans", 50.00, 1),
-                    new Product("VERY VERY LONG NAME", 1000000, 1),
-                    new Product("Shorts", 10.99, 10),
-                    new Product("Battery", 12.36, 2),
-                    new Product("Poster", 9.99, 1),
-                    new Product("TV", 1299.99, 1),
-                    new Product("T-Shirt", 20.00, 3),
-                    new Product("Jeans", 50.00, 1),
-                    new Product("VERY VERY VERY VERY VERY VERY LONG NAME", 1000000, 1),
-                    new Product("Shorts", 10.99, 10),
+        StoreProduct[] prod ={
+                new StoreProduct("FlashLight", "DESC", "URL", 9.99),
+                new StoreProduct("Battery", "DESC", "URL", 12.36),
+                new StoreProduct("Poster", "DESC", "URL", 9.99),
+                new StoreProduct("TV", "DESC", "URL", 1299.99),
+                new StoreProduct("T-Shirt", "DESC", "URL", 20.00),
+                new StoreProduct("Jeans", "DESC", "URL", 50.00),
+                new StoreProduct("VERY VERY LONG NAME", "DESC", "URL",1000000),
+                new StoreProduct("Shorts", "DESC", "URL", 10.99),
+                new StoreProduct("Battery", "DESC", "URL",12.36),
+                new StoreProduct("Poster", "DESC", "URL",9.99),
+                new StoreProduct("TV", "DESC", "URL",1299.99),
+                new StoreProduct("T-Shirt", "DESC", "URL",20.00),
+                new StoreProduct("Jeans", "DESC", "URL",50.00),
+                new StoreProduct("VERY VERY VERY VERY VERY VERY LONG NAME", "DESC", "URL",1000000),
+                new StoreProduct("Shorts", "DESC", "URL",10.99),
             };
 
+        Store store = new Store("A", "URL");
+        CartEntry[] prods = new CartEntry[15];
+
+        for (int i = 0; i < prods.length; i++){
+            prods[i] = new CartEntry(prod[i], store, i);
+        }
 
         onComplete.onComplete(new ArrayList<>(Arrays.asList(prods)));
     }
