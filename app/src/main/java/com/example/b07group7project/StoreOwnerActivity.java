@@ -1,14 +1,10 @@
 package com.example.b07group7project;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-
-import com.example.b07group7project.Order;
-import com.example.b07group7project.OrderAdapter;
-import com.example.b07group7project.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +19,13 @@ public class StoreOwnerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_owner);
 
-        // Assuming you have RecyclerView, Adapter, and LayoutManager set up.
+        // Assuming RecyclerView, Adapter, and LayoutManager set up.
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
         // Fetch pending orders from the database or your data source.
-        // For the sake of this example, we'll create dummy data.
+        // Forexample,  create dummy data.
         pendingOrdersList = getPendingOrders();
 
         // Set the pendingOrdersList to the RecyclerView Adapter
@@ -38,9 +34,9 @@ public class StoreOwnerActivity extends AppCompatActivity {
     }
 
     private List<Order> getPendingOrders() {
-        // Here you would fetch the list of pending orders from your data source.
-        // Since you mentioned that someone else is dealing with the database, assume you have this method.
-        // For now, let's return some dummy data for testing.
+        // fetch the list of pending orders from data source.
+        // someone else is dealing with the database, assume  this method.
+        // For now, return some dummy data for testing.
 
         List<Order> orders = new ArrayList<>();
         orders.add(new Order("1", "Cust001", "Product A", 5, "Pending"));
