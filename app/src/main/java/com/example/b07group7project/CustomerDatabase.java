@@ -52,20 +52,7 @@ public class CustomerDatabase {
         });
     }
 
-    public void addPreviousOrder(Customer customer, PreviousOrder previousOrder){
-        DatabaseReference newreference = reference.child(Constants.customers).child(customer.uuid).child(Constants.shopping_cart);
-        newreference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
 
 
 }

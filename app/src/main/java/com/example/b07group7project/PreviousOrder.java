@@ -21,38 +21,15 @@ public class PreviousOrder {
     HashMap<String, Object> products;
 
     public PreviousOrder() {
-        database = FirebaseDatabase.getInstance("https://b07group7project-default-rtdb.firebaseio.com/");
+        database = FirebaseDatabase.getInstance(Constants.database_url);
         reference = database.getReference();
     }
 
     public PreviousOrder(String email, String accounttype){
-        database = FirebaseDatabase.getInstance("https://b07group7project-default-rtdb.firebaseio.com/");
+        database = FirebaseDatabase.getInstance(Constants.database_url);
         reference = database.getReference();
         products = new HashMap<>();
-        /*
-        DatabaseReference newreference = reference;
-        if (accounttype.equals("Store Owner")) {
-            newreference = reference.child("Store").child("Previous Orders").child("Products"); // change****************
-        } else {
-            newreference = reference.child(accounttype).child("Previous Orders").child("Products"); // change****************
-        }
-        newreference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int i = 1;
-                for (DataSnapshot snap: snapshot.getChildren()) {
-                    Product p = new Product((String) snap.child("Product Name").getValue(), (String) snap.child("Product Description").getValue(), (String) snap.child("Product Price").getValue(), (String) snap.child("Product imageURL").getValue());
-                    products.put(Integer.toString(i), p);
-                    i++;
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-         */
     }
 
     public static List<PreviousOrder> getPreviousOrders(DatabaseReference ref, String email) {
