@@ -44,7 +44,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.046"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_description" />
 
             <TextView
                 android:id="@+id/textView10"
@@ -68,10 +68,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.046"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_item_name" />
 
             <EditText
-                android:id="@+id/editTextText2"
+                android:id="@+id/edit_text_item_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -85,7 +85,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
             <EditText
-                android:id="@+id/editTextText3"
+                android:id="@+id/edit_text_itemurl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -99,7 +99,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
             <EditText
-                android:id="@+id/editTextTextMultiLine"
+                android:id="@+id/edit_text_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -113,7 +113,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/button_save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -122,7 +122,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextText3" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_itemurl" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

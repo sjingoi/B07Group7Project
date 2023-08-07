@@ -7,20 +7,19 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.b07group7project.R;
 
 public class CreateProductFragment extends Fragment {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private SaveProduct saveProduct;
 
     public CreateProductFragment() {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
     public static CreateProductFragment newInstance() {
         CreateProductFragment fragment = new CreateProductFragment();
         Bundle args = new Bundle();
@@ -37,6 +36,26 @@ public class CreateProductFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_product, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_create_product, container, false);
+
+        EditText itemNameEditText = rootView.findViewById(R.id.edit_text_item_name);
+        EditText itemDescEditText = rootView.findViewById(R.id.edit_text_description);
+        EditText itemURLEditText = rootView.findViewById(R.id.edit_text_itemurl);
+        Button saveButton = rootView.findViewById(R.id.button_save);
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String itemName = itemNameEditText.getText().toString().trim();
+                String itemDesc = itemDescEditText.getText().toString().trim();
+                String itemURL = itemURLEditText.getText().toString().trim();
+
+                if (!itemName.isEmpty() && !itemDesc.isEmpty() && !itemURL.isEmpty()) {
+                    saveProduct.saveProductToFirebase(itemName, itemDesc, itemURL);
+                }
+            }
+        });
+
+        return rootView;
     }
 }
