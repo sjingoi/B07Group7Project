@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.b07group7project.R;
 
@@ -41,29 +42,33 @@ public class CreateProductFragment extends Fragment {
         EditText itemNameEditText = rootView.findViewById(R.id.edit_text_item_name);
         EditText itemDescEditText = rootView.findViewById(R.id.edit_text_description);
         EditText itemURLEditText = rootView.findViewById(R.id.edit_text_itemurl);
+        EditText itemPriceEditText = rootView.findViewById(R.id.edit_text_price);
         Button saveButton = rootView.findViewById(R.id.button_save);
 
         // Instantiate the SaveProductImplementation and assign it to saveProduct
         saveProduct = new SaveProductImplementation();
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String itemName = itemNameEditText.getText().toString().trim();
-                String itemDesc = itemDescEditText.getText().toString().trim();
-                String itemURL = itemURLEditText.getText().toString().trim();
+        saveButton.setOnClickListener(v -> {
+            String itemName = itemNameEditText.getText().toString().trim();
+            String itemDesc = itemDescEditText.getText().toString().trim();
+            String itemURL = itemURLEditText.getText().toString().trim();
+            String itemPriceText = itemPriceEditText.getText().toString().trim();
 
-                if (!itemName.isEmpty() && !itemDesc.isEmpty() && !itemURL.isEmpty()) {
-                    saveProduct.saveProductToFirebase(itemName, itemDesc, itemURL);
+            if (!itemName.isEmpty() && !itemDesc.isEmpty() && !itemURL.isEmpty() && !itemPriceText.isEmpty()) {
+                try {
+                    double itemPrice = Double.parseDouble(itemPriceText);
+                    saveProduct.saveProductToFirebase(itemName, itemDesc, itemURL, itemPrice);
+                } catch (NumberFormatException e) {
+                    Toast.makeText(getContext(), "Invalid item price input.", Toast.LENGTH_SHORT).show();
                 }
-
-                // Clear the EditText fields after saving
-                itemNameEditText.setText("");
-                itemDescEditText.setText("");
-                itemURLEditText.setText("");
             }
-        });
 
+            // Clear the EditText fields after saving
+            itemNameEditText.setText("");
+            itemDescEditText.setText("");
+            itemURLEditText.setText("");
+            itemPriceEditText.setText("");
+        });
         return rootView;
     }
 }
