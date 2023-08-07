@@ -30,7 +30,18 @@ public class ItemPreviewFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
+        // Get the item ID and store ID from arguments
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            String itemID = arguments.getString("itemID");
+            String storeID = arguments.getString("storeID");
+            // Now you can use the itemID and storeID variables as needed
+        }
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
