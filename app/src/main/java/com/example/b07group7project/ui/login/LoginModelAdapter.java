@@ -51,5 +51,6 @@ public class LoginModelAdapter implements LoginModel{
     @Override
     public void signOut() {
         mAuth.signOut();
+        User.removeCurrentUser();
     }
 }

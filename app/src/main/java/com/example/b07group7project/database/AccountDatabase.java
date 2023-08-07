@@ -55,34 +55,6 @@ public class AccountDatabase implements UserPermission {
     }
 
     @Override
-    public void getUserUUID(User user, OnComplete<String> withUserType) {
-        String userEmail = Objects.requireNonNull(user.getEmail());
-
-        //This line is necessary to avoid restricted values for keys for Firebase
-        String encodedEmail = Base64.getEncoder()
-                .encodeToString(userEmail.getBytes(StandardCharsets.UTF_8))
-                .replace('\\', ';');
-
-        DatabaseReference databaseReference = reference.child(Constants.accounts).child(encodedEmail);
-
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    String userUUID = snapshot.child(encodedEmail).child(Constants.user_type)
-                            .getValue(String.class);
-                    withUserType.onComplete(userUUID);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    @Override
     public void createUserOfType(UserType type, @NonNull User user) {
         String userEmail = Objects.requireNonNull(user.getEmail());
         String userUUID = String.valueOf(UUID.randomUUID());
@@ -152,5 +124,33 @@ public class AccountDatabase implements UserPermission {
             });
         }
 
+    }
+
+    @Override
+    public void getUserUUID(User user, OnComplete<String> withUUID) {
+        String userEmail = Objects.requireNonNull(user.getEmail());
+
+        //This line is necessary to avoid restricted values for keys for Firebase
+        String encodedEmail = Base64.getEncoder()
+                .encodeToString(userEmail.getBytes(StandardCharsets.UTF_8))
+                .replace('\\', ';');
+
+        DatabaseReference databaseReference = reference.child(Constants.accounts).child(encodedEmail);
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    String userUUID = snapshot.child(encodedEmail).child(Constants.user_type)
+                            .getValue(String.class);
+                    withUUID.onComplete(userUUID);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+    });
     }
 }

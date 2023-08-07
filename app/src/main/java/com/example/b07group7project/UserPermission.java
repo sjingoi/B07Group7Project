@@ -7,5 +7,5 @@ public interface UserPermission {
     void getUserType(User user, OnComplete<UserType> withUserType);
     void createUserOfType(UserType type, User user);
 
-    void getUserUUID(User user, OnComplete<String> withUserUUID);
+    void getUserUUID(User user, OnComplete<String> setUuid);
 }

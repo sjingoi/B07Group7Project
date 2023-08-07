@@ -20,6 +20,10 @@ public class User {
         }
     }
 
+    public static void removeCurrentUser() {
+        user = null;
+    }
+
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
