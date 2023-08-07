@@ -1,14 +1,14 @@
-package com.example.b07group7project;
+package com.example.b07group7project.nav;
 
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 
-import com.example.b07group7project.create_order.CheckoutFragment;
+import com.example.b07group7project.ExampleFragment;
+import com.example.b07group7project.R;
 import com.example.b07group7project.databinding.ShopperNavigationActivityBinding;
 import com.example.b07group7project.shopping_cart.ShoppingCart;
 import com.example.b07group7project.shopper_view_store.ShopperViewStoreFragment;
-import com.example.b07group7project.view_products.ViewProductFragment;
 
 public class ShopperNavigationActivity extends Navigation {
 
@@ -47,8 +47,8 @@ public class ShopperNavigationActivity extends Navigation {
         });
     }
 
-    @Override
     public int getFragmentContainer() {
         return R.id.frameLayout;
     }
+
 }
