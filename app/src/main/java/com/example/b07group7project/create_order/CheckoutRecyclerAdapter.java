@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.R;
+import com.example.b07group7project.shopping_cart.CartEntry;
 
 
 import java.text.DecimalFormat;
@@ -20,10 +21,10 @@ import java.util.ArrayList;
 
 public class CheckoutRecyclerAdapter extends RecyclerView.Adapter<CheckoutRecyclerAdapter.MyViewHolder>{
     Context context;
-    ArrayList<Product> products;
+    ArrayList<CartEntry> products;
 
 
-    public CheckoutRecyclerAdapter(Context context, ArrayList<Product> products) {
+    public CheckoutRecyclerAdapter(Context context, ArrayList<CartEntry> products) {
         this.context = context;
         this.products = products;
     }
@@ -45,13 +46,13 @@ public class CheckoutRecyclerAdapter extends RecyclerView.Adapter<CheckoutRecycl
          Will probably need to fix XML File as well for this
          */
 
-        Product prod = products.get(position);
+        CartEntry prod = products.get(position);
 
-        String name = String.valueOf(prod.getItemName());
+        String name = String.valueOf(prod.getProduct().getItemName());
         String quantity= String.valueOf(prod.getQuantity());
 
         DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
-        String formattedPrice = decimalFormat.format(products.get(position).getPrice());
+        String formattedPrice = decimalFormat.format(prod.getProduct().getPrice());
 
         holder.tvName.setText(name);
         holder.tvQTY.setText(quantity);
