@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.R;
+import com.example.b07group7project.database.CartDatabase;
+import com.example.b07group7project.database.User;
 import com.example.b07group7project.shopping_cart.CartEntry;
 
 
@@ -39,16 +41,10 @@ public class CheckoutFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.checkout_fragment, container, false);
 
-
-        RecyclerView recyclerView = view.findViewById(R.id.Checkout_RecyclerView);
-        // TODO: Update Accordinlgy based on Implemenetation of GetCartInterface
-        GetCartInterface cartInterface = new GetCartImplementation();
+        GetCartInterface cartInterface = new CartDatabase();
         cartInterface.getCart(
                 products -> onReceivedCart(products, view)
         );
-
-
-
 
         return view;
     }
@@ -59,27 +55,21 @@ public class CheckoutFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-
-
         // Price
         TextView totals = view.findViewById(R.id.OrderTotals);
-        totals.setText("TOTAL: $" + calculateTotal(cart));
+        totals.setText(String.format("%s%s", getString(R.string.total), calculateTotal(cart)));
 
 
         // Button Stuff
         Button orderButton = view.findViewById(R.id.PlaceOrderButton);
-        orderButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        orderButton.setOnClickListener(view1 -> {
 //              // TODO: Update As Needed When PlaceOrder Is Implemented Through Databse
-                PlaceOrderInterface orderInterface = new PlaceOrderImplementation();
-                orderInterface.placeOrder(cart, "EXAMPLE USER HERE");
+            PlaceOrderInterface orderInterface = new PlaceOrderImplementation();
+            orderInterface.placeOrder(cart, User.getCurrentUser());
 
-                Toast.makeText(requireContext(), "ORDER PLACED", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "ORDER PLACED", Toast.LENGTH_SHORT).show();
 
-                // Cart Is Now Empty As Everything Has Ordered
-
-            }
+            // Cart Is Now Empty As Everything Has Ordered
         });
     }
 
@@ -90,12 +80,10 @@ public class CheckoutFragment extends Fragment {
             total += (cart.get(i).getProduct().getPrice() * cart.get(i).getQuantity());
         }
 
-
         DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
-        String formattedPrice = decimalFormat.format(total);
 
         // Convert total to 2 decimal places
-        return formattedPrice;
+        return decimalFormat.format(total);
     }
 
 }
