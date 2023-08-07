@@ -20,18 +20,6 @@ import java.util.ArrayList;
 public class ShopperPreviousOrderFragment extends Fragment {
 
     ArrayList<PreviousOrder> previousOrders = new ArrayList<>();
-    /*
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_previousorders);
-        RecyclerView previousorderview = findViewById(R.id.viewPreviousOrders);
-        setUpPreviousOrders();
-        PreviousOrderAdapter adapter = new PreviousOrderAdapter(this, previousOrders);
-        previousorderview.setAdapter(adapter);
-        previousorderview.setLayoutManager(new LinearLayoutManager(this));
-    }
-    */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,14 +34,20 @@ public class ShopperPreviousOrderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_previousorders, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.viewPreviousOrders);
-        getPreviousOrderImplementation getPreviousOrders = new getPreviousOrderImplementation();
+        RecyclerView previousOrderView = view.findViewById(R.id.viewPreviousOrders);
+
+        setUpPreviousOrders();
+        PreviousOrderAdapter adapter = new PreviousOrderAdapter(requireContext(), previousOrders);
+        previousOrderView.setAdapter(adapter);
+        previousOrderView.setLayoutManager(new LinearLayoutManager(requireContext()));
+
+
         return view;
     }
-    /*
+
     private void setUpPreviousOrders() {
-        previousOrders = getPreviousOrders(new Customer());
+        getPreviousOrderImplementation getPreviousOrders = new getPreviousOrderImplementation();
+        previousOrders = getPreviousOrders.getPreviousOrders();
     }
-    */
 
 }
