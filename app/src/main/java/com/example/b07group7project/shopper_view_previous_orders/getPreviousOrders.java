@@ -1,8 +1,9 @@
 package com.example.b07group7project.shopper_view_previous_orders;
 
-import com.example.b07group7project.Customer;
 import com.example.b07group7project.database.OnComplete;
 
+import java.util.ArrayList;
+
 public interface getPreviousOrders {
-    void getPreviousOrders(OnComplete onComplete);
+    public ArrayList<PreviousOrder> getPreviousOrders();
 }
