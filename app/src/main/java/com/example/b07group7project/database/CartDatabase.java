@@ -2,31 +2,21 @@ package com.example.b07group7project.database;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
 import com.example.b07group7project.create_order.GetCartInterface;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 import com.example.b07group7project.shopping_cart.CartEntry;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CartDatabase implements GetCartInterface {
+public class CartDatabase extends Database implements GetCartInterface {
 
 
     ArrayList<CartEntry> products;
-    FirebaseDatabase database;
-    DatabaseReference reference;
 
     public CartDatabase(){
-        database = FirebaseDatabase.getInstance(Constants.database_url);
-        reference = database.getReference();
+        super();
     }
     @Override
     public void getCart(OnComplete<ArrayList<CartEntry>> onComplete) {
@@ -35,29 +25,16 @@ public class CartDatabase implements GetCartInterface {
             return;
         }
 
-        DatabaseReference databaseReference = reference.child(Constants.customers)
-                .child(User.getCurrentUser().uuid)
-                .child(Constants.shopping_cart);
-        databaseReference.addValueEventListener((new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                updateProductList(snapshot);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("db", error.toString());
-            }
-        }));
-
-        Task<DataSnapshot> dataSnapshotTask = databaseReference.get();
-        dataSnapshotTask.addOnCompleteListener(v -> {
-            updateProductList(v.getResult());
-            onComplete.onComplete(new ArrayList<>(products));
-        });
+        getWithCache(
+                root.child(Constants.customers)
+                        .child(User.getCurrentUser().uuid)
+                        .child(Constants.shopping_cart),
+                onComplete,
+                this::updateProductList
+        );
     }
 
-    private void updateProductList(DataSnapshot dataSnapshot) {
+    private ArrayList<CartEntry> updateProductList(DataSnapshot dataSnapshot) {
         Log.d("db", "updateStoreListDataSnap: " + dataSnapshot);
         ArrayList<CartEntry> tempProducts = new ArrayList<>();
         for (DataSnapshot e : dataSnapshot.getChildren()) {
@@ -86,12 +63,7 @@ public class CartDatabase implements GetCartInterface {
             tempProducts.add(new CartEntry(new StoreProduct(name, description, productImage, price), store, quantity));
         }
         Log.d("myLog", "storeList: " + tempProducts.size());
-        products = tempProducts;
-    }
-
-    private String getObjectAsString(Object o){
-        if(o == null)
-            return null;
-        return o.toString();
+        products = new ArrayList<>(tempProducts);
+        return tempProducts;
     }
 }
