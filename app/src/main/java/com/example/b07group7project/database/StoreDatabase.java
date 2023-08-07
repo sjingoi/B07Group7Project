@@ -1,7 +1,5 @@
 package com.example.b07group7project.database;
 
-import static com.example.b07group7project.database.Constants.DATABASE_URL;
-
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -27,7 +25,7 @@ public class StoreDatabase implements GetStoreInterface {
 
 
     public StoreDatabase(){
-        database = FirebaseDatabase.getInstance(DATABASE_URL);
+        database = FirebaseDatabase.getInstance(Constants.database_url);
         reference = database.getReference();
     }
     public void getStores(OnComplete<ArrayList<Store>> onComplete) {
@@ -36,7 +34,7 @@ public class StoreDatabase implements GetStoreInterface {
             return;
         }
 
-        DatabaseReference databaseReference = reference.child("Stores");
+        DatabaseReference databaseReference = reference.child(Constants.stores);
         databaseReference.addValueEventListener((new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -65,10 +63,10 @@ public class StoreDatabase implements GetStoreInterface {
             if(value == null)
                 continue;
             String name = getObjectAsString(
-                    value.getOrDefault("Store Name", null)
+                    value.getOrDefault(Constants.store_name, null)
             );
             String url = getObjectAsString(
-                    value.getOrDefault("Store Image", null)
+                    value.getOrDefault(Constants.store_image, null)
             );
 
             store.add(new Store(name, url));

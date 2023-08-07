@@ -3,10 +3,10 @@ package com.example.b07group7project.ui.login;
 import com.example.b07group7project.UserPermission;
 import com.example.b07group7project.UserType;
 import com.example.b07group7project.database.OnComplete;
+import com.example.b07group7project.database.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class LoginModelAdapter implements LoginModel{
     FirebaseAuth mAuth;
@@ -29,8 +29,8 @@ public class LoginModelAdapter implements LoginModel{
     }
 
     @Override
-    public FirebaseUser getCurrentUser() {
-        return mAuth.getCurrentUser();
+    public User getCurrentUser() {
+        return User.getCurrentUser();
     }
 
     @Override
@@ -39,12 +39,12 @@ public class LoginModelAdapter implements LoginModel{
     }
 
     @Override
-    public void setUserType(UserType type, FirebaseUser user) {
+    public void setUserType(UserType type, User user) {
         userPermission.createUserOfType(type, user);
     }
 
     @Override
-    public void getUserType(FirebaseUser user, OnComplete<UserType> withUserType) {
+    public void getUserType(User user, OnComplete<UserType> withUserType) {
         userPermission.getUserType(user, withUserType);
     }
 

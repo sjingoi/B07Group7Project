@@ -11,6 +11,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import com.example.b07group7project.database.OnComplete;
+import com.example.b07group7project.database.User;
 import com.example.b07group7project.ui.login.EmailPasswordActivity;
 import com.example.b07group7project.ui.login.LoginFragment;
 import com.example.b07group7project.ui.login.LoginModel;
@@ -24,7 +25,6 @@ import com.example.b07group7project.ui.login.ResetPasswordView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseUser;
 
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -53,7 +53,7 @@ public class LoginUnitTests {
             ArgumentCaptor.forClass(OnComplete.class);
 
     Task<AuthResult> task = mock(Task.class);
-    FirebaseUser user = mock(FirebaseUser.class);
+    User user = mock(User.class);
 
     @Test
     public void testForgotPasswordOnClick(){
