@@ -4,8 +4,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.b07group7project.Order;
-import com.example.b07group7project.Product;
 import com.example.b07group7project.database_abstractions.Store;
 import com.example.b07group7project.shopper_view_store.GetStoreInterface;
 import com.google.android.gms.tasks.Task;
@@ -18,15 +16,14 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class StoreDatabase implements GetStoreInterface {
+public class StoreDatabase extends Database implements GetStoreInterface {
     ArrayList<Store> stores;
     FirebaseDatabase database;
     DatabaseReference reference;
 
 
     public StoreDatabase(){
-        database = FirebaseDatabase.getInstance("https://b07group7project-default-rtdb.firebaseio.com/");
-        reference = database.getReference();
+        super();
     }
     public void getStores(OnComplete<ArrayList<Store>> onComplete) {
         if(stores != null){
@@ -34,27 +31,14 @@ public class StoreDatabase implements GetStoreInterface {
             return;
         }
 
-        DatabaseReference databaseReference = reference.child("Stores");
-        databaseReference.addValueEventListener((new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                updateStoreList(snapshot);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("db", error.toString());
-            }
-        }));
-
-        Task<DataSnapshot> dataSnapshotTask = databaseReference.get();
-        dataSnapshotTask.addOnCompleteListener(v -> {
-            updateStoreList(v.getResult());
-            onComplete.onComplete(new ArrayList<>(stores));
-        });
+        getWithCache(
+                root.child("Stores"),
+                onComplete,
+                this::updateStoreList
+        );
     }
 
-    public void updateStoreList(DataSnapshot dataSnapshot){
+    public ArrayList<Store> updateStoreList(DataSnapshot dataSnapshot){
         Log.d("db", "updateStoreListDataSnap: " + dataSnapshot);
         ArrayList<Store> store = new ArrayList<>();
         for (DataSnapshot e : dataSnapshot.getChildren()) {
@@ -72,7 +56,8 @@ public class StoreDatabase implements GetStoreInterface {
             store.add(new Store(name, url));
         }
         Log.d("myLog", "storeList: " + store.size());
-        stores = store;
+        stores = new ArrayList<>(store);
+        return store;
     }
 
     private String getObjectAsString(Object o){
@@ -136,4 +121,5 @@ public class StoreDatabase implements GetStoreInterface {
             }
         });
     }
+
 }
