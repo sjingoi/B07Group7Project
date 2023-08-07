@@ -14,6 +14,13 @@ public class ExampleFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static ExampleFragment newInstance() {
+        Bundle args = new Bundle();
+        ExampleFragment fragment = new ExampleFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

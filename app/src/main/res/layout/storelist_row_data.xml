@@ -6,7 +6,7 @@
     android:layout_height="200dp">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/StoreCardView"
+        android:id="@+id/ProductCardView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         app:cardBackgroundColor="@color/primary_Dark"
@@ -22,7 +22,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/Product_Image"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="12dp"
@@ -31,14 +31,14 @@
                 android:layout_marginBottom="8dp"
                 android:contentDescription="store icon"
                 android:src="@drawable/baseline_logo1_24"
-                app:layout_constraintBottom_toTopOf="@+id/Store_Name"
+                app:layout_constraintBottom_toTopOf="@+id/Product_Name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_launcher_background" />
 
             <TextView
-                android:id="@+id/Store_Name"
+                android:id="@+id/Product_Name"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_gravity="center"

@@ -4,9 +4,15 @@
     <string name="placeholder_footer">Placeholder Footer</string>
     <string name="placeholder_header">Placeholder Header</string>
     <string name="placeholder_fragment">Placeholder Fragment</string>
+
+    <!--Strings related to Shopping Cart-->
+    <string name="check_out_button">Check Out</string>
+
+    <!-- Strings realted to nav    -->
     <string name="homeNavMenu">Home</string>
     <string name="cartNavMenu">Cart</string>
     <string name="accountNavMenu">Account</string>
+    <string name="ordersNavMenu">Orders</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -21,6 +27,9 @@
     <string name="create_account">Create account</string>
     <string name="shopper_account">Shopper Account</string>
     <string name="store_owner_account">Store Owner Account</string>
-    <string name="ordersNavMenu">Orders</string>
+    <string name="reset_password_to_login">Go Back</string>
+
+
+
 
 </resources>
