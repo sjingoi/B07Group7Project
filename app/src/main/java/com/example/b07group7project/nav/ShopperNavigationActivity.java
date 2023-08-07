@@ -29,7 +29,7 @@ public class ShopperNavigationActivity extends Navigation {
 
         homeFragment = ShopperViewStoreFragment.newInstance();
         cartFragment = ShoppingCart.newInstance();
-        accountFragment = CreateProductFragment.newInstance(); // CHANGE THIS
+        accountFragment = ExampleFragment.newInstance(); // CHANGE THIS
 
         replaceFragment(homeFragment, false);
 

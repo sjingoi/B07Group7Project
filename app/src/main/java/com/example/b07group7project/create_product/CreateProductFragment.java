@@ -43,6 +43,9 @@ public class CreateProductFragment extends Fragment {
         EditText itemURLEditText = rootView.findViewById(R.id.edit_text_itemurl);
         Button saveButton = rootView.findViewById(R.id.button_save);
 
+        // Instantiate the SaveProductImplementation and assign it to saveProduct
+        saveProduct = new SaveProductImplementation();
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
