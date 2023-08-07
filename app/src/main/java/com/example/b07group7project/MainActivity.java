@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Intent intent = new Intent(MainActivity.this, ShopperNavigationActivity.class);
         startActivity(intent);
         // Code For Running ShopperViewStoreFragment
@@ -32,5 +33,6 @@ public class MainActivity extends AppCompatActivity {
 //            transaction.replace(R.id.fragment_container, shopperViewStoreFragment);
 //            transaction.commit();
 //      }
+
     }
 }
