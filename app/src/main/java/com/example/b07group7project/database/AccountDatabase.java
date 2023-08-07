@@ -1,7 +1,9 @@
-package com.example.b07group7project;
+package com.example.b07group7project.database;
 
 import androidx.annotation.NonNull;
 
+import com.example.b07group7project.Constants;
+import com.example.b07group7project.database_abstractions.Account;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,12 +21,12 @@ public class AccountDatabase {
     }
 
     public void addAccount(Account account) {
-        DatabaseReference newreference = reference.child(Constants.accounts).child(account.email);
+        DatabaseReference newreference = reference.child(Constants.accounts).child(account.getEmail());
         newreference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.exists()) {
-                    newreference.setValue(account.accounttype);
+                    newreference.setValue(account.getAccounttype());
                 }
             }
 
@@ -33,12 +35,5 @@ public class AccountDatabase {
             }
         });
     }
-    /*
-    public void getAccountType(String email) {
-        Account a = new Account();
-        email = a.upTo(email);
-
-    }
-    */
 
 }
