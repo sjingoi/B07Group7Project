@@ -53,6 +53,11 @@ public class CreateProductFragment extends Fragment {
                 if (!itemName.isEmpty() && !itemDesc.isEmpty() && !itemURL.isEmpty()) {
                     saveProduct.saveProductToFirebase(itemName, itemDesc, itemURL);
                 }
+
+                // Clear the EditText fields after saving
+                itemNameEditText.setText("");
+                itemDescEditText.setText("");
+                itemURLEditText.setText("");
             }
         });
 
