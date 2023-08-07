@@ -4,7 +4,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.b07group7project.Constants;
 import com.example.b07group7project.Order;
 import com.example.b07group7project.Product;
 import com.example.b07group7project.database_abstractions.Store;
@@ -30,7 +29,6 @@ public class StoreDatabase implements GetStoreInterface {
         reference = database.getReference();
     }
     public void getStores(OnComplete<ArrayList<Store>> onComplete) {
-
         if(stores != null){
             onComplete.onComplete(new ArrayList<>(stores));
             return;

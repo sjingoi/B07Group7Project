@@ -2,6 +2,8 @@ package com.example.b07group7project.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.example.b07group7project.database.AccountDatabase;
 import com.example.b07group7project.nav.Navigation;
 import com.example.b07group7project.R;
 import com.example.b07group7project.nav.ShopperNavigationActivity;
@@ -19,7 +21,7 @@ public class EmailPasswordActivity extends Navigation {
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this.getApplicationContext());
         setContentView(R.layout.activity_shopper_email_login);
-        loginModel = new LoginModelAdapter(FirebaseAuth.getInstance(), new TemporaryUserPermission());
+        loginModel = new LoginModelAdapter(FirebaseAuth.getInstance(), new AccountDatabase());
     }
 
     @Override

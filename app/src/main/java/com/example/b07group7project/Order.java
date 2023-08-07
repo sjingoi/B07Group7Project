@@ -1,5 +1,6 @@
 package com.example.b07group7project;
 
+import com.example.b07group7project.database.Constants;
 import com.example.b07group7project.database_abstractions.Store;
 
 import java.util.HashMap;
@@ -24,7 +25,7 @@ public class Order {
 
     public HashMap<String, Object> putIntoHashMap() {
         HashMap<String, Object> newhashmap = new HashMap<>();
-        newhashmap.put(Constants.customer_uuid, customer.uuid);
+        newhashmap.put(Constants.user_uuid, customer.uuid);
         newhashmap.put(Constants.order_complete, "false");
         HashMap<String, Integer> products = convertHashMap();
         newhashmap.put(Constants.store_products, products);

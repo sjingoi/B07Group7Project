@@ -2,6 +2,8 @@ package com.example.b07group7project;
 
 import java.util.HashMap;
 import java.util.UUID;
+
+import com.example.b07group7project.database.Constants;
 import com.example.b07group7project.database_abstractions.Store;
 
 public class Product {

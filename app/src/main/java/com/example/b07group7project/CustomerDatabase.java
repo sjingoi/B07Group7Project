@@ -2,6 +2,7 @@ package com.example.b07group7project;
 
 import androidx.annotation.NonNull;
 
+import com.example.b07group7project.database.Constants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -9,7 +10,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
-import java.util.UUID;
 
 public class CustomerDatabase {
     FirebaseDatabase database;

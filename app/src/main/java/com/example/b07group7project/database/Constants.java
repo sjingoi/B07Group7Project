@@ -1,4 +1,4 @@
-package com.example.b07group7project;
+package com.example.b07group7project.database;
 
 public final class Constants {
     public static final String database_url = "https://b07group7project-default-rtdb.firebaseio.com/";
@@ -8,6 +8,8 @@ public final class Constants {
     public static final String store_products = "Products";
     public static final String store_orders = "PreviousProducts";
     public static final String store_email = "StoreEmail";
+    public static final String user_uuid = "UserUUID";
+    public static final String user_type = "UserType";
     public static final String store_uuid = "StoreUUID";
 
     public static final String product_name = "ProductName";
@@ -24,7 +26,6 @@ public final class Constants {
     public static final String quantity = "Quantity";
     public static final String previous_orders = "PreviousOrders";
     public static final String accounts = "Accounts";
-    public static final String customer_uuid = "CustomerUUID";
     public static final String order_complete = "OrderComplete";
     public static final String orders = "Orders";
 
