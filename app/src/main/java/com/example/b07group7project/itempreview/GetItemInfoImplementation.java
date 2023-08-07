@@ -9,7 +9,7 @@ public class GetItemInfoImplementation implements GetItemInfo {
    @Override
    public void getItemInformation(OnComplete<StoreProduct> onComplete) {
       // Create a dummy StoreProduct with mock information
-      StoreProduct mockItem = new StoreProduct("Item", "Desc", "url", 0);
+      StoreProduct mockItem = new StoreProduct("Item", "Desc", "url", "a", 0);
       mockItem.setItemName("Dummy Item");
       mockItem.setPrice(10.99);
       mockItem.setDescription("This is a mock item for testing purposes.");

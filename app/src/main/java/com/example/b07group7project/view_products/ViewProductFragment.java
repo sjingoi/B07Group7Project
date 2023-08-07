@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.R;
+import com.example.b07group7project.database.StoreProductDatabase;
 import com.example.b07group7project.database_abstractions.Store;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 
@@ -41,7 +42,7 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
         View view = inflater.inflate(R.layout.view_product_fragment, container, false);
 
         // TODO: Replace GetProductImplementation with Database Stuff
-        GetProductsInterface productInterface = new GetProductsImplementation();
+        GetProductsInterface productInterface = new StoreProductDatabase();
         productInterface.getProducts(
                 new Store(), //TODO: replace
                 products -> onReceivedStores(products, view)

@@ -13,7 +13,7 @@ public class GetCartEntriesImplementation implements GetCartEntries{
         List<CartEntry> cart = new ArrayList<>();
 
 
-        StoreProduct sp = new StoreProduct("Test Product", "hi", "https://q.utoronto.ca/images/thumbnails/14520646/dZVwZaqetGv2CWPzGMdYLTsSiYz6IINFM81wJbhz", 69.99);
+        StoreProduct sp = new StoreProduct("Test Product", "hi", "https://q.utoronto.ca/images/thumbnails/14520646/dZVwZaqetGv2CWPzGMdYLTsSiYz6IINFM81wJbhz", "a", 69.99);
         cart.add(new CartEntry(sp, null, 2));
         cart.add(new CartEntry(sp, null, 2));
         cart.add(new CartEntry(sp, null, 2));

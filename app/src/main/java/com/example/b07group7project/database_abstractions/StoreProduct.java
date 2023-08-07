@@ -1,18 +1,21 @@
 package com.example.b07group7project.database_abstractions;
 
 public class StoreProduct {
+    private final String uuid;
     String itemName;
     String description;
     String imageURL;
     double price;
 
-    public StoreProduct(String itemName, String description, String imageURL, double price) {
+    public StoreProduct(String itemName, String description, String imageURL, String uuid, double price) {
         this.itemName = itemName;
         this.description = description;
         this.imageURL = imageURL;
         this.price = price;
+        this.uuid = uuid;
     }
 
+    public String getUUID(){return uuid;}
     public String getItemName() {
         return itemName;
     }

@@ -55,12 +55,13 @@ public class CartDatabase extends Database implements GetCartInterface {
                     product.getOrDefault(Constants.product_description, null)
             );
             double price = (double) product.get(Constants.product_price);
+            String uuid = (String) product.get(Constants.product_uuid);
 
             String store =  getObjectAsString(value.get(Constants.store_name));
             int quantity = (int) value.get(Constants.quantity);
 
 
-            tempProducts.add(new CartEntry(new StoreProduct(name, description, productImage, price), store, quantity));
+            tempProducts.add(new CartEntry(new StoreProduct(name, description, productImage, uuid, price), store, quantity));
         }
         Log.d("myLog", "storeList: " + tempProducts.size());
         products = new ArrayList<>(tempProducts);
