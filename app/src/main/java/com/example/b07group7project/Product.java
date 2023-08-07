@@ -73,4 +73,8 @@ public class Product {
         product.put(Constants.product_image, imageURL);
         return product;
     }
+
+    public String getUuid() {
+        return uuid;
+    }
 }

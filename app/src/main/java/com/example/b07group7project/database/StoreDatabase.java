@@ -4,6 +4,9 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.b07group7project.Constants;
+import com.example.b07group7project.Order;
+import com.example.b07group7project.Product;
 import com.example.b07group7project.database_abstractions.Store;
 import com.example.b07group7project.shopper_view_store.GetStoreInterface;
 import com.google.android.gms.tasks.Task;
@@ -78,5 +81,61 @@ public class StoreDatabase implements GetStoreInterface {
         if(o == null)
             return null;
         return o.toString();
+    }
+
+    public void addStore(com.example.b07group7project.database_abstractions.Store store){
+        DatabaseReference newreference = reference.child(Constants.stores).child(store.getUuid());
+
+        newreference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.exists()) {
+                    HashMap<String, Object> storemap = store.storeIntoHashmap();
+                    newreference.setValue(storemap);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+    }
+
+    public void addProductToStore(Product product, com.example.b07group7project.database_abstractions.Store store){
+        DatabaseReference newreference = reference.child(Constants.stores).child(store.getUuid()).child(Constants.products)
+                .child(product.getUuid());
+
+        newreference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.exists()){
+                    HashMap<String, Object> finalproduct = product.putIntoHashMap();
+                    newreference.setValue(finalproduct);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void addOrderToStore(Order order) {
+        DatabaseReference newreference = reference.child(Constants.stores).child(order.getStore().getUuid())
+                .child(Constants.orders).child(order.getUuid());
+
+        newreference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.exists()) {
+                    HashMap<String, Object> hashmap = order.putIntoHashMap();
+                    newreference.setValue(hashmap);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 }
