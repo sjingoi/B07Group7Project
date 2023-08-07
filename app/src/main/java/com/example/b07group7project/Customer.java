@@ -31,7 +31,7 @@ public class Customer {
 
     public HashMap<String, Object> putIntoHashMap() {
         HashMap<String, Object> hashmap = new HashMap<>();
-        hashmap.put(Constants.customer_email, this.email);
+        hashmap.put(Constants.email, this.email);
         hashmap.put(Constants.customer_name, this.name);
         if (shoppingCart != null) {
             hashmap.put(Constants.shopping_cart, this.shoppingCart);
