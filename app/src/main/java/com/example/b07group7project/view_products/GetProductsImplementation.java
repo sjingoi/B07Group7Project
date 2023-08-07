@@ -2,6 +2,7 @@ package com.example.b07group7project.view_products;
 
 
 import com.example.b07group7project.database.OnComplete;
+import com.example.b07group7project.database_abstractions.Store;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 
 
@@ -13,7 +14,7 @@ import java.util.Arrays;
 public class GetProductsImplementation implements GetProductsInterface {
 
     @Override
-    public void getProducts(OnComplete<ArrayList<StoreProduct>> onComplete) {
+    public void getProducts(Store store, OnComplete<ArrayList<StoreProduct>> onComplete) {
 
         StoreProduct[] products = {
                 new StoreProduct("FlashLight", "DESC", "https://picsum.photos/200", 9.99),
