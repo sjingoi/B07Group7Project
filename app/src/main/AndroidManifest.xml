@@ -15,7 +15,7 @@
         android:theme="@style/Theme.B07Group7Project"
         tools:targetApi="31">
         <activity
-            android:name=".ShopperNavigationActivity"
+            android:name=".nav.ShopperNavigationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
