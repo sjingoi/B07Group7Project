@@ -49,6 +49,6 @@ public class StoreOwnerNavigationActivity extends Navigation {
 
     @Override
     public int getFragmentContainer() {
-        return;
+        return R.id.frameLayout;
     }
 }

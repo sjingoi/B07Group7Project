@@ -21,5 +21,6 @@
     <string name="create_account">Create account</string>
     <string name="shopper_account">Shopper Account</string>
     <string name="store_owner_account">Store Owner Account</string>
+    <string name="ordersNavMenu">Orders</string>
 
 </resources>
