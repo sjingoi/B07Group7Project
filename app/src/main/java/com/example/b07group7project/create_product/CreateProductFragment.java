@@ -58,16 +58,19 @@ public class CreateProductFragment extends Fragment {
                 try {
                     double itemPrice = Double.parseDouble(itemPriceText);
                     saveProduct.saveProductToFirebase(itemName, itemDesc, itemURL, itemPrice);
+
+                    // Clear the EditText fields after saving if the data is valid and saved
+                    itemNameEditText.setText("");
+                    itemDescEditText.setText("");
+                    itemURLEditText.setText("");
+                    itemPriceEditText.setText("");
+
                 } catch (NumberFormatException e) {
                     Toast.makeText(getContext(), "Invalid item price input.", Toast.LENGTH_SHORT).show();
                 }
+            } else {
+                Toast.makeText(getContext(), "Please fill in all fields.", Toast.LENGTH_SHORT).show();
             }
-
-            // Clear the EditText fields after saving
-            itemNameEditText.setText("");
-            itemDescEditText.setText("");
-            itemURLEditText.setText("");
-            itemPriceEditText.setText("");
         });
         return rootView;
     }
