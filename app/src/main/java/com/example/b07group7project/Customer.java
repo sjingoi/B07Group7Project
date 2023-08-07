@@ -1,14 +1,6 @@
 package com.example.b07group7project;
 
-import static java.util.UUID.fromString;
-
-import androidx.annotation.NonNull;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.example.b07group7project.database.Constants;
 
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +31,7 @@ public class Customer {
 
     public HashMap<String, Object> putIntoHashMap() {
         HashMap<String, Object> hashmap = new HashMap<>();
-        hashmap.put(Constants.customer_email, this.email);
+        hashmap.put(Constants.email, this.email);
         hashmap.put(Constants.customer_name, this.name);
         if (shoppingCart != null) {
             hashmap.put(Constants.shopping_cart, this.shoppingCart);

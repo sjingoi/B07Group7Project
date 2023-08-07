@@ -1,10 +1,11 @@
 package com.example.b07group7project;
 
+import com.example.b07group7project.database.Constants;
+import com.example.b07group7project.database_abstractions.Store;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import com.example.b07group7project.database_abstractions.Store;
 
 public class Order {
     HashMap<Product, Integer> productsuuidToQuantity;
@@ -24,7 +25,7 @@ public class Order {
 
     public HashMap<String, Object> putIntoHashMap() {
         HashMap<String, Object> newhashmap = new HashMap<>();
-        newhashmap.put(Constants.customer_uuid, customer.uuid);
+        newhashmap.put(Constants.user_uuid, customer.uuid);
         newhashmap.put(Constants.order_complete, "false");
         HashMap<String, Integer> products = convertHashMap();
         newhashmap.put(Constants.store_products, products);
@@ -37,5 +38,13 @@ public class Order {
             newhashmap.put(m.getKey().uuid, m.getValue());
         }
         return newhashmap;
+    }
+
+    public Store getStore(){
+        return store;
+    }
+
+    public String getUuid() {
+        return uuid;
     }
 }

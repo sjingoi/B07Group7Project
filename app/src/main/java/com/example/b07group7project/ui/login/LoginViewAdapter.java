@@ -2,6 +2,8 @@ package com.example.b07group7project.ui.login;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.b07group7project.UserType;
+
 public class LoginViewAdapter implements LoginView {
     LoginFragment loginFragment;
     EmailPasswordActivity activity;
@@ -27,8 +29,8 @@ public class LoginViewAdapter implements LoginView {
     }
 
     @Override
-    public void onLoginComplete() {
-        activity.onLoginCompete();
+    public void onLoginComplete(UserType type) {
+        activity.onLoginCompete(type);
     }
 
     @Override
