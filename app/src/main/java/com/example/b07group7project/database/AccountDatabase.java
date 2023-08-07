@@ -25,6 +25,11 @@ public class AccountDatabase extends Database implements UserPermission {
 
     @Override
     public void getUserType(User user, OnComplete<UserType> withUserType) {
+        if(user.userType != null){
+            withUserType.onComplete(user.userType);
+            return;
+        }
+
         String userEmail = user.getEmail();
         if(userEmail == null)
             return;
@@ -39,6 +44,7 @@ public class AccountDatabase extends Database implements UserPermission {
                 snapshot -> {
                     UserType userType = snapshot.child(encodedEmail).child(Constants.user_type)
                             .getValue(UserType.class);
+                    user.userType = userType;
                     withUserType.onComplete(userType);
                 }
         );
@@ -90,6 +96,11 @@ public class AccountDatabase extends Database implements UserPermission {
 
     @Override
     public void getUserUUID(User user, OnComplete<String> withUUID) {
+        if(user.uuid != null){
+            withUUID.onComplete(user.uuid);
+            return;
+        }
+
         String userEmail = user.getEmail();
         if(userEmail == null)
             return;
@@ -104,6 +115,7 @@ public class AccountDatabase extends Database implements UserPermission {
                 snapshot -> {
                     String userUUID = snapshot.child(encodedEmail).child(Constants.user_type)
                             .getValue(String.class);
+                    user.uuid = userUUID;
                     withUUID.onComplete(userUUID);
                 }
         );
