@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.Customer;
-
+import com.example.b07group7project.R;
 import java.util.ArrayList;
 
 public class ShopperPreviousOrderActivity extends AppCompatActivity {
