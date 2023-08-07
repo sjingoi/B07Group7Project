@@ -3,14 +3,16 @@ package com.example.b07group7project.database;
 import android.util.Log;
 
 import com.example.b07group7project.create_order.GetCartInterface;
+import com.example.b07group7project.create_order.PlaceOrderInterface;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 import com.example.b07group7project.shopping_cart.CartEntry;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-public class CartDatabase extends Database implements GetCartInterface {
+public class CartDatabase extends Database implements GetCartInterface, PlaceOrderInterface {
 
 
     ArrayList<CartEntry> products;
@@ -65,5 +67,10 @@ public class CartDatabase extends Database implements GetCartInterface {
         Log.d("myLog", "storeList: " + tempProducts.size());
         products = new ArrayList<>(tempProducts);
         return tempProducts;
+    }
+
+    @Override
+    public void placeOrder(List<CartEntry> products, User user) {
+
     }
 }
