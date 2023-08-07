@@ -40,6 +40,35 @@ public class Database {
 
     }
 
+    void get(DatabaseReference ref, DataExtractor a){
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                a.extract(snapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    <T> void put(DatabaseReference ref, DataSetter<T> a){
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                T toSet = a.getData(snapshot);
+                ref.setValue(toSet);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     String getObjectAsString(Object o){
         if(o == null)
             return null;

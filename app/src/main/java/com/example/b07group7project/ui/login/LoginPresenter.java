@@ -50,10 +50,11 @@ public class LoginPresenter {
 
     public void afterLoginAttempt(Task<AuthResult> task) {
         User user = loginModel.getCurrentUser();
-        if (user != null) {
-            loginModel.getUserType(user, type -> loginView.onLoginComplete(type));
-        } else
+        if (user.getUserType() == null) {
             loginView.onLoginFailed();
+        } else {
+            loginModel.getUserType(user, type -> loginView.onLoginComplete(type));
+        }
         loginView.setLoadingAnimation(false);
     }
 }
