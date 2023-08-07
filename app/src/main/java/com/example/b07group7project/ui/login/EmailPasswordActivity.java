@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 import com.example.b07group7project.nav.Navigation;
 import com.example.b07group7project.R;
-import com.example.b07group7project.ShopperNavigationActivity;
+import com.example.b07group7project.nav.ShopperNavigationActivity;
 import com.example.b07group7project.UserType;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;

@@ -1,12 +1,10 @@
 package com.example.b07group7project.nav;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 
 import com.example.b07group7project.ExampleFragment;
-import com.example.b07group7project.MainActivity;
 import com.example.b07group7project.R;
 import com.example.b07group7project.databinding.ActivityStoreOwnerNavigationBinding;
 
@@ -25,9 +23,9 @@ public class StoreOwnerNavigationActivity extends Navigation {
         binding = ActivityStoreOwnerNavigationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        homeFragment = new ExampleFragment();    // CHANGE THIS
-        cartFragment = new ExampleFragment();    // CHANGE THIS
-        accountFragment = new ExampleFragment(); // CHANGE THIS
+        homeFragment = ExampleFragment.newInstance();    // CHANGE THIS
+        cartFragment = ExampleFragment.newInstance();    // CHANGE THIS
+        accountFragment = ExampleFragment.newInstance(); // CHANGE THIS
 
         replaceFragment(homeFragment);
 
