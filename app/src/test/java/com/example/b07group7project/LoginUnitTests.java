@@ -10,7 +10,6 @@ import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import com.example.b07group7project.database.OnComplete;
 import com.example.b07group7project.database.User;
 import com.example.b07group7project.ui.login.EmailPasswordActivity;
 import com.example.b07group7project.ui.login.LoginFragment;
@@ -48,9 +47,6 @@ public class LoginUnitTests {
 
     ArgumentCaptor<OnCompleteListener<AuthResult>> captor =
             ArgumentCaptor.forClass(OnCompleteListener.class);
-
-    ArgumentCaptor<OnComplete<UserType>> userTypeOnCompleteCaptor =
-            ArgumentCaptor.forClass(OnComplete.class);
 
     Task<AuthResult> task = mock(Task.class);
     User user = mock(User.class);
@@ -104,7 +100,8 @@ public class LoginUnitTests {
         verify(loginModel).signIn(eq("user"), eq("password"), captor.capture());
         OnCompleteListener<AuthResult> result = captor.getValue();
 
-        when(loginModel.getCurrentUser()).thenReturn(null);
+        when(loginModel.getCurrentUser()).thenReturn(user);
+        when(user.getUserType()).thenReturn(null);
         result.onComplete(task);
 
         verify(loginModel).getCurrentUser();
@@ -122,14 +119,10 @@ public class LoginUnitTests {
         OnCompleteListener<AuthResult> result = captor.getValue();
 
         when(loginModel.getCurrentUser()).thenReturn(user);
+        when(user.getUserType()).thenReturn(UserType.SHOPPER);
         result.onComplete(task);
         
         verify(loginModel).getCurrentUser();
-        verify(loginModel).getUserType(eq(user), userTypeOnCompleteCaptor.capture());
-
-        OnComplete<UserType> r = userTypeOnCompleteCaptor.getValue();
-        r.onComplete(UserType.SHOPPER);
-
         verify(loginView).onLoginComplete(UserType.SHOPPER);
         verify(loginView).setLoadingAnimation(false);
         verifyNoMoreInteractions(loginModel, loginView);

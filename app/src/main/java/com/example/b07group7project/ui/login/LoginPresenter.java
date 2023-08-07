@@ -53,7 +53,7 @@ public class LoginPresenter {
         if (user.getUserType() == null) {
             loginView.onLoginFailed();
         } else {
-            loginModel.getUserType(user, type -> loginView.onLoginComplete(type));
+            loginView.onLoginComplete(user.getUserType());
         }
         loginView.setLoadingAnimation(false);
     }
