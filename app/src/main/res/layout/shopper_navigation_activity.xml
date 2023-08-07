@@ -15,6 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/shopper_nav_menu"/>
 
+
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="0dp"

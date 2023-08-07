@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.example.b07group7project.ExampleFragment;
 import com.example.b07group7project.R;
 import com.example.b07group7project.databinding.ShopperNavigationActivityBinding;
+import com.example.b07group7project.itempreview.ItemPreviewFragment;
 import com.example.b07group7project.shopping_cart.ShoppingCart;
 import com.example.b07group7project.shopper_view_store.ShopperViewStoreFragment;
 
@@ -27,7 +28,7 @@ public class ShopperNavigationActivity extends Navigation {
 
         homeFragment = ShopperViewStoreFragment.newInstance();
         cartFragment = ShoppingCart.newInstance();
-        accountFragment = ExampleFragment.newInstance(); // CHANGE THIS
+        accountFragment = ItemPreviewFragment.newInstance(); // CHANGE THIS
 
         replaceFragment(homeFragment, false);
 
