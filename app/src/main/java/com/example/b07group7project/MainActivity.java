@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.b07group7project.nav.ShopperNavigationActivity;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {

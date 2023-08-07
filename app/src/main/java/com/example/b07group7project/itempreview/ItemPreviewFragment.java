@@ -85,7 +85,7 @@ public class ItemPreviewFragment extends Fragment {
         addToCartButton.setOnClickListener(v -> {
             // Call the addToCart method to add the item to the cart
             if (currentItem != null) {
-                //addToCart(currentItem.getItemID(), currentItem.getItemName(), cartItemQty);
+                //saddToCart(currentItem.getItemID(), currentItem.getItemName(), cartItemQty);
             }
         });
 

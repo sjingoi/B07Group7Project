@@ -15,6 +15,7 @@
     <string name="homeNavMenu">Home</string>
     <string name="cartNavMenu">Cart</string>
     <string name="accountNavMenu">Account</string>
+    <string name="ordersNavMenu">Orders</string>
 
     <!-- Strings related to item info -->
     <string name="itemName">Item Name</string>
@@ -41,4 +42,8 @@
     <string name="shopper_account">Shopper Account</string>
     <string name="store_owner_account">Store Owner Account</string>
     <string name="reset_password_to_login">Go Back</string>
+
+
+
+
 </resources>

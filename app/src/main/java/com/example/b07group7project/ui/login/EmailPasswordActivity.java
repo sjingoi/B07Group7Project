@@ -2,12 +2,11 @@ package com.example.b07group7project.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
-
-import com.example.b07group7project.Navigation;
+import com.example.b07group7project.nav.Navigation;
 import com.example.b07group7project.R;
-import com.example.b07group7project.ShopperNavigationActivity;
+import com.example.b07group7project.nav.ShopperNavigationActivity;
 import com.example.b07group7project.UserType;
+import com.example.b07group7project.nav.StoreOwnerNavigationActivity;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -40,8 +39,9 @@ public class EmailPasswordActivity extends Navigation {
     }
 
     public void moveToStoreOwnerLandingPage(){
-        //TODO: replace this with appropriate page
-        Toast.makeText(this, "Login Succeeded - store owner", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, StoreOwnerNavigationActivity.class);
+        startActivity(intent);
+        //Toast.makeText(this, "Login Succeeded - store owner", Toast.LENGTH_SHORT).show();
     }
 
     @Override
