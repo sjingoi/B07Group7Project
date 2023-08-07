@@ -1,7 +1,6 @@
 package com.example.b07group7project.create_order;
 
 import com.example.b07group7project.database.OnComplete;
-import com.example.b07group7project.database_abstractions.Store;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 import com.example.b07group7project.shopping_cart.CartEntry;
 
@@ -33,11 +32,10 @@ public class GetCartImplementation implements GetCartInterface{
                 new StoreProduct("Shorts", "DESC", "URL",10.99),
             };
 
-        Store store = new Store("A", "URL");
         CartEntry[] prods = new CartEntry[15];
 
         for (int i = 0; i < prods.length; i++){
-            prods[i] = new CartEntry(prod[i], store, i);
+            prods[i] = new CartEntry(prod[i], "A", i);
         }
 
         onComplete.onComplete(new ArrayList<>(Arrays.asList(prods)));
