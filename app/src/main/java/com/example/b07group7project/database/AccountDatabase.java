@@ -4,11 +4,8 @@ import androidx.annotation.NonNull;
 
 import com.example.b07group7project.UserPermission;
 import com.example.b07group7project.UserType;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
@@ -16,7 +13,7 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.UUID;
 
-public class AccountDatabase implements UserPermission {
+public class AccountDatabase extends Database implements UserPermission {
 
     FirebaseDatabase database;
     DatabaseReference reference;
@@ -28,30 +25,29 @@ public class AccountDatabase implements UserPermission {
 
     @Override
     public void getUserType(User user, OnComplete<UserType> withUserType) {
-        String userEmail = Objects.requireNonNull(user.getEmail());
+        if(user.userType != null){
+            withUserType.onComplete(user.userType);
+            return;
+        }
+
+        String userEmail = user.getEmail();
+        if(userEmail == null)
+            return;
 
         //This line is necessary to avoid restricted values for keys for Firebase
         String encodedEmail = Base64.getEncoder()
                 .encodeToString(userEmail.getBytes(StandardCharsets.UTF_8))
                 .replace('\\', ';');
 
-        DatabaseReference databaseReference = reference.child(Constants.accounts).child(encodedEmail);
-
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
+        get(
+                reference.child(Constants.accounts).child(encodedEmail),
+                snapshot -> {
                     UserType userType = snapshot.child(encodedEmail).child(Constants.user_type)
                             .getValue(UserType.class);
+                    user.userType = userType;
                     withUserType.onComplete(userType);
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        );
     }
 
     @Override
@@ -64,93 +60,64 @@ public class AccountDatabase implements UserPermission {
                 .encodeToString(userEmail.getBytes(StandardCharsets.UTF_8))
                 .replace('\\', ';');
 
-        DatabaseReference databaseReference = reference.child(Constants.accounts)
-                .child(encodedEmail);
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!snapshot.exists()) {
+        put(
+                reference.child(Constants.accounts).child(encodedEmail),
+                snapshot -> {
                     HashMap<String, String> data = new HashMap<>();
                     data.put(Constants.user_type, type.toString());
                     data.put(Constants.user_uuid, userUUID);
-                    databaseReference.setValue(data);
+                    return data;
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
+        );
 
         if(type == UserType.SHOPPER){
-            DatabaseReference secondDatabaseReference = reference.child(Constants.customers)
-                    .child(userUUID);
-
-            secondDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (!snapshot.exists()) {
+            put(
+                    reference.child(Constants.customers).child(userUUID),
+                    snapshot -> {
                         HashMap<String, Object> data = new HashMap<>();
                         data.put(Constants.email, encodedEmail);
-                        secondDatabaseReference.setValue(data);
+                        return data;
                     }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
+            );
         } else if (type == UserType.STORE_OWNER) {
-            DatabaseReference secondDatabaseReference = reference.child(Constants.store_owners)
-                    .child(userUUID);
             String storeUUID = UUID.randomUUID().toString();
-
-            secondDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (!snapshot.exists()) {
+            put(
+                    reference.child(Constants.store_owners).child(userUUID),
+                    snapshot -> {
                         HashMap<String, Object> data = new HashMap<>();
                         data.put(Constants.email, encodedEmail);
                         data.put(Constants.store_uuid, storeUUID);
-                        secondDatabaseReference.setValue(data);
+                        return data;
                     }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
+            );
         }
 
     }
 
     @Override
     public void getUserUUID(User user, OnComplete<String> withUUID) {
-        String userEmail = Objects.requireNonNull(user.getEmail());
+        if(user.uuid != null){
+            withUUID.onComplete(user.uuid);
+            return;
+        }
+
+        String userEmail = user.getEmail();
+        if(userEmail == null)
+            return;
 
         //This line is necessary to avoid restricted values for keys for Firebase
         String encodedEmail = Base64.getEncoder()
                 .encodeToString(userEmail.getBytes(StandardCharsets.UTF_8))
                 .replace('\\', ';');
 
-        DatabaseReference databaseReference = reference.child(Constants.accounts).child(encodedEmail);
-
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
+        get(
+                reference.child(Constants.accounts).child(encodedEmail),
+                snapshot -> {
                     String userUUID = snapshot.child(encodedEmail).child(Constants.user_type)
                             .getValue(String.class);
+                    user.uuid = userUUID;
                     withUUID.onComplete(userUUID);
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-    });
+        );
     }
 }

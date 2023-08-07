@@ -1,5 +1,6 @@
 package com.example.b07group7project.database;
 
+import com.example.b07group7project.UserType;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -7,35 +8,31 @@ public class User {
     static User user = null;
 
     String uuid;
-    String email;
-    public User(FirebaseUser currentUser) {
-        if(user == null){
-            this.uuid = null;
-            this.email = null;
-        }
-        else {
-            email = currentUser.getEmail();
-            AccountDatabase db = new AccountDatabase();
-            db.getUserUUID(this, this::setUuid);
-        }
+    private static FirebaseUser firebaseUser;
+    UserType userType;
+    private User() {
+        this.uuid = null;
+        this.userType = null;
     }
 
     public static void removeCurrentUser() {
         user = null;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+        firebaseUser = null;
+        FirebaseAuth.getInstance().signOut();
     }
 
     public static User getCurrentUser(){
-        if(user == null){
-            user = new User(FirebaseAuth.getInstance().getCurrentUser());
+        if(firebaseUser == null || user == null){
+            firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+            if(firebaseUser != null)
+                user = new User();
         }
         return user;
     }
 
     public String getEmail() {
-        return email;
+        if(firebaseUser == null)
+            return null;
+        return firebaseUser.getEmail();
     }
 }
