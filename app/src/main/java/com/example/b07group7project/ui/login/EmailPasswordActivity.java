@@ -3,15 +3,15 @@ package com.example.b07group7project.ui.login;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.b07group7project.database.AccountDatabase;
-import com.example.b07group7project.nav.Navigation;
 import com.example.b07group7project.R;
-import com.example.b07group7project.nav.ShopperNavigationActivity;
 import com.example.b07group7project.UserType;
+import com.example.b07group7project.database.AccountDatabase;
+import com.example.b07group7project.database.User;
+import com.example.b07group7project.nav.Navigation;
+import com.example.b07group7project.nav.ShopperNavigationActivity;
 import com.example.b07group7project.nav.StoreOwnerNavigationActivity;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class EmailPasswordActivity extends Navigation {
     private LoginModel loginModel;
@@ -27,7 +27,7 @@ public class EmailPasswordActivity extends Navigation {
     @Override
     public void onStart(){
         super.onStart();
-        FirebaseUser currentUser = loginModel.getCurrentUser();
+        User currentUser = loginModel.getCurrentUser();
         if(currentUser != null){
             loginModel.signOut();
 //            onLoginComplete(currentUser);
