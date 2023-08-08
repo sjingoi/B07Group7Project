@@ -23,4 +23,8 @@ public class StoreHeader {
     public String getStoreName() {
         return this.storeName;
     }
+
+    public String getStoreUUID() {
+        return storeUUID;
+    }
 }

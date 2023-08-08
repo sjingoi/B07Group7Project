@@ -42,7 +42,7 @@ public class StoreProduct {
         this.uuid = uuid;
     }
 
-    public String getUUID(String uuid){
+    public String getUUID(){
         return uuid;
     }
 

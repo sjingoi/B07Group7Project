@@ -17,6 +17,7 @@ import com.example.b07group7project.R;
 import com.example.b07group7project.database.CartDatabase;
 import com.example.b07group7project.database.User;
 import com.example.b07group7project.shopping_cart.CartEntry;
+import com.example.b07group7project.shopping_cart.GetCartEntries;
 
 
 import java.text.DecimalFormat;
@@ -41,8 +42,8 @@ public class CheckoutFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.checkout_fragment, container, false);
 
-        GetCartInterface cartInterface = new CartDatabase();
-        cartInterface.getCart(
+        GetCartEntries cartInterface = new CartDatabase();
+        cartInterface.getCartEntries(
                 products -> onReceivedCart(products, view)
         );
 

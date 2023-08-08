@@ -1,7 +1,10 @@
 package com.example.b07group7project.database;
 
+import com.example.b07group7project.create_order.PlaceOrderInterface;
 import com.example.b07group7project.database_abstractions.StoreHeader;
 import com.example.b07group7project.database_abstractions.StoreProduct;
+import com.example.b07group7project.shopper_view_previous_orders.OrderStatus;
+import com.example.b07group7project.shopper_view_previous_orders.OrderedProduct;
 import com.example.b07group7project.shopping_cart.CartEntry;
 import com.example.b07group7project.shopping_cart.GetCartEntries;
 import com.google.firebase.database.DataSnapshot;
@@ -9,10 +12,10 @@ import com.google.firebase.database.DataSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartDatabase extends Database implements GetCartEntries {
+public class CartDatabase extends Database implements GetCartEntries, PlaceOrderInterface {
 
     @Override
-    public void getCartEntries(OnComplete<List<CartEntry>> onComplete) {
+    public void getCartEntries(OnComplete<ArrayList<CartEntry>> onComplete) {
         AccountDatabase db = new AccountDatabase();
 
         db.getUserUUID(
@@ -21,7 +24,7 @@ public class CartDatabase extends Database implements GetCartEntries {
         );
     }
 
-    private void getCartEntriesWithUUID(String uuid, OnComplete<List<CartEntry>> onComplete) {
+    private void getCartEntriesWithUUID(String uuid, OnComplete<ArrayList<CartEntry>> onComplete) {
 
         get(
                 root.child(Constants.customers).child(uuid).child(Constants.shopping_cart),
@@ -32,7 +35,7 @@ public class CartDatabase extends Database implements GetCartEntries {
         );
 
     }
-    private void loadCart(DataSnapshot cartSnapshot, DataSnapshot productSnapshot, OnComplete<List<CartEntry>> onComplete) {
+    private void loadCart(DataSnapshot cartSnapshot, DataSnapshot productSnapshot, OnComplete<ArrayList<CartEntry>> onComplete) {
         ArrayList<CartEntry> entries = new ArrayList<>();
         ArrayList<String[]> toFetch = new ArrayList<>();
         for (DataSnapshot item: cartSnapshot.getChildren()){
@@ -87,4 +90,46 @@ public class CartDatabase extends Database implements GetCartEntries {
 
         onComplete.onComplete(entries);
     }
+
+    @Override
+    public void placeOrder(List<CartEntry> products, User user) {
+        AccountDatabase db = new AccountDatabase();
+        db.getUserUUID(user,
+                userUUID -> placeOrderWithUUID(products, userUUID)
+        );
+    }
+
+    private void placeOrderWithUUID(List<CartEntry> products, String userUUID) {
+        for (CartEntry e: products) {
+            StoreHeader header = e.getStore();
+
+            get(
+                    root.child(Constants.products).child(header.getStoreUUID()).child(e.getProduct().getUUID()),
+                    productSnapshot -> addProductToOrderList(userUUID, e, header, productSnapshot)
+            );
+        }
+    }
+
+    private void addProductToOrderList(String userUUID, CartEntry e, StoreHeader header, DataSnapshot productSnapshot) {
+        String description = productSnapshot.child(Constants.product_description).getValue(String.class);
+        String imageURL = productSnapshot.child(Constants.product_image).getValue(String.class);
+        String name = productSnapshot.child(Constants.product_name).getValue(String.class);
+        Double price = productSnapshot.child(Constants.product_price).getValue(Double.class);
+
+        if(price == null)
+            return;
+
+        StoreProduct p = new StoreProduct(name, description, imageURL, price);
+        put(
+                root.child(Constants.store_orders).child(header.getStoreUUID()),
+                snapshot -> {
+                    ArrayList list = snapshot.getValue(ArrayList.class);
+                    if(list == null)
+                        list = new ArrayList<OrderedProduct>();
+                    list.add(new OrderedProduct(p, OrderStatus.ORDER_INCOMPLETE, e.getQuantity(), userUUID));
+                    return list;
+                }
+        );
+    }
 }
+
