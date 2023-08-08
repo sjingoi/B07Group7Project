@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.b07group7project.R;
+import com.example.b07group7project.database.CartListenerImplementation;
 import com.example.b07group7project.database.ImageDownloader;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 
@@ -18,6 +19,10 @@ public class ItemPreviewFragment extends Fragment {
     private TextView cartItemQtyTextView;
     private int cartItemQty = 0;
     private StoreProduct currentItem;
+    String itemID;
+    String storeID;
+
+    private CartListenerImplementation cartListener;
 
     public ItemPreviewFragment() {
         // Required empty public constructor
@@ -37,8 +42,8 @@ public class ItemPreviewFragment extends Fragment {
         // Get the item ID and store ID from arguments
         Bundle arguments = getArguments();
         if (arguments != null) {
-            String itemID = arguments.getString("itemID");
-            String storeID = arguments.getString("storeID");
+            itemID = arguments.getString("itemID");
+            storeID = arguments.getString("storeID");
             // Now you can use the itemID and storeID variables as needed
         }
     }
@@ -88,11 +93,13 @@ public class ItemPreviewFragment extends Fragment {
             cartItemQtyTextView.setText(String.valueOf(cartItemQty));
         });
 
+        cartListener = new CartListenerImplementation(getContext());
+
         // Set OnClickListener for the cart add button
         addToCartButton.setOnClickListener(v -> {
             // Call the addToCart method to add the item to the cart
             if (currentItem != null) {
-                //addToCart(currentItem.getItemID(), currentItem.getItemName(), cartItemQty);
+                cartListener.addToCart(storeID, itemID, currentItem.getProductID(), cartItemQty);
             }
         });
 
