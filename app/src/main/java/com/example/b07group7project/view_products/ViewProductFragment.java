@@ -42,7 +42,7 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.view_product_fragment, container, false);
 
-        String storeUUID = "";
+        String storeUUID = null;
 
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -51,9 +51,7 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
             Toast.makeText(getContext(), "BUNDLE NULL", Toast.LENGTH_SHORT).show();
         }
 
-
-        // TODO: Replace GetProductImplementation with Database Stuff
-        GetProductsInterface productInterface = new GetProductsImplementation();
+        GetProductsInterface productInterface = new StoreProductDatabase();
         productInterface.getProducts(storeUUID, products -> onReceivedProducts(products, view));
 
         return view;

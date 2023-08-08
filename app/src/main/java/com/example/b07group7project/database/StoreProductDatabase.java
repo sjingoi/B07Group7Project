@@ -13,18 +13,24 @@ public class StoreProductDatabase extends Database implements GetProductsInterfa
     }
     @Override
     public void getProducts(String storeUUID, OnComplete<ArrayList<StoreProduct>> withProductList) {
+        if(storeUUID == null){
+            withProductList.onComplete(new ArrayList<>());
+            return;
+        }
+
         get(
                 root.child(Constants.products).child(storeUUID),
                 snapshot -> {
-                    ArrayList<StoreProduct> products = extractProductList(snapshot);
+                    ArrayList<StoreProduct> products = extractProductList(storeUUID, snapshot);
                     withProductList.onComplete(products);
                 }
         );
     }
 
-    private ArrayList<StoreProduct> extractProductList(DataSnapshot snapshot){
+    private ArrayList<StoreProduct> extractProductList(String storeUUID, DataSnapshot snapshot){
         ArrayList<StoreProduct> products = new ArrayList<>();
-
+        if(!snapshot.exists())
+            return products;
         for (DataSnapshot s: snapshot.getChildren()) {
             String uuid = s.getKey();
 
@@ -35,7 +41,7 @@ public class StoreProductDatabase extends Database implements GetProductsInterfa
             if(price == null)
                 continue;
 
-            StoreProduct product = new StoreProduct(name, description, imageURL, price, uuid);
+            StoreProduct product = new StoreProduct(name, uuid, storeUUID, description, imageURL, price);
 
             products.add(product);
         }
