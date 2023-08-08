@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.example.b07group7project.R;
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.RecyclerViewAdapter;
@@ -17,10 +18,12 @@ public class PreviousOrderAdapter extends RecyclerView.Adapter<PreviousOrderAdap
 
     Context context;
     ArrayList<PreviousOrder> previousOrders;
+    PreviousOrderClickListener listener;
 
-    public PreviousOrderAdapter(Context context, ArrayList<PreviousOrder> previousOrders) {
+    public PreviousOrderAdapter(Context context, ArrayList<PreviousOrder> previousOrders, PreviousOrderClickListener listener) {
         this.context = context;
         this.previousOrders = previousOrders;
+        this.listener = listener;
     }
 
     @NonNull
@@ -35,6 +38,7 @@ public class PreviousOrderAdapter extends RecyclerView.Adapter<PreviousOrderAdap
     public void onBindViewHolder(@NonNull PreviousOrderAdapter.MyViewHolder holder, int position) {
         holder.previousOrderView.setText(previousOrders.get(position).getPreviousorder());
         holder.orderStatusView.setText(previousOrders.get(position).getOrderstatus());
+        holder.cardView.setOnClickListener(view -> listener.onPreviousOrderClick(previousOrders.get(position)));
     }
 
     @Override
@@ -45,10 +49,12 @@ public class PreviousOrderAdapter extends RecyclerView.Adapter<PreviousOrderAdap
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView previousOrderView;
         TextView orderStatusView;
+        CardView cardView;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             previousOrderView = itemView.findViewById(R.id.previousOrder);
             orderStatusView = itemView.findViewById(R.id.orderStatus);
+            cardView = itemView.findViewById(R.id.cardView);
         }
     }
 }

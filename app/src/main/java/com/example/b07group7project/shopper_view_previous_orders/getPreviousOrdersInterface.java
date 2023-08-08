@@ -4,6 +4,7 @@ import com.example.b07group7project.database.OnComplete;
 
 import java.util.ArrayList;
 
-public interface getPreviousOrders {
-    public ArrayList<PreviousOrder> getPreviousOrders();
+public interface getPreviousOrdersInterface {
+    public void getPreviousOrders(OnComplete<ArrayList<PreviousOrder>> onComplete);
+
 }
