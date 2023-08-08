@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.b07group7project.ExampleFragment;
 import com.example.b07group7project.R;
+import com.example.b07group7project.create_product.CreateProductFragment;
 import com.example.b07group7project.nav.Navigation;
 import com.example.b07group7project.view_products.GetProductsImplementation;
 import com.example.b07group7project.view_products.GetProductsInterface;
@@ -25,6 +26,7 @@ public class StoreOwnerViewProducts extends ViewProductFragment {
     public static StoreOwnerViewProducts newInstance() {
         StoreOwnerViewProducts fragment = new StoreOwnerViewProducts();
         Bundle args = new Bundle();
+        //args.putString("storeID", storeID);
         fragment.setArguments(args);
         return fragment;
     }
@@ -40,7 +42,7 @@ public class StoreOwnerViewProducts extends ViewProductFragment {
             Activity activity = requireActivity();
             if (activity instanceof Navigation) {
                 Navigation navigation = (Navigation) activity;
-                navigation.replaceFragment(ExampleFragment.newInstance(), true); //TODO: CHANGE THIS
+                navigation.replaceFragment(CreateProductFragment.newInstance(), true); //TODO: CHANGE THIS
             }
         });
 

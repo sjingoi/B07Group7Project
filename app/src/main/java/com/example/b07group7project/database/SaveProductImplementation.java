@@ -1,5 +1,7 @@
 package com.example.b07group7project.database;
+
 import com.google.firebase.database.DatabaseReference;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -19,10 +21,10 @@ public class SaveProductImplementation extends Database implements SaveProduct {
 
         // Create a HashMap to store the product information
         Map<String, Object> productInfo = new HashMap<>();
-        productInfo.put("name", itemName);
-        productInfo.put("description", itemDesc);
-        productInfo.put("image", itemURL);
-        productInfo.put("price", itemPrice);
+        productInfo.put(Constants.product_name, itemName);
+        productInfo.put(Constants.product_description, itemDesc);
+        productInfo.put(Constants.product_image, itemURL);
+        productInfo.put(Constants.product_price, itemPrice);
 
         // Use the put method to set the product information
         putProductInfo(productInfo);
