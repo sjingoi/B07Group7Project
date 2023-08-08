@@ -8,6 +8,7 @@
     <color name="text_color">#FF000000</color>
     <color name="background_color">#FFFFFFFF</color>
     <color name="border_color">#FFDDDDDD</color>
+    <color name="nav_background_color">#FFEEEEEE</color>
 
 
     <style name="Theme.B07Group7Project" parent="Base.Theme.B07Group7Project" />

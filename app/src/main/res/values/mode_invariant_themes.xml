@@ -3,4 +3,7 @@
     <style name="text_style">
 
     </style>
+    <style name="title_text" parent="Base.Theme.B07Group7Project">
+        <item name="android:textSize">18sp</item>
+    </style>
 </resources>

@@ -1,8 +1,13 @@
 package com.example.b07group7project.nav;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.b07group7project.ExampleFragment;
@@ -24,6 +29,12 @@ public class ShopperNavigationActivity extends Navigation {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.nav_background_color));
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        window.setNavigationBarColor(ContextCompat.getColor(this, R.color.nav_background_color));
 
         binding = ShopperNavigationActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
