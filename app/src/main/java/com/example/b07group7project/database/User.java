@@ -10,10 +10,7 @@ public class User {
     String uuid;
     private static FirebaseUser firebaseUser;
     UserType userType;
-    private User() {
-        this.uuid = null;
-        this.userType = null;
-    }
+    private User() {}
 
     public static void removeCurrentUser() {
         user = null;
