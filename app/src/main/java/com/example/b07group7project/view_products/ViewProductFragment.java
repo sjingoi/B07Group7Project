@@ -11,13 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.R;
+import com.example.b07group7project.database.StoreProductDatabase;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 
 
 import java.util.ArrayList;
 
 public class ViewProductFragment extends Fragment implements ProductClickListener{
-
+    String storeUUID;
     public ViewProductFragment() {
         // Required Empty Constructor
     }
@@ -40,8 +41,9 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
         View view = inflater.inflate(R.layout.view_product_fragment, container, false);
 
         // TODO: Replace GetProductImplementation with Database Stuff
-        GetProductsInterface productInterface = new GetProductsImplementation();
+        GetProductsInterface productInterface = new StoreProductDatabase();
         productInterface.getProducts(
+                storeUUID,
                 products -> onReceivedStores(products, view)
         );
 

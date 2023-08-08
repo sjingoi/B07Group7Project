@@ -4,8 +4,19 @@ public class StoreProduct {
     String itemName;
     String description;
     String imageURL;
+
+    String itemUUID;
     double price;
 
+    public StoreProduct(String itemName, String description, String imageURL, double price, String itemUUID) {
+        this.itemName = itemName;
+        this.description = description;
+        this.imageURL = imageURL;
+        this.price = price;
+        this.itemUUID = itemUUID;
+    }
+
+    //TODO: remove
     public StoreProduct(String itemName, String description, String imageURL, double price) {
         this.itemName = itemName;
         this.description = description;
