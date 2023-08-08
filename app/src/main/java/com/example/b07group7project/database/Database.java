@@ -11,7 +11,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Database {
+class Database {
     FirebaseDatabase database;
     DatabaseReference root;
 
@@ -54,7 +54,7 @@ public class Database {
         });
     }
 
-    public <T> void put(DatabaseReference ref, DataSetter<T> a){
+    <T> void put(DatabaseReference ref, DataSetter<T> a){
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

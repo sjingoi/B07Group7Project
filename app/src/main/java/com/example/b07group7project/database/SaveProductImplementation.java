@@ -1,5 +1,6 @@
-package com.example.b07group7project.create_product;
+package com.example.b07group7project.database;
 
+import com.example.b07group7project.create_product.SaveProduct;
 import com.example.b07group7project.database.DataSetter;
 import com.example.b07group7project.database.Database;
 import com.google.firebase.database.DatabaseReference;
