@@ -5,11 +5,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.b07group7project.nav.Navigation;
 import com.example.b07group7project.R;
+import com.example.b07group7project.database_abstractions.Store;
 import com.example.b07group7project.database.StoreDatabase;
 import com.example.b07group7project.database_abstractions.StoreHeader;
 import com.example.b07group7project.nav.Navigation;
@@ -37,16 +45,16 @@ public class ShopperViewStoreFragment extends Fragment implements StoreClickList
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.shopper_view_store_fragment, container, false);
 
-        GetStoreInterface storeInterface = new StoreDatabase();
-        storeInterface.getStores(
-                stores -> onReceivedStores(stores, view)
-        );
-
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        GetStoreInterface storeInterface = new StoreDatabase();
+        storeInterface.getStores(stores -> onReceivedStores(stores, view));
     }
 
     public void onReceivedStores(ArrayList<StoreHeader> stores, View view){
