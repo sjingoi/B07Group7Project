@@ -8,10 +8,10 @@ public class PreviousOrder {
     OrderStatus orderStatus;
     List<OrderedProduct> orderedProducts;
 
-    public PreviousOrder(String previousOrderLabel, OrderStatus orderStatus, List<OrderedProduct> orderedProducts) {
+    public PreviousOrder(String previousOrderLabel,  List<OrderedProduct> orderedProducts) {
         this.previousOrderLabel = previousOrderLabel;
-        this.orderStatus = orderStatus;
         this.orderedProducts = orderedProducts;
+        this.orderStatus = isOrderComplete();
     }
 
     public PreviousOrder(String previousOrderLabel, OrderStatus orderStatus) {
@@ -27,5 +27,15 @@ public class PreviousOrder {
         return orderStatus;
     }
 
-    public boolean isOrderComplete
+    public OrderStatus isOrderComplete() {
+        if (orderedProducts == null) {
+            return OrderStatus.ORDER_INCOMPLETE;
+        }
+        for (OrderedProduct orderedProduct : orderedProducts) {
+            if (orderedProduct.orderStatus == OrderStatus.ORDER_INCOMPLETE) {
+                return OrderStatus.ORDER_INCOMPLETE;
+            }
+        }
+        return OrderStatus.ORDER_COMPLETE;
+    }
 }
