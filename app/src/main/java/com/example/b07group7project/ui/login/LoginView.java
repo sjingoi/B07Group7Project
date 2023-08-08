@@ -2,6 +2,8 @@ package com.example.b07group7project.ui.login;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.b07group7project.UserType;
+
 public interface LoginView {
     void setLoadingAnimation(boolean isLoading);
 
@@ -9,7 +11,7 @@ public interface LoginView {
 
     void onRegistrationFailed();
 
-    void onLoginComplete();
+    void onLoginComplete(UserType userType);
 
     void onLoginFailed();
 }
