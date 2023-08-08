@@ -37,9 +37,6 @@ public class StoreProductDatabase extends Database implements GetProductsInterfa
             Double price = s.child(Constants.product_price).getValue(Double.class);
             if(price == null)
                 continue;
-            Integer quantity = s.child(Constants.quantity).getValue(Integer.class);
-            if(quantity == null)
-                quantity = 0;
 
             StoreProduct product = new StoreProduct(name, description, imageURL, price, uuid);
 
