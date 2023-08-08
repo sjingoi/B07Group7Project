@@ -4,8 +4,6 @@ import androidx.annotation.NonNull;
 
 import com.example.b07group7project.UserPermission;
 import com.example.b07group7project.UserType;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
@@ -15,12 +13,8 @@ import java.util.UUID;
 
 public class AccountDatabase extends Database implements UserPermission {
 
-    FirebaseDatabase database;
-    DatabaseReference reference;
-
     public AccountDatabase(){
-        database = FirebaseDatabase.getInstance(Constants.database_url);
-        reference = database.getReference();
+        super();
     }
 
     @Override
@@ -40,10 +34,9 @@ public class AccountDatabase extends Database implements UserPermission {
                 .replace('\\', ';');
 
         get(
-                reference.child(Constants.accounts).child(encodedEmail),
+                root.child(Constants.accounts).child(encodedEmail).child(Constants.user_type),
                 snapshot -> {
-                    UserType userType = snapshot.child(encodedEmail).child(Constants.user_type)
-                            .getValue(UserType.class);
+                    UserType userType = snapshot.getValue(UserType.class);
                     user.userType = userType;
                     withUserType.onComplete(userType);
                 }
@@ -61,7 +54,7 @@ public class AccountDatabase extends Database implements UserPermission {
                 .replace('\\', ';');
 
         put(
-                reference.child(Constants.accounts).child(encodedEmail),
+                root.child(Constants.accounts).child(encodedEmail),
                 snapshot -> {
                     HashMap<String, String> data = new HashMap<>();
                     data.put(Constants.user_type, type.toString());
@@ -72,7 +65,7 @@ public class AccountDatabase extends Database implements UserPermission {
 
         if(type == UserType.SHOPPER){
             put(
-                    reference.child(Constants.customers).child(userUUID),
+                    root.child(Constants.customers).child(userUUID),
                     snapshot -> {
                         HashMap<String, Object> data = new HashMap<>();
                         data.put(Constants.email, encodedEmail);
@@ -82,7 +75,7 @@ public class AccountDatabase extends Database implements UserPermission {
         } else if (type == UserType.STORE_OWNER) {
             String storeUUID = UUID.randomUUID().toString();
             put(
-                    reference.child(Constants.store_owners).child(userUUID),
+                    root.child(Constants.store_owners).child(userUUID),
                     snapshot -> {
                         HashMap<String, Object> data = new HashMap<>();
                         data.put(Constants.email, encodedEmail);
@@ -111,7 +104,7 @@ public class AccountDatabase extends Database implements UserPermission {
                 .replace('\\', ';');
 
         get(
-                reference.child(Constants.accounts).child(encodedEmail),
+                root.child(Constants.accounts).child(encodedEmail),
                 snapshot -> {
                     String userUUID = snapshot.child(encodedEmail).child(Constants.user_type)
                             .getValue(String.class);
