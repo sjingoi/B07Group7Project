@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -13,9 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.Customer;
 import com.example.b07group7project.R;
-import com.example.b07group7project.create_order.CheckoutRecyclerAdapter;
 import com.example.b07group7project.database.OnComplete;
-import com.example.b07group7project.database_abstractions.Store;
 import com.example.b07group7project.shopper_view_store.ShopperViewStoreFragment;
 
 import java.util.ArrayList;
