@@ -1,4 +1,4 @@
-package com.example.b07group7project;
+package com.example.b07group7project.database_abstractions;
 
 public class Account {
     String email;
@@ -20,5 +20,13 @@ public class Account {
             return email.substring(0, email.indexOf("@"));
         }
         return email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getAccounttype() {
+        return accounttype;
     }
 }

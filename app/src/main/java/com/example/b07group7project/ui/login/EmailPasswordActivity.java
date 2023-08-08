@@ -2,15 +2,16 @@ package com.example.b07group7project.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
-import com.example.b07group7project.Navigation;
 import com.example.b07group7project.R;
-import com.example.b07group7project.ShopperNavigationActivity;
 import com.example.b07group7project.UserType;
+import com.example.b07group7project.database.AccountDatabase;
+import com.example.b07group7project.database.User;
+import com.example.b07group7project.nav.Navigation;
+import com.example.b07group7project.nav.ShopperNavigationActivity;
+import com.example.b07group7project.nav.StoreOwnerNavigationActivity;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class EmailPasswordActivity extends Navigation {
     private LoginModel loginModel;
@@ -20,13 +21,13 @@ public class EmailPasswordActivity extends Navigation {
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this.getApplicationContext());
         setContentView(R.layout.activity_shopper_email_login);
-        loginModel = new LoginModelAdapter(FirebaseAuth.getInstance(), new TemporaryUserPermission());
+        loginModel = new LoginModelAdapter(FirebaseAuth.getInstance(), new AccountDatabase());
     }
 
     @Override
     public void onStart(){
         super.onStart();
-        FirebaseUser currentUser = loginModel.getCurrentUser();
+        User currentUser = loginModel.getCurrentUser();
         if(currentUser != null){
             loginModel.signOut();
 //            onLoginComplete(currentUser);
@@ -37,11 +38,13 @@ public class EmailPasswordActivity extends Navigation {
     public void moveToShopperLandingPage(){
         Intent intent = new Intent(this, ShopperNavigationActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void moveToStoreOwnerLandingPage(){
-        //TODO: replace this with appropriate page
-        Toast.makeText(this, "Login Succeeded - store owner", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, StoreOwnerNavigationActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -53,8 +56,7 @@ public class EmailPasswordActivity extends Navigation {
         return loginModel;
     }
 
-    public void onLoginCompete() {
-        UserType type = loginModel.getUserType(loginModel.getCurrentUser());
+    public void onLoginCompete(UserType type) {
         if(type == UserType.SHOPPER)
             moveToShopperLandingPage();
         else

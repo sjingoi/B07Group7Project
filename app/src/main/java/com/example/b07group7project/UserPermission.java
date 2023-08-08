@@ -1,9 +1,11 @@
 package com.example.b07group7project;
 
-import com.google.firebase.auth.FirebaseUser;
+import com.example.b07group7project.database.OnComplete;
+import com.example.b07group7project.database.User;
 
-//TODO: implement database methods for this interface
 public interface UserPermission {
-    UserType getUserType(FirebaseUser user);
-    void createUserOfType(UserType type, FirebaseUser user);
+    void getUserType(User user, OnComplete<UserType> withUserType);
+    void createUserOfType(UserType type, User user);
+
+    void getUserUUID(User user, OnComplete<String> setUuid);
 }

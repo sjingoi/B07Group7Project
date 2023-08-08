@@ -14,6 +14,6 @@ public class RegisterPresenter {
 
     public void handleCreateAccount(UserType userType) {
         loginModel.setUserType(userType, loginModel.getCurrentUser());
-        emailPasswordActivity.onLoginCompete();
+        emailPasswordActivity.onLoginCompete(userType);
     }
 }

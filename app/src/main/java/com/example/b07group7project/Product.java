@@ -2,6 +2,8 @@ package com.example.b07group7project;
 
 import java.util.HashMap;
 import java.util.UUID;
+
+import com.example.b07group7project.database.Constants;
 import com.example.b07group7project.database_abstractions.Store;
 
 public class Product {
@@ -72,5 +74,9 @@ public class Product {
         product.put(Constants.product_price, price);
         product.put(Constants.product_image, imageURL);
         return product;
+    }
+
+    public String getUuid() {
+        return uuid;
     }
 }
