@@ -36,7 +36,7 @@ public class PreviousOrderAdapter extends RecyclerView.Adapter<PreviousOrderAdap
 
     @Override
     public void onBindViewHolder(@NonNull PreviousOrderAdapter.MyViewHolder holder, int position) {
-        holder.previousOrderView.setText(previousOrders.get(position).getPreviousOrderLabel());
+        holder.previousOrderView.setText(previousOrders.get(position).getCurrentDate());
         String orderStatus = previousOrders.get(position).getOrderstatus().name();
         holder.orderStatusView.setText(orderStatus.substring(0, orderStatus.indexOf("_")) + " " + orderStatus.substring(orderStatus.indexOf("_") + 1));
         holder.cardView.setOnClickListener(view -> listener.onPreviousOrderClick(previousOrders.get(position)));

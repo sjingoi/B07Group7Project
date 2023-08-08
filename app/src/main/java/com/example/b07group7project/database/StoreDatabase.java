@@ -42,12 +42,8 @@ public class StoreDatabase extends Database implements GetStoreInterface {
             HashMap<String, Object> value = (HashMap<String, Object>) e.getValue();
             if(value == null)
                 continue;
-            String name = getObjectAsString(
-                    value.getOrDefault("Store Name", null)
-            );
-            String url = getObjectAsString(
-                    value.getOrDefault("Store Image", null)
-            );
+            String name = getObjectAsString(value.getOrDefault("Store Name", null));
+            String url = getObjectAsString(value.getOrDefault("Store Image", null));
 
             store.add(new Store(name, url));
         }

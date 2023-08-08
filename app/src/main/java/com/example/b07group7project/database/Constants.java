@@ -28,4 +28,6 @@ public final class Constants {
     public static final String order_complete = "OrderComplete";
     public static final String orders = "Orders";
     public static final String store_owners = "StoreOwners";
+    public static final String order_status = "OrderStatus";
+    public static final String ordered_products = "OrderedProducts";
 }
