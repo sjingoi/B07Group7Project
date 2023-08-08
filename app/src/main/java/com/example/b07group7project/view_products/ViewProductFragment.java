@@ -53,12 +53,12 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
 
         // TODO: Replace GetProductImplementation with Database Stuff
         GetProductsInterface productInterface = new GetProductsImplementation();
-        productInterface.getProducts(storeUUID, products -> onReceivedStores(products, view));
+        productInterface.getProducts(storeUUID, products -> onReceivedProcucts(products, view));
 
         return view;
     }
 
-    public void onReceivedStores(ArrayList<StoreProduct> products, View view){
+    public void onReceivedProcucts(ArrayList<StoreProduct> products, View view){
         RecyclerView recyclerView = view.findViewById(R.id.ProductListRecyclerView);
         ViewProductAdapter adapter = new ViewProductAdapter(requireContext(), products, this);
         recyclerView.setAdapter(adapter);

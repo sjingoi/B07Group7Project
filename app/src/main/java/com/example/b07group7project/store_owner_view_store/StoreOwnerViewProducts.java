@@ -46,11 +46,11 @@ public class StoreOwnerViewProducts extends ViewProductFragment {
             }
         });
 
+        String storeUUID = "";
+
         // TODO: Replace GetProductImplementation with Database Stuff
         GetProductsInterface productInterface = new GetProductsImplementation();
-        productInterface.getProducts(
-                products -> onReceivedStores(products, view)
-        );
+        productInterface.getProducts(storeUUID, products -> onReceivedProcucts(products, view));
 
         return view;
     }
