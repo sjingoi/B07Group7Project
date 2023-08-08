@@ -50,7 +50,7 @@ public class ShopperPreviousOrderFragment extends Fragment implements PreviousOr
 
     @Override
     public void onPreviousOrderClick(PreviousOrder previousOrder) {
-        Toast.makeText(requireContext(), previousOrder.getPreviousorder(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), previousOrder.getPreviousOrderLabel(), Toast.LENGTH_SHORT).show();
     }
 
 

@@ -1,25 +1,31 @@
 package com.example.b07group7project.shopper_view_previous_orders;
 
 
-import com.example.b07group7project.Product;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class PreviousOrder {
-    String previousorderlabel;
-    String orderstatus;
+    String previousOrderLabel;
+    OrderStatus orderStatus;
+    List<OrderedProduct> orderedProducts;
 
-
-    public PreviousOrder(String previousorder, String orderstatus) {
-        this.previousorderlabel = previousorder;
-        this.orderstatus = orderstatus;
+    public PreviousOrder(String previousOrderLabel, OrderStatus orderStatus, List<OrderedProduct> orderedProducts) {
+        this.previousOrderLabel = previousOrderLabel;
+        this.orderStatus = orderStatus;
+        this.orderedProducts = orderedProducts;
     }
 
-    public String getPreviousorder() {
-        return previousorderlabel;
+    public PreviousOrder(String previousOrderLabel, OrderStatus orderStatus) {
+        this.previousOrderLabel = previousOrderLabel;
+        this.orderStatus = orderStatus;
     }
 
-    public String getOrderstatus() {
-        return orderstatus;
+    public String getPreviousOrderLabel() {
+        return previousOrderLabel;
     }
+
+    public OrderStatus getOrderstatus() {
+        return orderStatus;
+    }
+
+    public boolean isOrderComplete
 }

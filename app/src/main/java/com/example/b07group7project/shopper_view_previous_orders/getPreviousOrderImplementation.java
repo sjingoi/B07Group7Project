@@ -14,8 +14,8 @@ public class getPreviousOrderImplementation implements getPreviousOrdersInterfac
         //previousOrders.add(previousOrder1);
         //previousOrders.add(previousOrder2);
         PreviousOrder[] previousOrders = {
-                new PreviousOrder("isaiah", "Order Complete"),
-                new PreviousOrder("sebastian", "Order Incomplete")
+                new PreviousOrder("isaiah", OrderStatus.ORDER_COMPLETE),
+                new PreviousOrder("sebastian", OrderStatus.ORDER_INCOMPLETE)
         };
         onComplete.onComplete(new ArrayList<>(Arrays.asList(previousOrders)));
     }
