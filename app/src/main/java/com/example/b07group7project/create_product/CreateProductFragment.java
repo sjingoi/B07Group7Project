@@ -56,7 +56,7 @@ public class CreateProductFragment extends Fragment {
         String storeID = "Lay's"; //Dummy implement while Bundle isn't connected
 
         // Instantiate the SaveProductImplementation and assign it to saveProduct
-        saveProduct = new SaveProductImplementation();
+        saveProduct = new SaveProductImplementation(getContext());
 
         saveButton.setOnClickListener(v -> {
             String itemName = itemNameEditText.getText().toString().trim();
