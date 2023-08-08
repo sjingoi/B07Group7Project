@@ -1,8 +1,8 @@
 package com.example.b07group7project.shopper_view_store;
 
 
-import com.example.b07group7project.database_abstractions.Store;
+import com.example.b07group7project.database_abstractions.StoreHeader;
 
 public interface StoreClickListener {
-    void onStoreClicked(Store store);
+    void onStoreClicked(StoreHeader store);
 }

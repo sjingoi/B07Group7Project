@@ -1,76 +1,90 @@
 package com.example.b07group7project.database;
 
-import android.util.Log;
-
-import com.example.b07group7project.create_order.GetCartInterface;
-import com.example.b07group7project.create_order.PlaceOrderInterface;
+import com.example.b07group7project.database_abstractions.StoreHeader;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 import com.example.b07group7project.shopping_cart.CartEntry;
+import com.example.b07group7project.shopping_cart.GetCartEntries;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-public class CartDatabase extends Database implements GetCartInterface, PlaceOrderInterface {
+public class CartDatabase extends Database implements GetCartEntries {
 
-
-    ArrayList<CartEntry> products;
-
-    public CartDatabase(){
-        super();
-    }
     @Override
-    public void getCart(OnComplete<ArrayList<CartEntry>> onComplete) {
-        if(products != null){
-            onComplete.onComplete(new ArrayList<>(products));
-            return;
-        }
+    public void getCartEntries(OnComplete<List<CartEntry>> onComplete) {
+        AccountDatabase db = new AccountDatabase();
 
-        getWithCache(
-                root.child(Constants.customers)
-                        .child(User.getCurrentUser().uuid)
-                        .child(Constants.shopping_cart),
-                onComplete,
-                this::updateProductList
+        db.getUserUUID(
+                User.getCurrentUser(),
+                uuid -> getCartEntriesWithUUID(uuid, onComplete)
         );
     }
 
-    private ArrayList<CartEntry> updateProductList(DataSnapshot dataSnapshot) {
-        Log.d("db", "updateStoreListDataSnap: " + dataSnapshot);
-        ArrayList<CartEntry> tempProducts = new ArrayList<>();
-        for (DataSnapshot e : dataSnapshot.getChildren()) {
-            Log.d("myLog", e.getKey());
-            HashMap<String, Object> value = (HashMap<String, Object>) e.getValue();
-            if(value == null)
-                continue;
-            HashMap<String, Object> product = (HashMap<String, Object>) (value.get(Constants.products));
-            if(product == null)
-                continue;
-            String name = getObjectAsString(
-                    product.getOrDefault(Constants.product_name, null)
-            );
-            String productImage = getObjectAsString(
-                    product.getOrDefault(Constants.product_image, null)
-            );
-            String description = getObjectAsString(
-                    product.getOrDefault(Constants.product_description, null)
-            );
-            double price = (double) product.get(Constants.product_price);
+    private void getCartEntriesWithUUID(String uuid, OnComplete<List<CartEntry>> onComplete) {
 
-            String store =  getObjectAsString(value.get(Constants.store_name));
-            int quantity = (int) value.get(Constants.quantity);
+        get(
+                root.child(Constants.customers).child(uuid).child(Constants.shopping_cart),
+                cartSnapshot -> get(
+                        root.child(Constants.products),
+                        productSnapshot -> loadCart(cartSnapshot, productSnapshot, onComplete)
+                )
+        );
 
-
-            tempProducts.add(new CartEntry(new StoreProduct(name, description, productImage, price), store, quantity));
-        }
-        Log.d("myLog", "storeList: " + tempProducts.size());
-        products = new ArrayList<>(tempProducts);
-        return tempProducts;
     }
+    private void loadCart(DataSnapshot cartSnapshot, DataSnapshot productSnapshot, OnComplete<List<CartEntry>> onComplete) {
+        ArrayList<CartEntry> entries = new ArrayList<>();
+        ArrayList<String[]> toFetch = new ArrayList<>();
+        for (DataSnapshot item: cartSnapshot.getChildren()){
+            String storeUUID = item.child(Constants.store_uuid).getValue(String.class);
+            String productUUID = item.child(Constants.product_uuid).getValue(String.class);
+            String quantity = item.child(Constants.quantity).getValue(String.class);
+            toFetch.add(new String[]{storeUUID, productUUID, quantity});
+            entries.add(new CartEntry());
+        }
 
-    @Override
-    public void placeOrder(List<CartEntry> products, User user) {
+        for (DataSnapshot item: productSnapshot.getChildren()) {
+            String[] matchingIdSet = new String[0];
+            String storeUUID = item.getKey();
+            boolean hasItem = false;
+            for (String[] idSet: toFetch) {
+                if(idSet[0].equals(storeUUID)){
+                    hasItem = true;
+                    break;
+                }
+            }
+            if(!hasItem)
+                continue;
 
+            DataSnapshot values = item.child(Constants.product_uuid);
+            String productUUID = values.getKey();
+            hasItem = false;
+            for (String[] idSet: toFetch) {
+                if(idSet[0].equals(storeUUID) && idSet[1].equals(productUUID)){
+                    hasItem = true;
+                    matchingIdSet = idSet;
+                    break;
+                }
+            }
+            if(!hasItem)
+                continue;
+
+            String itemName = values.child(Constants.product_name).getValue(String.class);
+            String description = values.child(Constants.product_description).getValue(String.class);
+            String imageURL = values.child(Constants.product_image).getValue(String.class);
+            Double price = values.child(Constants.product_price).getValue(Double.class);
+            if(price == null)
+                continue;
+            StoreProduct product = new StoreProduct(itemName, description, imageURL, price);
+
+            String storeName = values.child(Constants.store_name).getValue(String.class);
+            StoreHeader storeHeader = new StoreHeader(storeName, storeUUID);
+            
+
+            CartEntry e = new CartEntry(product, storeHeader, Integer.parseInt(matchingIdSet[2]));
+            entries.add(e);
+        }
+
+        onComplete.onComplete(entries);
     }
 }

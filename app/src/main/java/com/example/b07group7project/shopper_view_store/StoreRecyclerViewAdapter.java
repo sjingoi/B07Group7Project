@@ -12,18 +12,18 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.R;
-import com.example.b07group7project.database_abstractions.Store;
 import com.example.b07group7project.database.ImageDownloader;
+import com.example.b07group7project.database_abstractions.StoreHeader;
 
 import java.util.ArrayList;
 
 
 public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecyclerViewAdapter.MyViewHolder>{
     Context context;
-    ArrayList<Store> items;
+    ArrayList<StoreHeader> items;
     StoreClickListener listener;
 
-    public StoreRecyclerViewAdapter(Context context, ArrayList<Store> items, StoreClickListener listener) {
+    public StoreRecyclerViewAdapter(Context context, ArrayList<StoreHeader> items, StoreClickListener listener) {
         this.context = context;
         this.items = items;
         this.listener = listener;
@@ -42,7 +42,7 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
     @Override
     public void onBindViewHolder(@NonNull StoreRecyclerViewAdapter.MyViewHolder holder, int position) {
         // Assign Value to Each Row as They Come On Screen
-        Store store = items.get(position);
+        StoreHeader store = items.get(position);
         holder.tvName.setText(store.getStoreName());
         ImageDownloader.setImageResource(holder.imageView, store.getImage());
 

@@ -1,27 +1,33 @@
 package com.example.b07group7project.shopping_cart;
+
 import android.view.View;
 
+import com.example.b07group7project.database_abstractions.StoreHeader;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 
 public class CartEntry {
 
     StoreProduct product;
-    String storeName;
+    StoreHeader store;
     int quantity;
 
     View.OnClickListener onClickListener;
 
-    public CartEntry(StoreProduct product, String store, int quantity) {
+    public CartEntry(StoreProduct product, StoreHeader store, int quantity) {
         this.product = product;
-        this.storeName = store;
+        this.store = store;
         this.quantity = quantity;
     }
 
-    public CartEntry(StoreProduct product, String store, int quantity, View.OnClickListener onClick) {
+    public CartEntry(StoreProduct product, StoreHeader store, int quantity, View.OnClickListener onClick) {
         this.product = product;
-        this.storeName = store;
+        this.store = store;
         this.quantity = quantity;
         this.onClickListener = onClick;
+    }
+
+    public CartEntry() {
+
     }
 
     public StoreProduct getProduct() {
@@ -32,12 +38,12 @@ public class CartEntry {
         this.product = product;
     }
 
-    public String getStoreName() {
-        return storeName;
+    public StoreHeader getStore() {
+        return store;
     }
 
-    public void setStoreName(String storeName) {
-        this.storeName = storeName;
+    public void setStore(StoreHeader store) {
+        this.store = store;
     }
 
     public int getQuantity() {
