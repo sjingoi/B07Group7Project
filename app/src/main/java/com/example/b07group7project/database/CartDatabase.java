@@ -75,7 +75,7 @@ public class CartDatabase extends Database implements GetCartEntries {
             Double price = values.child(Constants.product_price).getValue(Double.class);
             if(price == null)
                 continue;
-            StoreProduct product = new StoreProduct(itemName, description, imageURL, price);
+            StoreProduct product = new StoreProduct(itemName, productUUID, storeUUID, description, imageURL, price);
 
             String storeName = values.child(Constants.store_name).getValue(String.class);
             StoreHeader storeHeader = new StoreHeader(storeName, storeUUID);
