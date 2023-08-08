@@ -17,12 +17,7 @@ public abstract class Navigation extends AppCompatActivity {
 
     public abstract int getFragmentContainer();
 
-    public void replaceFragment(Fragment newFragment, boolean addToBackStack, String title) {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            //actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle(title);
-        }
+    public void replaceFragment(Fragment newFragment, boolean addToBackStack) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (addToBackStack) {
@@ -31,6 +26,15 @@ public abstract class Navigation extends AppCompatActivity {
         }
         fragmentTransaction.replace(getFragmentContainer(), newFragment);
         fragmentTransaction.commit();
+    }
+
+    public void replaceFragment(Fragment newFragment, boolean addToBackStack, String title) {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            //actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle(title);
+        }
+        replaceFragment(newFragment, addToBackStack);
     }
 
     protected void setUpToolbar() {
