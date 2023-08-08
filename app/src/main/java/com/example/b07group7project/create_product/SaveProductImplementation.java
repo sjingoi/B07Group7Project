@@ -1,11 +1,13 @@
 package com.example.b07group7project.create_product;
 
+import com.example.b07group7project.database.DataSetter;
+import com.example.b07group7project.database.Database;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.UUID;
 
-public class SaveProductImplementation implements SaveProduct {
+public class SaveProductImplementation extends Database implements SaveProduct {
 
     @Override
     public void saveProductToFirebase(String itemName, String itemDesc, String itemURL, String storeID, double itemPrice) {
@@ -17,9 +19,15 @@ public class SaveProductImplementation implements SaveProduct {
                 .child(storeID)
                 .child(itemID);
 
-        productsRef.child("name").setValue(itemName);
-        productsRef.child("description").setValue(itemDesc);
-        productsRef.child("image").setValue(itemURL);
-        productsRef.child("price").setValue(itemPrice);
+        // Use the put method to set the product information
+        putProductInfo(productsRef, itemName, itemDesc, itemURL, itemPrice);
+    }
+
+    private void putProductInfo(DatabaseReference productRef, String name, String description, String image, double price) {
+        // Use the put method with DataSetter to set each field's value
+        put(productRef.child("name"), snapshot -> name);
+        put(productRef.child("description"), snapshot -> description);
+        put(productRef.child("image"), snapshot -> image);
+        put(productRef.child("price"), snapshot -> price);
     }
 }
