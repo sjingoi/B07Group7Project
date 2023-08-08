@@ -44,7 +44,7 @@ public class CreateProductFragment extends Fragment {
         Bundle args = getArguments();
         if (args != null) {
             String storeID = args.getString("storeID", ""); // Retrieve the storeID from the bundle
-            // Now you can use the storeID as needed
+            // Now you can use the storeID as needed, remember to link through StoreOwnerViewProducts fragment
         }
 
         EditText itemNameEditText = rootView.findViewById(R.id.edit_text_item_name);
