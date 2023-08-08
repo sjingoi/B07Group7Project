@@ -7,5 +7,5 @@ import java.util.ArrayList;
 
 public interface GetProductsInterface {
 
-    void getProducts(String storeUUID, OnComplete<ArrayList<StoreProduct>> withProductList);
+    void getProducts(String storeID, OnComplete<ArrayList<StoreProduct>> withProductList);
 }

@@ -13,12 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.b07group7project.R;
 import com.example.b07group7project.database.StoreProductDatabase;
 import com.example.b07group7project.database_abstractions.StoreProduct;
+import com.example.b07group7project.itempreview.ItemPreviewFragment;
+import com.example.b07group7project.nav.Navigation;
 
 
 import java.util.ArrayList;
 
 public class ViewProductFragment extends Fragment implements ProductClickListener{
-    String storeUUID;
+
     public ViewProductFragment() {
         // Required Empty Constructor
     }
@@ -40,11 +42,19 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.view_product_fragment, container, false);
 
-        GetProductsInterface productInterface = new StoreProductDatabase();
-        productInterface.getProducts(
-                storeUUID,
-                products -> onReceivedProducts(products, view)
-        );
+        String storeUUID = "";
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            storeUUID = bundle.getString("storeID");
+        } else {
+            Toast.makeText(getContext(), "BUNDLE NULL", Toast.LENGTH_SHORT).show();
+        }
+
+
+        // TODO: Replace GetProductImplementation with Database Stuff
+        GetProductsInterface productInterface = new GetProductsImplementation();
+        productInterface.getProducts(storeUUID, products -> onReceivedProducts(products, view));
 
         return view;
     }
@@ -61,7 +71,14 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
     then update code in here */
     @Override
     public void onProductClicked(StoreProduct product) {
-        Toast.makeText(requireContext(), product.getItemName(), Toast.LENGTH_SHORT).show();
+        if (requireActivity() instanceof Navigation) {
+            Navigation nav = (Navigation) requireActivity();
+            Bundle bundle = new Bundle();
+            bundle.putString("itemID", product.getProductID());
+            bundle.putString("storeID", product.getStoreID());
+            nav.replaceFragment(ItemPreviewFragment.newInstance(), true, bundle);
+        }
+        //Toast.makeText(requireContext(), product.getItemName(), Toast.LENGTH_SHORT).show();
     }
 
 }
