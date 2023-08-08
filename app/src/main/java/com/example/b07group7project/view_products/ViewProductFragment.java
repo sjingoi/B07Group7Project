@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.R;
 import com.example.b07group7project.database_abstractions.StoreProduct;
+import com.example.b07group7project.itempreview.ItemPreviewFragment;
+import com.example.b07group7project.nav.Navigation;
 
 
 import java.util.ArrayList;
@@ -39,11 +41,19 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.view_product_fragment, container, false);
 
+        String storeUUID = "";
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            storeUUID = bundle.getString("storeID");
+        } else {
+            Toast.makeText(getContext(), "BUNDLE NULL", Toast.LENGTH_SHORT).show();
+        }
+
+
         // TODO: Replace GetProductImplementation with Database Stuff
         GetProductsInterface productInterface = new GetProductsImplementation();
-        productInterface.getProducts(
-                products -> onReceivedStores(products, view)
-        );
+        productInterface.getProducts(storeUUID, products -> onReceivedStores(products, view));
 
         return view;
     }
@@ -60,7 +70,14 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
     then update code in here */
     @Override
     public void onProductClicked(StoreProduct product) {
-        Toast.makeText(requireContext(), product.getItemName(), Toast.LENGTH_SHORT).show();
+        if (requireActivity() instanceof Navigation) {
+            Navigation nav = (Navigation) requireActivity();
+            Bundle bundle = new Bundle();
+            bundle.putString("itemID", product.getProductID());
+            bundle.putString("storeID", product.getStoreID());
+            nav.replaceFragment(ItemPreviewFragment.newInstance(), true, bundle);
+        }
+        //Toast.makeText(requireContext(), product.getItemName(), Toast.LENGTH_SHORT).show();
     }
 
 }

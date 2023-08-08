@@ -35,11 +35,11 @@ public class StoreOwnerNavigationActivity extends Navigation {
             int itemId = item.getItemId();
 
             if (itemId == R.id.homeNav) {
-                replaceFragment(homeFragment);
+                replaceFragment(homeFragment, false);
             } else if (itemId == R.id.cartNav) {
-                replaceFragment(cartFragment);
+                replaceFragment(cartFragment, false);
             } else if (itemId == R.id.accountNav) {
-                replaceFragment(accountFragment);
+                replaceFragment(accountFragment, false);
             }
 
             return true;
