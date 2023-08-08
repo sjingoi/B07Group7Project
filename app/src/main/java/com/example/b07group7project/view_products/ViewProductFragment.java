@@ -72,9 +72,12 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
     public void onProductClicked(StoreProduct product) {
         if (requireActivity() instanceof Navigation) {
             Navigation nav = (Navigation) requireActivity();
-            nav.replaceFragment(ItemPreviewFragment.newInstance(product), true);
+            Bundle bundle = new Bundle();
+            bundle.putString("itemID", product.getProductID());
+            bundle.putString("storeID", product.getStoreID());
+            nav.replaceFragment(ItemPreviewFragment.newInstance(), true, bundle);
         }
-        Toast.makeText(requireContext(), product.getItemName(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(requireContext(), product.getItemName(), Toast.LENGTH_SHORT).show();
     }
 
 }

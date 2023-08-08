@@ -1,7 +1,6 @@
 package com.example.b07group7project.itempreview;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +12,7 @@ import android.widget.TextView;
 
 import com.example.b07group7project.R;
 import com.example.b07group7project.database.ImageDownloader;
-import com.example.b07group7project.database.OnComplete;
 import com.example.b07group7project.database_abstractions.StoreProduct;
-import com.example.b07group7project.shopping_cart.ShoppingCart;
 
 public class ItemPreviewFragment extends Fragment {
     private TextView cartItemQtyTextView;
@@ -26,10 +23,9 @@ public class ItemPreviewFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static ItemPreviewFragment newInstance(StoreProduct product) {
+    public static ItemPreviewFragment newInstance() {
         ItemPreviewFragment fragment = new ItemPreviewFragment();
         Bundle args = new Bundle();
-        args.putSerializable("product", product);
         fragment.setArguments(args);
         return fragment;
     }
