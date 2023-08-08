@@ -1,34 +1,35 @@
 package com.example.b07group7project.database;
-
-import com.example.b07group7project.create_product.SaveProduct;
-import com.example.b07group7project.database.DataSetter;
-import com.example.b07group7project.database.Database;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class SaveProductImplementation extends Database implements SaveProduct {
 
+    private DatabaseReference productsRef;
+
     @Override
     public void saveProductToFirebase(String itemName, String itemDesc, String itemURL, String storeID, double itemPrice) {
-        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
         String itemID = UUID.randomUUID().toString(); // Generate a unique key for the product
 
         // Save the product information to the Products node
-        DatabaseReference productsRef = databaseRef.child("Products")
+        productsRef = root.child("Products")
                 .child(storeID)
                 .child(itemID);
 
+        // Create a HashMap to store the product information
+        Map<String, Object> productInfo = new HashMap<>();
+        productInfo.put("name", itemName);
+        productInfo.put("description", itemDesc);
+        productInfo.put("image", itemURL);
+        productInfo.put("price", itemPrice);
+
         // Use the put method to set the product information
-        putProductInfo(productsRef, itemName, itemDesc, itemURL, itemPrice);
+        putProductInfo(productInfo);
     }
 
-    private void putProductInfo(DatabaseReference productRef, String name, String description, String image, double price) {
-        // Use the put method with DataSetter to set each field's value
-        put(productRef.child("name"), snapshot -> name);
-        put(productRef.child("description"), snapshot -> description);
-        put(productRef.child("image"), snapshot -> image);
-        put(productRef.child("price"), snapshot -> price);
+    private void putProductInfo(Map<String, Object> productInfo) {
+        // Use the put method with DataSetter to set the entire product information
+        put(productsRef, snapshot -> productInfo);
     }
 }
