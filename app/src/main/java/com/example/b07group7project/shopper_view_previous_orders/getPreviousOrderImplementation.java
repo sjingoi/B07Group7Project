@@ -8,11 +8,6 @@ import java.util.Arrays;
 public class getPreviousOrderImplementation implements getPreviousOrdersInterface{
     @Override
     public void getPreviousOrders(OnComplete<ArrayList<PreviousOrder>> onComplete) {
-        //ArrayList<PreviousOrder> previousOrders = new ArrayList<>();
-        //PreviousOrder previousOrder1 = new PreviousOrder("isaiah", "Order Complete");
-        //PreviousOrder previousOrder2 = new PreviousOrder("sebastian", "Order Incomplete");
-        //previousOrders.add(previousOrder1);
-        //previousOrders.add(previousOrder2);
         PreviousOrder[] previousOrders = {
                 new PreviousOrder("isaiah", OrderStatus.ORDER_COMPLETE),
                 new PreviousOrder("sebastian", OrderStatus.ORDER_INCOMPLETE)
@@ -20,17 +15,6 @@ public class getPreviousOrderImplementation implements getPreviousOrdersInterfac
         onComplete.onComplete(new ArrayList<>(Arrays.asList(previousOrders)));
     }
 
-    /*
-    @Override
-    public ArrayList<PreviousOrder> getPreviousOrders() {
-        ArrayList<PreviousOrder> previousOrders = new ArrayList<>();
-        PreviousOrder previousOrder1 = new PreviousOrder("isaiah", "Order Complete");
-        PreviousOrder previousOrder2 = new PreviousOrder("sebastian", "Order Incomplete");
-        previousOrders.add(previousOrder1);
-        previousOrders.add(previousOrder2);
-        return previousOrders;
-    }
 
-     */
 
 }
