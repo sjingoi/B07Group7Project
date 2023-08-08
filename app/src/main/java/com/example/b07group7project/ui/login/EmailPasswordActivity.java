@@ -38,12 +38,13 @@ public class EmailPasswordActivity extends Navigation {
     public void moveToShopperLandingPage(){
         Intent intent = new Intent(this, ShopperNavigationActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void moveToStoreOwnerLandingPage(){
         Intent intent = new Intent(this, StoreOwnerNavigationActivity.class);
         startActivity(intent);
-        //Toast.makeText(this, "Login Succeeded - store owner", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @Override
