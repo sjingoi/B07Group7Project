@@ -37,9 +37,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
         // Handle the "Confirm" button click event here.
         holder.confirmButton.setOnClickListener(v -> {
-            // Implement the order confirmation logic here.
-            // Call the confirmOrder() method of your OrderRepository to confirm the order.
-            // For now, we'll assume the confirmation is successful and update the order status locally.
+            // Implement the order confirmation logic here, Call the confirmOrder() method of  OrderRepository to confirm the order.
+            // For now, assume the confirmation is successful and update the order status locally.
             order.order_complete = "true";
             notifyDataSetChanged();
         });

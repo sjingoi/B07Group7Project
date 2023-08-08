@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.example.b07group7project.ExampleFragment;
 import com.example.b07group7project.R;
+import com.example.b07group7project.StoreOwnerOrdersFragment;
 import com.example.b07group7project.databinding.ActivityStoreOwnerNavigationBinding;
 
 public class StoreOwnerNavigationActivity extends Navigation {
@@ -15,6 +16,7 @@ public class StoreOwnerNavigationActivity extends Navigation {
     Fragment homeFragment;
     Fragment cartFragment;
     Fragment accountFragment;
+    Fragment storeOwnerOrdersFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,8 @@ public class StoreOwnerNavigationActivity extends Navigation {
         homeFragment = ExampleFragment.newInstance();    // CHANGE THIS
         cartFragment = ExampleFragment.newInstance();    // CHANGE THIS
         accountFragment = ExampleFragment.newInstance(); // CHANGE THIS
+        storeOwnerOrdersFragment = StoreOwnerOrdersFragment.newInstance(); // Instantiate your StoreOwnerOrdersFragment
+
 
         replaceFragment(homeFragment);
 
@@ -36,13 +40,15 @@ public class StoreOwnerNavigationActivity extends Navigation {
             if (itemId == R.id.homeNav) {
                 replaceFragment(homeFragment);
             } else if (itemId == R.id.cartNav) {
-                replaceFragment(cartFragment);
+                replaceFragment(storeOwnerOrdersFragment); // Replace with StoreOwnerOrdersFragment
             } else if (itemId == R.id.accountNav) {
                 replaceFragment(accountFragment);
             }
 
             return true;
         });
+
+
     }
 
     @Override

@@ -29,6 +29,17 @@ public class StoreOwnerOrdersFragment extends Fragment {
     private List<Order> pendingOrdersList = new ArrayList<>();
     private OrderAdapter orderAdapter;
 
+    public StoreOwnerOrdersFragment() {
+
+    }
+
+    public static StoreOwnerOrdersFragment newInstance() {
+        StoreOwnerOrdersFragment fragment = new StoreOwnerOrdersFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,18 +49,18 @@ public class StoreOwnerOrdersFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        // Initialize the order adapter with an empty list initially
+        // Initialize order adapter with  empty list initially
         orderAdapter = new OrderAdapter(pendingOrdersList);
         recyclerView.setAdapter(orderAdapter);
 
-        // Fetch pending orders for the current store owner using the DummyOrder
+        // Fetch pending orders for  current store owner using  DummyOrder
         fetchPendingOrdersForStoreOwner();
 
         return rootView;
     }
 
     private void fetchPendingOrdersForStoreOwner() {
-        // Use the DummyOrder to get pending orders for the current store owner
+        // Use  DummyOrder to pending orders for the current store owner
         DummyOrder dummyOrderRepository = new DummyOrder();
 
         // assume the store owner has the ID "store_owner_id" (can replace this with the actual store owner ID)
@@ -57,7 +68,7 @@ public class StoreOwnerOrdersFragment extends Fragment {
             @Override
             public void onPendingOrdersLoaded(List<Order> orders) {
                 // Orders loaded successfully, update the UI with the orders
-                onPendingOrdersLoaded(orders);
+                updateUIWithOrders(orders);
             }
 
             @Override
@@ -72,7 +83,7 @@ public class StoreOwnerOrdersFragment extends Fragment {
         });
     }
 
-    private void onPendingOrdersLoaded(List<Order> orders) {
+    private void updateUIWithOrders(List<Order> orders) {
         pendingOrdersList.clear();
         pendingOrdersList.addAll(orders);
         orderAdapter.notifyDataSetChanged();

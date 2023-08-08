@@ -17,7 +17,7 @@ public class DummyOrder implements OrderInterface {
         List<Order> dummyOrders = new ArrayList<>();
 
         // Assume  list of orders for the store owner with the given ID
-        // For testing, add two dummy orders.
+        // For testing, adding two dummy orders.
 
         // Dummy Order 1
         HashMap<Product, Integer> products1 = new HashMap<>();
