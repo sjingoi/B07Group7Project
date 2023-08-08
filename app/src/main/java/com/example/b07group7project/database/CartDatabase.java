@@ -1,18 +1,16 @@
 package com.example.b07group7project.database;
 
+import com.example.b07group7project.database_abstractions.StoreHeader;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 import com.example.b07group7project.shopping_cart.CartEntry;
 import com.example.b07group7project.shopping_cart.GetCartEntries;
-import com.example.b07group7project.database_abstractions.StoreHeader;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class CartDatabase extends Database implements GetCartEntries {
 
-    static List<CartEntry> cart;
     @Override
     public void getCartEntries(OnComplete<List<CartEntry>> onComplete) {
         AccountDatabase db = new AccountDatabase();
@@ -24,26 +22,53 @@ public class CartDatabase extends Database implements GetCartEntries {
     }
 
     private void getCartEntriesWithUUID(String uuid, OnComplete<List<CartEntry>> onComplete) {
-        if(cart != null){
-            onComplete.onComplete(new ArrayList<>(cart));
-            return;
-        }
 
-        getWithCache(
+        get(
                 root.child(Constants.customers).child(uuid).child(Constants.shopping_cart),
-                onComplete,
-                this::loadCart
+                cartSnapshot -> get(
+                        root.child(Constants.products),
+                        productSnapshot -> loadCart(cartSnapshot, productSnapshot, onComplete)
+                )
         );
 
     }
-    //TODO: (Optional) should we remove invalid entries automatically?
-    private List<CartEntry> loadCart(DataSnapshot dataSnapshot) {
+    private void loadCart(DataSnapshot cartSnapshot, DataSnapshot productSnapshot, OnComplete<List<CartEntry>> onComplete) {
         ArrayList<CartEntry> entries = new ArrayList<>();
-        for (DataSnapshot item: dataSnapshot.getChildren()) {
-            String[] UUIDs = Objects.requireNonNull(item.getKey()).split("\\s+");
-            DataSnapshot values = item.getValue(DataSnapshot.class);
-            if(values == null)
+        ArrayList<String[]> toFetch = new ArrayList<>();
+        for (DataSnapshot item: cartSnapshot.getChildren()){
+            String storeUUID = item.child(Constants.store_uuid).getValue(String.class);
+            String productUUID = item.child(Constants.product_uuid).getValue(String.class);
+            String quantity = item.child(Constants.quantity).getValue(String.class);
+            toFetch.add(new String[]{storeUUID, productUUID, quantity});
+            entries.add(new CartEntry());
+        }
+
+        for (DataSnapshot item: productSnapshot.getChildren()) {
+            String[] matchingIdSet = new String[0];
+            String storeUUID = item.getKey();
+            boolean hasItem = false;
+            for (String[] idSet: toFetch) {
+                if(idSet[0].equals(storeUUID)){
+                    hasItem = true;
+                    break;
+                }
+            }
+            if(!hasItem)
                 continue;
+
+            DataSnapshot values = item.child(Constants.product_uuid);
+            String productUUID = values.getKey();
+            hasItem = false;
+            for (String[] idSet: toFetch) {
+                if(idSet[0].equals(storeUUID) && idSet[1].equals(productUUID)){
+                    hasItem = true;
+                    matchingIdSet = idSet;
+                    break;
+                }
+            }
+            if(!hasItem)
+                continue;
+
             String itemName = values.child(Constants.product_name).getValue(String.class);
             String description = values.child(Constants.product_description).getValue(String.class);
             String imageURL = values.child(Constants.product_image).getValue(String.class);
@@ -51,19 +76,15 @@ public class CartDatabase extends Database implements GetCartEntries {
             if(price == null)
                 continue;
             StoreProduct product = new StoreProduct(itemName, description, imageURL, price);
-            product.setUUID(UUIDs[1]);
 
             String storeName = values.child(Constants.store_name).getValue(String.class);
-            StoreHeader storeHeader = new StoreHeader(storeName, UUIDs[0]);
+            StoreHeader storeHeader = new StoreHeader(storeName, storeUUID);
+            
 
-            Integer quantity = values.child(Constants.quantity).getValue(Integer.class);
-            if(quantity == null)
-                continue;
-
-            CartEntry e = new CartEntry(product, storeHeader, quantity);
+            CartEntry e = new CartEntry(product, storeHeader, Integer.parseInt(matchingIdSet[2]));
             entries.add(e);
         }
-        cart = entries;
-        return entries;
+
+        onComplete.onComplete(entries);
     }
 }

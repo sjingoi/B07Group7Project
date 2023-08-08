@@ -26,6 +26,10 @@ public class CartEntry {
         this.onClickListener = onClick;
     }
 
+    public CartEntry() {
+
+    }
+
     public StoreProduct getProduct() {
         return product;
     }
