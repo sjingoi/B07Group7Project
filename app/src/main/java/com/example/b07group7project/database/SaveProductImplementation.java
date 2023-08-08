@@ -15,7 +15,7 @@ public class SaveProductImplementation extends Database implements SaveProduct {
         String itemID = UUID.randomUUID().toString(); // Generate a unique key for the product
 
         // Save the product information to the Products node
-        productsRef = root.child("Products")
+        productsRef = root.child(Constants.products)
                 .child(storeID)
                 .child(itemID);
 
