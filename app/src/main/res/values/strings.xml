@@ -48,4 +48,9 @@
     <string name="total">TOTAL: $</string>
 
 
+
+    <!--Strings related to Shopper View Previous Orders -->
+    <string name="previous_order">Previous Order</string>
+    <string name="order_status">Order Status</string>
+
 </resources>
