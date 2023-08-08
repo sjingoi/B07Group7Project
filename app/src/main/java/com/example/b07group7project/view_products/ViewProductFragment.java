@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.R;
 import com.example.b07group7project.database_abstractions.StoreProduct;
+import com.example.b07group7project.itempreview.ItemPreviewFragment;
+import com.example.b07group7project.nav.Navigation;
 
 
 import java.util.ArrayList;
@@ -68,6 +70,10 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
     then update code in here */
     @Override
     public void onProductClicked(StoreProduct product) {
+        if (requireActivity() instanceof Navigation) {
+            Navigation nav = (Navigation) requireActivity();
+            nav.replaceFragment(ItemPreviewFragment.newInstance(product), true);
+        }
         Toast.makeText(requireContext(), product.getItemName(), Toast.LENGTH_SHORT).show();
     }
 

@@ -8,9 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.b07group7project.R;
+import com.example.b07group7project.database.ImageDownloader;
 import com.example.b07group7project.database.OnComplete;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 import com.example.b07group7project.shopping_cart.ShoppingCart;
@@ -24,9 +26,10 @@ public class ItemPreviewFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static ItemPreviewFragment newInstance() {
+    public static ItemPreviewFragment newInstance(StoreProduct product) {
         ItemPreviewFragment fragment = new ItemPreviewFragment();
         Bundle args = new Bundle();
+        args.putSerializable("product", product);
         fragment.setArguments(args);
         return fragment;
     }
@@ -54,18 +57,26 @@ public class ItemPreviewFragment extends Fragment {
         TextView textViewItemName = view.findViewById(R.id.itemName);
         TextView textViewItemPrice = view.findViewById(R.id.itemPrice);
         TextView textViewItemDesc = view.findViewById(R.id.itemDesc);
+        ImageView itemImageView = view.findViewById(R.id.itemImage);
 
         Button addToCartButton = view.findViewById(R.id.button2);
         ImageButton incrementButton = view.findViewById(R.id.button3);
         ImageButton decrementButton = view.findViewById(R.id.button4);
 
-        // Get the item information using the GetItemInfo interface
-        GetItemInfo getItemInfo = new GetItemInfoImplementation();
-        getItemInfo.getItemInformation(storeProduct -> {
-            // Set the currentItem with the retrieved StoreProduct
-            currentItem = storeProduct;
-            updateUIWithItemInfo();
-        });
+        // Get the item information passed through bundle
+
+       if (getArguments() != null) {
+            currentItem = (StoreProduct) getArguments().getSerializable("product");
+        }
+
+            if (currentItem != null) {
+                textViewItemName.setText(currentItem.getItemName());
+                textViewItemPrice.setText("$" + currentItem.getPrice());
+                textViewItemDesc.setText(currentItem.getDescription());
+                ImageDownloader.setImageResource(itemImageView, currentItem.getImageURL());
+                cartItemQtyTextView.setText(String.valueOf(cartItemQty));
+            }
+
 
         // Set OnClickListener for the increment button
         incrementButton.setOnClickListener(v -> {
@@ -93,19 +104,4 @@ public class ItemPreviewFragment extends Fragment {
         return view;
     }
 
-    private void updateUIWithItemInfo() {
-        View rootView = getView();
-        if (rootView != null) {
-            TextView textViewItemName = rootView.findViewById(R.id.itemName);
-            TextView textViewItemPrice = rootView.findViewById(R.id.itemPrice);
-            TextView textViewItemDesc = rootView.findViewById(R.id.itemDesc);
-
-            if (currentItem != null) {
-                textViewItemName.setText(currentItem.getItemName());
-                textViewItemPrice.setText("$" + currentItem.getPrice());
-                textViewItemDesc.setText(currentItem.getDescription());
-                cartItemQtyTextView.setText(String.valueOf(cartItemQty));
-            }
-        }
-    }
 }

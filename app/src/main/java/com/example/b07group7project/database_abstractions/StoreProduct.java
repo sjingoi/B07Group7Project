@@ -1,6 +1,8 @@
 package com.example.b07group7project.database_abstractions;
 
-public class StoreProduct {
+import java.io.Serializable;
+
+public class StoreProduct implements Serializable {
     String itemName;
     String description;
     String imageURL;
