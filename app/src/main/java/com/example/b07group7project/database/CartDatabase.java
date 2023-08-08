@@ -3,7 +3,7 @@ package com.example.b07group7project.database;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 import com.example.b07group7project.shopping_cart.CartEntry;
 import com.example.b07group7project.shopping_cart.GetCartEntries;
-import com.example.b07group7project.shopping_cart.StoreHeader;
+import com.example.b07group7project.database_abstractions.StoreHeader;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;

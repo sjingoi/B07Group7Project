@@ -3,7 +3,7 @@ package com.example.b07group7project.create_order;
 import com.example.b07group7project.database.OnComplete;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 import com.example.b07group7project.shopping_cart.CartEntry;
-import com.example.b07group7project.shopping_cart.StoreHeader;
+import com.example.b07group7project.database_abstractions.StoreHeader;
 
 import java.util.ArrayList;
 import java.util.Arrays;
