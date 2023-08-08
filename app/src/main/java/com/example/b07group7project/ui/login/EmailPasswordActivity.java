@@ -60,6 +60,6 @@ public class EmailPasswordActivity extends Navigation {
         if(type == UserType.SHOPPER)
             moveToShopperLandingPage();
         else
-            moveToStoreOwnerLandingPage();
+            moveToShopperLandingPage();
     }
 }
