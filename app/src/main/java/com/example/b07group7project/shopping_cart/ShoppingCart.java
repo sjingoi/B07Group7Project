@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.b07group7project.R;
+import com.example.b07group7project.database.CartDatabase;
 
 import java.util.List;
 public class ShoppingCart extends Fragment {
@@ -41,7 +42,7 @@ public class ShoppingCart extends Fragment {
 
         RecyclerView recyclerView = shoppingCartLayout.findViewById(R.id.cartItemList);
 
-        (new GetCartEntriesImplementation()).getCartEntries(cartEntries -> onData(recyclerView, cartEntries));
+        (new CartDatabase()).getCartEntries(cartEntries -> onData(recyclerView, cartEntries));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 

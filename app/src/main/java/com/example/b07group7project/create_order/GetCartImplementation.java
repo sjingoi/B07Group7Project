@@ -1,9 +1,9 @@
 package com.example.b07group7project.create_order;
 
 import com.example.b07group7project.database.OnComplete;
-import com.example.b07group7project.database_abstractions.Store;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 import com.example.b07group7project.shopping_cart.CartEntry;
+import com.example.b07group7project.shopping_cart.StoreHeader;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,7 +33,7 @@ public class GetCartImplementation implements GetCartInterface{
                 new StoreProduct("Shorts", "DESC", "URL",10.99),
             };
 
-        Store store = new Store("A", "URL");
+        StoreHeader store = new StoreHeader("A", "UUID");
         CartEntry[] prods = new CartEntry[15];
 
         for (int i = 0; i < prods.length; i++){

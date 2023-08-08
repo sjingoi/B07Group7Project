@@ -4,6 +4,7 @@ public class StoreProduct {
     String itemName;
     String description;
     String imageURL;
+    String uuid;
     double price;
 
     public StoreProduct(String itemName, String description, String imageURL, double price) {
@@ -37,10 +38,14 @@ public class StoreProduct {
         this.description = description;
     }
 
-//    public void setImageURL(String imageURL) {
-//        this.imageURL = imageURL;
-//    }
-//
+    public void setUUID(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public String getUUID(String uuid){
+        return uuid;
+    }
+
     public void setPrice(double price) {
         this.price = price;
     }
