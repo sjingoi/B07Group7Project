@@ -15,7 +15,7 @@ class Database {
     FirebaseDatabase database;
     DatabaseReference root;
 
-    public Database(){
+    Database(){
         database = FirebaseDatabase.getInstance();
         root = database.getReference();
     }
