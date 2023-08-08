@@ -1,5 +1,10 @@
 package com.example.b07group7project.nav;
 
+import android.view.MenuItem;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -12,7 +17,12 @@ public abstract class Navigation extends AppCompatActivity {
 
     public abstract int getFragmentContainer();
 
-    public void replaceFragment(Fragment newFragment, boolean addToBackStack) {
+    public void replaceFragment(Fragment newFragment, boolean addToBackStack, String title) {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            //actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle(title);
+        }
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (addToBackStack) {
@@ -23,7 +33,29 @@ public abstract class Navigation extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    public void replaceFragment(Fragment newFragment) {
-        replaceFragment(newFragment, false);
+    protected void setUpToolbar() {
+        Toolbar toolbar = getToolbar();
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle("Mall App");
+        }
     }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public abstract Toolbar getToolbar();
+
+//
+//    public void replaceFragment(Fragment newFragment) {
+//        replaceFragment(newFragment, false);
+//    }
 }

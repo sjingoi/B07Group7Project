@@ -2,6 +2,12 @@ package com.example.b07group7project.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.b07group7project.nav.Navigation;
 import com.example.b07group7project.R;
 import com.example.b07group7project.nav.ShopperNavigationActivity;
@@ -11,7 +17,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class EmailPasswordActivity extends Navigation {
+public class EmailPasswordActivity extends AppCompatActivity {
     private LoginModel loginModel;
 
     @Override
@@ -44,7 +50,13 @@ public class EmailPasswordActivity extends Navigation {
         //Toast.makeText(this, "Login Succeeded - store owner", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
+    public void replaceFragment(Fragment newFragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(getFragmentContainer(), newFragment);
+        fragmentTransaction.commit();
+    }
+
     public int getFragmentContainer() {
         return R.id.fragmentContainerView;
     }

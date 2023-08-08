@@ -12,11 +12,12 @@ import com.example.b07group7project.nav.Navigation;
 import com.example.b07group7project.R;
 import com.example.b07group7project.database_abstractions.Store;
 import com.example.b07group7project.database.StoreDatabase;
+import com.example.b07group7project.nav.NavigationFragment;
 import com.example.b07group7project.view_products.ViewProductFragment;
 
 import java.util.ArrayList;
 
-public class ShopperViewStoreFragment extends Fragment implements StoreClickListener {
+public class ShopperViewStoreFragment extends NavigationFragment implements StoreClickListener {
 
 
     public ShopperViewStoreFragment() {
@@ -60,7 +61,7 @@ public class ShopperViewStoreFragment extends Fragment implements StoreClickList
     public void onStoreClicked(Store store) {
         if (requireActivity() instanceof Navigation) {
             Navigation nav = (Navigation) requireActivity();
-            nav.replaceFragment(ViewProductFragment.newInstance(), true); // TODO: Pass store data to the next fragment so it knows what to load (Seb will probably do this unless you want to then go ahead :) )
+            nav.replaceFragment(ViewProductFragment.newInstance(), true, "Products"); // TODO: Pass store data to the next fragment so it knows what to load (Seb will probably do this unless you want to then go ahead :) )
         }
 //        Toast.makeText(requireContext(), store.getStoreName(), Toast.LENGTH_SHORT).show();
     }

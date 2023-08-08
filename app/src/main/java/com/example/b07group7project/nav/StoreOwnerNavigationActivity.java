@@ -3,6 +3,7 @@ package com.example.b07group7project.nav;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.b07group7project.ExampleFragment;
 import com.example.b07group7project.R;
@@ -16,6 +17,9 @@ public class StoreOwnerNavigationActivity extends Navigation {
     Fragment cartFragment;
     Fragment accountFragment;
 
+    Toolbar toolbar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,22 +27,26 @@ public class StoreOwnerNavigationActivity extends Navigation {
         binding = ActivityStoreOwnerNavigationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        toolbar = findViewById(R.id.toolbar);
+
         homeFragment = ExampleFragment.newInstance();    // CHANGE THIS
         cartFragment = ExampleFragment.newInstance();    // CHANGE THIS
         accountFragment = ExampleFragment.newInstance(); // CHANGE THIS
 
-        replaceFragment(homeFragment);
+        replaceFragment(homeFragment, true, "Home");
+
+        setUpToolbar();
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 
             int itemId = item.getItemId();
 
             if (itemId == R.id.homeNav) {
-                replaceFragment(homeFragment);
+                replaceFragment(homeFragment, true, "Home");
             } else if (itemId == R.id.cartNav) {
-                replaceFragment(cartFragment);
+                replaceFragment(cartFragment, true, "Orders");
             } else if (itemId == R.id.accountNav) {
-                replaceFragment(accountFragment);
+                replaceFragment(accountFragment, true, "Store Account");
             }
 
             return true;
@@ -48,5 +56,11 @@ public class StoreOwnerNavigationActivity extends Navigation {
     @Override
     public int getFragmentContainer() {
         return R.id.frameLayout;
+    }
+
+
+    @Override
+    public Toolbar getToolbar() {
+        return toolbar;
     }
 }

@@ -9,7 +9,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.b07group7project.R;
 import com.example.b07group7project.databinding.FragmentResetPasswordBinding;
 
 public class ResetPasswordFragment extends Fragment implements ResetPasswordView {
@@ -41,6 +44,8 @@ public class ResetPasswordFragment extends Fragment implements ResetPasswordView
     public void replaceFragment(Fragment fragment) {
         ((EmailPasswordActivity) requireActivity()).replaceFragment(fragment);
     }
+
+
 
     public String getEmail() {
         return binding.editTextTextEmailAddress.getText().toString();

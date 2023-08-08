@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ExampleFragment extends Fragment {
+import com.example.b07group7project.nav.NavigationFragment;
+
+public class ExampleFragment extends NavigationFragment {
 
     public ExampleFragment() {
         // Required empty public constructor

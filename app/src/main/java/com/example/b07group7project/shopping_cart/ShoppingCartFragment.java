@@ -11,16 +11,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.b07group7project.R;
+import com.example.b07group7project.nav.NavigationFragment;
 
 import java.util.List;
-public class ShoppingCart extends Fragment {
+public class ShoppingCartFragment extends NavigationFragment {
 
-    public ShoppingCart() {
+    public ShoppingCartFragment() {
         // Required empty public constructor
     }
 
-    public static ShoppingCart newInstance() {
-        ShoppingCart fragment = new ShoppingCart();
+    public static ShoppingCartFragment newInstance() {
+        ShoppingCartFragment fragment = new ShoppingCartFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
