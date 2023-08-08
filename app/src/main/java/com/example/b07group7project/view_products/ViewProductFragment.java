@@ -40,17 +40,16 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.view_product_fragment, container, false);
 
-        // TODO: Replace GetProductImplementation with Database Stuff
         GetProductsInterface productInterface = new StoreProductDatabase();
         productInterface.getProducts(
                 storeUUID,
-                products -> onReceivedStores(products, view)
+                products -> onReceivedProducts(products, view)
         );
 
         return view;
     }
 
-    public void onReceivedStores(ArrayList<StoreProduct> products, View view){
+    public void onReceivedProducts(ArrayList<StoreProduct> products, View view){
         RecyclerView recyclerView = view.findViewById(R.id.ProductListRecyclerView);
         ViewProductAdapter adapter = new ViewProductAdapter(requireContext(), products, this);
         recyclerView.setAdapter(adapter);

@@ -14,7 +14,7 @@ public class StoreProductDatabase extends Database implements GetProductsInterfa
     @Override
     public void getProducts(String storeUUID, OnComplete<ArrayList<StoreProduct>> withProductList) {
         get(
-                root.child(Constants.products).child(Constants.store_uuid),
+                root.child(Constants.products).child(storeUUID),
                 snapshot -> {
                     ArrayList<StoreProduct> products = extractProductList(snapshot);
                     withProductList.onComplete(products);
@@ -27,9 +27,6 @@ public class StoreProductDatabase extends Database implements GetProductsInterfa
 
         for (DataSnapshot s: snapshot.getChildren()) {
             String uuid = s.getKey();
-            DataSnapshot child = s.getValue(DataSnapshot.class);
-            if(child == null)
-                continue;
 
             String description = s.child(Constants.product_description).getValue(String.class);
             String imageURL = s.child(Constants.product_image).getValue(String.class);
