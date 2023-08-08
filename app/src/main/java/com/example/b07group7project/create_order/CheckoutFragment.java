@@ -14,14 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.R;
-import com.example.b07group7project.nav.NavigationFragment;
 import com.example.b07group7project.shopping_cart.CartEntry;
 
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class CheckoutFragment extends NavigationFragment {
+public class CheckoutFragment extends Fragment {
 
     public static CheckoutFragment newInstance() {
         CheckoutFragment fragment = new CheckoutFragment();

@@ -2,15 +2,13 @@ package com.example.b07group7project;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.b07group7project.nav.NavigationFragment;
+import androidx.fragment.app.Fragment;
 
-public class ExampleFragment extends NavigationFragment {
+public class ExampleFragment extends Fragment {
 
     public ExampleFragment() {
         // Required empty public constructor

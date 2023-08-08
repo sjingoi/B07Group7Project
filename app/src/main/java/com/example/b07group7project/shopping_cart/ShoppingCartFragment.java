@@ -11,10 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.b07group7project.R;
-import com.example.b07group7project.nav.NavigationFragment;
 
 import java.util.List;
-public class ShoppingCartFragment extends NavigationFragment {
+public class ShoppingCartFragment extends Fragment {
 
     public ShoppingCartFragment() {
         // Required empty public constructor

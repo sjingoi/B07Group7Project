@@ -20,9 +20,9 @@ public class ShopperNavigationActivity extends Navigation {
 
     ShopperNavigationActivityBinding binding;
 
-    NavigationFragment homeFragment;
-    NavigationFragment cartFragment;
-    NavigationFragment accountFragment;
+    Fragment homeFragment;
+    Fragment cartFragment;
+    Fragment accountFragment;
 
     Toolbar toolbar;
 
