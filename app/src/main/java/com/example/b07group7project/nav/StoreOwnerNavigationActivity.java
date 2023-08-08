@@ -9,6 +9,7 @@ import com.example.b07group7project.R;
 import com.example.b07group7project.create_product.CreateProductFragment;
 import com.example.b07group7project.create_store.CreateStoreFragment;
 import com.example.b07group7project.databinding.ActivityStoreOwnerNavigationBinding;
+import com.example.b07group7project.store_owner_view_store.StoreOwnerViewProducts;
 
 public class StoreOwnerNavigationActivity extends Navigation {
 
@@ -25,9 +26,12 @@ public class StoreOwnerNavigationActivity extends Navigation {
         binding = ActivityStoreOwnerNavigationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        homeFragment = ExampleFragment.newInstance();    // CHANGE THIS
+
+
+        homeFragment = StoreOwnerViewProducts.newInstance();    // CHANGE THIS
         cartFragment = CreateProductFragment.newInstance();    // CHANGE THIS
         accountFragment = CreateStoreFragment.newInstance(); // CHANGE THIS
+
 
         replaceFragment(homeFragment);
 
@@ -36,11 +40,11 @@ public class StoreOwnerNavigationActivity extends Navigation {
             int itemId = item.getItemId();
 
             if (itemId == R.id.homeNav) {
-                replaceFragment(homeFragment);
+                replaceFragment(homeFragment, false);
             } else if (itemId == R.id.cartNav) {
-                replaceFragment(cartFragment);
+                replaceFragment(cartFragment, false);
             } else if (itemId == R.id.accountNav) {
-                replaceFragment(accountFragment);
+                replaceFragment(accountFragment, false);
             }
 
             return true;
