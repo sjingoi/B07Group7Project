@@ -14,7 +14,4 @@ public class getPreviousOrderImplementation implements getPreviousOrdersInterfac
         };
         onComplete.onComplete(new ArrayList<>(Arrays.asList(previousOrders)));
     }
-
-
-
 }
