@@ -104,10 +104,9 @@ public class AccountDatabase extends Database implements UserPermission {
                 .replace('\\', ';');
 
         get(
-                root.child(Constants.accounts).child(encodedEmail),
+                root.child(Constants.accounts).child(encodedEmail).child(Constants.user_type),
                 snapshot -> {
-                    String userUUID = snapshot.child(encodedEmail).child(Constants.user_type)
-                            .getValue(String.class);
+                    String userUUID = snapshot.getValue(String.class);
                     user.uuid = userUUID;
                     withUUID.onComplete(userUUID);
                 }
