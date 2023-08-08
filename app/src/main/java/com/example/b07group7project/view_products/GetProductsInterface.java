@@ -8,5 +8,5 @@ import java.util.ArrayList;
 // TODO: Implement Interface through the database
 public interface GetProductsInterface {
 
-    void getProducts(OnComplete<ArrayList<StoreProduct>> withProductList);
+    void getProducts(String storeID, OnComplete<ArrayList<StoreProduct>> withProductList);
 }

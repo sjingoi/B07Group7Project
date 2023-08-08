@@ -1,5 +1,6 @@
 package com.example.b07group7project.shopping_cart;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,12 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.b07group7project.R;
+import com.example.b07group7project.itempreview.ItemPreviewFragment;
+import com.example.b07group7project.nav.Navigation;
 import com.example.b07group7project.database.CartDatabase;
 
 import java.util.List;
-public class ShoppingCart extends Fragment {
+public class ShoppingCart extends Fragment implements EntryClickListener {
 
     public ShoppingCart() {
         // Required empty public constructor
@@ -50,6 +54,24 @@ public class ShoppingCart extends Fragment {
     }
 
     private void onData(RecyclerView recyclerView, List<CartEntry> cart) {
-        recyclerView.setAdapter(new CartAdapter(requireContext().getApplicationContext(), cart));
+        recyclerView.setAdapter(new CartAdapter(requireContext().getApplicationContext(), cart, this));
+    }
+
+    @Override
+    public void onEntryClick(CartEntry entry) {
+        Activity activity = requireActivity();
+        if (activity instanceof Navigation) {
+            Navigation nav = (Navigation) activity;
+            Bundle bundle = new Bundle();
+            bundle.putString("itemID", entry.getProduct().getProductID());
+            bundle.putString("storeID", entry.getStore());
+            nav.replaceFragment(ItemPreviewFragment.newInstance(), true, bundle);
+        }
+    }
+
+    @Override
+    public void onRemoveClick(CartEntry entry) {
+        //Delete Entry
+        Toast.makeText(requireContext(), "DELETE", Toast.LENGTH_SHORT).show();
     }
 }
