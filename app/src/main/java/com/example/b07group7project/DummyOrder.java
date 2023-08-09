@@ -39,6 +39,6 @@ public class DummyOrder implements OrderInterface {
     public void confirmOrder(Order order, OrderCallback callback) {
         //  update the status of the order to "Confirmed" in the database.
         // Since  dummy data, just assume the order is confirmed. do later
-        callback.onOrderConfirmationSuccess();
+        //callback.onOrderConfirmationSuccess();
     }
 }

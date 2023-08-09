@@ -71,15 +71,19 @@ public class StoreOwnerOrdersFragment extends Fragment {
                 updateUIWithOrders(orders);
             }
 
+            /*
             @Override
             public void onOrderConfirmationSuccess() {
                 // Order confirmation successful, handle the success case if needed doing later.
             }
+            */
 
-            @Override
+
+            /*@Override
             public void onOrderConfirmationFailure(String errorMessage) {
                 // Handle the error, e.g., display a message to the user. doing alter
             }
+             */
         });
     }
 

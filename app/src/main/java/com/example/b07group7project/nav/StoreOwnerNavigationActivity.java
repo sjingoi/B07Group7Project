@@ -10,6 +10,7 @@ import com.example.b07group7project.R;
 import com.example.b07group7project.create_product.CreateProductFragment;
 import com.example.b07group7project.create_store.CreateStoreFragment;
 import com.example.b07group7project.databinding.ActivityStoreOwnerNavigationBinding;
+import com.example.b07group7project.StoreOwnerOrdersFragment;
 import com.example.b07group7project.store_owner_view_store.StoreOwnerViewProducts;
 
 public class StoreOwnerNavigationActivity extends Navigation {
@@ -19,7 +20,7 @@ public class StoreOwnerNavigationActivity extends Navigation {
     Fragment homeFragment;
     Fragment cartFragment;
     Fragment accountFragment;
-
+    Fragment storeOwnerOrdersFragment;
     Toolbar toolbar;
 
 
@@ -38,7 +39,7 @@ public class StoreOwnerNavigationActivity extends Navigation {
         homeFragment = StoreOwnerViewProducts.newInstance();    // CHANGE THIS
         cartFragment = CreateProductFragment.newInstance();    // CHANGE THIS
         accountFragment = CreateStoreFragment.newInstance(); // CHANGE THIS
-
+        storeOwnerOrdersFragment = StoreOwnerOrdersFragment.newInstance();
 
         replaceFragment(homeFragment);
 
@@ -49,7 +50,7 @@ public class StoreOwnerNavigationActivity extends Navigation {
             if (itemId == R.id.homeNav) {
                 replaceFragment(homeFragment, false);
             } else if (itemId == R.id.cartNav) {
-                replaceFragment(cartFragment, false);
+                replaceFragment(storeOwnerOrdersFragment); // Replace with StoreOwnerOrdersFragment
             } else if (itemId == R.id.accountNav) {
                 replaceFragment(accountFragment, false);
             }
