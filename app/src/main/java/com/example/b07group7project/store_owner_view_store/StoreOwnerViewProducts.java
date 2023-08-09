@@ -5,12 +5,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.b07group7project.R;
 import com.example.b07group7project.create_product.CreateProductFragment;
 import com.example.b07group7project.database.StoreProductDatabase;
+import com.example.b07group7project.database_abstractions.StoreProduct;
+import com.example.b07group7project.itempreview.ItemPreviewFragment;
+import com.example.b07group7project.itempreview.OwnerItemPreviewFragment;
 import com.example.b07group7project.nav.Navigation;
 import com.example.b07group7project.view_products.GetProductsInterface;
 import com.example.b07group7project.view_products.ViewProductFragment;
@@ -61,6 +65,19 @@ public class StoreOwnerViewProducts extends ViewProductFragment {
         productInterface.getProducts(storeID, products -> onReceivedProducts(products, view));
 
         return view;
+    }
+
+
+    @Override
+    public void onProductClicked(StoreProduct product) {
+        if (requireActivity() instanceof Navigation) {
+            Navigation nav = (Navigation) requireActivity();
+            Bundle bundle = new Bundle();
+            bundle.putString("itemID", product.getProductID());
+            bundle.putString("storeID", product.getStoreID());
+            nav.replaceFragment(OwnerItemPreviewFragment.newInstance(), true, bundle);
+        }
+        //Toast.makeText(requireContext(), product.getItemName(), Toast.LENGTH_SHORT).show();
     }
 
 }
