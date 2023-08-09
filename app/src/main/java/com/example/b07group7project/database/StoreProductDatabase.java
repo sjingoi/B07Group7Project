@@ -7,6 +7,7 @@ import com.example.b07group7project.view_products.GetProductsInterface;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class StoreProductDatabase extends Database implements GetProductsInterface, GetProductInfo {
 
@@ -61,7 +62,7 @@ public class StoreProductDatabase extends Database implements GetProductsInterfa
         }
 
         get(
-                root.child("Product").child(storeUUID),
+                root.child(Constants.products).child(storeUUID),
                 snapshot -> {
                     StoreProduct Product = extractProduct(storeUUID, itemUUID, snapshot);
                     withProduct.onComplete(Product);
@@ -74,22 +75,24 @@ public class StoreProductDatabase extends Database implements GetProductsInterfa
         StoreProduct product = new StoreProduct();
         if(!snapshot.exists())
             return product;
-        for (DataSnapshot s: snapshot.getChildren()) {
-            String uuid = s.getKey();
-
-            String description = s.child(Constants.product_description).getValue(String.class);
-            String imageURL = s.child(Constants.product_image).getValue(String.class);
-            String name = s.child(Constants.product_name).getValue(String.class);
-            Double price = s.child(Constants.product_price).getValue(Double.class);
-            if(price == null)
-                continue;
-
-            if(uuid == itemUUID) {
-                product = new StoreProduct(name, uuid, storeUUID, description, imageURL, price);
-            }
+        DataSnapshot s = snapshot.child(itemUUID);
 
 
-        }
+        String uuid = s.getKey();
+
+
+        String description = s.child(Constants.product_description).getValue(String.class);
+        String imageURL = s.child(Constants.product_image).getValue(String.class);
+        String name = s.child(Constants.product_name).getValue(String.class);
+        Double price = s.child(Constants.product_price).getValue(Double.class);
+
+        product = new StoreProduct(name, uuid, storeUUID, description, imageURL, price);
+
+
+
+
+
+
 
         return product;
     }
