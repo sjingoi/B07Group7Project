@@ -27,7 +27,7 @@ public class CartListenerImplementation extends Database implements CartListener
 
     @Override
     public void addToCart(String store_uuid, String customer_uuid, String itemID, int quantity) {
-        String cartEntry = store_uuid + ", " + itemID;
+        String cartEntry = store_uuid + ":" + itemID;
 
         // Customer cart information to Customers node
         cartRef = root.child(Constants.customers)
