@@ -10,6 +10,7 @@ import com.example.b07group7project.shopping_cart.GetCartEntries;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CartDatabase extends Database implements GetCartEntries, PlaceOrderInterface {
 
