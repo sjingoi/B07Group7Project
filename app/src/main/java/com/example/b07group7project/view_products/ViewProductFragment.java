@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.R;
+import com.example.b07group7project.database.StoreProductDatabase;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 import com.example.b07group7project.itempreview.ItemPreviewFragment;
 import com.example.b07group7project.nav.Navigation;
@@ -50,9 +51,7 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
             Toast.makeText(getContext(), "BUNDLE NULL", Toast.LENGTH_SHORT).show();
         }
 
-
-        // TODO: Replace GetProductImplementation with Database Stuff
-        GetProductsInterface productInterface = new GetProductsImplementation();
+        GetProductsInterface productInterface = new StoreProductDatabase();
         productInterface.getProducts(storeUUID, products -> onReceivedStores(products, view));
 
         return view;

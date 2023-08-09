@@ -119,7 +119,7 @@ public class CartDatabase extends Database implements GetCartEntries, PlaceOrder
         if(price == null)
             return;
 
-        StoreProduct p = new StoreProduct(name, description, imageURL, price);
+        StoreProduct p = new StoreProduct(name, e.getProduct().getUUID(), e.getStore().getStoreUUID(), description, imageURL, price);
         put(
                 root.child(Constants.store_orders).child(header.getStoreUUID()),
                 snapshot -> {

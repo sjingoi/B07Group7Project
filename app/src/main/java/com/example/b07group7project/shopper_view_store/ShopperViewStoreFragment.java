@@ -5,18 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.b07group7project.nav.Navigation;
 import com.example.b07group7project.R;
-import com.example.b07group7project.database_abstractions.Store;
 import com.example.b07group7project.database.StoreDatabase;
 import com.example.b07group7project.database_abstractions.StoreHeader;
 import com.example.b07group7project.nav.Navigation;
@@ -69,7 +64,7 @@ public class ShopperViewStoreFragment extends Fragment implements StoreClickList
         if (requireActivity() instanceof Navigation) {
             Navigation nav = (Navigation) requireActivity();
             Bundle bundle = new Bundle();
-            bundle.putString("storeID", store.getUuid());
+            bundle.putString("storeID", store.getStoreUUID());
             nav.replaceFragment(ViewProductFragment.newInstance(), true, bundle); // TODO: Pass store data to the next fragment so it knows what to load (Seb will probably do this unless you want to then go ahead :) )
         }
 //        Toast.makeText(requireContext(), store.getStoreName(), Toast.LENGTH_SHORT).show();
