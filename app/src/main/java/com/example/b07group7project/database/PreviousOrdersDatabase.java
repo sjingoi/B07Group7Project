@@ -53,32 +53,4 @@ public class PreviousOrdersDatabase extends Database implements getPreviousOrder
             onComplete.onComplete(previousOrderList);
         });
     }
-
-
-
-
-    public void addPreviousOrder(PreviousOrder previousOrder) {
-        DatabaseReference newreference =root.child(Constants.customers).child(User.getCurrentUser().uuid).child(Constants.previous_orders).child(previousOrder.getCurrentDate());
-
-        newreference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!snapshot.exists()) {
-                    HashMap<String, Object> hashmap = new HashMap<>();
-                    for (OrderedProduct orderedProduct : previousOrder.getOrderedProducts()){
-                        HashMap<String, String> productInfo = new HashMap<>();
-                        productInfo.put(Constants.order_status, orderedProduct.getOrderStatus().toString());
-                        productInfo.put(Constants.quantity, Integer.toString(orderedProduct.getQuantity()));
-                        hashmap.put(orderedProduct.getProductUUID(), hashmap);
-                    }
-                    newreference.setValue(hashmap);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
 }
