@@ -40,6 +40,7 @@ public class Store{
     public Store(String storeName, String imageURL, String uuid) {
         this.storeName = storeName;
         this.imageURL = imageURL;
+        this.uuid = uuid;
     }
 
     public Store(String storename, String storedescription, String email, String storeicon) {
