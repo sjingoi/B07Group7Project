@@ -4,12 +4,12 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
-import com.example.b07group7project.ExampleFragment;
+
 import com.example.b07group7project.R;
-import com.example.b07group7project.create_product.CreateProductFragment;
+import com.example.b07group7project.account.ShopperAccountFragment;
 import com.example.b07group7project.databinding.ShopperNavigationActivityBinding;
-import com.example.b07group7project.itempreview.ItemPreviewFragment;
 import com.example.b07group7project.shopping_cart.ShoppingCartFragment;
+
 import com.example.b07group7project.shopper_view_store.ShopperViewStoreFragment;
 
 public class ShopperNavigationActivity extends Navigation {
@@ -29,13 +29,14 @@ public class ShopperNavigationActivity extends Navigation {
         binding = ShopperNavigationActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         setSystemBarColors();
 
         toolbar = findViewById(R.id.toolbar);
 
         homeFragment = ShopperViewStoreFragment.newInstance();
         cartFragment = ShoppingCartFragment.newInstance();
-        accountFragment = ExampleFragment.newInstance(); // CHANGE THIS
+        accountFragment = ShopperAccountFragment.newInstance();
 
         replaceFragment(homeFragment, false, "Home");
 

@@ -12,15 +12,20 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.b07group7project.R;
+import com.example.b07group7project.UserType;
+import com.example.b07group7project.database.AccountDatabase;
 import com.example.b07group7project.database.SaveProduct;
 import com.example.b07group7project.database.SaveProductImplementation;
+import com.example.b07group7project.database.User;
 
 public class CreateProductFragment extends Fragment {
 
     private SaveProduct saveProduct;
+    private AccountDatabase accountDatabase;
 
     public CreateProductFragment() {
         // Required empty public constructor
+        accountDatabase = new AccountDatabase();
     }
 
     public static CreateProductFragment newInstance() {
@@ -41,47 +46,52 @@ public class CreateProductFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_create_product, container, false);
 
-        Bundle args = getArguments();
-        if (args != null) {
-            String storeID = args.getString("storeID", ""); // Retrieve the storeID from the bundle
-            // Now you can use the storeID as needed, remember to link through StoreOwnerViewProducts fragment
-        }
-
         EditText itemNameEditText = rootView.findViewById(R.id.edit_text_item_name);
         EditText itemDescEditText = rootView.findViewById(R.id.edit_text_description);
         EditText itemURLEditText = rootView.findViewById(R.id.edit_text_itemurl);
         EditText itemPriceEditText = rootView.findViewById(R.id.edit_text_price);
         Button saveButton = rootView.findViewById(R.id.button_save);
 
-        String storeID = "Lay's"; //Dummy implement while Bundle isn't connected
+        User currentUser = User.getCurrentUser();
+        accountDatabase.getUserType(currentUser, userType -> {
+            if (userType == UserType.STORE_OWNER) {
+                accountDatabase.getUserUUID(currentUser, storeUUID -> {
+                    accountDatabase.getStoreName(storeUUID, storeName -> {
+                        String storeID = storeName; // Store ID retrieved
+                        saveProduct = new SaveProductImplementation(getContext());
 
-        // Instantiate the SaveProductImplementation and assign it to saveProduct
-        saveProduct = new SaveProductImplementation(getContext());
+                        saveButton.setOnClickListener(v -> {
+                            String itemName = itemNameEditText.getText().toString().trim();
+                            String itemDesc = itemDescEditText.getText().toString().trim();
+                            String itemURL = itemURLEditText.getText().toString().trim();
+                            String itemPriceText = itemPriceEditText.getText().toString().trim();
 
-        saveButton.setOnClickListener(v -> {
-            String itemName = itemNameEditText.getText().toString().trim();
-            String itemDesc = itemDescEditText.getText().toString().trim();
-            String itemURL = itemURLEditText.getText().toString().trim();
-            String itemPriceText = itemPriceEditText.getText().toString().trim();
+                            if (!itemName.isEmpty() && !itemDesc.isEmpty() && !itemURL.isEmpty() && !itemPriceText.isEmpty()) {
+                                try {
+                                    double itemPrice = Double.parseDouble(itemPriceText);
+                                    saveProduct.saveProductToFirebase(itemName, itemDesc, itemURL, storeID, itemPrice);
 
-            if (!itemName.isEmpty() && !itemDesc.isEmpty() && !itemURL.isEmpty() && !itemPriceText.isEmpty()) {
-                try {
-                    double itemPrice = Double.parseDouble(itemPriceText);
-                    saveProduct.saveProductToFirebase(itemName, itemDesc, itemURL, storeID, itemPrice);
+                                    // Clear the EditText fields after saving if the data is valid and saved
+                                    itemNameEditText.setText("");
+                                    itemDescEditText.setText("");
+                                    itemURLEditText.setText("");
+                                    itemPriceEditText.setText("");
 
-                    // Clear the EditText fields after saving if the data is valid and saved
-                    itemNameEditText.setText("");
-                    itemDescEditText.setText("");
-                    itemURLEditText.setText("");
-                    itemPriceEditText.setText("");
-
-                } catch (NumberFormatException e) {
-                    Toast.makeText(getContext(), "Invalid item price input.", Toast.LENGTH_SHORT).show();
-                }
+                                } catch (NumberFormatException e) {
+                                    Toast.makeText(getContext(), "Invalid item price input.", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(getContext(), "Please fill in all fields.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    });
+                });
             } else {
-                Toast.makeText(getContext(), "Please fill in all fields.", Toast.LENGTH_SHORT).show();
+                // Handle other user types or show an error message
             }
         });
+
         return rootView;
     }
+
 }
