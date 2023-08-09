@@ -22,6 +22,8 @@ public class StoreProduct implements Serializable {
         this.price = price;
     }
 
+    public StoreProduct(){}
+
     public String getItemName() {
         return itemName;
     }
