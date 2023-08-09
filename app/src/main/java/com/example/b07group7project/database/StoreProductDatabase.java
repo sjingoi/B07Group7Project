@@ -1,13 +1,11 @@
 package com.example.b07group7project.database;
 
-import com.example.b07group7project.database_abstractions.Store;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 import com.example.b07group7project.itempreview.GetProductInfo;
 import com.example.b07group7project.view_products.GetProductsInterface;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class StoreProductDatabase extends Database implements GetProductsInterface, GetProductInfo {
 
@@ -57,7 +55,7 @@ public class StoreProductDatabase extends Database implements GetProductsInterfa
     @Override
     public void getProductFromFirebase(String storeUUID, String itemUUID, OnComplete<StoreProduct> withProduct) {
         if(storeUUID == null){
-            withProduct.onComplete(new StoreProduct());
+            withProduct.onComplete(null);
             return;
         }
 
@@ -72,9 +70,9 @@ public class StoreProductDatabase extends Database implements GetProductsInterfa
 
 
     private StoreProduct extractProduct(String storeUUID, String itemUUID, DataSnapshot snapshot){
-        StoreProduct product = new StoreProduct();
+        StoreProduct product;
         if(!snapshot.exists())
-            return product;
+            return null;
         DataSnapshot s = snapshot.child(itemUUID);
 
 
@@ -87,12 +85,6 @@ public class StoreProductDatabase extends Database implements GetProductsInterfa
         Double price = s.child(Constants.product_price).getValue(Double.class);
 
         product = new StoreProduct(name, uuid, storeUUID, description, imageURL, price);
-
-
-
-
-
-
 
         return product;
     }

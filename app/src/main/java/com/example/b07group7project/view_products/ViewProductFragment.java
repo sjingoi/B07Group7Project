@@ -20,7 +20,7 @@ import com.example.b07group7project.nav.Navigation;
 import java.util.ArrayList;
 
 public class ViewProductFragment extends Fragment implements ProductClickListener{
-    String storeID;
+    public String storeID;
 
     public ViewProductFragment() {
         // Required Empty Constructor

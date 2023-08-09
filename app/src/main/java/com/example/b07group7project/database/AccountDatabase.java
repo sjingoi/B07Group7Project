@@ -53,9 +53,9 @@ public class AccountDatabase extends Database implements UserPermission {
                 .encodeToString(userEmail.getBytes(StandardCharsets.UTF_8))
                 .replace('\\', ';');
 
-        put(
-                root.child(Constants.accounts).child(encodedEmail),
-                snapshot -> {
+        put(root.child(Constants.accounts).child(encodedEmail),
+                snapshot ->
+                {
                     HashMap<String, String> data = new HashMap<>();
                     data.put(Constants.user_type, type.toString());
                     data.put(Constants.user_uuid, userUUID);
@@ -112,6 +112,7 @@ public class AccountDatabase extends Database implements UserPermission {
                 }
         );
     }
+
     public void getStoreName(String storeUUID, OnComplete<String> withStoreName) {
         get(
                 root.child(Constants.store_owners).child(storeUUID).child(Constants.store_uuid),
@@ -120,5 +121,19 @@ public class AccountDatabase extends Database implements UserPermission {
                     withStoreName.onComplete(storeName);
                 }
         );
+    }
+
+    //Assume User is a StoreOwner
+    public void getStoreUUID(User user, OnComplete<String> withUUID) {
+        getUserUUID(user, uuid -> onReceiveUserUUID(withUUID, uuid));
+    }
+
+    public void onReceiveUserUUID(OnComplete<String> withUUID, String storeOwnerUUID) {
+        get(root.child(Constants.store_owners).child(storeOwnerUUID),
+                snapshot -> {
+            String storeUUID = (String) snapshot.child(Constants.store_uuid).getValue();
+            withUUID.onComplete(storeUUID);
+        });
+
     }
 }
