@@ -4,7 +4,7 @@ import com.example.b07group7project.database_abstractions.StoreProduct;
 
 public class OrderedProduct {
     StoreProduct product;
-    String orderStatus;
+    OrderStatus orderStatus;
     long quantity;
 
     String shopperUUID;
@@ -12,7 +12,7 @@ public class OrderedProduct {
     String date;
     String orderUUID;
 
-    public OrderedProduct(StoreProduct product, String orderStatus, long quantity, String shopperUUID, String date, String orderUUID) {
+    public OrderedProduct(StoreProduct product, OrderStatus orderStatus, long quantity, String shopperUUID, String date, String orderUUID) {
         this.product = product;
         this.orderStatus = orderStatus;
         this.quantity = quantity;

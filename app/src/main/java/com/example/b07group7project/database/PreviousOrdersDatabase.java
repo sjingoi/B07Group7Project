@@ -1,6 +1,7 @@
 package com.example.b07group7project.database;
 
 import com.example.b07group7project.database_abstractions.StoreProduct;
+import com.example.b07group7project.shopper_view_previous_orders.OrderStatus;
 import com.example.b07group7project.shopper_view_previous_orders.OrderedProduct;
 import com.example.b07group7project.shopper_view_previous_orders.PreviousOrder;
 import com.example.b07group7project.shopper_view_previous_orders.getPreviousOrdersInterface;
@@ -31,6 +32,8 @@ public class PreviousOrdersDatabase extends Database implements getPreviousOrder
             ArrayList<PreviousOrder> previousOrderList = new ArrayList<>();
             for (DataSnapshot previousOrder : snapshot.getChildren()) {
                 ArrayList<OrderedProduct> orderedProductList = new ArrayList<>();
+                String date = previousOrder.getKey().replace("?", ".").replace(";", ":");
+
                 for (DataSnapshot product : previousOrder.getChildren()) {
                     String productName = (String) product.child(Constants.product_name).getValue();
                     String productDescription = (String) product.child(Constants.product_description).getValue();
@@ -41,11 +44,9 @@ public class PreviousOrdersDatabase extends Database implements getPreviousOrder
                     StoreProduct storeProduct = new StoreProduct(productName, productUUID, storeUUID, productDescription, imageURL, productPrice);
 
                     long quantity = (Long) product.child(Constants.quantity).getValue();
-                    String orderStatus = (String) product.child(Constants.order_status).getValue();
-                    String customerUUID = (String) product.child(Constants.customer_UUID).getValue();
-                    String date = snapshot.getKey().replace("?", ".").replace(";", ":");
+                    OrderStatus orderStatus = product.child(Constants.order_status).getValue(OrderStatus.class);
                     String orderUUID = product.getKey();
-                    OrderedProduct orderedProduct = new OrderedProduct(storeProduct, orderStatus, quantity, customerUUID, date, orderUUID);
+                    OrderedProduct orderedProduct = new OrderedProduct(storeProduct, orderStatus, quantity, userUUID, date, orderUUID);
                     orderedProductList.add(orderedProduct);
                 }
                 String currentDate = (String) previousOrder.getKey();
