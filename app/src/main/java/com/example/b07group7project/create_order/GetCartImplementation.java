@@ -37,7 +37,7 @@ public class GetCartImplementation implements GetCartInterface{
         CartEntry[] prods = new CartEntry[15];
 
         for (int i = 0; i < prods.length; i++){
-            prods[i] = new CartEntry(prod[i], store, i);
+            prods[i] = new CartEntry(products[i], products[i].getStoreID(), (i*97) % 7);
         }
 
         onComplete.onComplete(new ArrayList<>(Arrays.asList(prods)));

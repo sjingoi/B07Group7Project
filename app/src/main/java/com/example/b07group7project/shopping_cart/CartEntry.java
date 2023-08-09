@@ -1,7 +1,5 @@
 package com.example.b07group7project.shopping_cart;
-import android.view.View;
 
-import com.example.b07group7project.database_abstractions.Store;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 
 public class CartEntry {
