@@ -13,7 +13,7 @@ import com.example.b07group7project.database.ImageDownloader;
 public class CartViewHolder extends RecyclerViewHolder<CartEntry> {
 
     ImageView imageView;
-    TextView nameView, quantityView;
+    TextView nameView, quantityView, priceView;
     ImageButton increaseQty, decreaseQty, removeItem;
     View layout;
 
@@ -26,13 +26,14 @@ public class CartViewHolder extends RecyclerViewHolder<CartEntry> {
         decreaseQty = itemView.findViewById(R.id.decreaseQty);
         layout = itemView.findViewById(R.id.itemLayout);
         removeItem = itemView.findViewById(R.id.removeItem);
-
+        priceView = itemView.findViewById(R.id.cartItemPrice);
     }
 
     @Override
     public void updateView(CartEntry cartEntry) {
         nameView.setText(cartEntry.getProduct().getItemName());
         quantityView.setText(String.format(Integer.toString(cartEntry.getQuantity())));
+        priceView.setText("$ " + cartEntry.getProduct().getPrice());
 
         increaseQty.setOnClickListener(view -> {
             cartEntry.setQuantity(cartEntry.getQuantity() + 1);
