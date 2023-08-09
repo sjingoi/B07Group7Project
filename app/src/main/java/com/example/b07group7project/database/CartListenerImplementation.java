@@ -5,9 +5,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.b07group7project.database.CartListener;
-import com.example.b07group7project.database.Constants;
-import com.example.b07group7project.database.Database;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
