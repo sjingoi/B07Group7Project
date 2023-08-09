@@ -7,24 +7,23 @@
 
     <Button
         android:id="@+id/SignOutButton"
-        android:layout_width="347dp"
-        android:layout_height="55dp"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:background="@color/fui_transparent"
         android:text="Sign Out"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.934" />
+        app:layout_constraintTop_toBottomOf="@+id/ViewOrderButton" />
 
     <Button
         android:id="@+id/ViewOrderButton"
-        android:layout_width="346dp"
-        android:layout_height="53dp"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:background="@color/fui_transparent"
         android:text="View Orders"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.063" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
