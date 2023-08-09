@@ -33,7 +33,7 @@ public class OrderedProduct {
         return product;
     }
 
-    public int getQuantity() {
+    public long getQuantity() {
         return quantity;
     }
 
