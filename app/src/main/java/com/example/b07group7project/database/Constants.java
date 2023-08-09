@@ -6,6 +6,7 @@ public final class Constants {
     public static final String store_description = "StoreDescription";
     public static final String store_image = "StoreImage";
     public static final String store_products = "Products";
+    public static final String previous_products = "PreviousProducts";
     public static final String store_orders = "StoreOrders";
     public static final String email = "Email";
     public static final String user_uuid = "UserUUID";
@@ -17,7 +18,6 @@ public final class Constants {
     public static final String product_image = "ProductImage";
     public static final String product_uuid = "ProductUUID";
     public static final String product_price = "ProductPrice";
-    public static final String customer_name = "CustomerName";
     public static final String customers = "Customers";
     public static final String products = "Products";
     public static final String stores = "Stores";
@@ -25,11 +25,13 @@ public final class Constants {
     public static final String quantity = "Quantity";
     public static final String previous_orders = "PreviousOrders";
     public static final String accounts = "Accounts";
-    public static final String order_complete = "OrderComplete";
     public static final String orders = "Orders";
     public static final String store_owners = "StoreOwners";
     public static final String order_status = "OrderStatus";
-    public static final String ordered_products = "OrderedProducts";
-    public static final String customer_UUID = "CustomerUUID";
+
+
+    public static final String customer_uuid = "CustomerUUID";
+
+
 
 }

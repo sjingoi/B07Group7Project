@@ -181,7 +181,7 @@ public class CartDatabase extends Database implements GetCartEntries, PlaceOrder
         product.put(Constants.product_uuid, productSnapshot.getKey());
         product.put(Constants.quantity, e.getQuantity());
         product.put(Constants.order_status, OrderStatus.ORDER_INCOMPLETE);
-        product.put(Constants.user_uuid, userUUID);
+        product.put(Constants.customer_uuid, userUUID);
         return product;
     }
 }
