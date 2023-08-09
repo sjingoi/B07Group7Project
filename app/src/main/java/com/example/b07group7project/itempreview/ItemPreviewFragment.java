@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.example.b07group7project.R;
 import com.example.b07group7project.database.OnComplete;
 import com.example.b07group7project.database_abstractions.StoreProduct;
-import com.example.b07group7project.shopping_cart.ShoppingCart;
 
 public class ItemPreviewFragment extends Fragment {
     private TextView cartItemQtyTextView;

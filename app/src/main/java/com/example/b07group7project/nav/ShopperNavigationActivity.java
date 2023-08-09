@@ -9,8 +9,8 @@ import com.example.b07group7project.R;
 import com.example.b07group7project.create_product.CreateProductFragment;
 import com.example.b07group7project.databinding.ShopperNavigationActivityBinding;
 import com.example.b07group7project.itempreview.ItemPreviewFragment;
-import com.example.b07group7project.shopping_cart.ShoppingCart;
 import com.example.b07group7project.shopper_view_store.ShopperViewStoreFragment;
+import com.example.b07group7project.shopping_cart.ShoppingCartFragment;
 
 public class ShopperNavigationActivity extends Navigation {
 

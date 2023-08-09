@@ -2,6 +2,14 @@ package com.example.b07group7project.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.example.b07group7project.database.AccountDatabase;
+import com.example.b07group7project.database.User;
 import com.example.b07group7project.nav.Navigation;
 import com.example.b07group7project.R;
 import com.example.b07group7project.nav.ShopperNavigationActivity;
