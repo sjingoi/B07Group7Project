@@ -43,7 +43,6 @@ public class CartDatabase extends Database implements GetCartEntries {
             String qString = (quantity == null)? null:quantity.toString();
 
             toFetch.add(new String[]{UUIDs[0], UUIDs[1], qString});
-            entries.add(new CartEntry());
         }
 
         for (DataSnapshot storeSnapshot: productSnapshot.getChildren()) {
