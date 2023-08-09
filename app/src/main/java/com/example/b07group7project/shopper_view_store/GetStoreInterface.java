@@ -1,7 +1,7 @@
 package com.example.b07group7project.shopper_view_store;
 
-import com.example.b07group7project.database_abstractions.Store;
 import com.example.b07group7project.database.OnComplete;
+import com.example.b07group7project.database_abstractions.Store;
 
 import java.util.ArrayList;
 

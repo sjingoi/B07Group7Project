@@ -10,6 +10,7 @@ public class StoreProduct implements Serializable {
     String itemName;
     String description;
     String imageURL;
+    String uuid;
     double price;
 
 
@@ -21,6 +22,8 @@ public class StoreProduct implements Serializable {
         this.imageURL = imageURL;
         this.price = price;
     }
+
+    public StoreProduct(){}
 
     public String getItemName() {
         return itemName;
@@ -46,10 +49,14 @@ public class StoreProduct implements Serializable {
         this.description = description;
     }
 
-//    public void setImageURL(String imageURL) {
-//        this.imageURL = imageURL;
-//    }
-//
+    public void setUUID(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public String getUUID(String uuid){
+        return uuid;
+    }
+
     public void setPrice(double price) {
         this.price = price;
     }

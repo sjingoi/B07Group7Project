@@ -9,18 +9,27 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.b07group7project.R;
+import com.example.b07group7project.database.AccountDatabase;
+import com.example.b07group7project.database.CartListenerImplementation;
 import com.example.b07group7project.database.ImageDownloader;
+import com.example.b07group7project.database.User;
+import com.example.b07group7project.database.StoreProductDatabase;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 
 public class ItemPreviewFragment extends Fragment {
     private TextView cartItemQtyTextView;
     private int cartItemQty = 0;
     private StoreProduct currentItem;
+    String itemID;
+    String storeID;
+    private AccountDatabase accountDatabase;
 
     public ItemPreviewFragment() {
         // Required empty public constructor
+        accountDatabase = new AccountDatabase();
     }
 
     public static ItemPreviewFragment newInstance() {
@@ -37,8 +46,8 @@ public class ItemPreviewFragment extends Fragment {
         // Get the item ID and store ID from arguments
         Bundle arguments = getArguments();
         if (arguments != null) {
-            String itemID = arguments.getString("itemID");
-            String storeID = arguments.getString("storeID");
+            itemID = arguments.getString("itemID");
+            storeID = arguments.getString("storeID");
             // Now you can use the itemID and storeID variables as needed
         }
     }
@@ -47,6 +56,8 @@ public class ItemPreviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_preview, container, false);
+
+        CartListenerImplementation cartListener = new CartListenerImplementation(getContext());
 
         // Get references to TextView and Buttons
         cartItemQtyTextView = view.findViewById(R.id.cartItemQty);
@@ -60,6 +71,13 @@ public class ItemPreviewFragment extends Fragment {
         ImageButton decrementButton = view.findViewById(R.id.button4);
 
         // Get the item information passed through bundle
+        GetProductInfo getProductInfo = new StoreProductDatabase();
+        getProductInfo.getProductFromFirebase(storeID, itemID, storeProduct -> {
+            // Set the currentItem with the retrieved StoreProduct
+            currentItem = storeProduct;
+            updateUIWithItemInfo();
+        });
+
 
        if (getArguments() != null) {
             currentItem = (StoreProduct) getArguments().getSerializable("product");
@@ -67,7 +85,8 @@ public class ItemPreviewFragment extends Fragment {
 
             if (currentItem != null) {
                 textViewItemName.setText(currentItem.getItemName());
-                textViewItemPrice.setText("$" + currentItem.getPrice());
+                String price = "$" + currentItem.getPrice();
+                textViewItemPrice.setText(price);
                 textViewItemDesc.setText(currentItem.getDescription());
                 ImageDownloader.setImageResource(itemImageView, currentItem.getImageURL());
                 cartItemQtyTextView.setText(String.valueOf(cartItemQty));
@@ -90,14 +109,40 @@ public class ItemPreviewFragment extends Fragment {
 
         // Set OnClickListener for the cart add button
         addToCartButton.setOnClickListener(v -> {
-            // Call the addToCart method to add the item to the cart
-            if (currentItem != null) {
-                //addToCart(currentItem.getItemID(), currentItem.getItemName(), cartItemQty);
+            // Call the getUserUUID method to fetch user's UUID
+            User currentUser = User.getCurrentUser();
+            if (currentUser != null) {
+                accountDatabase.getUserUUID(currentUser, userUUID -> {
+                    if (userUUID != null) {
+                        cartListener.addToCart(storeID, userUUID, itemID, cartItemQty);
+                    } else {
+                        Toast.makeText(requireContext(), "NULL UUID!", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
 
         return view;
+    }
+
+    private void updateUIWithItemInfo() {
+        View rootView = getView();
+        if (rootView != null) {
+            TextView textViewItemName = rootView.findViewById(R.id.itemName);
+            TextView textViewItemPrice = rootView.findViewById(R.id.itemPrice);
+            TextView textViewItemDesc = rootView.findViewById(R.id.itemDesc);
+            ImageView productImage = rootView.findViewById(R.id.itemImage);
+
+            if (currentItem != null) {
+                textViewItemName.setText(currentItem.getItemName());
+                String price = "$" + currentItem.getPrice();
+                textViewItemPrice.setText(price);
+                textViewItemDesc.setText(currentItem.getDescription());
+                ImageDownloader.setImageResource(productImage, currentItem.getImageURL(), 1080, 1080);
+                cartItemQtyTextView.setText(String.valueOf(cartItemQty));
+            }
+        }
     }
 
 }

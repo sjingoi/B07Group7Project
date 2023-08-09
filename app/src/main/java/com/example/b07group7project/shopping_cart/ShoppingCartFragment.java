@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.b07group7project.R;
 import com.example.b07group7project.itempreview.ItemPreviewFragment;
 import com.example.b07group7project.nav.Navigation;
+import com.example.b07group7project.database.CartDatabase;
 
 import java.util.List;
 public class ShoppingCartFragment extends Fragment implements EntryClickListener {
@@ -45,7 +46,7 @@ public class ShoppingCartFragment extends Fragment implements EntryClickListener
 
         RecyclerView recyclerView = shoppingCartLayout.findViewById(R.id.cartItemList);
 
-        (new GetCartEntriesImplementation()).getCartEntries(cartEntries -> onData(recyclerView, cartEntries));
+        (new CartDatabase()).getCartEntries(cartEntries -> onData(recyclerView, cartEntries));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
@@ -63,7 +64,7 @@ public class ShoppingCartFragment extends Fragment implements EntryClickListener
             Navigation nav = (Navigation) activity;
             Bundle bundle = new Bundle();
             bundle.putString("itemID", entry.getProduct().getProductID());
-            bundle.putString("storeID", entry.getStore());
+            bundle.putString("storeID", entry.getStore().getStoreUUID());
             nav.replaceFragment(ItemPreviewFragment.newInstance(), true, bundle);
         }
     }

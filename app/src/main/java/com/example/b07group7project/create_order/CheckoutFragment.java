@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.R;
+import com.example.b07group7project.database.CartDatabase;
 import com.example.b07group7project.shopping_cart.CartEntry;
+import com.example.b07group7project.shopping_cart.GetCartEntries;
 
 
 import java.text.DecimalFormat;
@@ -42,8 +44,8 @@ public class CheckoutFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.Checkout_RecyclerView);
         // TODO: Update Accordinlgy based on Implemenetation of GetCartInterface
-        GetCartInterface cartInterface = new GetCartImplementation();
-        cartInterface.getCart(
+        GetCartEntries cartInterface = new CartDatabase();
+        cartInterface.getCartEntries(
                 products -> onReceivedCart(products, view)
         );
 
