@@ -51,7 +51,7 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
             Toast.makeText(getContext(), "BUNDLE NULL", Toast.LENGTH_SHORT).show();
         }
 
-        storeUUID = "Lay's"; // TODO: Implement uuids to pass in from stores and cart
+        Toast.makeText(requireContext(), "Store ID: " + storeUUID, Toast.LENGTH_SHORT).show();
 
         GetProductsInterface productInterface = new StoreProductDatabase();
         productInterface.getProducts(storeUUID, products -> onReceivedProducts(products, view));

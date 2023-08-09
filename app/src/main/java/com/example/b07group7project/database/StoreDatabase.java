@@ -33,8 +33,9 @@ public class StoreDatabase extends Database implements GetStoreInterface, SaveSt
         for (DataSnapshot e : dataSnapshot.getChildren()) {
             String name = e.child(Constants.store_name).getValue(String.class);
             String url = e.child(Constants.store_image).getValue(String.class);
+            String uuid = e.getKey();
 
-            store.add(new Store(name, url));
+            store.add(new Store(name, uuid, url));
         }
         stores = new ArrayList<>(store);
         return store;
