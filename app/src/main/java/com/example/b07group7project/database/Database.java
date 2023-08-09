@@ -11,7 +11,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Database {
+class Database {
     FirebaseDatabase database;
     DatabaseReference root;
 
@@ -69,9 +69,8 @@ public class Database {
         });
     }
 
-    String getObjectAsString(Object o){
-        if(o == null)
-            return null;
-        return o.toString();
+    void delete(DatabaseReference ref){
+        ref.removeValue();
     }
+
 }

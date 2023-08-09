@@ -5,19 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.b07group7project.Customer;
 import com.example.b07group7project.R;
-import com.example.b07group7project.database.OnComplete;
-import com.example.b07group7project.database.PreviousOrdersDatabase;
-import com.example.b07group7project.database.User;
-import com.example.b07group7project.shopper_view_store.ShopperViewStoreFragment;
 
 import java.util.ArrayList;
 
@@ -38,8 +31,8 @@ public class ShopperPreviousOrderFragment extends Fragment implements PreviousOr
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_previousorders, container, false);
-        PreviousOrdersDatabase getPreviousOrders = new PreviousOrdersDatabase(); //TODO Change to new class once database is working
-        getPreviousOrders.getPreviousOrders(User.getCurrentUser(), previousOrders -> onReceivedOrder(previousOrders, view));
+        getPreviousOrdersInterface getPreviousOrders = new getPreviousOrderImplementation(); //TODO Change to new class once database is working
+        getPreviousOrders.getPreviousOrders(previousOrders -> onReceivedOrder(previousOrders, view));
         return view;
     }
 
@@ -52,7 +45,7 @@ public class ShopperPreviousOrderFragment extends Fragment implements PreviousOr
 
     @Override
     public void onPreviousOrderClick(PreviousOrder previousOrder) {
-        Toast.makeText(requireContext(), previousOrder.getCurrentDate(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), previousOrder.getPreviousOrderLabel(), Toast.LENGTH_SHORT).show();
     }
 
 
