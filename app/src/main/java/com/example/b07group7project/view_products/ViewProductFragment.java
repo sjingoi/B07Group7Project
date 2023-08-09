@@ -11,7 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.R;
+import com.example.b07group7project.database.StoreProductDatabase;
 import com.example.b07group7project.database_abstractions.StoreProduct;
+import com.example.b07group7project.itempreview.ItemPreviewFragment;
+import com.example.b07group7project.nav.Navigation;
 
 
 import java.util.ArrayList;
@@ -39,16 +42,27 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.view_product_fragment, container, false);
 
-        // TODO: Replace GetProductImplementation with Database Stuff
-        GetProductsInterface productInterface = new GetProductsImplementation();
-        productInterface.getProducts(
-                products -> onReceivedStores(products, view)
-        );
+        String storeUUID = null;
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            storeUUID = bundle.getString("storeID");
+        } else {
+            Toast.makeText(getContext(), "BUNDLE NULL", Toast.LENGTH_SHORT).show();
+        }
+
+        storeUUID = "Lay's"; // TODO: Implement uuids to pass in from stores and cart
+
+        GetProductsInterface productInterface = new StoreProductDatabase();
+        productInterface.getProducts(storeUUID, products -> onReceivedProducts(products, view));
+
 
         return view;
     }
 
-    public void onReceivedStores(ArrayList<StoreProduct> products, View view){
+
+    public void onReceivedProducts(ArrayList<StoreProduct> products, View view){
+
         RecyclerView recyclerView = view.findViewById(R.id.ProductListRecyclerView);
         ViewProductAdapter adapter = new ViewProductAdapter(requireContext(), products, this);
         recyclerView.setAdapter(adapter);
@@ -60,7 +74,14 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
     then update code in here */
     @Override
     public void onProductClicked(StoreProduct product) {
-        Toast.makeText(requireContext(), product.getItemName(), Toast.LENGTH_SHORT).show();
+        if (requireActivity() instanceof Navigation) {
+            Navigation nav = (Navigation) requireActivity();
+            Bundle bundle = new Bundle();
+            bundle.putString("itemID", product.getProductID());
+            bundle.putString("storeID", product.getStoreID());
+            nav.replaceFragment(ItemPreviewFragment.newInstance(), true, bundle);
+        }
+        //Toast.makeText(requireContext(), product.getItemName(), Toast.LENGTH_SHORT).show();
     }
 
 }

@@ -19,7 +19,6 @@ public class LoginModelAdapter implements LoginModel{
     @Override
     public void signIn(String email, String password, OnCompleteListener<AuthResult> onComplete) {
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(a -> User.getCurrentUser())
                 .addOnCompleteListener(onComplete);
     }
 

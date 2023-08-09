@@ -1,19 +1,18 @@
 package com.example.b07group7project.itempreview;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.b07group7project.R;
-import com.example.b07group7project.database.OnComplete;
+import com.example.b07group7project.database.ImageDownloader;
 import com.example.b07group7project.database_abstractions.StoreProduct;
-import com.example.b07group7project.shopping_cart.ShoppingCart;
 
 public class ItemPreviewFragment extends Fragment {
     private TextView cartItemQtyTextView;
@@ -54,18 +53,26 @@ public class ItemPreviewFragment extends Fragment {
         TextView textViewItemName = view.findViewById(R.id.itemName);
         TextView textViewItemPrice = view.findViewById(R.id.itemPrice);
         TextView textViewItemDesc = view.findViewById(R.id.itemDesc);
+        ImageView itemImageView = view.findViewById(R.id.itemImage);
 
         Button addToCartButton = view.findViewById(R.id.button2);
         ImageButton incrementButton = view.findViewById(R.id.button3);
         ImageButton decrementButton = view.findViewById(R.id.button4);
 
-        // Get the item information using the GetItemInfo interface
-        GetItemInfo getItemInfo = new GetItemInfoImplementation();
-        getItemInfo.getItemInformation(storeProduct -> {
-            // Set the currentItem with the retrieved StoreProduct
-            currentItem = storeProduct;
-            updateUIWithItemInfo();
-        });
+        // Get the item information passed through bundle
+
+       if (getArguments() != null) {
+            currentItem = (StoreProduct) getArguments().getSerializable("product");
+        }
+
+            if (currentItem != null) {
+                textViewItemName.setText(currentItem.getItemName());
+                textViewItemPrice.setText("$" + currentItem.getPrice());
+                textViewItemDesc.setText(currentItem.getDescription());
+                ImageDownloader.setImageResource(itemImageView, currentItem.getImageURL());
+                cartItemQtyTextView.setText(String.valueOf(cartItemQty));
+            }
+
 
         // Set OnClickListener for the increment button
         incrementButton.setOnClickListener(v -> {
@@ -85,7 +92,7 @@ public class ItemPreviewFragment extends Fragment {
         addToCartButton.setOnClickListener(v -> {
             // Call the addToCart method to add the item to the cart
             if (currentItem != null) {
-                //saddToCart(currentItem.getItemID(), currentItem.getItemName(), cartItemQty);
+                //addToCart(currentItem.getItemID(), currentItem.getItemName(), cartItemQty);
             }
         });
 
@@ -93,19 +100,4 @@ public class ItemPreviewFragment extends Fragment {
         return view;
     }
 
-    private void updateUIWithItemInfo() {
-        View rootView = getView();
-        if (rootView != null) {
-            TextView textViewItemName = rootView.findViewById(R.id.itemName);
-            TextView textViewItemPrice = rootView.findViewById(R.id.itemPrice);
-            TextView textViewItemDesc = rootView.findViewById(R.id.itemDesc);
-
-            if (currentItem != null) {
-                textViewItemName.setText(currentItem.getItemName());
-                textViewItemPrice.setText("$" + currentItem.getPrice());
-                textViewItemDesc.setText(currentItem.getDescription());
-                cartItemQtyTextView.setText(String.valueOf(cartItemQty));
-            }
-        }
-    }
 }
