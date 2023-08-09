@@ -1,7 +1,5 @@
 package com.example.b07group7project.database;
 
-import android.util.Log;
-
 import com.example.b07group7project.create_store.SaveStore;
 import com.example.b07group7project.database_abstractions.Store;
 import com.example.b07group7project.shopper_view_store.GetStoreInterface;
@@ -24,30 +22,20 @@ public class StoreDatabase extends Database implements GetStoreInterface, SaveSt
         }
 
         getWithCache(
-                root.child("Stores"),
+                root.child(Constants.stores),
                 onComplete,
                 this::updateStoreList
         );
     }
 
     public ArrayList<Store> updateStoreList(DataSnapshot dataSnapshot){
-        Log.d("db", "updateStoreListDataSnap: " + dataSnapshot);
         ArrayList<Store> store = new ArrayList<>();
         for (DataSnapshot e : dataSnapshot.getChildren()) {
-            Log.d("myLog", e.getKey());
-            HashMap<String, Object> value = (HashMap<String, Object>) e.getValue();
-            if(value == null)
-                continue;
-            String name = getObjectAsString(
-                    value.getOrDefault("Store Name", null)
-            );
-            String url = getObjectAsString(
-                    value.getOrDefault("Store Image", null)
-            );
+            String name = e.child(Constants.store_name).getValue(String.class);
+            String url = e.child(Constants.store_image).getValue(String.class);
 
             store.add(new Store(name, url));
         }
-        Log.d("myLog", "storeList: " + store.size());
         stores = new ArrayList<>(store);
         return store;
     }
