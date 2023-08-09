@@ -20,6 +20,7 @@ import com.example.b07group7project.nav.Navigation;
 import java.util.ArrayList;
 
 public class ViewProductFragment extends Fragment implements ProductClickListener{
+    String storeID;
 
     public ViewProductFragment() {
         // Required Empty Constructor
@@ -32,9 +33,18 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
         return fragment;
     }
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Get the store ID from arguments
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            storeID = arguments.getString("storeID");
+            // Now you can use the storeID variable as needed
+        }
     }
 
     @Override
@@ -51,10 +61,10 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
             Toast.makeText(getContext(), "BUNDLE NULL", Toast.LENGTH_SHORT).show();
         }
 
-        storeUUID = "Lay's"; // TODO: Implement uuids to pass in from stores and cart
+        //storeUUID = "Lay's"; // TODO: Implement uuids to pass in from stores and cart
 
         GetProductsInterface productInterface = new StoreProductDatabase();
-        productInterface.getProducts(storeUUID, products -> onReceivedProducts(products, view));
+        productInterface.getProducts(storeID, products -> onReceivedProducts(products, view));
 
 
         return view;
