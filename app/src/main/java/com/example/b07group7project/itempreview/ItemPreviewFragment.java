@@ -12,12 +12,16 @@ import android.widget.TextView;
 
 import com.example.b07group7project.R;
 import com.example.b07group7project.database.ImageDownloader;
+import com.example.b07group7project.database.StoreProductDatabase;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 
 public class ItemPreviewFragment extends Fragment {
     private TextView cartItemQtyTextView;
     private int cartItemQty = 0;
     private StoreProduct currentItem;
+
+    String itemID;
+    String storeID;
 
     public ItemPreviewFragment() {
         // Required empty public constructor
@@ -37,8 +41,8 @@ public class ItemPreviewFragment extends Fragment {
         // Get the item ID and store ID from arguments
         Bundle arguments = getArguments();
         if (arguments != null) {
-            String itemID = arguments.getString("itemID");
-            String storeID = arguments.getString("storeID");
+            itemID = arguments.getString("itemID");
+            storeID = arguments.getString("storeID");
             // Now you can use the itemID and storeID variables as needed
         }
     }
@@ -60,6 +64,13 @@ public class ItemPreviewFragment extends Fragment {
         ImageButton decrementButton = view.findViewById(R.id.button4);
 
         // Get the item information passed through bundle
+        GetProductInfo getProductInfo = new StoreProductDatabase();
+        getProductInfo.getProductFromFirebase(storeID, itemID, storeProduct -> {
+            // Set the currentItem with the retrieved StoreProduct
+            currentItem = storeProduct;
+            updateUIWithItemInfo();
+        });
+
 
        if (getArguments() != null) {
             currentItem = (StoreProduct) getArguments().getSerializable("product");
@@ -98,6 +109,22 @@ public class ItemPreviewFragment extends Fragment {
 
 
         return view;
+    }
+
+    private void updateUIWithItemInfo() {
+        View rootView = getView();
+        if (rootView != null) {
+            TextView textViewItemName = rootView.findViewById(R.id.itemName);
+            TextView textViewItemPrice = rootView.findViewById(R.id.itemPrice);
+            TextView textViewItemDesc = rootView.findViewById(R.id.itemDesc);
+
+            if (currentItem != null) {
+                textViewItemName.setText(currentItem.getItemName());
+                textViewItemPrice.setText("$" + currentItem.getPrice());
+                textViewItemDesc.setText(currentItem.getDescription());
+                cartItemQtyTextView.setText(String.valueOf(cartItemQty));
+            }
+        }
     }
 
 }
