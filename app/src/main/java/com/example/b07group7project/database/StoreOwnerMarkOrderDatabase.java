@@ -20,7 +20,13 @@ public class StoreOwnerMarkOrderDatabase extends Database{
     public StoreOwnerMarkOrderDatabase (){super();}
 
     public void getStoreOwnerOrders(User user, OnComplete<ArrayList<OrderedProduct>> onComplete) {
-        DatabaseReference newreference = root.child(Constants.store_orders).child(user.uuid);
+        AccountDatabase accountDatabase = new AccountDatabase();
+        accountDatabase.getStoreUUID(user, storeUUID -> onReceiveStoreUUID(onComplete, storeUUID));
+
+    }
+
+    public void onReceiveStoreUUID(OnComplete<ArrayList<OrderedProduct>> onComplete, String storeUUID) {
+        DatabaseReference newreference = root.child(Constants.store_orders).child(storeUUID);
         get(newreference, snapshot -> {
             ArrayList<OrderedProduct> storeOrders = new ArrayList<>();
             for (DataSnapshot storeOrder: snapshot.getChildren()) {
@@ -28,11 +34,9 @@ public class StoreOwnerMarkOrderDatabase extends Database{
                 String productUUID = (String) storeOrder.child(Constants.product_uuid).getValue();
                 String productDescription = (String) storeOrder.child(Constants.product_description).getValue();
                 String imageURL = (String) storeOrder.child(Constants.product_image).getValue();
-                String storeUUID = (String) storeOrder.child(Constants.store_uuid).getValue();
-                int price = (Integer) storeOrder.child(Constants.product_price).getValue();
+                int price = storeOrder.child(Constants.product_price).getValue(Integer.class);
                 StoreProduct product1 = new StoreProduct(productName, productUUID, storeUUID, productDescription, imageURL, price);
-                //StoreProduct product1 = new StoreProduct(productName, productDescription,imageURL, price, productUUID);
-                int quantity = (Integer) storeOrder.child(Constants.quantity).getValue();
+                int quantity = storeOrder.child(Constants.quantity).getValue(Integer.class);
                 String orderStatus = (String) storeOrder.child(Constants.order_status).getValue();
                 String customerUUID = (String) storeOrder.child(Constants.customer_uuid).getValue();
                 String orderUUID = (String) storeOrder.getKey().split(":")[1];

@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.b07group7project.database.StoreOwnerMarkOrderDatabase;
+import com.example.b07group7project.database.User;
 import com.example.b07group7project.shopper_view_previous_orders.OrderedProduct;
 
 import java.util.ArrayList;
@@ -53,14 +55,18 @@ public class StoreOwnerOrdersFragment extends Fragment {
         return rootView;
     }
     private void fetchPendingOrdersForStoreOwner() {
-        DummyStoreData dummy = new DummyStoreData();
-
+        //DummyStoreData dummy = new DummyStoreData();
+        StoreOwnerMarkOrderDatabase getStoreOrders = new StoreOwnerMarkOrderDatabase();
+        getStoreOrders.getStoreOwnerOrders(User.getCurrentUser(), this::updateUIWithOrders);
+        /*
         dummy.getPendingOrdersForStoreOwner("Random Id Sowne", new OrderInterface.OrderCallback() {
             @Override
             public void onPendingOrdersLoaded(List<OrderedProduct> orders) {
                 updateUIWithOrders(orders);
             }
         });
+
+         */
     }
     private void updateUIWithOrders(List<OrderedProduct> orders) {
         pendingOrdersList.clear();
