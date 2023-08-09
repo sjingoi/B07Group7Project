@@ -9,6 +9,7 @@ public class User {
 
     String uuid;
     private static FirebaseUser firebaseUser;
+
     UserType userType;
     private User() {}
 

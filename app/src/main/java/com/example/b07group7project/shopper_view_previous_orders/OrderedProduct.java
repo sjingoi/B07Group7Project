@@ -4,6 +4,7 @@ import com.example.b07group7project.Product;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 
 import java.util.UUID;
+import com.example.b07group7project.database_abstractions.StoreProduct;
 
 public class OrderedProduct {
     StoreProduct product;
@@ -44,8 +45,32 @@ public class OrderedProduct {
     public String getOrderStatus() {
         return orderStatus;
     }
+    public int getQuantity() {
+        return quantity;
+    }
 
     public StoreProduct getProduct() {
         return product;
+        this.shopperUUID = shopperUUID;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public StoreProduct getProduct() {
+        return product;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public String getShopperUUID() {
+        return shopperUUID;
     }
 }

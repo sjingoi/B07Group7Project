@@ -104,7 +104,7 @@ public class AccountDatabase extends Database implements UserPermission {
                 .replace('\\', ';');
 
         get(
-                root.child(Constants.accounts).child(encodedEmail).child(Constants.user_type),
+                root.child(Constants.accounts).child(encodedEmail).child(Constants.user_uuid),
                 snapshot -> {
                     String userUUID = snapshot.getValue(String.class);
                     user.uuid = userUUID;
@@ -123,5 +123,14 @@ public class AccountDatabase extends Database implements UserPermission {
             String storeUUID = (String) snapshot.child(Constants.store_uuid).getValue();
             withUUID.onComplete(storeUUID);
         });
+    }
+    public void getStoreName(String storeUUID, OnComplete<String> withStoreName) {
+        get(
+                root.child(Constants.store_owners).child(storeUUID).child(Constants.store_uuid),
+                snapshot -> {
+                    String storeName = snapshot.getValue(String.class);
+                    withStoreName.onComplete(storeName);
+                }
+        );
     }
 }

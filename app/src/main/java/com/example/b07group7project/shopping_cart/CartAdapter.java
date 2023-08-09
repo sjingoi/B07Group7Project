@@ -13,8 +13,25 @@ import java.util.List;
 
 public class CartAdapter extends RecyclerViewAdapter<CartEntry, CartViewHolder> {
 
-    public CartAdapter(Context context, List<CartEntry> items) {
+    List<CartEntry> entries;
+
+    EntryClickListener entryClickListener;
+
+
+    public CartAdapter(Context context, List<CartEntry> items, EntryClickListener entryClickListener) {
         super(context, items);
+        this.entryClickListener = entryClickListener;
+        this.entries = items;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
+        super.onBindViewHolder(holder, position);
+        CartEntry cartEntry = entries.get(position);
+        holder.layout.setOnClickListener(view -> entryClickListener.onEntryClick(cartEntry));
+        holder.removeItem.setOnClickListener(view -> entryClickListener.onRemoveClick(position));
+        holder.increaseQty.setOnClickListener(view -> entryClickListener.onIncrement(cartEntry, holder.quantityView));
+        holder.decreaseQty.setOnClickListener(view -> entryClickListener.onDecrement(cartEntry, holder.quantityView));
     }
 
     @NonNull

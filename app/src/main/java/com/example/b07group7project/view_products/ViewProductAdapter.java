@@ -8,14 +8,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.R;
 import com.example.b07group7project.database.ImageDownloader;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 
-
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 // RecylerViewAdapter for ViewProductFragment
@@ -36,7 +35,7 @@ public class ViewProductAdapter extends RecyclerView.Adapter<ViewProductAdapter.
     public ViewProductAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Give Look To Each Row
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.storelist_row_data, parent, false);
+        View view = inflater.inflate(R.layout.view_product_row_data, parent, false);
 
         return new ViewProductAdapter.MyViewHolder(view);
     }
@@ -46,6 +45,10 @@ public class ViewProductAdapter extends RecyclerView.Adapter<ViewProductAdapter.
         // Assign Value to Each Row as They Come On Screen
         StoreProduct product = items.get(position);
         holder.tvName.setText(product.getItemName());
+
+        double price = product.getPrice();
+        DecimalFormat decForm = new DecimalFormat("$#.00");
+        holder.tvPrice.setText(decForm.format(price));
         ImageDownloader.setImageResource(holder.imageView, product.getImageURL());
 
         holder.cardView.setOnClickListener(view -> listener.onProductClicked(product));
@@ -60,7 +63,8 @@ public class ViewProductAdapter extends RecyclerView.Adapter<ViewProductAdapter.
 
         ImageView imageView;
         TextView tvName;
-        CardView cardView;
+        TextView tvPrice;
+        View cardView;
 
 
         public MyViewHolder(@NonNull View itemView) {
@@ -68,6 +72,7 @@ public class ViewProductAdapter extends RecyclerView.Adapter<ViewProductAdapter.
 
             imageView = itemView.findViewById(R.id.Product_Image);
             tvName = itemView.findViewById(R.id.Product_Name);
+            tvPrice = itemView.findViewById(R.id.itemPrice);
             cardView = itemView.findViewById(R.id.ProductCardView);
         }
 
