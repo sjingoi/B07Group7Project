@@ -36,7 +36,7 @@ public class ViewProductAdapter extends RecyclerView.Adapter<ViewProductAdapter.
     public ViewProductAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Give Look To Each Row
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.storelist_row_data, parent, false);
+        View view = inflater.inflate(R.layout.view_product_row_data, parent, false);
 
         return new ViewProductAdapter.MyViewHolder(view);
     }
@@ -60,7 +60,7 @@ public class ViewProductAdapter extends RecyclerView.Adapter<ViewProductAdapter.
 
         ImageView imageView;
         TextView tvName;
-        CardView cardView;
+        View cardView;
 
 
         public MyViewHolder(@NonNull View itemView) {

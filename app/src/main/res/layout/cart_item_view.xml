@@ -1,18 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/itemLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp">
 
-    <ImageView
-        android:id="@+id/cartItemImage"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/imageCard"
         android:layout_width="128dp"
         android:layout_height="128dp"
         android:contentDescription="Item Image"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/cartItemImage"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:contentDescription="Item Image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@drawable/ic_launcher_background" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/cartItemName"
@@ -20,9 +39,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Item Name Here"
+        android:textColor="@color/text_color"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/removeItem"
-        app:layout_constraintStart_toEndOf="@+id/cartItemImage"
+        app:layout_constraintStart_toEndOf="@+id/imageCard"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -30,6 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="$69.00"
+        android:textColor="@color/text_color"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/cartItemName"
         app:layout_constraintTop_toBottomOf="@+id/cartItemName" />
