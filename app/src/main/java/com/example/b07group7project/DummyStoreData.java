@@ -13,20 +13,15 @@ public class DummyStoreData implements OrderInterface{
     @Override
     public void getPendingOrdersForStoreOwner(String storeOwnerId, OrderCallback callback) {
         List<OrderedProduct> dummyOrders = new ArrayList<>();
+        /*
+        OrderedProduct order1 = new OrderedProduct(new StoreProduct("Product 1", "product1 Id", "Item 1", "Description for Product 1", "random", 20), OrderStatus.ORDER_INCOMPLETE, 23, "Random ID shopper");
+        OrderedProduct order2 = new OrderedProduct(new StoreProduct("Product 2", "product2 Id", "Item 2", "Description for Product 2", "randomss", 3), OrderStatus.ORDER_INCOMPLETE, 2, "Random ID shopperss");
 
+        dummyOrders.add(order1);
+        dummyOrders.add(order2);
 
-        OrderedProduct order1 = new OrderedProduct(
-                new StoreProduct("Product 1", "product1 Id", "Item 1", "Description for Product 1", "random", 20),OrderStatus.ORDER_INCOMPLETE,
-                23, "Random ID shopper", "DATE", "Random ID order");
-        OrderedProduct order2 = new OrderedProduct(new StoreProduct("Product 2", "product2 Id", "Item 2", "Description for Product 2", "randomss", 3), OrderStatus.ORDER_INCOMPLETE,
-                2, "Random ID shopperss", "DATE", "Random ID order");
-
-
-        //dummyOrders.add(order1);
-        //ummyOrders.add(order2);
-
-        //callback.onPendingOrdersLoaded(dummyOrders);
-
+        callback.onPendingOrdersLoaded(dummyOrders);
+        */
     }
 
     @Override

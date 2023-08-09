@@ -112,17 +112,6 @@ public class AccountDatabase extends Database implements UserPermission {
                 }
         );
     }
-
-    public void getStoreName(String storeUUID, OnComplete<String> withStoreName) {
-        get(
-                root.child(Constants.store_owners).child(storeUUID).child(Constants.store_uuid),
-                snapshot -> {
-                    String storeName = snapshot.getValue(String.class);
-                    withStoreName.onComplete(storeName);
-                }
-        );
-    }
-
     //Assume User is a StoreOwner
     public void getStoreUUID(User user, OnComplete<String> withUUID) {
         getUserUUID(user, uuid -> onReceiveUserUUID(withUUID, uuid));
@@ -134,6 +123,14 @@ public class AccountDatabase extends Database implements UserPermission {
             String storeUUID = (String) snapshot.child(Constants.store_uuid).getValue();
             withUUID.onComplete(storeUUID);
         });
-
+    }
+    public void getStoreName(String storeUUID, OnComplete<String> withStoreName) {
+        get(
+                root.child(Constants.store_owners).child(storeUUID).child(Constants.store_uuid),
+                snapshot -> {
+                    String storeName = snapshot.getValue(String.class);
+                    withStoreName.onComplete(storeName);
+                }
+        );
     }
 }

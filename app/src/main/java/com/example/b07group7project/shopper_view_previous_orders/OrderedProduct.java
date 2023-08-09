@@ -21,6 +21,14 @@ public class OrderedProduct {
         this.orderUUID = orderUUID;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public String getOrderUUID() {
+        return orderUUID;
+    }
+
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
     }
