@@ -11,7 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.b07group7project.R;
+import com.example.b07group7project.database.AccountDatabase;
+import com.example.b07group7project.database.CartListenerImplementation;
 import com.example.b07group7project.database.ImageDownloader;
+import com.example.b07group7project.database.User;
 import com.example.b07group7project.database.StoreProductDatabase;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 
@@ -19,12 +22,13 @@ public class ItemPreviewFragment extends Fragment {
     private TextView cartItemQtyTextView;
     private int cartItemQty = 0;
     private StoreProduct currentItem;
-
     String itemID;
     String storeID;
+    private AccountDatabase accountDatabase;
 
     public ItemPreviewFragment() {
         // Required empty public constructor
+        accountDatabase = new AccountDatabase();
     }
 
     public static ItemPreviewFragment newInstance() {
@@ -51,6 +55,8 @@ public class ItemPreviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_preview, container, false);
+
+        CartListenerImplementation cartListener = new CartListenerImplementation(getContext());
 
         // Get references to TextView and Buttons
         cartItemQtyTextView = view.findViewById(R.id.cartItemQty);
@@ -101,9 +107,17 @@ public class ItemPreviewFragment extends Fragment {
 
         // Set OnClickListener for the cart add button
         addToCartButton.setOnClickListener(v -> {
-            // Call the addToCart method to add the item to the cart
-            if (currentItem != null) {
-                //addToCart(currentItem.getItemID(), currentItem.getItemName(), cartItemQty);
+            // Call the getUserUUID method to fetch user's UUID
+            User currentUser = User.getCurrentUser();
+            if (currentUser != null) {
+                accountDatabase.getUserUUID(currentUser, userUUID -> {
+                    if (userUUID != null) {
+                        String customerUUID = userUUID;
+                        cartListener.addToCart(storeID, customerUUID, itemID, cartItemQty);
+                    } else {
+                        // Handle the case where userUUID is null
+                    }
+                });
             }
         });
 
