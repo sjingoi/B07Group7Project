@@ -8,13 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.R;
 import com.example.b07group7project.database.ImageDownloader;
 import com.example.b07group7project.database_abstractions.StoreProduct;
-
 
 import java.util.ArrayList;
 
@@ -46,6 +44,7 @@ public class ViewProductAdapter extends RecyclerView.Adapter<ViewProductAdapter.
         // Assign Value to Each Row as They Come On Screen
         StoreProduct product = items.get(position);
         holder.tvName.setText(product.getItemName());
+        //TODO: get the price from the product
         ImageDownloader.setImageResource(holder.imageView, product.getImageURL());
 
         holder.cardView.setOnClickListener(view -> listener.onProductClicked(product));

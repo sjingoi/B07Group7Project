@@ -2,25 +2,21 @@ package com.example.b07group7project.shopping_cart;
 
 import android.app.Activity;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.b07group7project.R;
 import com.example.b07group7project.create_order.CheckoutFragment;
-import com.example.b07group7project.create_order.PlaceOrderImplementation;
-import com.example.b07group7project.create_order.PlaceOrderInterface;
+import com.example.b07group7project.database.CartDatabase;
 import com.example.b07group7project.itempreview.ItemPreviewFragment;
 import com.example.b07group7project.nav.Navigation;
-import com.example.b07group7project.database.CartDatabase;
-import com.example.b07group7project.view_products.ViewProductFragment;
 
 import java.util.List;
 public class ShoppingCartFragment extends Fragment implements EntryClickListener {
