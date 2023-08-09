@@ -8,11 +8,10 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.b07group7project.ExampleFragment;
 import com.example.b07group7project.R;
 import com.example.b07group7project.create_product.CreateProductFragment;
+import com.example.b07group7project.database.StoreProductDatabase;
 import com.example.b07group7project.nav.Navigation;
-import com.example.b07group7project.view_products.GetProductsImplementation;
 import com.example.b07group7project.view_products.GetProductsInterface;
 import com.example.b07group7project.view_products.ViewProductFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -46,11 +45,11 @@ public class StoreOwnerViewProducts extends ViewProductFragment {
             }
         });
 
+        String storeUUID = "";
+
         // TODO: Replace GetProductImplementation with Database Stuff
-        GetProductsInterface productInterface = new GetProductsImplementation();
-        productInterface.getProducts(
-                products -> onReceivedStores(products, view)
-        );
+        GetProductsInterface productInterface = new StoreProductDatabase();
+        productInterface.getProducts(storeUUID, products -> onReceivedProducts(products, view));
 
         return view;
     }

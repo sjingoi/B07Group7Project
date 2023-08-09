@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.R;
+import com.example.b07group7project.database.StoreProductDatabase;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 import com.example.b07group7project.itempreview.ItemPreviewFragment;
 import com.example.b07group7project.nav.Navigation;
@@ -41,7 +42,7 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.view_product_fragment, container, false);
 
-        String storeUUID = "";
+        String storeUUID = null;
 
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -51,14 +52,16 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
         }
 
 
-        // TODO: Replace GetProductImplementation with Database Stuff
-        GetProductsInterface productInterface = new GetProductsImplementation();
-        productInterface.getProducts(storeUUID, products -> onReceivedStores(products, view));
+        GetProductsInterface productInterface = new StoreProductDatabase();
+        productInterface.getProducts(storeUUID, products -> onReceivedProducts(products, view));
+
 
         return view;
     }
 
-    public void onReceivedStores(ArrayList<StoreProduct> products, View view){
+
+    public void onReceivedProducts(ArrayList<StoreProduct> products, View view){
+
         RecyclerView recyclerView = view.findViewById(R.id.ProductListRecyclerView);
         ViewProductAdapter adapter = new ViewProductAdapter(requireContext(), products, this);
         recyclerView.setAdapter(adapter);
