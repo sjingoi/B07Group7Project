@@ -7,8 +7,9 @@ import com.google.firebase.auth.FirebaseUser;
 public class User {
     static User user = null;
 
-    public String uuid;
+    String uuid;
     private static FirebaseUser firebaseUser;
+
     UserType userType;
     private User() {}
 

@@ -64,13 +64,10 @@ public class CheckoutFragment extends Fragment {
         // Button Stuff
         Button orderButton = view.findViewById(R.id.PlaceOrderButton);
         orderButton.setOnClickListener(view1 -> {
-//              // TODO: Update As Needed When PlaceOrder Is Implemented Through Databse
-            PlaceOrderInterface orderInterface = new PlaceOrderImplementation();
+            PlaceOrderInterface orderInterface = new CartDatabase();
             orderInterface.placeOrder(cart, User.getCurrentUser());
 
             Toast.makeText(requireContext(), "ORDER PLACED", Toast.LENGTH_SHORT).show();
-
-            // Cart Is Now Empty As Everything Has Ordered
         });
     }
 
