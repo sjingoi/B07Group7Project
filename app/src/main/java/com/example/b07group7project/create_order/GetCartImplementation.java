@@ -33,7 +33,7 @@ public class GetCartImplementation implements GetCartInterface{
                 new StoreProduct("Shorts", "uuid101", "uuid1", "DESC", "https://picsum.photos/200", 10.99),
         };
 
-        Store store = new Store("A", "URL");
+        Store store = new Store("A", "URL", "uuid");
         CartEntry[] prods = new CartEntry[15];
 
         for (int i = 0; i < prods.length; i++){
