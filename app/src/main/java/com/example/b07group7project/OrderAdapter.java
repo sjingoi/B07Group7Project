@@ -7,15 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import java.text.DecimalFormat;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.b07group7project.database.AccountDatabase;
 import com.example.b07group7project.database.StoreOwnerMarkOrderDatabase;
 import com.example.b07group7project.database.User;
 import com.example.b07group7project.shopper_view_previous_orders.OrderedProduct;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /*
@@ -59,10 +60,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         String formattedPrice = decimalFormat.format(price);
 
         holder.orderPriceTextView.setText("Price Per Unit: $" + formattedPrice);
-        //holder.orderUserEmailView.setText("User Email: " + order.getProduct().getuserEmail());
+        AccountDatabase db = new AccountDatabase();
+        db.getUserEmail(order.getShopperUUID(),
+                e -> holder.orderUserEmailTextView.setText("User Email: " + e));
         holder.orderItemNameTextView.setText("Item Name: " + order.getProduct().getItemName());
         holder.orderItemDesTextView.setText("Item Description: " + order.getProduct().getDescription());
-        //holder.orderQuantityTextView.setText("Quantity: " + order.getQuantity());
+        holder.orderQuantityTextView.setText("Quantity: " + order.getQuantity());
 
         // Handle the "Confirm" button click event here.
         holder.confirmButton.setOnClickListener(v -> {
@@ -82,11 +85,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
     static class OrderViewHolder extends RecyclerView.ViewHolder {
         TextView orderItemNameTextView;
-        //TextView orderUserEmailTextView;
+        TextView orderUserEmailTextView;
         TextView orderItemDesTextView;
         TextView orderQuantityTextView;
         TextView orderPriceTextView;
         TextView orderStatusTextView;
+
         Button confirmButton;
 
         public OrderViewHolder(@NonNull View itemView) {
@@ -100,6 +104,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             orderPriceTextView = itemView.findViewById(R.id.orderPriceTextView);
             orderStatusTextView = itemView.findViewById(R.id.orderStatusTextView);
             confirmButton = itemView.findViewById(R.id.confirmButton);
+            orderUserEmailTextView = itemView.findViewById(R.id.orderUserEmailTextView);
+
         }
     }
 }

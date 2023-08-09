@@ -43,6 +43,25 @@ public class AccountDatabase extends Database implements UserPermission {
         );
     }
 
+    public void getUserEmail(String userID, OnComplete<String> withUserEmail){
+        get(
+                root.child(Constants.customers).child(userID).child(Constants.email),
+                email -> {
+                    try {
+                        String decodedEmail =
+                                new String(Base64.getDecoder().decode(email.getValue(String.class).replace(';', '\\')), StandardCharsets.UTF_8);
+                        withUserEmail.onComplete(decodedEmail);
+                    }catch (Exception ignored){
+
+                    }
+
+
+
+
+                }
+        );
+    }
+
     @Override
     public void createUserOfType(UserType type, @NonNull User user) {
         String userEmail = Objects.requireNonNull(user.getEmail());
