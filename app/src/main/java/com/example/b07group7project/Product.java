@@ -34,6 +34,12 @@ public class Product {
         this.storeuuid = store.getUuid();
     }
 
+    public Product(String productname, String imageURL, int quantity) {
+        this.productname = productname;
+        this.imageURL = imageURL;
+        this.quantity = quantity;
+    }
+
     public Product(String productname, String description, String price, String imageURL, Store store, int quantity){
         this.productname = productname;
         this.description = description;
@@ -74,6 +80,10 @@ public class Product {
         product.put(Constants.product_price, price);
         product.put(Constants.product_image, imageURL);
         return product;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 
     public String getUuid() {
