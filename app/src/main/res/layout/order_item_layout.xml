@@ -7,6 +7,12 @@
     android:padding="16dp">
 
     <TextView
+        android:id="@+id/orderUserEmailTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User Email: " />
+
+    <TextView
         android:id="@+id/orderItemNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +34,7 @@
         android:id="@+id/orderPriceTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Price Per Unit: " />
+        android:text="Price Per Unit: $" />
 
     <TextView
         android:id="@+id/orderStatusTextView"

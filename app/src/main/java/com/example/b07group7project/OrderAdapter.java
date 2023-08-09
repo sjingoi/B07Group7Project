@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import java.text.DecimalFormat;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,7 +52,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         //holder.customerNameTextView.setText("Customer Name: " + order.customer.name);
         //holder.storeNameTextView.setText("Store Name: " + order.store.getStoreName());
         holder.orderStatusTextView.setText("Status: " + order.getOrderStatus());
-        holder.orderPriceTextView.setText("Price Per Unit: " + order.getProduct().getPrice());
+        double price = order.getProduct().getPrice();
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        String formattedPrice = decimalFormat.format(price);
+
+        holder.orderPriceTextView.setText("Price Per Unit: $" + formattedPrice);
+        //holder.orderUserEmailView.setText("User Email: " + order.getProduct().getuserEmail());
         holder.orderItemNameTextView.setText("Item Name: " + order.getProduct().getItemName());
         holder.orderItemDesTextView.setText("Item Description: " + order.getProduct().getDescription());
         holder.orderQuantityTextView.setText("Quantity: " + order.getQuantity());
@@ -72,6 +78,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
     static class OrderViewHolder extends RecyclerView.ViewHolder {
         TextView orderItemNameTextView;
+        //TextView orderUserEmailTextView;
         TextView orderItemDesTextView;
         TextView orderQuantityTextView;
         TextView orderPriceTextView;
@@ -82,6 +89,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             super(itemView);
 
             // Initialize your views here based on the item layout.
+            //orderUserEmailTextView = itemView.findViewById(R.id.orderUserEmailTextView);
             orderItemNameTextView = itemView.findViewById(R.id.orderItemNameTextView);
             orderItemDesTextView = itemView.findViewById(R.id.orderItemDesTextView);
             orderQuantityTextView = itemView.findViewById(R.id.orderQuantityTextView);
