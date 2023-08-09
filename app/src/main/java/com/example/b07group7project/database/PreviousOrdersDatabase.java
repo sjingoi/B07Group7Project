@@ -42,8 +42,9 @@ public class PreviousOrdersDatabase extends Database implements getPreviousOrder
                 String currentDate = (String) previousOrder.getValue();
                 PreviousOrder exPreviousOrder = new PreviousOrder(orderedProductList, currentDate);
                 previousOrderList.add(exPreviousOrder);
-                onComplete.onComplete(previousOrderList);
+
             }
+            onComplete.onComplete(previousOrderList);
         });
     }
 
