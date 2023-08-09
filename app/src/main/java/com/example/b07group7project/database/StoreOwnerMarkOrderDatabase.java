@@ -28,13 +28,15 @@ public class StoreOwnerMarkOrderDatabase extends Database{
                 ArrayList<OrderedProduct> products = new ArrayList<>();
                 for (DataSnapshot product: storeOrder.child(Constants.store_products).getChildren()) {
                     String productName = (String) product.child(Constants.product_name).getValue();
+                    String productUUID = (String) product.child(Constants.product_uuid).getValue();
                     String productDescription = (String) product.child(Constants.product_description).getValue();
                     String imageURL = (String) product.child(Constants.product_image).getValue();
                     int price = (Integer) product.child(Constants.product_price).getValue();
+                    StoreProduct product1 = new StoreProduct(productName, productDescription,imageURL, price, productUUID);
                     int quantity = (Integer) product.child(Constants.quantity).getValue();
-                    StoreProduct product1 = new StoreProduct(productName, productDescription,imageURL, price);
                     String orderStatus = (String) storeOrder.child(Constants.order_status).getValue();
-                    OrderedProduct orderedProduct = new OrderedProduct(product1, orderStatus, quantity);
+                    String customerUUID = (String) storeOrder.child(Constants.customer_uuid).getValue();
+                    OrderedProduct orderedProduct = new OrderedProduct(product1, orderStatus, quantity, customerUUID);
                     products.add(orderedProduct);
                 }
                 StoreOrder storeOrder1 = new StoreOrder(products, storeOrder.getKey());
@@ -50,8 +52,9 @@ public class StoreOwnerMarkOrderDatabase extends Database{
     }
 
     public void onReceiveStoreUUID(OrderedProduct orderedProduct, StoreOrder storeOrder, String storeUUID) {
-        DatabaseReference newreference = root.child(Constants.store_orders).child(storeUUID).child(storeOrder.getCurrentDate()).child(Constants.order_status);
-        put(newreference, snapshot -> OrderStatus.ORDER_COMPLETE.toString());
+        DatabaseReference reference1 = root.child(Constants.store_orders).child(storeUUID).child(storeOrder.getCurrentDate()).child(Constants.order_status);
+        put(reference1, snapshot -> OrderStatus.ORDER_COMPLETE.toString());
+        DatabaseReference reference2 = root.child(Constants.customers).child(storeOrder.getCustomerUUID()).child(Constants.previous_orders);
 
     }
 }

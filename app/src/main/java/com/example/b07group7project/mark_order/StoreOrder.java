@@ -32,6 +32,17 @@ public class StoreOrder {
         currentDate = currentDate.substring(0, currentDate.indexOf("T")) + " at " + currentDate.substring(currentDate.indexOf("T") + 1, currentDate.indexOf("."));
     }
 
+    public StoreOrder(OrderStatus orderStatus, List<OrderedProduct> orderedProducts, String currentDate, String customerUUID) {
+        this.orderStatus = orderStatus;
+        this.orderedProducts = orderedProducts;
+        this.currentDate = currentDate;
+        this.customerUUID = customerUUID;
+    }
+
+    public String getCustomerUUID() {
+        return customerUUID;
+    }
+
     public OrderStatus isOrderComplete() {
         if (orderedProducts == null) {
             return OrderStatus.ORDER_INCOMPLETE;

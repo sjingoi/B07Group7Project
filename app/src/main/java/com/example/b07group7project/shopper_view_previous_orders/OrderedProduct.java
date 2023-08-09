@@ -7,6 +7,14 @@ public class OrderedProduct {
     StoreProduct product;
     String orderStatus;
     int quantity;
+    String customerUUID;
+
+    public OrderedProduct(StoreProduct product, String orderStatus, int quantity, String customerUUID) {
+        this.product = product;
+        this.orderStatus = orderStatus;
+        this.quantity = quantity;
+        this.customerUUID = customerUUID;
+    }
 
     public OrderedProduct(StoreProduct product, OrderStatus orderStatus, int quantity) {
         this.product = product;
