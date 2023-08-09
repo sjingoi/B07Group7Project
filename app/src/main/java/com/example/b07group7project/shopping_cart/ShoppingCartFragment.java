@@ -64,7 +64,7 @@ public class ShoppingCartFragment extends Fragment implements EntryClickListener
             Navigation nav = (Navigation) activity;
             Bundle bundle = new Bundle();
             bundle.putString("itemID", entry.getProduct().getProductID());
-            bundle.putString("storeID", entry.getStore());
+            bundle.putString("storeID", entry.getStore().getStoreUUID());
             nav.replaceFragment(ItemPreviewFragment.newInstance(), true, bundle);
         }
     }

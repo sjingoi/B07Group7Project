@@ -7,12 +7,11 @@ import com.example.b07group7project.shopping_cart.GetCartEntries;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CartDatabase extends Database implements GetCartEntries {
 
     @Override
-    public void getCartEntries(OnComplete<List<CartEntry>> onComplete) {
+    public void getCartEntries(OnComplete<ArrayList<CartEntry>> onComplete) {
         AccountDatabase db = new AccountDatabase();
 
         db.getUserUUID(
@@ -21,7 +20,7 @@ public class CartDatabase extends Database implements GetCartEntries {
         );
     }
 
-    private void getCartEntriesWithUUID(String uuid, OnComplete<List<CartEntry>> onComplete) {
+    private void getCartEntriesWithUUID(String uuid, OnComplete<ArrayList<CartEntry>> onComplete) {
 
         get(
                 root.child(Constants.customers).child(uuid).child(Constants.shopping_cart),
@@ -32,7 +31,7 @@ public class CartDatabase extends Database implements GetCartEntries {
         );
 
     }
-    private void loadCart(DataSnapshot cartSnapshot, DataSnapshot productSnapshot, OnComplete<List<CartEntry>> onComplete) {
+    private void loadCart(DataSnapshot cartSnapshot, DataSnapshot productSnapshot, OnComplete<ArrayList<CartEntry>> onComplete) {
         ArrayList<CartEntry> entries = new ArrayList<>();
         ArrayList<String[]> toFetch = new ArrayList<>();
         for (DataSnapshot item: cartSnapshot.getChildren()){
