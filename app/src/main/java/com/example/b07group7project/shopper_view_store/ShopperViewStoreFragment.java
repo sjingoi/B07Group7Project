@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -61,7 +60,9 @@ public class ShopperViewStoreFragment extends Fragment implements StoreClickList
     public void onStoreClicked(Store store) {
         if (requireActivity() instanceof Navigation) {
             Navigation nav = (Navigation) requireActivity();
-            nav.replaceFragment(ViewProductFragment.newInstance(), true); // TODO: Pass store data to the next fragment so it knows what to load (Seb will probably do this unless you want to then go ahead :) )
+            Bundle bundle = new Bundle();
+            bundle.putString("storeID", store.getUuid());
+            nav.replaceFragment(ViewProductFragment.newInstance(), true, bundle); // TODO: Pass store data to the next fragment so it knows what to load (Seb will probably do this unless you want to then go ahead :) )
         }
 //        Toast.makeText(requireContext(), store.getStoreName(), Toast.LENGTH_SHORT).show();
     }

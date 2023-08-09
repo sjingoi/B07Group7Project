@@ -8,16 +8,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.b07group7project.R;
+import com.example.b07group7project.UserType;
 import com.example.b07group7project.database.AccountDatabase;
 import com.example.b07group7project.database.User;
 import com.example.b07group7project.nav.Navigation;
-import com.example.b07group7project.R;
 import com.example.b07group7project.nav.ShopperNavigationActivity;
-import com.example.b07group7project.UserType;
 import com.example.b07group7project.nav.StoreOwnerNavigationActivity;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class EmailPasswordActivity extends AppCompatActivity {
     private LoginModel loginModel;

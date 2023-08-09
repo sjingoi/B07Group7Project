@@ -15,7 +15,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/store_owner_nav_menu" />
+        app:menu="@menu/store_owner_nav_menu"/>
 
     <FrameLayout
         android:id="@+id/frameLayout"

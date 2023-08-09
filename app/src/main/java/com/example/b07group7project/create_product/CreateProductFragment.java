@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.b07group7project.R;
+import com.example.b07group7project.database.SaveProduct;
+import com.example.b07group7project.database.SaveProductImplementation;
 
 public class CreateProductFragment extends Fragment {
 
