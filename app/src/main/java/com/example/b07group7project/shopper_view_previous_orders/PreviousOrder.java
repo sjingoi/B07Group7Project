@@ -32,7 +32,7 @@ public class PreviousOrder {
             return OrderStatus.ORDER_INCOMPLETE;
         }
         for (OrderedProduct orderedProduct : orderedProducts) {
-            if (orderedProduct.orderStatus == OrderStatus.ORDER_INCOMPLETE) {
+            if (orderedProduct.orderStatus == OrderStatus.ORDER_INCOMPLETE.toString()) {
                 return OrderStatus.ORDER_INCOMPLETE;
             }
         }
