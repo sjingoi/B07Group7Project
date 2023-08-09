@@ -44,7 +44,7 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
         // Assign Value to Each Row as They Come On Screen
         Store store = items.get(position);
         holder.tvName.setText(store.getStoreName());
-        ImageDownloader.setImageResource(holder.imageView, store.getImage());
+        ImageDownloader.setImageResource(holder.imageView, store.getImage(), 900, 900);
 
         holder.cardView.setOnClickListener(view -> listener.onStoreClicked(store));
     }
