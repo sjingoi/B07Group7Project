@@ -1,10 +1,6 @@
 package com.example.b07group7project.create_store;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.b07group7project.R;
-import com.example.b07group7project.create_store.SaveStore;
-import com.example.b07group7project.create_store.SaveStoreImplementation;
-import com.example.b07group7project.nav.ShopperNavigationActivity;
+import com.example.b07group7project.database.StoreDatabase;
 
 public class CreateStoreFragment extends Fragment {
 
@@ -49,16 +45,16 @@ public class CreateStoreFragment extends Fragment {
         Button saveButton = rootView.findViewById(R.id.button_save);
 
         // Instantiate the SaveProductImplementation and assign it to saveProduct
-        saveStore = new SaveStoreImplementation();
+        saveStore = new StoreDatabase();
 
         saveButton.setOnClickListener(v -> {
-            String itemName = storeNameEditText.getText().toString().trim();
-            String itemDesc = storeDescEditText.getText().toString().trim();
-            String itemURL = storeURLEditText.getText().toString().trim();
+            String storeName = storeNameEditText.getText().toString().trim();
+            String storeDesc = storeDescEditText.getText().toString().trim();
+            String storeURL = storeURLEditText.getText().toString().trim();
 
-            if (!itemName.isEmpty() && !itemDesc.isEmpty() && !itemURL.isEmpty()) {
+            if (!storeName.isEmpty() && !storeDesc.isEmpty() && !storeURL.isEmpty()) {
 
-                saveStore.saveStoreToFirebase(itemName, itemDesc, itemURL);
+                saveStore.saveStoreToFirebase(storeName, storeDesc, storeURL);
 
                 // Clear the EditText fields after saving if the data is valid and saved
                 storeNameEditText.setText("");
@@ -66,10 +62,6 @@ public class CreateStoreFragment extends Fragment {
                 storeURLEditText.setText("");
 
                 Toast.makeText(getContext(), "Store Created", Toast.LENGTH_SHORT).show();
-
-                //TODO: Go To Shopper Navigation Activity
-
-
 
             } else {
                 Toast.makeText(getContext(), "Please fill in all fields.", Toast.LENGTH_SHORT).show();
