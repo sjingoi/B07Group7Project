@@ -11,11 +11,14 @@
     <!--Strings related to Shopping Cart-->
     <string name="check_out_button">Check Out</string>
 
-    <!-- Strings realted to nav    -->
+    <!-- Strings related to nav    -->
     <string name="homeNavMenu">Home</string>
     <string name="cartNavMenu">Cart</string>
     <string name="accountNavMenu">Account</string>
     <string name="ordersNavMenu">Orders</string>
+
+    <!-- Strings related to product creation -->
+    <string name="saveProduct">Save &amp; Add Product</string>
 
     <!-- Strings related to item info -->
     <string name="itemName">Item Name</string>
@@ -44,6 +47,8 @@
     <string name="reset_password_to_login">Go Back</string>
 
 
-
+    <!--Strings related to Shopper View Previous Orders -->
+    <string name="previous_order">Previous Order</string>
+    <string name="order_status">Order Status</string>
 
 </resources>
