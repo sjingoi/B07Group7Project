@@ -41,7 +41,7 @@ public class CheckoutFragment extends Fragment {
 
 
         RecyclerView recyclerView = view.findViewById(R.id.Checkout_RecyclerView);
-        // TODO: Update Accordingly based on Implementation of GetCartInterface
+        // TODO: Update Accordinlgy based on Implemenetation of GetCartInterface
         GetCartInterface cartInterface = new GetCartImplementation();
         cartInterface.getCart(
                 products -> onReceivedCart(products, view)

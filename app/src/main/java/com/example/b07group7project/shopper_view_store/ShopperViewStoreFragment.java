@@ -48,6 +48,11 @@ public class ShopperViewStoreFragment extends Fragment implements StoreClickList
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.shopper_view_store_fragment, container, false);
 
+//        GetStoreInterface storeInterface = new StoreDatabase();
+//        storeInterface.getStores(
+//                stores -> onReceivedStores(stores, view)
+//        );
+
         return view;
     }
 

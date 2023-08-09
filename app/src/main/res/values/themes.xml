@@ -5,5 +5,12 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
+    <color name="text_color">#FF000000</color>
+    <color name="background_color">#FFFFFFFF</color>
+    <color name="border_color">#FFDDDDDD</color>
+    <color name="nav_background_color">#FFEEEEEE</color>
+    <color name="icon_unselected">#646468</color>
+
+
     <style name="Theme.B07Group7Project" parent="Base.Theme.B07Group7Project" />
 </resources>
