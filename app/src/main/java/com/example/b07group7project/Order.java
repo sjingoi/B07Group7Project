@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class Order {
+    public String order_complete;
     HashMap<Product, Integer> productsuuidToQuantity;
     Store store;
     Customer customer;
