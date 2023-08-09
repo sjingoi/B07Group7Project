@@ -65,6 +65,8 @@ public class CreateStoreFragment extends Fragment {
                 storeDescEditText.setText("");
                 storeURLEditText.setText("");
 
+                Toast.makeText(getContext(), "Store Created", Toast.LENGTH_SHORT).show();
+
                 //TODO: Go To Shopper Navigation Activity
 
 
