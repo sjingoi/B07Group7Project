@@ -15,4 +15,24 @@ public class OrderedProduct {
         this.quantity = quantity;
         this.shopperUUID = shopperUUID;
     }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public StoreProduct getProduct() {
+        return product;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public String getShopperUUID() {
+        return shopperUUID;
+    }
 }
