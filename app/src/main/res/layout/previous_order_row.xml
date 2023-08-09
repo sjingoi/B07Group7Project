@@ -17,16 +17,16 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/previousOrderRecycler"
             android:layout_width="match_parent"
-            android:layout_height="106dp">
+            android:layout_height="136dp">
 
             <TextView
                 android:id="@+id/previousOrder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="30dp"
                 android:text="@string/previous_order"
-                android:textSize="30dp"
+                android:textSize="25dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="8dp"
                 android:text="@string/order_status"
                 android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"

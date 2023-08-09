@@ -33,4 +33,7 @@ public final class Constants {
 
     public static final String customer_uuid = "CustomerUUID";
     public static final String current_date = "CurrentDate";
+    public static final String ordered_products = "OrderedProducts";
+    public static final String customer_UUID = "CustomerUUID";
+
 }
