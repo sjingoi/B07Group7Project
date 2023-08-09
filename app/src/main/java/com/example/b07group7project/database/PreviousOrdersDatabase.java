@@ -2,7 +2,7 @@ package com.example.b07group7project.database;
 
 import androidx.annotation.NonNull;
 
-import com.example.b07group7project.Product;
+
 import com.example.b07group7project.database_abstractions.StoreProduct;
 import com.example.b07group7project.shopper_view_previous_orders.OrderedProduct;
 import com.example.b07group7project.shopper_view_previous_orders.PreviousOrder;
@@ -28,12 +28,17 @@ public class PreviousOrdersDatabase extends Database implements getPreviousOrder
             onComplete.onComplete(new ArrayList<>(previousOrders));
             return;
         }
-        DatabaseReference newreference = root.child(Constants.customers).child(User.getCurrentUser().uuid).child(Constants.previous_orders);
+        AccountDatabase accountDatabase = new AccountDatabase();
+        accountDatabase.getUserUUID(user, userUUID -> onReceiveUserUUID(onComplete, userUUID));
+    }
+
+    public void onReceiveUserUUID(OnComplete<ArrayList<PreviousOrder>> onComplete, String userUUID) {
+        DatabaseReference newreference = root.child(Constants.customers).child(userUUID).child(Constants.previous_orders);
         get(newreference, snapshot -> {
             ArrayList<PreviousOrder> previousOrderList = new ArrayList<>();
             for (DataSnapshot previousOrder : snapshot.child("PreviousOrders").getChildren()) {
                 ArrayList<OrderedProduct> orderedProductList = new ArrayList<>();
-                for (DataSnapshot product : previousOrder.child(Constants.ordered_products).getChildren()) {
+                for (DataSnapshot product : previousOrder.getChildren()) {
                     String productName = (String) product.child(Constants.product_name).getValue();
                     String productDescription = (String) product.child(Constants.product_description).getValue();
                     String imageURL = (String) product.child(Constants.product_image).getValue();
@@ -44,11 +49,11 @@ public class PreviousOrdersDatabase extends Database implements getPreviousOrder
                     String orderStatus = (String) product.child(Constants.order_status).getValue();
                     String customerUUID = (String) product.child(Constants.customer_UUID).getValue();
                     OrderedProduct orderedProduct = new OrderedProduct(storeProduct, orderStatus, quantity, customerUUID);
+                    orderedProductList.add(orderedProduct);
                 }
-                String currentDate = (String) previousOrder.getValue();
+                String currentDate = (String) previousOrder.getKey();
                 PreviousOrder exPreviousOrder = new PreviousOrder(orderedProductList, currentDate);
                 previousOrderList.add(exPreviousOrder);
-
             }
             onComplete.onComplete(previousOrderList);
         });
