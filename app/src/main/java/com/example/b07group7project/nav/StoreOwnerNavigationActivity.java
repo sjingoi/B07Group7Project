@@ -33,15 +33,13 @@ public class StoreOwnerNavigationActivity extends Navigation {
 
         toolbar = findViewById(R.id.toolbar);
 
-        setUpToolbar();
-
 
         homeFragment = StoreOwnerViewProducts.newInstance();    // CHANGE THIS
         cartFragment = CreateProductFragment.newInstance();    // CHANGE THIS
         accountFragment = StoreOwnerAccountFragment.newInstance(); // CHANGE THIS
 
 
-        replaceFragment(homeFragment, false, "Products");
+        replaceFragment(homeFragment);
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 

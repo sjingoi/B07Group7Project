@@ -9,6 +9,7 @@ import com.example.b07group7project.R;
 import com.example.b07group7project.account.ShopperAccountFragment;
 import com.example.b07group7project.databinding.ShopperNavigationActivityBinding;
 import com.example.b07group7project.shopping_cart.ShoppingCartFragment;
+
 import com.example.b07group7project.shopper_view_store.ShopperViewStoreFragment;
 
 public class ShopperNavigationActivity extends Navigation {
@@ -27,6 +28,7 @@ public class ShopperNavigationActivity extends Navigation {
 
         binding = ShopperNavigationActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
         setSystemBarColors();
 
