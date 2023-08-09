@@ -7,6 +7,17 @@
     tools:context=".shopping_cart.ShoppingCartFragment"
     android:padding="8dp">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/emptyCartText"
+        android:text="No items in cart."
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/cartItemList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cartItemList"
         android:layout_width="match_parent"
@@ -20,8 +31,10 @@
         android:id="@+id/checkoutButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:enabled="false"
         android:text="@string/check_out_button"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="8dp" />
 
 
 

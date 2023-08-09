@@ -31,6 +31,8 @@ public class ShoppingCartFragment extends Fragment implements EntryClickListener
     String userID;
 
     CartListenerImplementation cli;
+    Button checkoutButton;
+    TextView emptyCartText;
 
     public ShoppingCartFragment() {
         // Required empty public constructor
@@ -59,6 +61,8 @@ public class ShoppingCartFragment extends Fragment implements EntryClickListener
         cli = new CartListenerImplementation(requireContext());
 
         recyclerView = shoppingCartLayout.findViewById(R.id.cartItemList);
+        checkoutButton = shoppingCartLayout.findViewById(R.id.checkoutButton);
+        emptyCartText = shoppingCartLayout.findViewById(R.id.emptyCartText);
 
         AccountDatabase adb = new AccountDatabase();
         adb.getUserUUID(User.getCurrentUser(), uuid -> userID = uuid);
@@ -86,6 +90,13 @@ public class ShoppingCartFragment extends Fragment implements EntryClickListener
     }
 
     private void onData(RecyclerView recyclerView, List<CartEntry> cart) {
+        if (cart.size() == 0) {
+            checkoutButton.setEnabled(false);
+            emptyCartText.setVisibility(View.VISIBLE);
+        } else {
+            checkoutButton.setEnabled(true);
+            emptyCartText.setVisibility(View.INVISIBLE);
+        }
         recyclerView.setAdapter(new CartAdapter(requireContext().getApplicationContext(), cart, this));
     }
 
