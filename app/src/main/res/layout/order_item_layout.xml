@@ -7,22 +7,34 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/orderIdTextView"
+        android:id="@+id/orderUserEmailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Order ID: " />
+        android:text="User Email: " />
 
     <TextView
-        android:id="@+id/customerNameTextView"
+        android:id="@+id/orderItemNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Customer Name: " />
+        android:text="Item Name: " />
 
     <TextView
-        android:id="@+id/storeNameTextView"
+        android:id="@+id/orderItemDesTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Store Name: " />
+        android:text="Item Description: " />
+
+    <TextView
+        android:id="@+id/orderQuantityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quantity: " />
+
+    <TextView
+        android:id="@+id/orderPriceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price Per Unit: $" />
 
     <TextView
         android:id="@+id/orderStatusTextView"
