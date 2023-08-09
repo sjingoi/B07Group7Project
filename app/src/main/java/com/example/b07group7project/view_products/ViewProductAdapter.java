@@ -14,6 +14,7 @@ import com.example.b07group7project.R;
 import com.example.b07group7project.database.ImageDownloader;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 // RecylerViewAdapter for ViewProductFragment
@@ -44,7 +45,10 @@ public class ViewProductAdapter extends RecyclerView.Adapter<ViewProductAdapter.
         // Assign Value to Each Row as They Come On Screen
         StoreProduct product = items.get(position);
         holder.tvName.setText(product.getItemName());
-        //TODO: get the price from the product
+
+        double price = product.getPrice();
+        DecimalFormat decForm = new DecimalFormat("$#.00");
+        holder.tvPrice.setText(decForm.format(price));
         ImageDownloader.setImageResource(holder.imageView, product.getImageURL());
 
         holder.cardView.setOnClickListener(view -> listener.onProductClicked(product));
@@ -59,6 +63,7 @@ public class ViewProductAdapter extends RecyclerView.Adapter<ViewProductAdapter.
 
         ImageView imageView;
         TextView tvName;
+        TextView tvPrice;
         View cardView;
 
 
@@ -67,6 +72,7 @@ public class ViewProductAdapter extends RecyclerView.Adapter<ViewProductAdapter.
 
             imageView = itemView.findViewById(R.id.Product_Image);
             tvName = itemView.findViewById(R.id.Product_Name);
+            tvPrice = itemView.findViewById(R.id.itemPrice);
             cardView = itemView.findViewById(R.id.ProductCardView);
         }
 
