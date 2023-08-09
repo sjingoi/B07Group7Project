@@ -35,7 +35,7 @@ public class StoreOwnerNavigationActivity extends Navigation {
         cartFragment = ExampleFragment.newInstance();    // CHANGE THIS
         accountFragment = ExampleFragment.newInstance(); // CHANGE THIS
 
-        replaceFragment(homeFragment, true, "Home");
+        replaceFragment(homeFragment, false, "Home");
 
         setUpToolbar();
 
