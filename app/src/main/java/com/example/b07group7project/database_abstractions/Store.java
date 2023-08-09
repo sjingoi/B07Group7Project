@@ -14,10 +14,6 @@ public class Store{
         return imageURL;
     }
 
-    public String getStoredescription() {
-        return storedescription;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -26,12 +22,7 @@ public class Store{
         return uuid;
     }
 
-    public String getStoreicon() {
-        return storeicon;
-    }
-
     String uuid;
-    String storeicon;
 
     public Store() {
         // Required empty public constructor
@@ -43,21 +34,14 @@ public class Store{
         this.uuid = uuid;
     }
 
-    public Store(String storename, String storedescription, String email, String storeicon) {
+    public Store(String storename, String storedescription, String email, String imageURL) {
         this.storeName = storename;
         this.storedescription = storedescription;
         this.email = email;
-        this.imageURL = storeicon;
+        this.imageURL = imageURL;
         this.uuid = UUID.randomUUID().toString();
     }
 
-    public Store(String storename, String storedescription, String email, HashMap<String, Object> productlist, HashMap<String, Object> previousOrders, String storeicon) {
-        this.storeName = storename;
-        this.storedescription = storedescription;
-        this.email = email;
-        this.imageURL = storeicon;
-        this.uuid = UUID.randomUUID().toString();
-    }
 
     public String getStoreName() {
         return storeName;
@@ -72,7 +56,7 @@ public class Store{
         store.put("Store name", storeName);
         store.put("Store Description", storedescription);
         store.put("Email", email);
-        store.put("Store Icon", storeicon);
+        store.put("Store Icon", imageURL);
         return store;
     }
 

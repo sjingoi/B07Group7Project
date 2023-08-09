@@ -45,6 +45,8 @@
     <string name="shopper_account">Shopper Account</string>
     <string name="store_owner_account">Store Owner Account</string>
     <string name="reset_password_to_login">Go Back</string>
+    <string name="total">TOTAL: $</string>
+
 
 
     <!--Strings related to Shopper View Previous Orders -->
