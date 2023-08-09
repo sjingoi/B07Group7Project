@@ -69,9 +69,8 @@ class Database {
         });
     }
 
-    String getObjectAsString(Object o){
-        if(o == null)
-            return null;
-        return o.toString();
+    void delete(DatabaseReference ref){
+        ref.removeValue();
     }
+
 }

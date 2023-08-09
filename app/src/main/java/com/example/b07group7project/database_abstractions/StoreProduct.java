@@ -48,10 +48,6 @@ public class StoreProduct implements Serializable {
         this.description = description;
     }
 
-//    public void setImageURL(String imageURL) {
-//        this.imageURL = imageURL;
-//    }
-//
     public void setPrice(double price) {
         this.price = price;
     }

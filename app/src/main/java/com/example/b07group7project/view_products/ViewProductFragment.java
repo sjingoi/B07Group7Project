@@ -33,8 +33,6 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
         return fragment;
     }
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

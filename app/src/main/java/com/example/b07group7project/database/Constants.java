@@ -6,7 +6,7 @@ public final class Constants {
     public static final String store_description = "StoreDescription";
     public static final String store_image = "StoreImage";
     public static final String store_products = "Products";
-    public static final String previous_products = "PreviousProducts";
+    public static final String store_orders = "StoreOrders";
     public static final String email = "Email";
     public static final String user_uuid = "UserUUID";
     public static final String user_type = "UserType";

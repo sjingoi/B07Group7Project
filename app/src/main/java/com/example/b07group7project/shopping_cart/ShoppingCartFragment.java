@@ -2,17 +2,19 @@ package com.example.b07group7project.shopping_cart;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.example.b07group7project.R;
+import com.example.b07group7project.create_order.CheckoutFragment;
+import com.example.b07group7project.database.CartDatabase;
 import com.example.b07group7project.itempreview.ItemPreviewFragment;
 import com.example.b07group7project.nav.Navigation;
 
@@ -45,9 +47,23 @@ public class ShoppingCartFragment extends Fragment implements EntryClickListener
 
         RecyclerView recyclerView = shoppingCartLayout.findViewById(R.id.cartItemList);
 
-        (new GetCartEntriesImplementation()).getCartEntries(cartEntries -> onData(recyclerView, cartEntries));
+        (new CartDatabase()).getCartEntries(cartEntries -> onData(recyclerView, cartEntries));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+
+
+        // Button Stuff
+        Button checkoutButton = shoppingCartLayout.findViewById(R.id.checkoutButton);
+        checkoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (requireActivity() instanceof Navigation) {
+                    Navigation nav = (Navigation) requireActivity();
+                    nav.replaceFragment(CheckoutFragment.newInstance(), true);
+                }
+
+            }
+        });
 
         return shoppingCartLayout;
     }
@@ -63,7 +79,7 @@ public class ShoppingCartFragment extends Fragment implements EntryClickListener
             Navigation nav = (Navigation) activity;
             Bundle bundle = new Bundle();
             bundle.putString("itemID", entry.getProduct().getProductID());
-            bundle.putString("storeID", entry.getStore());
+            bundle.putString("storeID", entry.getStore().getStoreUUID());
             nav.replaceFragment(ItemPreviewFragment.newInstance(), true, bundle);
         }
     }
