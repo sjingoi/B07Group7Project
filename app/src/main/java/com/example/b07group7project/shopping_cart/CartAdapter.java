@@ -28,7 +28,8 @@ public class CartAdapter extends RecyclerViewAdapter<CartEntry, CartViewHolder> 
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         holder.layout.setOnClickListener(view -> entryClickListener.onEntryClick(entries.get(position)));
-        holder.removeItem.setOnClickListener(view -> entryClickListener.onRemoveClick(entries.get(position)));
+        holder.removeItem.setOnClickListener(view -> entryClickListener.onRemoveClick(position)
+        );
     }
 
     @NonNull

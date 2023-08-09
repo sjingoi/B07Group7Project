@@ -11,19 +11,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.b07group7project.R;
 import com.example.b07group7project.create_order.CheckoutFragment;
-import com.example.b07group7project.create_order.PlaceOrderImplementation;
-import com.example.b07group7project.create_order.PlaceOrderInterface;
+import com.example.b07group7project.database.AccountDatabase;
+import com.example.b07group7project.database.CartListenerImplementation;
+import com.example.b07group7project.database.User;
 import com.example.b07group7project.itempreview.ItemPreviewFragment;
 import com.example.b07group7project.nav.Navigation;
 import com.example.b07group7project.database.CartDatabase;
-import com.example.b07group7project.view_products.ViewProductFragment;
 
 import java.util.List;
 public class ShoppingCartFragment extends Fragment implements EntryClickListener {
+
+    List<CartEntry> cartEntriesList;
+
+    RecyclerView recyclerView;
+
+    String userID;
 
     public ShoppingCartFragment() {
         // Required empty public constructor
@@ -49,24 +54,27 @@ public class ShoppingCartFragment extends Fragment implements EntryClickListener
         // Inflate the layout for this fragment
         View shoppingCartLayout = inflater.inflate(R.layout.fragment_shopping_cart, container, false);
 
-        RecyclerView recyclerView = shoppingCartLayout.findViewById(R.id.cartItemList);
+        recyclerView = shoppingCartLayout.findViewById(R.id.cartItemList);
 
-        (new CartDatabase()).getCartEntries(cartEntries -> onData(recyclerView, cartEntries));
+        AccountDatabase adb = new AccountDatabase();
+        adb.getUserUUID(User.getCurrentUser(), uuid -> userID = uuid);
+
+        (new CartDatabase()).getCartEntries(cartEntries -> {
+                cartEntriesList = cartEntries;
+                onData(recyclerView, cartEntries);
+            });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
 
         // Button Stuff
         Button checkoutButton = shoppingCartLayout.findViewById(R.id.checkoutButton);
-        checkoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (requireActivity() instanceof Navigation) {
-                    Navigation nav = (Navigation) requireActivity();
-                    nav.replaceFragment(CheckoutFragment.newInstance(), true);
-                }
-
+        checkoutButton.setOnClickListener(view -> {
+            if (requireActivity() instanceof Navigation) {
+                Navigation nav = (Navigation) requireActivity();
+                nav.replaceFragment(CheckoutFragment.newInstance(), true);
             }
+
         });
 
         return shoppingCartLayout;
@@ -89,8 +97,14 @@ public class ShoppingCartFragment extends Fragment implements EntryClickListener
     }
 
     @Override
-    public void onRemoveClick(CartEntry entry) {
+    public void onRemoveClick(int entryPosition) {
         //Delete Entry
-        Toast.makeText(requireContext(), "DELETE", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(requireContext(), "DELETE", Toast.LENGTH_SHORT).show();
+        CartEntry entry = cartEntriesList.get(entryPosition);
+        CartListenerImplementation cli = new CartListenerImplementation(requireContext());
+        cli.removeFromCart(entry.getStore().getStoreUUID(), userID, entry.getProduct().getProductID());
+        cartEntriesList.remove(entryPosition);
+        onData(recyclerView, cartEntriesList);
+
     }
 }
