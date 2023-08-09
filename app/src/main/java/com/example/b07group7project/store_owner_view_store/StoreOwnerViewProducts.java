@@ -57,9 +57,6 @@ public class StoreOwnerViewProducts extends ViewProductFragment {
             }
         });
 
-        //String storeUUID = "";
-
-        // TODO: Replace GetProductImplementation with Database Stuff
         GetProductsInterface productInterface = new StoreProductDatabase();
         productInterface.getProducts(storeID, products -> onReceivedProducts(products, view));
 
