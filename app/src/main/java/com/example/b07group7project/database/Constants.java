@@ -31,4 +31,5 @@ public final class Constants {
     public static final String store_orders = "StoreOrders";
     public static final String order_status = "OrderStatus";
     public static final String customer_uuid = "CustomerUUID";
+    public static final String current_date = "CurrentDate";
 }

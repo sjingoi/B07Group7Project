@@ -9,6 +9,7 @@ import java.util.List;
 public class StoreOrder {
 
     OrderStatus orderStatus;
+
     List<OrderedProduct> orderedProducts;
     String currentDate;
 

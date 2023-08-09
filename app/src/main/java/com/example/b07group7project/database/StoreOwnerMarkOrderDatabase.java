@@ -54,7 +54,8 @@ public class StoreOwnerMarkOrderDatabase extends Database{
     public void onReceiveStoreUUID(OrderedProduct orderedProduct, StoreOrder storeOrder, String storeUUID) {
         DatabaseReference reference1 = root.child(Constants.store_orders).child(storeUUID).child(storeOrder.getCurrentDate()).child(Constants.order_status);
         put(reference1, snapshot -> OrderStatus.ORDER_COMPLETE.toString());
-        DatabaseReference reference2 = root.child(Constants.customers).child(storeOrder.getCustomerUUID()).child(Constants.previous_orders);
-
+        DatabaseReference reference2 = root.child(Constants.customers).child(storeOrder.getCustomerUUID()).child(Constants.previous_orders).child(Constants.current_date).child(orderedProduct.getProduct().getStoreProductUUID());
+        put(reference2, snapshot -> OrderStatus.ORDER_COMPLETE.toString());
     }
+
 }

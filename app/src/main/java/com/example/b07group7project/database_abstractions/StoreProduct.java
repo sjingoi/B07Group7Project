@@ -46,7 +46,11 @@ public class StoreProduct {
         this.description = description;
     }
 
-//    public void setImageURL(String imageURL) {
+    public String getStoreProductUUID() {
+        return storeProductUUID;
+    }
+
+    //    public void setImageURL(String imageURL) {
 //        this.imageURL = imageURL;
 //    }
 //
