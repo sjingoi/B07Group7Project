@@ -3,17 +3,22 @@ package com.example.b07group7project.nav;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.b07group7project.R;
 import com.example.b07group7project.StoreOwnerOrdersFragment;
 import com.example.b07group7project.account.StoreOwnerAccountFragment;
 import com.example.b07group7project.create_product.CreateProductFragment;
+import com.example.b07group7project.database.AccountDatabase;
+import com.example.b07group7project.database.OnComplete;
+import com.example.b07group7project.database.User;
 import com.example.b07group7project.databinding.ActivityStoreOwnerNavigationBinding;
 import com.example.b07group7project.store_owner_view_store.StoreOwnerViewProducts;
 
 public class StoreOwnerNavigationActivity extends Navigation {
 
+    String storeUUID;
     ActivityStoreOwnerNavigationBinding binding;
 
     Fragment homeFragment;
@@ -34,22 +39,44 @@ public class StoreOwnerNavigationActivity extends Navigation {
 
         toolbar = findViewById(R.id.toolbar);
 
-
         homeFragment = StoreOwnerViewProducts.newInstance();    // CHANGE THIS
         cartFragment = StoreOwnerOrdersFragment.newInstance();    // CHANGE THIS
         accountFragment = StoreOwnerAccountFragment.newInstance(); // CHANGE THIS
 
 
-        replaceFragment(homeFragment);
+        replaceFragment(accountFragment, false, "Account");
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 
             int itemId = item.getItemId();
-
+            Bundle bundle = new Bundle();
             if (itemId == R.id.homeNav) {
-                replaceFragment(homeFragment, false, "Products");
+                if(storeUUID != null){
+                    bundle.putString("storeID", storeUUID);
+                    replaceFragment(homeFragment, false, bundle);
+                }
+                else{
+                    getStoreUUID(
+                            uuid -> {
+                                bundle.putString("storeID", uuid);
+                                storeUUID = uuid;
+                                replaceFragment(homeFragment, false, bundle);
+                            });
+                }
+
             } else if (itemId == R.id.cartNav) {
-                replaceFragment(cartFragment, false, "Orders");
+                if(storeUUID != null){
+                    bundle.putString("storeID", storeUUID);
+                    replaceFragment(cartFragment, false, "Orders");
+                }
+                else{
+                    getStoreUUID(
+                            uuid -> {
+                                bundle.putString("storeID", uuid);
+                                storeUUID = uuid;
+                                replaceFragment(cartFragment, false, "Orders");
+                            });
+                }
             } else if (itemId == R.id.accountNav) {
                 replaceFragment(accountFragment, false, "Store Account");
             }
@@ -68,4 +95,12 @@ public class StoreOwnerNavigationActivity extends Navigation {
     public Toolbar getToolbar() {
         return toolbar;
     }
+
+    public void getStoreUUID(OnComplete<String> withUUID){
+        AccountDatabase accountDatabase = new AccountDatabase();
+        accountDatabase.getStoreUUID(User.getCurrentUser(),
+                withUUID
+        );
+    }
+
 }

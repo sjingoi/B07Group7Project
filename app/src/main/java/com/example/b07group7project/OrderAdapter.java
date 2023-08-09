@@ -62,7 +62,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         //holder.orderUserEmailView.setText("User Email: " + order.getProduct().getuserEmail());
         holder.orderItemNameTextView.setText("Item Name: " + order.getProduct().getItemName());
         holder.orderItemDesTextView.setText("Item Description: " + order.getProduct().getDescription());
-        holder.orderQuantityTextView.setText("Quantity: " + order.getQuantity());
+        //holder.orderQuantityTextView.setText("Quantity: " + order.getQuantity());
 
         // Handle the "Confirm" button click event here.
         holder.confirmButton.setOnClickListener(v -> {
