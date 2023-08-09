@@ -31,6 +31,18 @@ public class StoreOwnerViewProducts extends ViewProductFragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Get the store ID from arguments
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            storeID = arguments.getString("storeID");
+            // Now you can use the storeID variable as needed
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_store_owner_view_products, container, false);
@@ -45,11 +57,8 @@ public class StoreOwnerViewProducts extends ViewProductFragment {
             }
         });
 
-        String storeUUID = "";
-
-        // TODO: Replace GetProductImplementation with Database Stuff
         GetProductsInterface productInterface = new StoreProductDatabase();
-        productInterface.getProducts(storeUUID, products -> onReceivedProducts(products, view));
+        productInterface.getProducts(storeID, products -> onReceivedProducts(products, view));
 
         return view;
     }
