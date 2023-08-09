@@ -22,4 +22,8 @@ public class OrderedProduct {
     public String getOrderStatus() {
         return orderStatus;
     }
+
+    public Product getProduct() {
+        return product;
+    }
 }

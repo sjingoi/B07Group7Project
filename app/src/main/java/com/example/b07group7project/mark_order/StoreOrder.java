@@ -1,4 +1,4 @@
-package com.example.b07group7project;
+package com.example.b07group7project.mark_order;
 
 import com.example.b07group7project.shopper_view_previous_orders.OrderStatus;
 import com.example.b07group7project.shopper_view_previous_orders.OrderedProduct;
@@ -40,5 +40,9 @@ public class StoreOrder {
             }
         }
         return OrderStatus.ORDER_COMPLETE;
+    }
+
+    public String getCurrentDate() {
+        return currentDate;
     }
 }

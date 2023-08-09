@@ -1,15 +1,19 @@
 package com.example.b07group7project.database;
 
-import com.example.b07group7project.Order;
+import androidx.annotation.NonNull;
+
 import com.example.b07group7project.Product;
-import com.example.b07group7project.StoreOrder;
-import com.example.b07group7project.database_abstractions.Store;
+import com.example.b07group7project.database_abstractions.Account;
+import com.example.b07group7project.mark_order.StoreOrder;
+import com.example.b07group7project.shopper_view_previous_orders.OrderStatus;
 import com.example.b07group7project.shopper_view_previous_orders.OrderedProduct;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.UUID;
 
 public class StoreOwnerMarkOrderDatabase extends Database{
     ArrayList<StoreOrder> orders;
@@ -35,5 +39,16 @@ public class StoreOwnerMarkOrderDatabase extends Database{
             }
             onComplete.onComplete(storeOrders);
         });
+    }
+
+    public void markOrderAsComplete(User user, OrderedProduct orderedProduct, StoreOrder storeOrder)  {
+        AccountDatabase accountDatabase = new AccountDatabase();
+        accountDatabase.getUserUUID(user, uuid -> onReceiveUserUUID(orderedProduct, storeOrder, uuid));
+    }
+
+    public void onReceiveUserUUID(OrderedProduct orderedProduct, StoreOrder storeOrder, String storeOwnerUUID) {
+        get(root.child(Constants.store_orders).child(storeOwnerUUID).child(Constants.store_uuid), snapshot -> snapshot.getValue());
+        DatabaseReference newreference = root.child(Constants.store_orders).child().child(storeOrder.getCurrentDate()).child(Constants.order_status);
+        put(newreference, snapshot -> OrderStatus.ORDER_COMPLETE.toString());
     }
 }
