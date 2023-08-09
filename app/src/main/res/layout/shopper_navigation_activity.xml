@@ -20,6 +20,7 @@
         app:titleTextAppearance="@style/title_text"/>
 
 
+
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="0dp"

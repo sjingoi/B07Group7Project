@@ -1,5 +1,6 @@
 package com.example.b07group7project.ui.login;
 
+import com.example.b07group7project.database.User;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
@@ -48,10 +49,12 @@ public class LoginPresenter {
     }
 
     public void afterLoginAttempt(Task<AuthResult> task) {
-        if (loginModel.getCurrentUser() != null) {
-            loginView.onLoginComplete();
-        } else
+        User user = loginModel.getCurrentUser();
+        if (user == null) {
             loginView.onLoginFailed();
+        } else {
+            loginModel.getUserType(user, type -> loginView.onLoginComplete(type));
+        }
         loginView.setLoadingAnimation(false);
     }
 }

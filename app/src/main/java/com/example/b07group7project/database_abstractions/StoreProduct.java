@@ -29,19 +29,19 @@ public class StoreProduct {
         return price;
     }
 
-//    public void setItemName(String itemName) {
-//        this.itemName = itemName;
-//    }
-//
-//    public void setDescription(String description) {
-//        this.description = description;
-//    }
-//
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
 //    public void setImageURL(String imageURL) {
 //        this.imageURL = imageURL;
 //    }
 //
-//    public void setPrice(double price) {
-//        this.price = price;
-//    }
+    public void setPrice(double price) {
+        this.price = price;
+    }
 }
