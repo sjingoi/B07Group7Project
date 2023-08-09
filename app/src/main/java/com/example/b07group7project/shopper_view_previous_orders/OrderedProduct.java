@@ -1,6 +1,5 @@
 package com.example.b07group7project.shopper_view_previous_orders;
 
-import com.example.b07group7project.Product;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 
 import java.util.UUID;
@@ -51,26 +50,16 @@ public class OrderedProduct {
 
     public StoreProduct getProduct() {
         return product;
-        this.shopperUUID = shopperUUID;
     }
 
     public void setOrderStatus(OrderStatus orderStatus) {
-        this.orderStatus = orderStatus;
+        this.orderStatus = orderStatus.toString();
     }
 
-    public OrderStatus getOrderStatus() {
-        return orderStatus;
-    }
 
-    public StoreProduct getProduct() {
-        return product;
-    }
 
-    public int getQuantity() {
-        return quantity;
-    }
 
-    public String getShopperUUID() {
-        return shopperUUID;
-    }
+
+
+
 }

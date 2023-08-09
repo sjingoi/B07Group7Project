@@ -2,7 +2,7 @@ package com.example.b07group7project.database;
 
 
 
-import com.example.b07group7project.Order;
+
 import com.example.b07group7project.database_abstractions.StoreProduct;
 import com.example.b07group7project.shopper_view_previous_orders.OrderStatus;
 import com.example.b07group7project.shopper_view_previous_orders.OrderedProduct;
@@ -28,8 +28,10 @@ public class StoreOwnerMarkOrderDatabase extends Database{
                 String productUUID = (String) storeOrder.child(Constants.product_uuid).getValue();
                 String productDescription = (String) storeOrder.child(Constants.product_description).getValue();
                 String imageURL = (String) storeOrder.child(Constants.product_image).getValue();
+                String storeUUID = (String) storeOrder.child(Constants.store_uuid).getValue();
                 int price = (Integer) storeOrder.child(Constants.product_price).getValue();
-                StoreProduct product1 = new StoreProduct(productName, productDescription,imageURL, price, productUUID);
+                StoreProduct product1 = new StoreProduct(productName, productUUID, storeUUID, productDescription, imageURL, price);
+                //StoreProduct product1 = new StoreProduct(productName, productDescription,imageURL, price, productUUID);
                 int quantity = (Integer) storeOrder.child(Constants.quantity).getValue();
                 String orderStatus = (String) storeOrder.child(Constants.order_status).getValue();
                 String customerUUID = (String) storeOrder.child(Constants.customer_uuid).getValue();
@@ -50,7 +52,7 @@ public class StoreOwnerMarkOrderDatabase extends Database{
         DatabaseReference reference1 = root.child(Constants.store_orders).child(storeUUID).child(orderedProduct.getCurrentDate()).child(Constants.order_status);
         put(reference1, snapshot -> OrderStatus.ORDER_COMPLETE.toString());
         DatabaseReference reference2 = root.child(Constants.customers).child(orderedProduct.getCustomerUUID()).
-                child(Constants.previous_orders).child(Constants.current_date).child(orderedProduct.getProduct().getStoreProductUUID());
+                child(Constants.previous_orders).child(Constants.current_date).child(orderedProduct.getProduct().getProductID());
         put(reference2, snapshot -> OrderStatus.ORDER_COMPLETE.toString());
     }
 
