@@ -10,7 +10,6 @@ public class StoreProduct implements Serializable {
     String itemName;
     String description;
     String imageURL;
-    String uuid;
     double price;
 
 
@@ -47,14 +46,6 @@ public class StoreProduct implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public void setUUID(String uuid) {
-        this.uuid = uuid;
-    }
-
-    public String getUUID(){
-        return uuid;
     }
 
     public void setPrice(double price) {
