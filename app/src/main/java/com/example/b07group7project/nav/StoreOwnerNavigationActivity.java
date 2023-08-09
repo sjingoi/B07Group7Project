@@ -27,6 +27,8 @@ public class StoreOwnerNavigationActivity extends Navigation {
         binding = ActivityStoreOwnerNavigationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        setSystemBarColors();
+
         toolbar = findViewById(R.id.toolbar);
 
         homeFragment = ExampleFragment.newInstance();    // CHANGE THIS
@@ -42,11 +44,11 @@ public class StoreOwnerNavigationActivity extends Navigation {
             int itemId = item.getItemId();
 
             if (itemId == R.id.homeNav) {
-                replaceFragment(homeFragment, true, "Home");
+                replaceFragment(homeFragment, false, "Home");
             } else if (itemId == R.id.cartNav) {
-                replaceFragment(cartFragment, true, "Orders");
+                replaceFragment(cartFragment, false, "Orders");
             } else if (itemId == R.id.accountNav) {
-                replaceFragment(accountFragment, true, "Store Account");
+                replaceFragment(accountFragment, false, "Store Account");
             }
 
             return true;
