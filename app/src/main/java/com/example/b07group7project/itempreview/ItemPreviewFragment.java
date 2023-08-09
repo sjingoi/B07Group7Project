@@ -105,7 +105,7 @@ public class ItemPreviewFragment extends Fragment {
         // Set OnClickListener for the decrement button
         decrementButton.setOnClickListener(v -> {
             // Decrement the cartItemQty (with a minimum value of 1) and update the TextView
-            cartItemQty = Math.max(1, cartItemQty);
+            cartItemQty = Math.max(1, cartItemQty-1);
             cartItemQtyTextView.setText(String.valueOf(cartItemQty));
         });
 
