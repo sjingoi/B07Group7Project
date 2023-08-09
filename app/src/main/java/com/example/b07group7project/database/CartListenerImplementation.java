@@ -26,6 +26,10 @@ public class CartListenerImplementation extends Database implements CartListener
     public void addToCart(String store_uuid, String customer_uuid, String itemID, int quantity) {
         String cartEntry = store_uuid + ":" + itemID;
 
+        if (quantity == 0) {
+            return;
+        }
+
         // Customer cart information to Customers node
         cartRef = root.child(Constants.customers)
                 .child(customer_uuid)
@@ -62,6 +66,65 @@ public class CartListenerImplementation extends Database implements CartListener
                 showToast("Failed to add item to cart.");
             }
         });
+    }
+
+    public void setCartQuantity(String store_uuid, String customer_uuid, String itemID, int quantity) {
+        String cartEntry = store_uuid + ":" + itemID;
+
+        if (quantity <= 0) {
+            removeFromCart(store_uuid, customer_uuid, itemID);
+            return;
+        }
+
+        // Customer cart information to Customers node
+        cartRef = root.child(Constants.customers)
+                .child(customer_uuid)
+                .child(Constants.shopping_cart)
+                .child(cartEntry);
+
+        cartRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // Item already exists in the cart, update the quantity
+//                    int existingQuantity = dataSnapshot.child(Constants.quantity).getValue(Integer.class);
+//                    int newQuantity = existingQuantity + quantity;
+
+                    Map<String, Object> updatedQuantity = new HashMap<>();
+                    updatedQuantity.put(Constants.quantity, quantity);
+
+                    cartRef.updateChildren(updatedQuantity);
+
+                    showToast("Item quantity updated in the cart.");
+                }
+//                else {
+//                    // Item doesn't exist in the cart, add it with the given quantity
+//                    Map<String, Object> cartItem = new HashMap<>();
+//                    cartItem.put(Constants.quantity, quantity);
+//
+//                    put(cartRef, snapshot -> cartItem);
+//
+//                    showToast("Item added to cart successfully.");
+//                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                showToast("Failed to update cart.");
+            }
+        });
+    }
+
+    public void removeFromCart(String store_uuid, String customer_uuid, String itemID) {
+        String cartEntry = store_uuid + ":" + itemID;
+
+        // Customer cart information to Customers node
+        cartRef = root.child(Constants.customers)
+                .child(customer_uuid)
+                .child(Constants.shopping_cart)
+                .child(cartEntry);
+
+        cartRef.removeValue();
     }
 
     private void showToast(String message) {

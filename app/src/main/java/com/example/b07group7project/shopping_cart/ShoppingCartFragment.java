@@ -2,24 +2,35 @@ package com.example.b07group7project.shopping_cart;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 import com.example.b07group7project.R;
 import com.example.b07group7project.create_order.CheckoutFragment;
 import com.example.b07group7project.database.CartDatabase;
+import com.example.b07group7project.database.AccountDatabase;
+import com.example.b07group7project.database.CartListenerImplementation;
+import com.example.b07group7project.database.User;
 import com.example.b07group7project.itempreview.ItemPreviewFragment;
 import com.example.b07group7project.nav.Navigation;
 
 import java.util.List;
 public class ShoppingCartFragment extends Fragment implements EntryClickListener {
+
+    List<CartEntry> cartEntriesList;
+
+    RecyclerView recyclerView;
+
+    String userID;
+
+    CartListenerImplementation cli;
 
     public ShoppingCartFragment() {
         // Required empty public constructor
@@ -45,24 +56,30 @@ public class ShoppingCartFragment extends Fragment implements EntryClickListener
         // Inflate the layout for this fragment
         View shoppingCartLayout = inflater.inflate(R.layout.fragment_shopping_cart, container, false);
 
-        RecyclerView recyclerView = shoppingCartLayout.findViewById(R.id.cartItemList);
+        cli = new CartListenerImplementation(requireContext());
 
-        (new CartDatabase()).getCartEntries(cartEntries -> onData(recyclerView, cartEntries));
+        recyclerView = shoppingCartLayout.findViewById(R.id.cartItemList);
+
+        AccountDatabase adb = new AccountDatabase();
+        adb.getUserUUID(User.getCurrentUser(), uuid -> userID = uuid);
+
+        (new CartDatabase()).getCartEntries(cartEntries -> {
+                cartEntriesList = cartEntries;
+                onData(recyclerView, cartEntries);
+            });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
 
+
         // Button Stuff
         Button checkoutButton = shoppingCartLayout.findViewById(R.id.checkoutButton);
-        checkoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (requireActivity() instanceof Navigation) {
-                    Navigation nav = (Navigation) requireActivity();
-                    nav.replaceFragment(CheckoutFragment.newInstance(), true);
-                }
-
+        checkoutButton.setOnClickListener(view -> {
+            if (requireActivity() instanceof Navigation) {
+                Navigation nav = (Navigation) requireActivity();
+                nav.replaceFragment(CheckoutFragment.newInstance(), true);
             }
+
         });
 
         return shoppingCartLayout;
@@ -85,8 +102,29 @@ public class ShoppingCartFragment extends Fragment implements EntryClickListener
     }
 
     @Override
-    public void onRemoveClick(CartEntry entry) {
+    public void onRemoveClick(int entryPosition) {
         //Delete Entry
-        Toast.makeText(requireContext(), "DELETE", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(requireContext(), "DELETE", Toast.LENGTH_SHORT).show();
+        CartEntry entry = cartEntriesList.get(entryPosition);
+        cli.removeFromCart(entry.getStore().getStoreUUID(), userID, entry.getProduct().getProductID());
+        cartEntriesList.remove(entryPosition);
+        onData(recyclerView, cartEntriesList);
+
+    }
+
+    public void onIncrement(CartEntry entry, TextView textView) {
+        entry.setQuantity(entry.getQuantity() + 1);
+        String str = Integer.toString(entry.getQuantity());
+        textView.setText(str);
+        cli.setCartQuantity(entry.getStore().getStoreUUID(), userID, entry.getProduct().getProductID(), entry.getQuantity());
+    }
+
+    public void onDecrement(CartEntry entry, TextView textView) {
+        if (entry.getQuantity() - 1 > 0) {
+            entry.setQuantity(entry.getQuantity() - 1);
+            String str = Integer.toString(entry.getQuantity());
+            textView.setText(str);
+            cli.setCartQuantity(entry.getStore().getStoreUUID(), userID, entry.getProduct().getProductID(), entry.getQuantity());
+        }
     }
 }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.b07group7project.R;
+import com.example.b07group7project.StoreOwnerOrdersFragment;
 import com.example.b07group7project.account.StoreOwnerAccountFragment;
 import com.example.b07group7project.create_product.CreateProductFragment;
 import com.example.b07group7project.database.AccountDatabase;
@@ -39,7 +40,7 @@ public class StoreOwnerNavigationActivity extends Navigation {
         toolbar = findViewById(R.id.toolbar);
 
         homeFragment = StoreOwnerViewProducts.newInstance();    // CHANGE THIS
-        cartFragment = CreateProductFragment.newInstance();    // CHANGE THIS
+        cartFragment = StoreOwnerOrdersFragment.newInstance();    // CHANGE THIS
         accountFragment = StoreOwnerAccountFragment.newInstance(); // CHANGE THIS
 
 

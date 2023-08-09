@@ -53,9 +53,9 @@ public class AccountDatabase extends Database implements UserPermission {
                 .encodeToString(userEmail.getBytes(StandardCharsets.UTF_8))
                 .replace('\\', ';');
 
-        put(
-                root.child(Constants.accounts).child(encodedEmail),
-                snapshot -> {
+        put(root.child(Constants.accounts).child(encodedEmail),
+                snapshot ->
+                {
                     HashMap<String, String> data = new HashMap<>();
                     data.put(Constants.user_type, type.toString());
                     data.put(Constants.user_uuid, userUUID);

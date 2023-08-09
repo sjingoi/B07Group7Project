@@ -33,7 +33,8 @@ public class CartViewHolder extends RecyclerViewHolder<CartEntry> {
     public void updateView(CartEntry cartEntry) {
         nameView.setText(cartEntry.getProduct().getItemName());
         quantityView.setText(String.format(Integer.toString(cartEntry.getQuantity())));
-        priceView.setText("$ " + cartEntry.getProduct().getPrice());
+        String price = "$ " + cartEntry.getProduct().getPrice();
+        priceView.setText(price);
 
         increaseQty.setOnClickListener(view -> {
             cartEntry.setQuantity(cartEntry.getQuantity() + 1);
@@ -46,11 +47,6 @@ public class CartViewHolder extends RecyclerViewHolder<CartEntry> {
                 quantityView.setText(String.format(Integer.toString(cartEntry.getQuantity())));
             }
         });
-
-        removeItem.setOnClickListener(view -> {
-            //Stuff here
-        });
-
 
         ImageDownloader.setImageResource(imageView, cartEntry.getProduct().getImageURL(), 512, 512);
     }

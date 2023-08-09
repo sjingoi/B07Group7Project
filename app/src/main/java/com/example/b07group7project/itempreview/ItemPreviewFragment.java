@@ -19,6 +19,8 @@ import com.example.b07group7project.database.User;
 import com.example.b07group7project.database.StoreProductDatabase;
 import com.example.b07group7project.database_abstractions.StoreProduct;
 
+import java.text.DecimalFormat;
+
 public class ItemPreviewFragment extends Fragment {
     private TextView cartItemQtyTextView;
     private int cartItemQty = 0;
@@ -61,6 +63,8 @@ public class ItemPreviewFragment extends Fragment {
 
         // Get references to TextView and Buttons
         cartItemQtyTextView = view.findViewById(R.id.cartItemQty);
+        cartItemQty = 1;
+        cartItemQtyTextView.setText(String.valueOf(cartItemQty));
         TextView textViewItemName = view.findViewById(R.id.itemName);
         TextView textViewItemPrice = view.findViewById(R.id.itemPrice);
         TextView textViewItemDesc = view.findViewById(R.id.itemDesc);
@@ -102,8 +106,8 @@ public class ItemPreviewFragment extends Fragment {
 
         // Set OnClickListener for the decrement button
         decrementButton.setOnClickListener(v -> {
-            // Decrement the cartItemQty (with a minimum value of 0) and update the TextView
-            cartItemQty = Math.max(0, cartItemQty - 1);
+            // Decrement the cartItemQty (with a minimum value of 1) and update the TextView
+            cartItemQty = Math.max(1, cartItemQty-1);
             cartItemQtyTextView.setText(String.valueOf(cartItemQty));
         });
 
@@ -133,10 +137,11 @@ public class ItemPreviewFragment extends Fragment {
             TextView textViewItemPrice = rootView.findViewById(R.id.itemPrice);
             TextView textViewItemDesc = rootView.findViewById(R.id.itemDesc);
             ImageView productImage = rootView.findViewById(R.id.itemImage);
+            DecimalFormat decForm = new DecimalFormat("$#.00");
 
             if (currentItem != null) {
                 textViewItemName.setText(currentItem.getItemName());
-                String price = "$" + currentItem.getPrice();
+                String price = decForm.format(currentItem.getPrice());
                 textViewItemPrice.setText(price);
                 textViewItemDesc.setText(currentItem.getDescription());
                 ImageDownloader.setImageResource(productImage, currentItem.getImageURL(), 1080, 1080);

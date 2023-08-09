@@ -27,8 +27,11 @@ public class CartAdapter extends RecyclerViewAdapter<CartEntry, CartViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
-        holder.layout.setOnClickListener(view -> entryClickListener.onEntryClick(entries.get(position)));
-        holder.removeItem.setOnClickListener(view -> entryClickListener.onRemoveClick(entries.get(position)));
+        CartEntry cartEntry = entries.get(position);
+        holder.layout.setOnClickListener(view -> entryClickListener.onEntryClick(cartEntry));
+        holder.removeItem.setOnClickListener(view -> entryClickListener.onRemoveClick(position));
+        holder.increaseQty.setOnClickListener(view -> entryClickListener.onIncrement(cartEntry, holder.quantityView));
+        holder.decreaseQty.setOnClickListener(view -> entryClickListener.onDecrement(cartEntry, holder.quantityView));
     }
 
     @NonNull
