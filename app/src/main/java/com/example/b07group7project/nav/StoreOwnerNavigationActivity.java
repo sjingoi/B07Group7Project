@@ -9,7 +9,6 @@ import com.example.b07group7project.ExampleFragment;
 import com.example.b07group7project.R;
 import com.example.b07group7project.create_product.CreateProductFragment;
 import com.example.b07group7project.databinding.ActivityStoreOwnerNavigationBinding;
-import com.example.b07group7project.store_owner_view_store.StoreOwnerViewProducts;
 
 public class StoreOwnerNavigationActivity extends Navigation {
 
@@ -33,7 +32,7 @@ public class StoreOwnerNavigationActivity extends Navigation {
 
         toolbar = findViewById(R.id.toolbar);
 
-        homeFragment = ExampleFragment.newInstance();    // CHANGE THIS
+        homeFragment = StoreOwnerViewProducts.newInstance();   // CHANGE THIS
         cartFragment = ExampleFragment.newInstance();    // CHANGE THIS
         accountFragment = CreateProductFragment.newInstance(); // CHANGE THIS
 
