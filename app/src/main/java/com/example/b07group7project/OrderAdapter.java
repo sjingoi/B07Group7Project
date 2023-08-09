@@ -12,6 +12,8 @@ import java.text.DecimalFormat;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.b07group7project.database.StoreOwnerMarkOrderDatabase;
+import com.example.b07group7project.database.User;
 import com.example.b07group7project.shopper_view_previous_orders.OrderedProduct;
 
 import java.util.List;
@@ -67,6 +69,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             // Implement the order confirmation logic here, Call the confirmOrder() method of  OrderRepository to confirm the order.
             // For now, assume the confirmation is successful and update the order status locally.
             order.setOrderStatus(ORDER_COMPLETE);
+            StoreOwnerMarkOrderDatabase storeOwnerMarkOrderDatabase = new StoreOwnerMarkOrderDatabase();
+            storeOwnerMarkOrderDatabase.markOrderAsComplete(User.getCurrentUser(), order);
             notifyDataSetChanged();
         });
     }

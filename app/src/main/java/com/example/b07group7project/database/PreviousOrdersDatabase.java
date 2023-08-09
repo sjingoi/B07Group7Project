@@ -39,11 +39,13 @@ public class PreviousOrdersDatabase extends Database implements getPreviousOrder
                     String productDescription = (String) product.child(Constants.product_description).getValue();
                     String imageURL = (String) product.child(Constants.product_image).getValue();
                     String productUUID = (String) product.child(Constants.product_uuid).getValue();
-                    double productPrice = (Double) product.child(Constants.product_price).getValue();
+                    Double productPrice = product.child(Constants.product_price).getValue(Double.class);
+                    if (productPrice == null) {continue;}
                     String storeUUID = (String) product.child(Constants.store_uuid).getValue();
                     StoreProduct storeProduct = new StoreProduct(productName, productUUID, storeUUID, productDescription, imageURL, productPrice);
 
-                    long quantity = (Long) product.child(Constants.quantity).getValue();
+                    Long quantity = product.child(Constants.quantity).getValue(Long.class);
+                    if (quantity == null) {continue;}
                     OrderStatus orderStatus = product.child(Constants.order_status).getValue(OrderStatus.class);
                     String orderUUID = product.getKey();
                     OrderedProduct orderedProduct = new OrderedProduct(storeProduct, orderStatus, quantity, userUUID, date, orderUUID);

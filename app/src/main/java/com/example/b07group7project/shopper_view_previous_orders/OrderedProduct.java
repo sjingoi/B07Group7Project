@@ -21,6 +21,14 @@ public class OrderedProduct {
         this.orderUUID = orderUUID;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public String getOrderUUID() {
+        return orderUUID;
+    }
+
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
     }
@@ -33,7 +41,7 @@ public class OrderedProduct {
         return product;
     }
 
-    public int getQuantity() {
+    public long getQuantity() {
         return quantity;
     }
 
