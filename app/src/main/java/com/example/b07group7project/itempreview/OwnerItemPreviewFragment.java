@@ -57,14 +57,14 @@ public class OwnerItemPreviewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_item_preview, container, false);
+        View view = inflater.inflate(R.layout.fragment_owner_item_preview, container, false);
 
         CartListenerImplementation cartListener = new CartListenerImplementation(getContext());
 
         // Get references to TextView and Buttons
-        cartItemQtyTextView = view.findViewById(R.id.cartItemQty);
+        // cartItemQtyTextView = view.findViewById(R.id.cartItemQty);
         // cartItemQty = 1;
-        cartItemQtyTextView.setText(String.valueOf(cartItemQty));
+        //cartItemQtyTextView.setText(String.valueOf(cartItemQty));
         TextView textViewItemName = view.findViewById(R.id.itemName);
         TextView textViewItemPrice = view.findViewById(R.id.itemPrice);
         TextView textViewItemDesc = view.findViewById(R.id.itemDesc);
@@ -93,7 +93,7 @@ public class OwnerItemPreviewFragment extends Fragment {
             textViewItemPrice.setText(price);
             textViewItemDesc.setText(currentItem.getDescription());
             ImageDownloader.setImageResource(itemImageView, currentItem.getImageURL());
-            cartItemQtyTextView.setText(String.valueOf(cartItemQty));
+            //cartItemQtyTextView.setText(String.valueOf(cartItemQty));
         }
 
 
@@ -147,7 +147,7 @@ public class OwnerItemPreviewFragment extends Fragment {
                 textViewItemPrice.setText(price);
                 textViewItemDesc.setText(currentItem.getDescription());
                 ImageDownloader.setImageResource(productImage, currentItem.getImageURL(), 1080, 1080);
-                cartItemQtyTextView.setText(String.valueOf(cartItemQty));
+                //cartItemQtyTextView.setText(String.valueOf(cartItemQty));
             }
         }
     }
