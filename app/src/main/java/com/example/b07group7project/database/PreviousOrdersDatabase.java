@@ -1,20 +1,13 @@
 package com.example.b07group7project.database;
 
-import androidx.annotation.NonNull;
-
-
 import com.example.b07group7project.database_abstractions.StoreProduct;
 import com.example.b07group7project.shopper_view_previous_orders.OrderedProduct;
 import com.example.b07group7project.shopper_view_previous_orders.PreviousOrder;
 import com.example.b07group7project.shopper_view_previous_orders.getPreviousOrdersInterface;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class PreviousOrdersDatabase extends Database implements getPreviousOrdersInterface {
 
@@ -36,19 +29,23 @@ public class PreviousOrdersDatabase extends Database implements getPreviousOrder
         DatabaseReference newreference = root.child(Constants.customers).child(userUUID).child(Constants.previous_orders);
         get(newreference, snapshot -> {
             ArrayList<PreviousOrder> previousOrderList = new ArrayList<>();
-            for (DataSnapshot previousOrder : snapshot.child("PreviousOrders").getChildren()) {
+            for (DataSnapshot previousOrder : snapshot.getChildren()) {
                 ArrayList<OrderedProduct> orderedProductList = new ArrayList<>();
                 for (DataSnapshot product : previousOrder.getChildren()) {
                     String productName = (String) product.child(Constants.product_name).getValue();
                     String productDescription = (String) product.child(Constants.product_description).getValue();
                     String imageURL = (String) product.child(Constants.product_image).getValue();
                     String productUUID = (String) product.child(Constants.product_uuid).getValue();
-                    int productPrice = (Integer) product.child(Constants.product_price).getValue();
-                    StoreProduct storeProduct = new StoreProduct(productName, productDescription, imageURL, productPrice, productUUID);
-                    int quantity = (Integer) product.child(Constants.quantity).getValue();
+                    double productPrice = (Double) product.child(Constants.product_price).getValue();
+                    String storeUUID = (String) product.child(Constants.store_uuid).getValue();
+                    StoreProduct storeProduct = new StoreProduct(productName, productUUID, storeUUID, productDescription, imageURL, productPrice);
+
+                    long quantity = (Long) product.child(Constants.quantity).getValue();
                     String orderStatus = (String) product.child(Constants.order_status).getValue();
                     String customerUUID = (String) product.child(Constants.customer_UUID).getValue();
-                    OrderedProduct orderedProduct = new OrderedProduct(storeProduct, orderStatus, quantity, customerUUID);
+                    String date = snapshot.getKey().replace("?", ".").replace(";", ":");
+                    String orderUUID = product.getKey();
+                    OrderedProduct orderedProduct = new OrderedProduct(storeProduct, orderStatus, quantity, customerUUID, date, orderUUID);
                     orderedProductList.add(orderedProduct);
                 }
                 String currentDate = (String) previousOrder.getKey();
