@@ -52,6 +52,6 @@ public class CartViewHolder extends RecyclerViewHolder<CartEntry> {
         });
 
 
-        ImageDownloader.setImageResource(imageView, cartEntry.getProduct().getImageURL(), 256, 256);
+        ImageDownloader.setImageResource(imageView, cartEntry.getProduct().getImageURL(), 512, 512);
     }
 }
