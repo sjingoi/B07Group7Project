@@ -20,6 +20,7 @@ import com.example.b07group7project.nav.Navigation;
 import java.util.ArrayList;
 
 public class ViewProductFragment extends Fragment implements ProductClickListener{
+    String storeID;
 
     public ViewProductFragment() {
         // Required Empty Constructor
@@ -35,6 +36,13 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Get the store ID from arguments
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            storeID = arguments.getString("storeID");
+            // Now you can use the storeID variable as needed
+        }
     }
 
     @Override
@@ -42,7 +50,7 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.view_product_fragment, container, false);
 
-        String storeUUID = "";
+        String storeUUID = null;
 
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -51,13 +59,18 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
             Toast.makeText(getContext(), "BUNDLE NULL", Toast.LENGTH_SHORT).show();
         }
 
+        //storeUUID = "Lay's"; // TODO: Implement uuids to pass in from stores and cart
+
         GetProductsInterface productInterface = new StoreProductDatabase();
-        productInterface.getProducts(storeUUID, products -> onReceivedStores(products, view));
+        productInterface.getProducts(storeID, products -> onReceivedProducts(products, view));
+
 
         return view;
     }
 
-    public void onReceivedStores(ArrayList<StoreProduct> products, View view){
+
+    public void onReceivedProducts(ArrayList<StoreProduct> products, View view){
+
         RecyclerView recyclerView = view.findViewById(R.id.ProductListRecyclerView);
         ViewProductAdapter adapter = new ViewProductAdapter(requireContext(), products, this);
         recyclerView.setAdapter(adapter);

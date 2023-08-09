@@ -18,14 +18,14 @@ import com.example.b07group7project.nav.Navigation;
 import com.example.b07group7project.database.CartDatabase;
 
 import java.util.List;
-public class ShoppingCart extends Fragment implements EntryClickListener {
+public class ShoppingCartFragment extends Fragment implements EntryClickListener {
 
-    public ShoppingCart() {
+    public ShoppingCartFragment() {
         // Required empty public constructor
     }
 
-    public static ShoppingCart newInstance() {
-        ShoppingCart fragment = new ShoppingCart();
+    public static ShoppingCartFragment newInstance() {
+        ShoppingCartFragment fragment = new ShoppingCartFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -64,7 +64,7 @@ public class ShoppingCart extends Fragment implements EntryClickListener {
             Navigation nav = (Navigation) activity;
             Bundle bundle = new Bundle();
             bundle.putString("itemID", entry.getProduct().getProductID());
-            bundle.putString("storeID", entry.getStore());
+            bundle.putString("storeID", entry.getStore().getStoreUUID());
             nav.replaceFragment(ItemPreviewFragment.newInstance(), true, bundle);
         }
     }

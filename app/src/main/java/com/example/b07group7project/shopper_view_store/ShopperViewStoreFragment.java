@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07group7project.R;
 import com.example.b07group7project.database.StoreDatabase;
-import com.example.b07group7project.database_abstractions.StoreHeader;
+import com.example.b07group7project.database_abstractions.Store;
 import com.example.b07group7project.nav.Navigation;
 import com.example.b07group7project.view_products.ViewProductFragment;
 
@@ -42,6 +42,11 @@ public class ShopperViewStoreFragment extends Fragment implements StoreClickList
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.shopper_view_store_fragment, container, false);
 
+//        GetStoreInterface storeInterface = new StoreDatabase();
+//        storeInterface.getStores(
+//                stores -> onReceivedStores(stores, view)
+//        );
+
         return view;
     }
 
@@ -51,7 +56,7 @@ public class ShopperViewStoreFragment extends Fragment implements StoreClickList
         storeInterface.getStores(stores -> onReceivedStores(stores, view));
     }
 
-    public void onReceivedStores(ArrayList<StoreHeader> stores, View view){
+    public void onReceivedStores(ArrayList<Store> stores, View view){
         RecyclerView recyclerView = view.findViewById(R.id.StoreListRecyclerView);
         StoreRecyclerViewAdapter adapter = new StoreRecyclerViewAdapter(requireContext(), stores, this);
         recyclerView.setAdapter(adapter);
@@ -60,7 +65,7 @@ public class ShopperViewStoreFragment extends Fragment implements StoreClickList
     }
 
     @Override
-    public void onStoreClicked(StoreHeader store) {
+    public void onStoreClicked(Store store) {
         if (requireActivity() instanceof Navigation) {
             Navigation nav = (Navigation) requireActivity();
             Bundle bundle = new Bundle();
