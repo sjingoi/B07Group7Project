@@ -4,4 +4,11 @@
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
+
+    <color name="text_color">#FFFFFFFF</color>
+    <color name="background_color">#FF000000</color>
+    <color name="border_color">#FF38393A</color>
+    <color name="nav_background_color">#FF1C1C1E</color>
+    <color name="icon_unselected">#FF98989E</color>
+
 </resources>
