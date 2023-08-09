@@ -1,19 +1,19 @@
 package com.example.b07group7project.database;
 
-import androidx.annotation.NonNull;
+
 
 import com.example.b07group7project.Product;
-import com.example.b07group7project.database_abstractions.Account;
+
 import com.example.b07group7project.mark_order.StoreOrder;
 import com.example.b07group7project.shopper_view_previous_orders.OrderStatus;
 import com.example.b07group7project.shopper_view_previous_orders.OrderedProduct;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
+
 
 import java.util.ArrayList;
-import java.util.UUID;
+
 
 public class StoreOwnerMarkOrderDatabase extends Database{
     ArrayList<StoreOrder> orders;
@@ -31,7 +31,7 @@ public class StoreOwnerMarkOrderDatabase extends Database{
                     int quantity = (Integer) product.child(Constants.quantity).getValue();
                     Product product1 = new Product(productName, imageURL, quantity);
                     String orderStatus = (String) storeOrder.child(Constants.order_status).getValue();
-                    OrderedProduct orderedProduct = new OrderedProduct(product1, orderStatus.toString(), product1.getQuantity());
+                    OrderedProduct orderedProduct = new OrderedProduct(product1, orderStatus, product1.getQuantity());
                     products.add(orderedProduct);
                 }
                 StoreOrder storeOrder1 = new StoreOrder(products, storeOrder.getKey());
@@ -47,8 +47,14 @@ public class StoreOwnerMarkOrderDatabase extends Database{
     }
 
     public void onReceiveUserUUID(OrderedProduct orderedProduct, StoreOrder storeOrder, String storeOwnerUUID) {
-        get(root.child(Constants.store_orders).child(storeOwnerUUID).child(Constants.store_uuid), snapshot -> snapshot.getValue());
-        DatabaseReference newreference = root.child(Constants.store_orders).child().child(storeOrder.getCurrentDate()).child(Constants.order_status);
+        get(root.child(Constants.store_orders).child(storeOwnerUUID).child(Constants.store_uuid), snapshot -> {
+            onReceiveStoreUUID(orderedProduct, storeOrder, (String) snapshot.getValue());
+        });
+
+    }
+
+    public void onReceiveStoreUUID(OrderedProduct orderedProduct, StoreOrder storeOrder, String storeUUID) {
+        DatabaseReference newreference = root.child(Constants.store_orders).child(storeUUID).child(storeOrder.getCurrentDate()).child(Constants.order_status);
         put(newreference, snapshot -> OrderStatus.ORDER_COMPLETE.toString());
     }
 }
