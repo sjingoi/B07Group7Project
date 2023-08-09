@@ -11,12 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.widget.TextView;
 import com.example.b07group7project.R;
 import com.example.b07group7project.create_order.CheckoutFragment;
 import com.example.b07group7project.database.CartDatabase;
@@ -25,7 +20,6 @@ import com.example.b07group7project.database.CartListenerImplementation;
 import com.example.b07group7project.database.User;
 import com.example.b07group7project.itempreview.ItemPreviewFragment;
 import com.example.b07group7project.nav.Navigation;
-import com.example.b07group7project.database.CartDatabase;
 
 import java.util.List;
 public class ShoppingCartFragment extends Fragment implements EntryClickListener {
