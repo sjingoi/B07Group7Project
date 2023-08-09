@@ -51,13 +51,17 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
             Toast.makeText(getContext(), "BUNDLE NULL", Toast.LENGTH_SHORT).show();
         }
 
+
         GetProductsInterface productInterface = new StoreProductDatabase();
         productInterface.getProducts(storeUUID, products -> onReceivedProducts(products, view));
+
 
         return view;
     }
 
+
     public void onReceivedProducts(ArrayList<StoreProduct> products, View view){
+
         RecyclerView recyclerView = view.findViewById(R.id.ProductListRecyclerView);
         ViewProductAdapter adapter = new ViewProductAdapter(requireContext(), products, this);
         recyclerView.setAdapter(adapter);
