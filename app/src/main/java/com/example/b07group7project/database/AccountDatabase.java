@@ -112,4 +112,13 @@ public class AccountDatabase extends Database implements UserPermission {
                 }
         );
     }
+    public void getStoreName(String storeUUID, OnComplete<String> withStoreName) {
+        get(
+                root.child(Constants.store_owners).child(storeUUID).child(Constants.store_uuid),
+                snapshot -> {
+                    String storeName = snapshot.getValue(String.class);
+                    withStoreName.onComplete(storeName);
+                }
+        );
+    }
 }
