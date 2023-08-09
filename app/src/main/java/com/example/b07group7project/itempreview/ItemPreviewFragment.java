@@ -114,7 +114,8 @@ public class ItemPreviewFragment extends Fragment {
             if (currentUser != null) {
                 accountDatabase.getUserUUID(currentUser, userUUID -> {
                     if (userUUID != null) {
-                        cartListener.addToCart(storeID, userUUID, itemID, cartItemQty);
+                        String customerUUID = userUUID;
+                        cartListener.addToCart(storeID, customerUUID, itemID, cartItemQty);
                     } else {
                         Toast.makeText(requireContext(), "NULL UUID!", Toast.LENGTH_SHORT).show();
                     }
