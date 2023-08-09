@@ -7,7 +7,8 @@
 
     <color name="text_color">#FFFFFFFF</color>
     <color name="background_color">#FF000000</color>
-    <color name="border_color">#FF333333</color>
-    <color name="nav_background_color">#FF222222</color>
+    <color name="border_color">#FF38393A</color>
+    <color name="nav_background_color">#FF1C1C1E</color>
+    <color name="icon_unselected">#FF98989E</color>
 
 </resources>

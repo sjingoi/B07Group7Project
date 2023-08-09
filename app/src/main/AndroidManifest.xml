@@ -24,6 +24,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".nav.StoreOwnerNavigationActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
 
