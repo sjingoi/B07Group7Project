@@ -17,6 +17,7 @@ import com.example.b07group7project.store_owner_view_store.StoreOwnerViewProduct
 
 public class StoreOwnerNavigationActivity extends Navigation {
 
+    String storeUUID;
     ActivityStoreOwnerNavigationBinding binding;
 
     Fragment homeFragment;
@@ -47,19 +48,34 @@ public class StoreOwnerNavigationActivity extends Navigation {
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 
             int itemId = item.getItemId();
-
+            Bundle bundle = new Bundle();
             if (itemId == R.id.homeNav) {
-                getStoreUUID(
-                        storeUUID -> { Bundle bundle = new Bundle();
+                if(storeUUID != null){
                     bundle.putString("storeID", storeUUID);
                     replaceFragment(homeFragment, false, bundle);
-                });
+                }
+                else{
+                    getStoreUUID(
+                            uuid -> {
+                                bundle.putString("storeID", uuid);
+                                storeUUID = uuid;
+                                replaceFragment(homeFragment, false, bundle);
+                            });
+                }
+
             } else if (itemId == R.id.cartNav) {
-                getStoreUUID(
-                        storeUUID -> { Bundle bundle = new Bundle();
-                            bundle.putString("storeID", storeUUID);
-                            replaceFragment(cartFragment, false, "Orders");
-                        });
+                if(storeUUID != null){
+                    bundle.putString("storeID", storeUUID);
+                    replaceFragment(cartFragment, false, "Orders");
+                }
+                else{
+                    getStoreUUID(
+                            uuid -> {
+                                bundle.putString("storeID", uuid);
+                                storeUUID = uuid;
+                                replaceFragment(cartFragment, false, "Orders");
+                            });
+                }
             } else if (itemId == R.id.accountNav) {
                 replaceFragment(accountFragment, false, "Store Account");
             }
