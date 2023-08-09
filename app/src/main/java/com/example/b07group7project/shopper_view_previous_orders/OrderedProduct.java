@@ -33,9 +33,9 @@ public class OrderedProduct {
         return product;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
+    //public int getQuantity() {
+    //    return quantity;
+    //}
 
     public String getShopperUUID() {
         return shopperUUID;
