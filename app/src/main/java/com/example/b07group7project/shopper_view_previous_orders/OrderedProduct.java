@@ -1,19 +1,20 @@
 package com.example.b07group7project.shopper_view_previous_orders;
 
 import com.example.b07group7project.Product;
+import com.example.b07group7project.database_abstractions.StoreProduct;
 
 public class OrderedProduct {
-    Product product;
+    StoreProduct product;
     String orderStatus;
     int quantity;
 
-    public OrderedProduct(Product product, OrderStatus orderStatus, int quantity) {
+    public OrderedProduct(StoreProduct product, OrderStatus orderStatus, int quantity) {
         this.product = product;
         this.orderStatus = orderStatus.toString();
         this.quantity = quantity;
     }
 
-    public OrderedProduct(Product product, String orderStatus, int quantity) {
+    public OrderedProduct(StoreProduct product, String orderStatus, int quantity) {
         this.product = product;
         this.orderStatus = orderStatus;
         this.quantity = quantity;
@@ -23,7 +24,7 @@ public class OrderedProduct {
         return orderStatus;
     }
 
-    public Product getProduct() {
+    public StoreProduct getProduct() {
         return product;
     }
 }

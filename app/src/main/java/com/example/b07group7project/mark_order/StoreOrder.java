@@ -12,6 +12,8 @@ public class StoreOrder {
     List<OrderedProduct> orderedProducts;
     String currentDate;
 
+    String customerUUID;
+
     public StoreOrder(List<OrderedProduct> orderedProducts) {
         this.orderedProducts = orderedProducts;
         this.orderStatus = isOrderComplete();
