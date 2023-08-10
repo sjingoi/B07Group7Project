@@ -16,8 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.b07group7project.R;
 import com.example.b07group7project.database.CartDatabase;
 import com.example.b07group7project.database.User;
+import com.example.b07group7project.nav.Navigation;
 import com.example.b07group7project.shopping_cart.CartEntry;
 import com.example.b07group7project.shopping_cart.GetCartEntries;
+import com.example.b07group7project.shopping_cart.ShoppingCartFragment;
 
 
 import java.text.DecimalFormat;
@@ -66,8 +68,11 @@ public class CheckoutFragment extends Fragment {
         orderButton.setOnClickListener(view1 -> {
             PlaceOrderInterface orderInterface = new CartDatabase();
             orderInterface.placeOrder(cart, User.getCurrentUser());
-
-            Toast.makeText(requireContext(), "ORDER PLACED", Toast.LENGTH_SHORT).show();
+            if (requireActivity() instanceof Navigation) {
+                Navigation nav = (Navigation) requireActivity();
+                nav.replaceFragment(ShoppingCartFragment.newInstance(), false);
+            }
+            Toast.makeText(requireContext(), "Order Placed Successfully.", Toast.LENGTH_SHORT).show();
         });
     }
 
