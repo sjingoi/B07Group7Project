@@ -43,6 +43,8 @@ public class StoreOwnerNavigationActivity extends Navigation {
         cartFragment = StoreOwnerOrdersFragment.newInstance();    // CHANGE THIS
         accountFragment = StoreOwnerAccountFragment.newInstance(); // CHANGE THIS
 
+        setUpToolbar();
+
 
         replaceFragment(accountFragment, false, "Account");
 
@@ -53,14 +55,14 @@ public class StoreOwnerNavigationActivity extends Navigation {
             if (itemId == R.id.homeNav) {
                 if(storeUUID != null){
                     bundle.putString("storeID", storeUUID);
-                    replaceFragment(homeFragment, false, bundle);
+                    replaceFragment(homeFragment, false, bundle, "Your Products");
                 }
                 else{
                     getStoreUUID(
                             uuid -> {
                                 bundle.putString("storeID", uuid);
                                 storeUUID = uuid;
-                                replaceFragment(homeFragment, false, bundle);
+                                replaceFragment(homeFragment, false, bundle, "Your Products");
                             });
                 }
 
