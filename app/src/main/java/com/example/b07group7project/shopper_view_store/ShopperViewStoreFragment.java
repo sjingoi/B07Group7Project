@@ -1,5 +1,6 @@
 package com.example.b07group7project.shopper_view_store;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,9 +59,13 @@ public class ShopperViewStoreFragment extends Fragment implements StoreClickList
 
     public void onReceivedStores(ArrayList<Store> stores, View view){
         RecyclerView recyclerView = view.findViewById(R.id.StoreListRecyclerView);
-        StoreRecyclerViewAdapter adapter = new StoreRecyclerViewAdapter(requireContext(), stores, this);
+        Context context = getContext();
+        if(context == null)
+            return;
+
+        StoreRecyclerViewAdapter adapter = new StoreRecyclerViewAdapter(context, stores, this);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 2));
+        recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
 
     }
 

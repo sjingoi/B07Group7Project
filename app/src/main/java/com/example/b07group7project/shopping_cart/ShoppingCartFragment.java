@@ -1,6 +1,7 @@
 package com.example.b07group7project.shopping_cart;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -90,6 +91,10 @@ public class ShoppingCartFragment extends Fragment implements EntryClickListener
     }
 
     private void onData(RecyclerView recyclerView, List<CartEntry> cart) {
+        Context context = getContext();
+        if(context == null)
+            return;
+
         if (cart.size() == 0) {
             checkoutButton.setEnabled(false);
             emptyCartText.setVisibility(View.VISIBLE);
@@ -97,7 +102,7 @@ public class ShoppingCartFragment extends Fragment implements EntryClickListener
             checkoutButton.setEnabled(true);
             emptyCartText.setVisibility(View.INVISIBLE);
         }
-        recyclerView.setAdapter(new CartAdapter(requireContext().getApplicationContext(), cart, this));
+        recyclerView.setAdapter(new CartAdapter(context.getApplicationContext(), cart, this));
     }
 
     @Override
