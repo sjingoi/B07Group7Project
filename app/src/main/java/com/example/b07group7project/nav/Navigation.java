@@ -79,7 +79,7 @@ public abstract class Navigation extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle("Mall App");
+            actionBar.setTitle("Home");
         }
     }
 
