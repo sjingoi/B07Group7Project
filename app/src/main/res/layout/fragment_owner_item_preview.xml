@@ -23,78 +23,77 @@
             <TextView
                 android:id="@+id/itemName"
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:background="#673AB7"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:text="@string/itemName"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/itemImage"
-                android:layout_width="175dp"
-                android:layout_height="175dp"
-                android:layout_marginTop="12dp"
+                android:textAlignment="textStart"
+                android:textColor="@color/text_color"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/itemName"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                app:layout_constraintTop_toBottomOf="@+id/ProductCardView" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/ProductCardView"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                app:cardBackgroundColor="#FFCCCCCC"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/itemImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="0dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/itemName"
+                        app:srcCompat="@drawable/ic_launcher_background" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
 
             <TextView
                 android:id="@+id/itemDesc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:text="@string/itemDesc"
+                android:textColor="@color/text_color"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="48dp"
-                android:layout_marginEnd="8dp"
-                android:text="@string/itemDescTitle"
-                android:textAlignment="viewStart"
-                android:textColor="#673AB7"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/itemImage" />
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="8dp"
-                android:text="@string/itemPriceTitle"
-                android:textColor="#673AB7"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/itemImage" />
+                app:layout_constraintTop_toBottomOf="@+id/itemPrice" />
 
             <TextView
                 android:id="@+id/itemPrice"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:text="@string/itemPrice"
-                app:layout_constraintBottom_toTopOf="@+id/textView5"
+                android:textColor="@color/text_color"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                app:layout_constraintTop_toBottomOf="@+id/itemName" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
