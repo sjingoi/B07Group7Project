@@ -19,7 +19,7 @@
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:background="@color/fui_transparent"
-        android:text="Edit Store Details"
+        android:text="Create/Edit Store"
         android:textAlignment="viewStart"
         android:textColor="@color/text_color"
         android:textSize="18sp"
