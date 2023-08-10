@@ -1,5 +1,6 @@
 package com.example.b07group7project.shopper_view_previous_orders;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,14 +41,21 @@ public class ShopperPreviousOrderFragment extends Fragment implements PreviousOr
 
     public void onReceivedOrder(ArrayList<PreviousOrder> previousOrders, View view) {
         RecyclerView recyclerView = view.findViewById(R.id.viewPreviousOrders);
-        PreviousOrderAdapter previousOrderAdapter = new PreviousOrderAdapter(requireContext(), previousOrders, this);
+        Context context = getContext();
+        if(context == null)
+            return;
+
+        PreviousOrderAdapter previousOrderAdapter = new PreviousOrderAdapter(context, previousOrders, this);
         recyclerView.setAdapter(previousOrderAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
     }
 
     @Override
     public void onPreviousOrderClick(PreviousOrder previousOrder) {
-        Toast.makeText(requireContext(), previousOrder.getCurrentDate(), Toast.LENGTH_SHORT).show();
+        Context context = getContext();
+        if(context == null)
+            return;
+        Toast.makeText(context, previousOrder.getCurrentDate(), Toast.LENGTH_SHORT).show();
     }
 
 

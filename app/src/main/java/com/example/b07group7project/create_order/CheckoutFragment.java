@@ -1,6 +1,7 @@
 package com.example.b07group7project.create_order;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,9 +55,13 @@ public class CheckoutFragment extends Fragment {
 
     public void onReceivedCart(ArrayList<CartEntry> cart, View view){
         RecyclerView recyclerView = view.findViewById(R.id.Checkout_RecyclerView);
-        CheckoutRecyclerAdapter adapter = new CheckoutRecyclerAdapter(requireContext(), cart);
+        Context context = getContext();
+        if(context == null)
+            return;
+
+        CheckoutRecyclerAdapter adapter = new CheckoutRecyclerAdapter(context, cart);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         // Price
         TextView totals = view.findViewById(R.id.OrderTotals);
@@ -72,7 +77,7 @@ public class CheckoutFragment extends Fragment {
                 Navigation nav = (Navigation) requireActivity();
                 nav.replaceFragment(ShoppingCartFragment.newInstance(), false);
             }
-            Toast.makeText(requireContext(), "Order Placed Successfully.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Order Placed Successfully.", Toast.LENGTH_SHORT).show();
         });
     }
 

@@ -1,5 +1,6 @@
 package com.example.b07group7project.view_products;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,9 +88,12 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
 
 
         RecyclerView recyclerView = view.findViewById(R.id.ProductListRecyclerView);
-        ViewProductAdapter adapter = new ViewProductAdapter(requireContext(), products, this);
+        Context context = getContext();
+        if(context == null)
+            return;
+        ViewProductAdapter adapter = new ViewProductAdapter(context, products, this);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
 
 
