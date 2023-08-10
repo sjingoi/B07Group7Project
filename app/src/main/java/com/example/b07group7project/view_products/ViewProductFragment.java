@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 
 public class ViewProductFragment extends Fragment implements ProductClickListener{
     public String storeID;
+    protected TextView emptyText;
 
     public ViewProductFragment() {
         // Required Empty Constructor
@@ -50,6 +52,10 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.view_product_fragment, container, false);
 
+        emptyText = view.findViewById(R.id.noProductsText);
+//        Toast.makeText(requireContext(), "HELLOO????", Toast.LENGTH_SHORT).show();
+//        System.out.println("WTFFFFF???");
+
         String storeUUID = null;
 
         Bundle bundle = getArguments();
@@ -71,10 +77,21 @@ public class ViewProductFragment extends Fragment implements ProductClickListene
 
     public void onReceivedProducts(ArrayList<StoreProduct> products, View view){
 
+        if (emptyText != null) {
+            if (products.size() == 0) {
+                emptyText.setVisibility(View.VISIBLE);
+            } else {
+                emptyText.setVisibility(View.INVISIBLE);
+            }
+        }
+
+
         RecyclerView recyclerView = view.findViewById(R.id.ProductListRecyclerView);
         ViewProductAdapter adapter = new ViewProductAdapter(requireContext(), products, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+
+
 
     }
 

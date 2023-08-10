@@ -24,6 +24,7 @@ public class ViewProductAdapter extends RecyclerView.Adapter<ViewProductAdapter.
     ArrayList<StoreProduct> items;
     ProductClickListener listener;
 
+
     public ViewProductAdapter(Context context, ArrayList<StoreProduct> items, ProductClickListener listener) {
         this.context = context;
         this.items = items;

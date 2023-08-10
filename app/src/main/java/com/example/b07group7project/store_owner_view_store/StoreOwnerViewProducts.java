@@ -52,6 +52,7 @@ public class StoreOwnerViewProducts extends ViewProductFragment {
         View view = inflater.inflate(R.layout.fragment_store_owner_view_products, container, false);
 
         FloatingActionButton addButton = view.findViewById(R.id.addItemButton);
+        emptyText = view.findViewById(R.id.noProductsText);
 
         addButton.setOnClickListener(view1 -> {
             Activity activity = requireActivity();
